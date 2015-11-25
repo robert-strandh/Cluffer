@@ -9,4 +9,5 @@
    (:file "buffer")
    (:file "update-protocol")
    (:file "line")
-   (:file "conditions")))
+   (:file "conditions")
+   (:file "condition-reporters-english")))
