@@ -1,0 +1,62 @@
+\chapter{Buffer update protocol}
+\label{chap-update-protocol}
+
+The purpose of the buffer update protocol is to allow for a number of
+edit operations to the buffer without updating the view of the buffer.
+This functionality is important because a single command may result in
+an arbitrary number of edit operations to the buffer, and we typically
+want the view to be updated only once, when all those edit operations
+have been executed.
+
+At the center of the update protocol is the concept of a \emph{time
+  stamp}.  Each buffer manages a \emph{current time} which is a
+non-negative integer that has the initial value $0$.  Whenever a line
+is modified or created, it is marked with the current time of the
+buffer, and then the current time of the buffer is incremented.
+
+\Defgeneric {current-time} {buffer}
+
+Return the current time of the buffer.
+
+\Defgeneric {items} {line \key start end}
+
+Return the items of \textit{line} as a vector.  The keyword parameters
+\textit{start} and \textit{end} have the same interpretation as for
+\cl{} sequence functions.
+
+\Defgeneric {update} {buffer time sync skip update create}
+
+The \textit{buffer} parameter is a buffer that might have been
+modified since the last update operation.  The \textit{time} parameter
+is the last time the update operation was called, so that the
+\texttt{update} function will report modifications since that time. 
+
+The parameters \textit{sync}, \textit{skip}, \textit{modify}, and
+\textit{create}, are functions that are called by the \texttt{update}
+function.  They are to be considered as \emph{edit operations} on some
+representation of the buffer as it was after the previous call to
+\texttt{update}.  The operations have the following meaning:
+
+\begin{itemize}
+\item \textit{create} indicates a line that has been created.  The
+  function is called with that line as an argument.
+\item \textit{modify}%
+  indicates a line that has been modified.  The
+  function is called with that line as an argument.
+\item \textit{sync} indicates the first unmodified line after a
+  sequence of new or modified lines.  Accordingly, this function is
+  called once, following one or more calls to \textit{create} or
+  \textit{modify}.  This function is called with a single argument:
+  the unmodified line.
+\item \textit{skip} indicates that a number of lines have not been
+  subject to any modifications since the last update.  The function
+  takes a single argument, the number of lines to skip.  This function
+  is called \emph{first} to indicate that a \emph{prefix} of the
+  buffer is unmodified, or after a \emph{sync} operation to indicate
+  that that many lines following the one given as argument to the
+  \textit{sync} operation are unmodified.%
+  \fixme{Decide whether this operation should be called on an
+    unmodified \emph{suffix} of the buffer, or whether the last
+    \textit{sync} operation is enough.}
+\end{itemize}
+

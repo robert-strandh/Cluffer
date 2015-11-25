@@ -1,0 +1,158 @@
+\chapter{Buffer edit protocol}
+\label{chap-edit-protocol}
+
+\Defgeneric {beginning-of-buffer-p} {cursor}
+
+Return \textit{true} if and only if \textit{cursor} is located at the
+beginning of a buffer.
+
+\Defgeneric {end-of-buffer-p} {cursor}
+
+Return \textit{true} if and only if \textit{cursor} is located at the
+end of a buffer.
+
+\Defgeneric {beginning-of-line-p} {cursor}
+
+Return \textit{true} if and only if \textit{cursor} is located at the
+beginning of a line.
+
+\Defgeneric {end-of-line-p} {cursor}
+
+Return \textit{true} if and only if \textit{cursor} is located at the
+end of a line.
+
+\Defgeneric {beginning-of-buffer} {cursor}
+
+Position \textit{cursor} at the very beginning of the buffer.
+
+\Defgeneric {end-of-buffer} {cursor}
+
+Position \textit{cursor} at the very end of the buffer.
+
+\Defgeneric {beginning-of-line} {cursor}
+
+Position \textit{cursor} at the very beginning of the line.
+
+\Defgeneric {end-of-line} {cursor}
+
+Position \textit{cursor} at the very end of the line.
+
+\Defgeneric {forward-item} {cursor}
+
+Move \textit{cursor} forward one position.  If \emph{cursor} is at the
+end of the line, the error condition \texttt{end-of-line} will be
+signaled.
+
+\Defgeneric {backward-item} {cursor}
+
+Move \textit{cursor} backward one position.  If \emph{cursor} is at
+the beginning of the line, the error condition
+\texttt{beginning-of-line} will be signaled.
+
+\Defgeneric {insert-item} {cursor item}
+
+Insert an item at the location of \textit{cursor}.  After this
+operation, any left-sticky cursor located at the same position as
+\textit{cursor} will be located before \textit{item}, and any
+right-sticky cursor located at the same position as \textit{cursor}
+will be located after \textit{item}.
+
+\Defgeneric {delete-item} {cursor}
+
+Delete the item immediately to the right of \emph{cursor}.  If
+\emph{cursor} is at the end of the line, the error condition
+\texttt{end-of-line} will be signaled.
+
+\Defgeneric {erase-item} {cursor}
+
+Delete the item immediately to the left of \emph{cursor}.  If
+\emph{cursor} is at the beginning of the line, the error condition
+\texttt{beginning-of-line} will be signaled.
+
+\Defgeneric {item-after-cursor} {cursor}
+
+Return the item located immediately to the right of \textit{cursor}.
+If \emph{cursor} is at the end of the line, the error condition
+\texttt{end-of-line} will be signaled.
+
+\Defgeneric {item-before-cursor} {cursor}
+
+Return the item located immediately to the left of \textit{cursor}.
+If \emph{cursor} is at the beginning of the line, the error condition
+\texttt{beginning-of-line} will be signaled.
+
+\Defgeneric {split-line} {cursor}
+
+Split the line in which \textit{cursor} is located into two lines, the
+first cone containing the text preceding \textit{cursor} and the
+second one containing the text following \textit{cursor}.  After this
+operation, any left-sticky cursor located at the same position as
+\textit{cursor} will be located at the end of the first line, and any
+right-sticky cursor located at the same position as \textit{cursor}
+will be located at the beginning of the second line.
+
+\Defgeneric {join-line} {cursor}
+
+Join the line in which \textit{cursor} is located and the following
+line.  If \textit{cursor} is located at the last line of the buffer,
+the error condition \texttt{end-of-buffer} will be signaled.
+
+\Defgeneric {detach-cursor} {cursor}
+
+The class of \textit{cursor} is changed to \texttt{detached-cursor}
+and it is removed from the line it was initially located in. 
+
+If \textit{cursor} is already detached, this operation has no effect.
+
+\Defgeneric {attach-cursor} {cursor line \optional (position 0)}
+
+Attach \textit{cursor} to \textit{line} at \textit{position}.  If
+\textit{position} is supplied and it is greater than the number of
+items in \textit{line}, the error condition \texttt{end-of-line} is
+signaled.  If \textit{cursor} is already attached to a line, the error
+condition \texttt{cursor-attached} will be signaled.
+
+\Defgeneric {cursor-position} {cursor}
+
+Return the position of \textit{cursor} as two values: the line number
+and the item number within the line. 
+
+\Defgeneric {line-count} {cursor}
+
+Return the number of lines in the buffer in which \textit{cursor} is
+located.
+
+\Defgeneric {item-count} {cursor}
+
+Return the number of items in the line in which \textit{cursor} is
+located.
+
+\Defgeneric {line} {cursor}
+
+Return the line in which \textit{cursor} is located. 
+
+\Defgeneric {line-number} {line}
+
+Return the line number of \textit{line}.  The first line of the buffer
+has the number $0$. 
+
+\Defgeneric {find-line} {buffer line-number}
+
+Return the line in the buffer with the given \textit{line-number}.  If
+\textit{line-number} is less than $0$ then the error
+\texttt{beginning-of-buffer} is signaled.  If \textit{line-number} is
+greater than or equal to the number of lines in the buffer, then the
+error \texttt{end-of-buffer} is signaled.
+
+\Defgeneric {buffer} {object}
+
+Return the buffer in which \textit{object} is located, where
+\textit{object} is a \emph{cursor} or a \emph{line}.
+
+Notice that the edit protocol does not contain any
+\texttt{delete-line} operation.  This design decision was made on
+purpose.  By only providing \texttt{join-line}, we guarantee that
+removing a line leaves a \emph{trace} in the buffer in the form of a
+modification operation on the first of the two lines that were
+joined.  This features is essential in order for the \emph{update
+  protocol} to work correctly.
