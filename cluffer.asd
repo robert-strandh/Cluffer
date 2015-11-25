@@ -1,7 +1,8 @@
 (cl:in-package #:asdf-user)
 
 (defsystem :cluffer
-  :depends-on (:clump-splay-tree)
+  :depends-on (:acclimation
+	       :clump-splay-tree)
   :serial t
   :components
   ((:file "packages")
