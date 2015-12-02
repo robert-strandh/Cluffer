@@ -2,7 +2,7 @@
 
 (defsystem :cluffer
   :depends-on (:acclimation
-	       :clump-splay-tree)
+	       :clump-binary-tree)
   :serial t
   :components
   ((:file "packages")
