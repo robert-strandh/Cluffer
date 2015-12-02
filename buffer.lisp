@@ -97,7 +97,7 @@
 	(max (max-modify-time node)
 	     (max-modify-time new-right))))
 
-(defmethod clump-splay-tree:splay :after ((node node))
+(defmethod clump-binary-tree:splay :after ((node node))
   (setf (contents (buffer node)) node))
 
 (defun make-empty-buffer ()
@@ -260,7 +260,7 @@
 (defmethod insert-item :after ((cursor attached-cursor) item)
   (let* ((node (node (line cursor)))
 	 (buffer (buffer cursor)))
-    (clump-splay-tree:splay node)
+    (clump-binary-tree:splay node)
     (incf (item-count node))
     (setf (modify-time node) (incf (current-time buffer)))
     (setf (max-modify-time node) (modify-time node))))
@@ -277,7 +277,7 @@
 (defmethod delete-item :after ((cursor attached-cursor))
   (let ((node (node (line cursor)))
 	(buffer (buffer cursor)))
-    (clump-splay-tree:splay node)
+    (clump-binary-tree:splay node)
     (decf (item-count node))
     (setf (modify-time node) (incf (current-time buffer)))
     (setf (max-modify-time node) (modify-time node))))
@@ -294,7 +294,7 @@
 (defmethod erase-item :after ((cursor attached-cursor))
   (let ((node (node (line cursor)))
 	(buffer (buffer cursor)))
-    (clump-splay-tree:splay node)
+    (clump-binary-tree:splay node)
     (decf (item-count node))
     (setf (modify-time node) (incf (current-time buffer)))
     (setf (max-modify-time node) (modify-time node))))
@@ -332,7 +332,7 @@
 
 (defmethod line-number (line)
   (let ((node (node line)))
-    (clump-splay-tree:splay node)
+    (clump-binary-tree:splay node)
     (if (null (clump-binary-tree:left node))
 	0
 	(line-count (clump-binary-tree:left node)))))
@@ -406,7 +406,7 @@
 	 ;; line and also the number of items of the new line.
 	 (diff (- (item-count existing-line) (cursor-position cursor))))
     ;; Make sure the existing line is the root of the tree.
-    (clump-splay-tree:splay existing-node)
+    (clump-binary-tree:splay existing-node)
     (decf (item-count existing-node) diff)
     ;; If the cursor is at the end of the line, then the line
     ;; is not modified, but we don't take that into account.
@@ -457,8 +457,8 @@
 	   (next-line (find-line (buffer (node line)) (1+ line-number))))
       (let ((node-line (node line))
 	    (node-next-line (node next-line)))
-	(clump-splay-tree:splay node-next-line)
-	(clump-splay-tree:splay node-line)
+	(clump-binary-tree:splay node-next-line)
+	(clump-binary-tree:splay node-line)
 	;; Now LINE is on top and NEXT-LINE is its right child.
 	;; Furthermore NEXT-LINE does not have any left children.
 	(let ((time (incf (current-time (buffer node-line)))))
