@@ -6,7 +6,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Open line.
+;;; Class OPEN-LINE.
 ;;; 
 ;;; The items of an open line are stored in a gap buffer.
 
