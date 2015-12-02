@@ -90,6 +90,15 @@
 ;;;
 ;;; Methods on ITEMS.
 
+;;; When the items of an open line are asked for, we first close the
+;;; line.  While this way of doing it might seem wasteful, it probably
+;;; is not that bad.  When the items are asked for, the reason is
+;;; probably that those items are going to be displayed or used to
+;;; drive a parser, or something else that will imply some significant
+;;; work for each item.  So even if the line is repeatedly opened (to
+;;; edit) and closed (to display), it probably does not matter much.
+;;; A slight improvement could be to leave the line open and return a
+;;; freshly allocated vector with the items in it.
 (defmethod cluffer-buffer:items ((line open-line) &key (start 0) (end nil))
   (close-line line)
   (cluffer-buffer:items line :start start :end end))
