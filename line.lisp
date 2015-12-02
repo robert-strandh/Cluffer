@@ -1,5 +1,11 @@
 (cl:in-package #:cluffer-line)
 
+;;;; A line is either open or closed.  An open line has a
+;;;; representation that lends itself to efficient editing.  For a
+;;;; closed line, a compact representation is more important.  The
+;;;; cursors attached to an open line are open cursors.  Similarly,
+;;;; the cursors attached to a closed line are closed cursors.
+
 (defclass line (cluffer-buffer:line)
    ((%contents :initarg :contents :accessor contents)
     (%cursors :initarg :cursors :accessor cursors)))
