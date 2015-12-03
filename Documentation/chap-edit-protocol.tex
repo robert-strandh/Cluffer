@@ -9,6 +9,12 @@ This is the class to instantiate in order to create a buffer.
 
 This is the base class for all cursors.
 
+\Defclass {detached-cursor}
+
+This is the base class for all detached cursors.  It is a subclass of
+\texttt{cursor}.  A detached cursor is a cursor that is not attached
+to any line.
+
 \Defgeneric {beginning-of-buffer-p} {cursor}
 
 Return \textit{true} if and only if \textit{cursor} is located at the
