@@ -100,19 +100,18 @@
 (defmethod clump-binary-tree:splay :after ((node node))
   (setf (contents (buffer node)) node))
 
-(defun make-empty-buffer ()
-  (let* ((line (funcall *empty-line-constructor*))
-	 (node (make-instance 'node
+(defun make-empty-buffer (initial-line)
+  (let* ((node (make-instance 'node
 		     :line-count 1
 		     :item-count 0
 		     :create-time 0
 		     :modify-time 0
 		     :max-modify-time 0
-		     :line line))
+		     :line initial-line))
 	 (buffer (make-instance 'buffer
 		   :current-time 1
 		   :contents node)))
-    (setf (node line) node)
+    (setf (node initial-line) node)
     (setf (buffer node) buffer)
     buffer))
 
