@@ -98,6 +98,9 @@
 (defmethod clump-binary-tree:splay :after ((node node))
   (setf (contents (buffer node)) node))
 
+;;; Make an empty buffer.  Client code can decide what line
+;;; implementation to use by passing in instance of the desired class
+;;; as the initial line for the buffer.
 (defun make-empty-buffer (initial-line)
   (let* ((node (make-instance 'node
 		     :line-count 1
