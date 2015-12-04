@@ -90,8 +90,6 @@
     :gap-start 0
     :gap-end 32))
     
-(setq cluffer-buffer:*empty-line-constructor* 'make-empty-line)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on ITEMS.

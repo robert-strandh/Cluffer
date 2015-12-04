@@ -10,7 +10,6 @@
    #:cursor-detached
    #:buffer
    #:line
-   #:*empty-line-constructor*
    #:attach-line
    #:detach-line
    #:cursor

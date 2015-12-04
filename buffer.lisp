@@ -7,8 +7,6 @@
 (defclass line ()
   ((%node :initarg :node :initform nil :accessor node)))
 
-(defvar *empty-line-constructor*)
-
 (defclass cursor () ())
 
 (defclass detached-cursor (cursor)

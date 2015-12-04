@@ -32,8 +32,6 @@
     :cursors '()
     :contents (make-array 0 :fill-pointer t)))
     
-(setq cluffer-buffer:*empty-line-constructor* 'make-empty-line)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on ITEMS.
