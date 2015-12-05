@@ -9,6 +9,27 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Generic function ITEM-COUNT.
+;;;
+;;; Return the number of items in ENTITY.
+
+;;; If ENTITY is a buffer, then the total number of items in the
+;;; buffer is returned.
+;;;
+;;; IF ENTITY is a line, then the number of items in the line is
+;;; returned.
+;;;
+;;; If ENTITY is a cursor that is currently attached to a line, the
+;;; number of items of the line to which the cursor is attached is
+;;; returned.
+;;;
+;;; If ENTITY is a cursor that is currently not attached to a line,
+;;; then an error of type DETACHED-CURSOR is signaled.
+
+(defgeneric item-count (entity))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Generic function CURSOR-POSITION.
 ;;;
 ;;; Given a cursor, return its conceptual position.
