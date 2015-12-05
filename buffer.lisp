@@ -138,13 +138,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function CURSOR-POSITION.
-;;;
-;;; Given a cursor, return its conceptual position.
+;;; Method on CURSOR-POSITION.
 
-(defgeneric cursor-position (cursor))
-
-(defmethod cursor-position ((cursor detached-cursor))
+(defmethod cluffer:cursor-position ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
