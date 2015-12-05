@@ -6,6 +6,7 @@
   :serial t
   :components
   ((:file "packages")
+   (:file "edit-protocol")
    (:file "buffer")
    (:file "update-protocol")
    (:file "line")
