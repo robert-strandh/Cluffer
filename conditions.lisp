@@ -1,4 +1,4 @@
-(cl:in-package #:cluffer-buffer)
+(cl:in-package #:cluffer)
 
 (define-condition beginning-of-line (error acclimation:condition)
   ())
