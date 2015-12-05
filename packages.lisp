@@ -1,5 +1,9 @@
 (cl:in-package #:common-lisp-user)
 
+(defpackage #:cluffer
+  (:use #:common-lisp)
+  (:export))
+
 (defpackage #:cluffer-line
   (:use #:common-lisp))
 
