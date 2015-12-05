@@ -68,3 +68,19 @@
 ;;; this function might be implemented differently.
 
 (defgeneric beginning-of-line-p (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function END-OF-LINE-P.
+;;;
+;;; Return true if and only if CURSOR is positioned at the end of the
+;;; line to which it is attached.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+;;;
+;;; Calling this function has the same effect as calling the functions
+;;; CURSOR-POSITION and ITEM-COUNT checking whether the return values
+;;; are the same, but this function might be implemented differently.
+
+(defgeneric end-of-line-p (cursor))
