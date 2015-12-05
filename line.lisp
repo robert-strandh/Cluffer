@@ -29,7 +29,7 @@
 (defclass open-cursor-mixin ()
   ((%cursor-position
     :initarg :cursor-position
-    :accessor cluffer-buffer:cursor-position)))
+    :accessor cluffer:cursor-position)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -43,18 +43,18 @@
 (defclass closed-cursor-mixin ()
   ((%cursor-position
     :initarg :cursor-position
-    :accessor cluffer-buffer:cursor-position)))
+    :accessor cluffer:cursor-position)))
 
 (defclass closed-left-sticky-cursor
-    (cluffer-buffer:attached-cursor
+    (cluffer:attached-cursor
      closed-cursor-mixin
-     cluffer-buffer:left-sticky-mixin)
+     cluffer:left-sticky-mixin)
   ())
 
 (defclass closed-right-sticky-cursor
-    (cluffer-buffer:attached-cursor
+    (cluffer:attached-cursor
      closed-cursor-mixin
-     cluffer-buffer:right-sticky-mixin)
+     cluffer:right-sticky-mixin)
   ())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -62,9 +62,9 @@
 ;;; Class OPEN-LEFT-STICKY CURSOR.
 
 (defclass open-left-sticky-cursor
-    (cluffer-buffer:attached-cursor
+    (cluffer:attached-cursor
      open-cursor-mixin
-     cluffer-buffer:left-sticky-mixin)
+     cluffer:left-sticky-mixin)
   ())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -72,15 +72,15 @@
 ;;; Class OPEN-RIGHT-STICKY CURSOR.
 
 (defclass open-right-sticky-cursor
-    (cluffer-buffer:attached-cursor
+    (cluffer:attached-cursor
      open-cursor-mixin
-     cluffer-buffer:right-sticky-mixin)
+     cluffer:right-sticky-mixin)
   ())
 
-(defmethod cluffer-buffer:item-count ((line open-line))
+(defmethod cluffer:item-count ((line open-line))
   (- (length (contents line)) (- (gap-end line) (gap-start line))))
 
-(defmethod cluffer-buffer:item-count ((line closed-line))
+(defmethod cluffer:item-count ((line closed-line))
   (length (contents line)))
 
 (defun make-empty-line ()
@@ -103,14 +103,14 @@
 ;;; edit) and closed (to display), it probably does not matter much.
 ;;; A slight improvement could be to leave the line open and return a
 ;;; freshly allocated vector with the items in it.
-(defmethod cluffer-buffer:items ((line open-line) &key (start 0) (end nil))
+(defmethod cluffer:items ((line open-line) &key (start 0) (end nil))
   (close-line line)
-  (cluffer-buffer:items line :start start :end end))
+  (cluffer:items line :start start :end end))
 
 ;;; When all the items are asked for, we do not allocate a fresh
 ;;; vector.  This means that client code is not allowed to mutate the
 ;;; return value of this function
-(defmethod cluffer-buffer:items ((line closed-line) &key (start 0) (end nil))
+(defmethod cluffer:items ((line closed-line) &key (start 0) (end nil))
   (if (and (= start 0) (null end))
       (contents line)
       (subseq (contents line) start end)))
@@ -130,7 +130,7 @@
 
 (defmethod close-line ((line open-line))
   (mapc #'close-cursor (cursors line))
-  (let* ((item-count (cluffer-buffer:item-count line))
+  (let* ((item-count (cluffer:item-count line))
 	 (contents (contents line))
 	 (new-contents (make-array item-count)))
     (replace new-contents contents
@@ -172,79 +172,79 @@
 ;;;
 ;;; Detaching and attaching a cursor.
 
-(defmethod cluffer-buffer:attach-cursor
-    ((cursor cluffer-buffer:attached-cursor) line &optional position)
+(defmethod cluffer:attach-cursor
+    ((cursor cluffer:attached-cursor) line &optional position)
   (declare (ignore line position))
-  (error 'cluffer-buffer:cursor-attached))
+  (error 'cluffer:cursor-attached))
 
-(defmethod cluffer-buffer:attach-cursor
-    ((cursor cluffer-buffer:detached-left-sticky-cursor)
+(defmethod cluffer:attach-cursor
+    ((cursor cluffer:detached-left-sticky-cursor)
      (line open-line)
      &optional
        (position 0))
-  (when (> position (cluffer-buffer:item-count line))
-    (error 'cluffer-buffer:end-of-line))
+  (when (> position (cluffer:item-count line))
+    (error 'cluffer:end-of-line))
   (push cursor (cursors line))
   (change-class cursor 'open-left-sticky-cursor
 		:line line
 		:cursor-position position)
   nil)
 
-(defmethod cluffer-buffer:attach-cursor
-    ((cursor cluffer-buffer:detached-left-sticky-cursor)
+(defmethod cluffer:attach-cursor
+    ((cursor cluffer:detached-left-sticky-cursor)
      (line closed-line)
      &optional
        (position 0))
-  (when (> position (cluffer-buffer:item-count line))
-    (error 'cluffer-buffer:end-of-line))
+  (when (> position (cluffer:item-count line))
+    (error 'cluffer:end-of-line))
   (push cursor (cursors line))
   (change-class cursor 'closed-left-sticky-cursor
 		:line line
 		:cursor-position position)
   nil)
   
-(defmethod cluffer-buffer:attach-cursor
-    ((cursor cluffer-buffer:detached-right-sticky-cursor)
+(defmethod cluffer:attach-cursor
+    ((cursor cluffer:detached-right-sticky-cursor)
      (line open-line)
      &optional
        (position 0))
-  (when (> position (cluffer-buffer:item-count line))
-    (error 'cluffer-buffer:end-of-line))
+  (when (> position (cluffer:item-count line))
+    (error 'cluffer:end-of-line))
   (push cursor (cursors line))
   (change-class cursor 'open-right-sticky-cursor
 		:line line
 		:cursor-position position)
   nil)
 
-(defmethod cluffer-buffer:attach-cursor
-    ((cursor cluffer-buffer:detached-right-sticky-cursor)
+(defmethod cluffer:attach-cursor
+    ((cursor cluffer:detached-right-sticky-cursor)
      (line closed-line)
      &optional
        (position 0))
-  (when (> position (cluffer-buffer:item-count line))
-    (error 'cluffer-buffer:end-of-line))
+  (when (> position (cluffer:item-count line))
+    (error 'cluffer:end-of-line))
   (push cursor (cursors line))
   (change-class cursor 'closed-right-sticky-cursor
 		:line line
 		:cursor-position position)
   nil)
 
-(defmethod cluffer-buffer:detach-cursor
-    ((cursor cluffer-buffer:detached-cursor))
-  (error 'cluffer-buffer:cursor-detached))
+(defmethod cluffer:detach-cursor
+    ((cursor cluffer:detached-cursor))
+  (error 'cluffer:cursor-detached))
 
-(defmethod cluffer-buffer:detach-cursor
-  ((cursor cluffer-buffer:left-sticky-mixin))
+(defmethod cluffer:detach-cursor
+  ((cursor cluffer:left-sticky-mixin))
   (setf (cursors (cluffer:line cursor))
 	(remove cursor (cursors (cluffer:line cursor))))
-  (change-class cursor 'cluffer-buffer:detached-left-sticky-cursor)
+  (change-class cursor 'cluffer:detached-left-sticky-cursor)
   nil)
 
-(defmethod cluffer-buffer:detach-cursor
-  ((cursor cluffer-buffer:right-sticky-mixin))
+(defmethod cluffer:detach-cursor
+  ((cursor cluffer:right-sticky-mixin))
   (setf (cursors (cluffer:line cursor))
 	(remove cursor (cursors (cluffer:line cursor))))
-  (change-class cursor 'cluffer-buffer:detached-right-sticky-cursor)
+  (change-class cursor 'cluffer:detached-right-sticky-cursor)
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -258,42 +258,42 @@
 ;;; Given a cursor, return true if and only if it is at the beginning
 ;;; of the line.
 
-(defmethod cluffer-buffer:beginning-of-line-p
-    ((cursor cluffer-buffer:detached-cursor))
-  (error 'cluffer-buffer:cursor-detached))
+(defmethod cluffer:beginning-of-line-p
+    ((cursor cluffer:detached-cursor))
+  (error 'cluffer:cursor-detached))
 
 ;;; The default method just calls CURSOR-POSITION and returns true if
 ;;; and only if that position is 0.
-(defmethod cluffer-buffer:beginning-of-line-p
-    ((cursor cluffer-buffer:attached-cursor))
-  (zerop (cluffer-buffer:cursor-position cursor)))
+(defmethod cluffer:beginning-of-line-p
+    ((cursor cluffer:attached-cursor))
+  (zerop (cluffer:cursor-position cursor)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on END-OF-LINE-P.
 
-(defmethod cluffer-buffer:end-of-line-p
-    ((cursor cluffer-buffer:detached-cursor))
-  (error 'cluffer-buffer:cursor-detached))
+(defmethod cluffer:end-of-line-p
+    ((cursor cluffer:detached-cursor))
+  (error 'cluffer:cursor-detached))
 
 ;;; The default method just calls CURSOR-POSITION and returns true if
 ;;; and only if that position is the same as the number of items in
 ;;; the line.
-(defmethod cluffer-buffer:end-of-line-p
-    ((cursor cluffer-buffer:attached-cursor))
-  (= (cluffer-buffer:cursor-position cursor)
-     (cluffer-buffer:item-count (cluffer:line cursor))))
+(defmethod cluffer:end-of-line-p
+    ((cursor cluffer:attached-cursor))
+  (= (cluffer:cursor-position cursor)
+     (cluffer:item-count (cluffer:line cursor))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on INSERT-ITEM.
 
-(defmethod cluffer-buffer:insert-item ((cursor closed-cursor-mixin) item)
+(defmethod cluffer:insert-item ((cursor closed-cursor-mixin) item)
   (open-line (cluffer:line cursor))
-  (cluffer-buffer:insert-item cursor item))
+  (cluffer:insert-item cursor item))
 
-(defmethod cluffer-buffer:insert-item ((cursor open-cursor-mixin) item)
-  (let* ((pos (cluffer-buffer:cursor-position cursor))
+(defmethod cluffer:insert-item ((cursor open-cursor-mixin) item)
+  (let* ((pos (cluffer:cursor-position cursor))
 	 (line (cluffer:line cursor))
 	 (contents (contents line)))
     (cond ((= (gap-start line) (gap-end line))
@@ -324,25 +324,25 @@
     (setf (aref (contents line) (gap-start line)) item)
     (incf (gap-start line))
     (loop for cursor in (cursors line)
-	  do (when (or (and (typep cursor 'cluffer-buffer:right-sticky-mixin)
-			    (>= (cluffer-buffer:cursor-position cursor) pos))
-		       (and (typep cursor 'cluffer-buffer:left-sticky-mixin)
-			    (> (cluffer-buffer:cursor-position cursor) pos)))
-	       (incf (cluffer-buffer:cursor-position cursor)))))
+	  do (when (or (and (typep cursor 'cluffer:right-sticky-mixin)
+			    (>= (cluffer:cursor-position cursor) pos))
+		       (and (typep cursor 'cluffer:left-sticky-mixin)
+			    (> (cluffer:cursor-position cursor) pos)))
+	       (incf (cluffer:cursor-position cursor)))))
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on DELETE-ITEM.
 
-(defmethod cluffer-buffer:delete-item ((cursor closed-cursor-mixin))
+(defmethod cluffer:delete-item ((cursor closed-cursor-mixin))
   (open-line (cluffer:line cursor))
-  (cluffer-buffer:delete-item cursor))
+  (cluffer:delete-item cursor))
 
-(defmethod cluffer-buffer:delete-item ((cursor open-cursor-mixin))
-  (when (cluffer-buffer:end-of-line-p cursor)
-    (error 'cluffer-buffer:end-of-line))
-  (let* ((pos (cluffer-buffer:cursor-position cursor))
+(defmethod cluffer:delete-item ((cursor open-cursor-mixin))
+  (when (cluffer:end-of-line-p cursor)
+    (error 'cluffer:end-of-line))
+  (let* ((pos (cluffer:cursor-position cursor))
 	 (line (cluffer:line cursor))
 	 (contents (contents line)))
     (cond ((< pos (gap-start line))
@@ -374,23 +374,23 @@
 	(decf (gap-end line) diff)
 	(setf (contents line) new-contents)))
     (loop for cursor in (cursors line)
-	  do (when (> (cluffer-buffer:cursor-position cursor) pos)
-	       (decf (cluffer-buffer:cursor-position cursor)))))
+	  do (when (> (cluffer:cursor-position cursor) pos)
+	       (decf (cluffer:cursor-position cursor)))))
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on ERASE-ITEM.
 
-(defmethod cluffer-buffer:erase-item ((cursor closed-cursor-mixin))
+(defmethod cluffer:erase-item ((cursor closed-cursor-mixin))
   (open-line (cluffer:line cursor))
-  (cluffer-buffer:erase-item cursor))
+  (cluffer:erase-item cursor))
 
-(defmethod cluffer-buffer:erase-item ((cursor open-cursor-mixin))
-  (when (cluffer-buffer:beginning-of-line-p cursor)
-    (error 'cluffer-buffer:beginning-of-line))
-  (cluffer-buffer:backward-item cursor)
-  (cluffer-buffer:delete-item cursor)
+(defmethod cluffer:erase-item ((cursor open-cursor-mixin))
+  (when (cluffer:beginning-of-line-p cursor)
+    (error 'cluffer:beginning-of-line))
+  (cluffer:backward-item cursor)
+  (cluffer:delete-item cursor)
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -398,16 +398,16 @@
 ;;; Methods on FORWARD-ITEM
 
 ;;; No need to open the line just because the cursor moves.  
-(defmethod cluffer-buffer:forward-item ((cursor closed-cursor-mixin))
-  (when (cluffer-buffer:end-of-line-p cursor)
-    (error 'cluffer-buffer:end-of-line))
-  (incf (cluffer-buffer:cursor-position cursor))
+(defmethod cluffer:forward-item ((cursor closed-cursor-mixin))
+  (when (cluffer:end-of-line-p cursor)
+    (error 'cluffer:end-of-line))
+  (incf (cluffer:cursor-position cursor))
   nil)
 
-(defmethod cluffer-buffer:forward-item ((cursor open-cursor-mixin))
-  (when (cluffer-buffer:end-of-line-p cursor)
-    (error 'cluffer-buffer:end-of-line))
-  (incf (cluffer-buffer:cursor-position cursor))
+(defmethod cluffer:forward-item ((cursor open-cursor-mixin))
+  (when (cluffer:end-of-line-p cursor)
+    (error 'cluffer:end-of-line))
+  (incf (cluffer:cursor-position cursor))
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -415,16 +415,16 @@
 ;;; Methods on BACKWARD-ITEM
 
 ;;; No need to open the line just because the cursor moves.  
-(defmethod cluffer-buffer:backward-item ((cursor closed-cursor-mixin))
-  (when (cluffer-buffer:beginning-of-line-p cursor)
-    (error 'cluffer-buffer:beginning-of-line))
-  (decf (cluffer-buffer:cursor-position cursor))
+(defmethod cluffer:backward-item ((cursor closed-cursor-mixin))
+  (when (cluffer:beginning-of-line-p cursor)
+    (error 'cluffer:beginning-of-line))
+  (decf (cluffer:cursor-position cursor))
   nil)
 
-(defmethod cluffer-buffer:backward-item ((cursor open-cursor-mixin))
-  (when (cluffer-buffer:beginning-of-line-p cursor)
-    (error 'cluffer-buffer:beginning-of-line))
-  (decf (cluffer-buffer:cursor-position cursor))
+(defmethod cluffer:backward-item ((cursor open-cursor-mixin))
+  (when (cluffer:beginning-of-line-p cursor)
+    (error 'cluffer:beginning-of-line))
+  (decf (cluffer:cursor-position cursor))
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -433,13 +433,13 @@
 ;;;
 ;;; Position the cursor at the beginning of the line.
 
-(defmethod cluffer-buffer:beginning-of-line
-    ((cursor cluffer-buffer:detached-cursor))
-  (error 'cluffer-buffer:cursor-detached))
+(defmethod cluffer:beginning-of-line
+    ((cursor cluffer:detached-cursor))
+  (error 'cluffer:cursor-detached))
 
-(defmethod cluffer-buffer:beginning-of-line
-    ((cursor cluffer-buffer:attached-cursor))
-  (setf (cluffer-buffer:cursor-position cursor) 0))
+(defmethod cluffer:beginning-of-line
+    ((cursor cluffer:attached-cursor))
+  (setf (cluffer:cursor-position cursor) 0))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -447,43 +447,43 @@
 ;;;
 ;;; Position the cursor at the end of the line.
 
-(defmethod cluffer-buffer:end-of-line
-    ((cursor cluffer-buffer:detached-cursor))
-  (error 'cluffer-buffer:cursor-detached))
+(defmethod cluffer:end-of-line
+    ((cursor cluffer:detached-cursor))
+  (error 'cluffer:cursor-detached))
 
-(defmethod cluffer-buffer:end-of-line
-    ((cursor cluffer-buffer:attached-cursor))
-  (setf (cluffer-buffer:cursor-position cursor)
-	(cluffer-buffer:item-count (cluffer:line cursor))))
+(defmethod cluffer:end-of-line
+    ((cursor cluffer:attached-cursor))
+  (setf (cluffer:cursor-position cursor)
+	(cluffer:item-count (cluffer:line cursor))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on ITEM-BEFORE-CURSOR.
 
 ;;; No need to open the line.
-(defmethod cluffer-buffer:item-before-cursor
+(defmethod cluffer:item-before-cursor
     ((cursor closed-cursor-mixin))
-  (when (cluffer-buffer:beginning-of-line-p cursor)
-    (error 'cluffer-buffer:beginning-of-line))
+  (when (cluffer:beginning-of-line-p cursor)
+    (error 'cluffer:beginning-of-line))
   (aref (contents (cluffer:line cursor))
-	(1- (cluffer-buffer:cursor-position cursor))))
+	(1- (cluffer:cursor-position cursor))))
 
-(defmethod cluffer-buffer:item-before-cursor
+(defmethod cluffer:item-before-cursor
     ((cursor open-left-sticky-cursor))
-  (when (cluffer-buffer:beginning-of-line-p cursor)
-    (error 'cluffer-buffer:beginning-of-line))
-  (let ((pos (1- (cluffer-buffer:cursor-position cursor)))
+  (when (cluffer:beginning-of-line-p cursor)
+    (error 'cluffer:beginning-of-line))
+  (let ((pos (1- (cluffer:cursor-position cursor)))
 	(line (cluffer:line cursor)))
     (aref (contents line)
 	  (if (< pos (gap-start line))
 	      pos
 	      (+ pos (- (gap-end line) (gap-start line)))))))
 
-(defmethod cluffer-buffer:item-before-cursor
+(defmethod cluffer:item-before-cursor
     ((cursor open-right-sticky-cursor))
-  (when (cluffer-buffer:beginning-of-line-p cursor)
-    (error 'cluffer-buffer:beginning-of-line))
-  (let ((pos (1- (cluffer-buffer:cursor-position cursor)))
+  (when (cluffer:beginning-of-line-p cursor)
+    (error 'cluffer:beginning-of-line))
+  (let ((pos (1- (cluffer:cursor-position cursor)))
 	(line (cluffer:line cursor)))
     (aref (contents line)
 	  (if (< pos (gap-start line))
@@ -495,29 +495,29 @@
 ;;; Methods on ITEM-AFTER-CURSOR.
 
 ;;; No need to open the line.
-(defmethod cluffer-buffer:item-after-cursor
+(defmethod cluffer:item-after-cursor
     ((cursor closed-cursor-mixin))
-  (when (cluffer-buffer:beginning-of-line-p cursor)
-    (error 'cluffer-buffer:beginning-of-line))
+  (when (cluffer:beginning-of-line-p cursor)
+    (error 'cluffer:beginning-of-line))
   (aref (contents (cluffer:line cursor))
-	(cluffer-buffer:cursor-position cursor)))
+	(cluffer:cursor-position cursor)))
 
-(defmethod cluffer-buffer:item-after-cursor
+(defmethod cluffer:item-after-cursor
     ((cursor open-left-sticky-cursor))
-  (when (cluffer-buffer:beginning-of-line-p cursor)
-    (error 'cluffer-buffer:beginning-of-line))
-  (let ((pos (cluffer-buffer:cursor-position cursor))
+  (when (cluffer:beginning-of-line-p cursor)
+    (error 'cluffer:beginning-of-line))
+  (let ((pos (cluffer:cursor-position cursor))
 	(line (cluffer:line cursor)))
     (aref (contents line)
 	  (if (< pos (gap-start line))
 	      pos
 	      (+ pos (- (gap-end line) (gap-start line)))))))
 
-(defmethod cluffer-buffer:item-after-cursor
+(defmethod cluffer:item-after-cursor
     ((cursor open-right-sticky-cursor))
-  (when (cluffer-buffer:beginning-of-line-p cursor)
-    (error 'cluffer-buffer:beginning-of-line))
-  (let ((pos (cluffer-buffer:cursor-position cursor))
+  (when (cluffer:beginning-of-line-p cursor)
+    (error 'cluffer:beginning-of-line))
+  (let ((pos (cluffer:cursor-position cursor))
 	(line (cluffer:line cursor)))
     (aref (contents line)
 	  (if (< pos (gap-start line))
@@ -529,7 +529,7 @@
 ;;; Methods on LINE-SPLIT-LINE.
 
 (defmethod cluffer:line-split-line ((cursor closed-cursor-mixin))
-  (let* ((pos (cluffer-buffer:cursor-position cursor))
+  (let* ((pos (cluffer:cursor-position cursor))
 	 (line (cluffer:line cursor))
 	 (contents (contents line))
 	 (new-contents (subseq contents pos))
@@ -540,14 +540,14 @@
 	  (subseq (contents line) 0 pos))
     (setf (cursors new-line)
 	  (loop for cursor in (cursors line)
-		when (or (and (typep cursor 'cluffer-buffer:right-sticky-mixin)
-			      (>= (cluffer-buffer:cursor-position cursor) pos))
-			 (and (typep cursor 'cluffer-buffer:left-sticky-mixin)
-			      (> (cluffer-buffer:cursor-position cursor) pos)))
+		when (or (and (typep cursor 'cluffer:right-sticky-mixin)
+			      (>= (cluffer:cursor-position cursor) pos))
+			 (and (typep cursor 'cluffer:left-sticky-mixin)
+			      (> (cluffer:cursor-position cursor) pos)))
 		  collect cursor))
     (loop for cursor in (cursors new-line)
 	  do (setf (cluffer:line cursor) new-line)
-	     (decf (cluffer-buffer:cursor-position cursor) pos))
+	     (decf (cluffer:cursor-position cursor) pos))
     (setf (cursors line)
 	  (set-difference (cursors line) (cursors new-line)))
     new-line))
@@ -572,7 +572,7 @@
   (loop with length = (length (contents line1))
 	for cursor in (cursors line2)
 	do (setf (cluffer:line cursor) line1)
-	   (incf (cluffer-buffer:cursor-position cursor) length))
+	   (incf (cluffer:cursor-position cursor) length))
   (setf (contents line1)
 	(concatenate 'vector (contents line1) (contents line2)))
   nil)
