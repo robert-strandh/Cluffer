@@ -145,13 +145,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function (SETF CURSOR-POSITION).
-;;;
-;;; Given a cursor, set its conceptual position.
+;;; Method on (SETF CURSOR-POSITION).
 
-(defgeneric (setf cursor-position) (position cursor))
-
-(defmethod (setf cursor-position) (position (cursor detached-cursor))
+(defmethod (setf cluffer:cursor-position) (position (cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
