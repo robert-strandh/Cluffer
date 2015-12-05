@@ -30,8 +30,6 @@
    #:insert-item
    #:delete-item
    #:erase-item
-   #:beginning-of-line-p
-   #:end-of-line-p
    #:beginning-of-line
    #:end-of-line
    #:beginning-of-buffer-p
