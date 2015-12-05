@@ -5,7 +5,8 @@
   (:export
    #:buffer
    #:line
-   #:cursor))
+   #:cursor
+   #:cursor-position))
 
 (defpackage #:cluffer-line
   (:use #:common-lisp))
