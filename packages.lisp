@@ -2,7 +2,10 @@
 
 (defpackage #:cluffer
   (:use #:common-lisp)
-  (:export))
+  (:export
+   #:buffer
+   #:line
+   #:cursor))
 
 (defpackage #:cluffer-line
   (:use #:common-lisp))
