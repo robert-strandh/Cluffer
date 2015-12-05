@@ -33,6 +33,9 @@
 ;;; Generic function CURSOR-POSITION.
 ;;;
 ;;; Given a cursor, return its conceptual position.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
 
 (defgeneric cursor-position (cursor))
 
@@ -44,5 +47,8 @@
 ;;;
 ;;; If POSITION is negative or greater than the item count of the line
 ;;; to which the cursor is attached, then an error is signaled.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
 
 (defgeneric (setf cursor-position) (position cursor))
