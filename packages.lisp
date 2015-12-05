@@ -18,9 +18,6 @@
   (:export
    #:cursor-attached
    #:cursor-detached
-   #:buffer
-   #:line
-   #:cursor
    #:detached-cursor
    #:attached-cursor
    #:detached-left-sticky-cursor
