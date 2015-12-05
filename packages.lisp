@@ -7,7 +7,8 @@
    #:line
    #:cursor
    #:item-count
-   #:cursor-position))
+   #:cursor-position
+   #:beginning-of-line-p))
 
 (defpackage #:cluffer-line
   (:use #:common-lisp))
