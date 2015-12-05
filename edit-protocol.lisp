@@ -84,3 +84,17 @@
 ;;; are the same, but this function might be implemented differently.
 
 (defgeneric end-of-line-p (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function FORWARD-ITEM.
+;;;
+;;; CURSOR is moved forward by one position.
+;;;
+;;; If CURSOR is already at the end of the line to which it is
+;;; attached, then the error END-OF-LINE is signaled.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+
+(defgeneric forward-item (cursor))
