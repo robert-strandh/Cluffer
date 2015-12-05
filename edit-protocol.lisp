@@ -52,3 +52,19 @@
 ;;; type DETACHED-CURSOR is signaled.
 
 (defgeneric (setf cursor-position) (position cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function BEGINNING-OF-LINE-P.
+;;;
+;;; Return true if and only if CURSOR is positioned at the beginning
+;;; of the line to which it is attached.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+;;;
+;;; Calling this function has the same effect as calling the function
+;;; CURSOR-POSITION and checking whether the return value is zero, but
+;;; this function might be implemented differently.
+
+(defgeneric beginning-of-line-p (cursor))
