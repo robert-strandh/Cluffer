@@ -6,6 +6,7 @@
    #:buffer
    #:line
    #:cursor
+   #:item-count
    #:cursor-position))
 
 (defpackage #:cluffer-line
