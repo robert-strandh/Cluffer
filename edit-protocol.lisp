@@ -124,3 +124,15 @@
 ;;; type DETACHED-CURSOR is signaled.
 
 (defgeneric beginning-of-line (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function END-OF-LINE.
+;;;
+;;; CURSOR is moved so that it is positioned at the end of the line to
+;;; which it is attached.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+
+(defgeneric end-of-line (cursor))
