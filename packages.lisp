@@ -9,7 +9,9 @@
    #:item-count
    #:cursor-position
    #:beginning-of-line-p
-   #:end-of-line-p))
+   #:end-of-line-p
+   #:forward-item
+   #:backward-item))
 
 (defpackage #:cluffer-line
   (:use #:common-lisp))
