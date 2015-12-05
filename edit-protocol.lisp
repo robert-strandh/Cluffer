@@ -150,3 +150,17 @@
 ;;; type DETACHED-CURSOR is signaled.
 
 (defgeneric item-before-cursor (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function ITEM-AFTER-CURSOR.
+;;;
+;;; Return the item that occurs immediately after CURSOR.
+;;;
+;;; If CURSOR is at the end of the line to which it is attached, then
+;;; the error END-OF-LINE is signaled.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+
+(defgeneric item-after-cursor (cursor))
