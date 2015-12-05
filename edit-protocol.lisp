@@ -112,3 +112,15 @@
 ;;; type DETACHED-CURSOR is signaled.
 
 (defgeneric backward-item (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function BEGINNING-OF-LINE.
+;;;
+;;; CURSOR is moved so that it is positioned at the beginning of the
+;;; line to which it is attached.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+
+(defgeneric beginning-of-line (cursor))
