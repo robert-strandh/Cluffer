@@ -48,7 +48,6 @@
    #:backward-item
    #:attach-cursor
    #:detach-cursor
-   #:item-count
    #:cursor-position
    #:line-count
    #:split-line
