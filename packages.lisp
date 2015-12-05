@@ -17,8 +17,6 @@
    #:cursor-detached
    #:buffer
    #:line
-   #:attach-line
-   #:detach-line
    #:cursor
    #:detached-cursor
    #:attached-cursor
