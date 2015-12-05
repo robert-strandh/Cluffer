@@ -13,7 +13,9 @@
    #:forward-item
    #:backward-item
    #:beginning-of-line
-   #:end-of-line))
+   #:end-of-line
+   #:item-before-cursor
+   #:item-after-cursor))
 
 (defpackage #:cluffer-line
   (:use #:common-lisp))
