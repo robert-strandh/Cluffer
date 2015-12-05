@@ -131,7 +131,7 @@
   (buffer (node line)))
 
 (defmethod buffer ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 (defmethod buffer ((cursor attached-cursor))
   (buffer (line cursor)))
@@ -145,7 +145,7 @@
 (defgeneric cursor-position (cursor))
 
 (defmethod cursor-position ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -156,7 +156,7 @@
 (defgeneric (setf cursor-position) (position cursor))
 
 (defmethod (setf cursor-position) (position (cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -165,7 +165,7 @@
 (defgeneric beginning-of-line-p (cursor))
 
 (defmethod beginning-of-line-p ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -174,7 +174,7 @@
 (defgeneric end-of-line-p (cursor))
 
 (defmethod end-of-line-p ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -183,7 +183,7 @@
 (defgeneric forward-item (cursor))
 
 (defmethod forward-item ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -192,7 +192,7 @@
 (defgeneric backward-item (cursor))
 
 (defmethod backward-item ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -201,7 +201,7 @@
 (defgeneric beginning-of-line (cursor))
 
 (defmethod beginning-of-line ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -210,7 +210,7 @@
 (defgeneric end-of-line (cursor))
 
 (defmethod end-of-line ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -219,7 +219,7 @@
 (defgeneric item-before-cursor (cursor))
 
 (defmethod item-before-cursor ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -228,7 +228,7 @@
 (defgeneric item-after-cursor (cursor))
 
 (defmethod item-after-cursor ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
@@ -255,7 +255,7 @@
 (defgeneric insert-item (cursor item))
 
 (defmethod insert-item ((cursor detached-cursor) item)
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 (defmethod insert-item :after ((cursor attached-cursor) item)
   (let* ((node (node (line cursor)))
@@ -272,7 +272,7 @@
 (defgeneric delete-item (cursor))
 
 (defmethod delete-item ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 (defmethod delete-item :after ((cursor attached-cursor))
   (let ((node (node (line cursor)))
@@ -289,7 +289,7 @@
 (defgeneric erase-item (cursor))
 
 (defmethod erase-item ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 (defmethod erase-item :after ((cursor attached-cursor))
   (let ((node (node (line cursor)))
@@ -310,9 +310,9 @@
 ;;; instead.
 (defmethod find-line ((buffer buffer) line-number)
   (when (minusp line-number)
-    (error 'begining-of-buffer))
+    (error 'cluffer:begining-of-buffer))
   (when (>= line-number (line-count buffer))
-    (error 'end-of-buffer))
+    (error 'cluffer:end-of-buffer))
   (labels ((traverse (node line-number)
 	     (let* ((left (clump-binary-tree:left node))
 		    (right (clump-binary-tree:right node))
@@ -365,7 +365,7 @@
 (defgeneric beginning-of-buffer-p (cursor))
 
 (defmethod beginning-of-buffer-p ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 (defmethod beginning-of-buffer-p ((cursor attached-cursor))
   (and (beginning-of-line-p cursor)
@@ -378,7 +378,7 @@
 (defgeneric end-of-buffer-p (cursor))
 
 (defmethod end-of-buffer-p ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 (defmethod end-of-buffer-p ((cursor attached-cursor))
   (and (end-of-line-p cursor)
@@ -450,12 +450,12 @@
 (defgeneric line-join-line (line1 line2))
 
 (defmethod join-line ((cursor detached-cursor))
-  (error 'cursor-detached))
+  (error 'cluffer:cursor-detached))
 
 (defmethod join-line ((cursor attached-cursor))
   (let ((line (line cursor)))
     (when (last-line-p line)
-      (error 'end-of-buffer))
+      (error 'cluffer:end-of-buffer))
     (let* ((line-number (line-number line))
 	   (next-line (find-line (buffer (node line)) (1+ line-number))))
       (let ((node-line (node line))
