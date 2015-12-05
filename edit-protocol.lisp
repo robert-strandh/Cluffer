@@ -20,5 +20,8 @@
 ;;; Generic function (SETF CURSOR-POSITION).
 ;;;
 ;;; Given a cursor, set its conceptual position.
+;;;
+;;; If POSITION is negative or greater than the item count of the line
+;;; to which the cursor is attached, then an error is signaled.
 
 (defgeneric (setf cursor-position) (position cursor))
