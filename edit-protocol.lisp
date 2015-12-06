@@ -180,3 +180,17 @@
 ;;; type DETACHED-CURSOR is signaled.
 
 (defgeneric insert-item (cursor item))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function DELETE-ITEM.
+;;;
+;;; Delete the item immediately after CURSOR.
+;;;
+;;; If CURSOR is at the end of the line to which it is attached, then
+;;; the error END-OF-LINE is signaled.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+
+(defgeneric delete-item (cursor))
