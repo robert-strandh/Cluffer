@@ -194,3 +194,17 @@
 ;;; type DETACHED-CURSOR is signaled.
 
 (defgeneric delete-item (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function ERASE-ITEM.
+;;;
+;;; Delete the item immediately before CURSOR.
+;;;
+;;; If CURSOR is at the beginning of the line to which it is attached,
+;;; then the error BEGINNING-OF-LINE is signaled.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+
+(defgeneric erase-item (cursor))
