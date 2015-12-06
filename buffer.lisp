@@ -244,10 +244,10 @@
 ;;;
 ;;; Methods on function INSERT-ITEM.
 
-(defmethod insert-item ((cursor detached-cursor) item)
+(defmethod cluffer:insert-item ((cursor detached-cursor) item)
   (error 'cluffer:cursor-detached))
 
-(defmethod insert-item :after ((cursor attached-cursor) item)
+(defmethod cluffer:insert-item :after ((cursor attached-cursor) item)
   (let* ((node (node (line cursor)))
 	 (buffer (buffer cursor)))
     (clump-binary-tree:splay node)
