@@ -257,9 +257,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function DELETE-ITEM.
-
-(defgeneric delete-item (cursor))
+;;; Methods on generic function DELETE-ITEM.
 
 (defmethod delete-item ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
