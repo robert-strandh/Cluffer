@@ -242,9 +242,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function INSERT-ITEM.
-
-(defgeneric insert-item (cursor item))
+;;; Methods on function INSERT-ITEM.
 
 (defmethod insert-item ((cursor detached-cursor) item)
   (error 'cluffer:cursor-detached))
