@@ -164,3 +164,19 @@
 ;;; type DETACHED-CURSOR is signaled.
 
 (defgeneric item-after-cursor (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function INSERT-ITEM.
+;;;
+;;; Insert ITEM into the line to which CURSOR is attached at the
+;;; current position of CURSOR.
+;;;
+;;; How the position of CURSOR (and other cursors at the same position
+;;; as CURSOR) is affected by this operation is defined by the exact
+;;; types of these cursors.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+
+(defgeneric insert-item (cursor item))
