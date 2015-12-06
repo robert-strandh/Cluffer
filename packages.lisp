@@ -15,7 +15,8 @@
    #:beginning-of-line
    #:end-of-line
    #:item-before-cursor
-   #:item-after-cursor))
+   #:item-after-cursor
+   #:insert-item))
 
 (defpackage #:cluffer-line
   (:use #:common-lisp))
