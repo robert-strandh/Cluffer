@@ -138,24 +138,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function BACKWARD-ITEM.
-
-(defgeneric backward-item (cursor))
-
-(defmethod backward-item ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Generic function BEGINNING-OF-LINE.
-
-(defgeneric beginning-of-line (cursor))
-
-(defmethod beginning-of-line ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Generic function END-OF-LINE.
 
 (defgeneric end-of-line (cursor))
