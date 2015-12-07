@@ -138,15 +138,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function FORWARD-ITEM.
-
-(defgeneric forward-item (cursor))
-
-(defmethod forward-item ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Generic function BACKWARD-ITEM.
 
 (defgeneric backward-item (cursor))
