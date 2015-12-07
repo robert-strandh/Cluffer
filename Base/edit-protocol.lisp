@@ -30,6 +30,15 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Generic function CURSOR-ATTACHED-P.
+;;;
+;;; Given a cursor, return true if and only if the cursor is attached
+;;; to a line.
+
+(defgeneric cursor-attached-p (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Generic function CURSOR-POSITION.
 ;;;
 ;;; Given a cursor, return its conceptual position.
