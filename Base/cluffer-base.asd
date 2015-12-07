@@ -3,4 +3,5 @@
 (defsystem :cluffer-base
   :serial t
   :components
-  ((:file "packages")))
+  ((:file "packages")
+   (:file "edit-protocol")))
