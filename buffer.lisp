@@ -138,13 +138,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Method on CURSOR-POSITION.
-
-(defmethod cluffer:cursor-position ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Method on (SETF CURSOR-POSITION).
 
 (defmethod (setf cluffer:cursor-position) (position (cursor detached-cursor))
