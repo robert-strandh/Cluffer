@@ -7,4 +7,5 @@
   ((:file "packages")
    (:file "edit-protocol")
    (:file "conditions")
+   (:file "condition-reporters-english")
    (:file "methods")))
