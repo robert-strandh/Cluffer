@@ -226,3 +226,18 @@
 ;;; then an error of type DETACHED-CURSOR is signaled.
 
 (defgeneric line-number (entity))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function FIND-LINE.
+;;;
+;;; Return the line with the number LINE-NUMBER in BUFFER.
+;;;
+;;; The first line in the buffer has number 0.
+;;;
+;;; If LINE-NUMBER is negative, then an error of type
+;;; BEGINNING-OF-BUFFER is signaled.  If LINE-NUMBER is greater than
+;;; or equal to the number of lines in BUFFER, then an error of type
+;;; END-OF-BUFFER is signaled.
+
+(defgeneric find-line (buffer line-number))
