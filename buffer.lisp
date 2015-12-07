@@ -152,15 +152,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function END-OF-LINE-P.
-
-(defgeneric end-of-line-p (cursor))
-
-(defmethod end-of-line-p ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Generic function FORWARD-ITEM.
 
 (defgeneric forward-item (cursor))
