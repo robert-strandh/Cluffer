@@ -315,9 +315,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function LINE-NUMBER.
-
-(defgeneric line-number (line))
+;;; Method on generic function LINE-NUMBER.
 
 (defmethod line-number (line)
   (let ((node (node line)))
