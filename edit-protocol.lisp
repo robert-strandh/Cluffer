@@ -208,3 +208,21 @@
 ;;; type DETACHED-CURSOR is signaled.
 
 (defgeneric erase-item (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function LINE-NUMBER.
+;;;
+;;; Return the line number of ENTITY.
+;;;
+;;; If ENTITY is a line, then the number of that line in the buffer to
+;;; which the line belongs is returned.  The first line in the buffer
+;;; has number 0.
+;;;
+;;; If ENTITY is a cursor, then the number of the line to which the
+;;; cursor is attached is returned.
+;;;
+;;; If ENTITY is a cursor that is currently not attached to a line,
+;;; then an error of type DETACHED-CURSOR is signaled.
+
+(defgeneric line-number (entity))
