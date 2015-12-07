@@ -317,7 +317,7 @@
 ;;;
 ;;; Method on generic function LINE-NUMBER.
 
-(defmethod line-number (line)
+(defmethod cluffer:line-number (line)
   (let ((node (node line)))
     (clump-binary-tree:splay node)
     (if (null (clump-binary-tree:left node))
