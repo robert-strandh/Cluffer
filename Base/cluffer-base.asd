@@ -5,4 +5,5 @@
   :components
   ((:file "packages")
    (:file "edit-protocol")
+   (:file "conditions")
    (:file "methods")))
