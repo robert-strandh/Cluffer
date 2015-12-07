@@ -138,13 +138,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Method on (SETF CURSOR-POSITION).
-
-(defmethod (setf cluffer:cursor-position) (position (cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Generic function FORWARD-ITEM.
 
 (defgeneric forward-item (cursor))

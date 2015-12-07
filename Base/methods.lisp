@@ -27,6 +27,13 @@
 
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
+(defmethod (setf cluffer:cursor-position) :before (position cursor)
+  (declare (ignore position))
+  (unless (cluffer:cursor-attached-p cursor)
+    (error 'cluffer:cursor-detached)))
+
+;;; This :BEFORE method checks whether the cursor is attached, and if
+;;; not, signals an error.
 (defmethod cluffer:beginning-of-line-p :before (cursor)
   (unless (cluffer:cursor-attached-p cursor)
     (error 'cluffer:cursor-detached)))
