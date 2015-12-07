@@ -152,13 +152,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Method on generic function BEGINNING-OF-LINE-P.
-
-(defmethod beginning-of-line-p ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Generic function END-OF-LINE-P.
 
 (defgeneric end-of-line-p (cursor))

@@ -18,3 +18,9 @@
 (defmethod cluffer:end-of-line-p (cursor)
   (= (cluffer:cursor-position cursor)
      (cluffer:item-count cursor)))
+
+;;; This :BEFORE method checks whether the cursor is attached, and if
+;;; not, signals an error.
+(defmethod beginning-of-line-p :before (cursor)
+  (unless (cursor-attached-p cursor)
+    (error 'cluffer:cursor-detached)))
