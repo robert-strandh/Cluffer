@@ -19,7 +19,11 @@
    #:item-after-cursor
    #:insert-item
    #:delete-item
-   #:erase-item))
+   #:erase-item
+   #:beginning-of-buffer
+   #:end-of-buffer
+   #:cursor-attached
+   #:cursor-detached))
 
 (defpackage #:cluffer-base
   (:use #:common-lisp)
