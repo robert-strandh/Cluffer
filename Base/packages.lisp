@@ -7,6 +7,7 @@
    #:line
    #:cursor
    #:item-count
+   #:cursor-attached-p
    #:cursor-position
    #:beginning-of-line-p
    #:end-of-line-p
