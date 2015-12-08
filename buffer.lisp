@@ -138,24 +138,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function END-OF-LINE.
-
-(defgeneric end-of-line (cursor))
-
-(defmethod end-of-line ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Generic function ITEM-BEFORE-CURSOR.
-
-(defgeneric item-before-cursor (cursor))
-
-(defmethod item-before-cursor ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Generic function ITEM-AFTER-CURSOR.
 
 (defgeneric item-after-cursor (cursor))
