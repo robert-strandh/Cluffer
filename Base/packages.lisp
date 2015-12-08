@@ -31,7 +31,8 @@
    #:join-line
    #:items
    #:attach-cursor
-   #:detach-cursor))
+   #:detach-cursor
+   #:line-number))
 
 (defpackage #:cluffer-internal
   (:use #:common-lisp)
