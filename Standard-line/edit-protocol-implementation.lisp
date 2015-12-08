@@ -153,7 +153,7 @@
   nil)
 
 (defmethod cluffer:detach-cursor
-    ((cursor cluffer:detached-cursor))
+    ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 (defmethod cluffer:detach-cursor
@@ -182,7 +182,7 @@
 ;;; of the line.
 
 (defmethod cluffer:beginning-of-line-p
-    ((cursor cluffer:detached-cursor))
+    ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 ;;; The default method just calls CURSOR-POSITION and returns true if
@@ -196,7 +196,7 @@
 ;;; Methods on END-OF-LINE-P.
 
 (defmethod cluffer:end-of-line-p
-    ((cursor cluffer:detached-cursor))
+    ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 ;;; The default method just calls CURSOR-POSITION and returns true if
@@ -357,7 +357,7 @@
 ;;; Position the cursor at the beginning of the line.
 
 (defmethod cluffer:beginning-of-line
-    ((cursor cluffer:detached-cursor))
+    ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 (defmethod cluffer:beginning-of-line
@@ -371,7 +371,7 @@
 ;;; Position the cursor at the end of the line.
 
 (defmethod cluffer:end-of-line
-    ((cursor cluffer:detached-cursor))
+    ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 (defmethod cluffer:end-of-line
