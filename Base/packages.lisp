@@ -23,7 +23,8 @@
    #:beginning-of-buffer
    #:end-of-buffer
    #:cursor-attached
-   #:cursor-detached))
+   #:cursor-detached
+   #:beginning-of-buffer-p))
 
 (defpackage #:cluffer-base
   (:use #:common-lisp)
