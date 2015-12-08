@@ -326,3 +326,11 @@
 ;;; Generic function DETACH-CURSOR.
 
 (defgeneric detach-cursor (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function BUFFER.
+;;;
+;;; Return the buffer of a node, a cursor, or a line.
+
+(defgeneric buffer (thing))

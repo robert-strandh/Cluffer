@@ -8,9 +8,6 @@
   ((%current-time :initform 0 :initarg :current-time :accessor current-time)
    (%contents :initarg :contents :accessor contents)))
 
-;;; Return the buffer of a node, a cursor, or a line.
-(defgeneric buffer (thing))
-
 ;;; The node contains a reference to the buffer in which it is
 ;;; located.  This reference is needed because when a node of the tree
 ;;; is splayed, that node must be explicitly assigned to the CONTENTS
