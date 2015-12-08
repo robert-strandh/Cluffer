@@ -29,7 +29,8 @@
 
 (defclass closed-line (line) ())
 
-(defclass attached-cursor () ())
+(defclass attached-cursor ()
+  ((%line :initarg :line :accessor line)))
 
 (defclass detached-cursor () ())
 
