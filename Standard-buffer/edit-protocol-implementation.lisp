@@ -81,7 +81,7 @@
 ;;;
 ;;; Methods on function INSERT-ITEM.
 
-(defmethod cluffer:insert-item :after ((cursor attached-cursor) item)
+(defmethod cluffer:insert-item :after (cursor item)
   (let* ((node (node (line cursor)))
 	 (buffer (buffer cursor)))
     (clump-binary-tree:splay node)
@@ -93,7 +93,7 @@
 ;;;
 ;;; Methods on generic function DELETE-ITEM.
 
-(defmethod cluffer:delete-item :after ((cursor attached-cursor))
+(defmethod cluffer:delete-item :after (cursor)
   (let ((node (node (line cursor)))
 	(buffer (buffer cursor)))
     (clump-binary-tree:splay node)
@@ -107,7 +107,7 @@
 
 (defgeneric erase-item (cursor))
 
-(defmethod erase-item :after ((cursor attached-cursor))
+(defmethod erase-item :after (cursor)
   (let ((node (node (line cursor)))
 	(buffer (buffer cursor)))
     (clump-binary-tree:splay node)
@@ -178,7 +178,7 @@
 
 (defgeneric beginning-of-buffer-p (cursor))
 
-(defmethod beginning-of-buffer-p ((cursor attached-cursor))
+(defmethod beginning-of-buffer-p (cursor)
   (and (beginning-of-line-p cursor)
        (first-line-p (line cursor))))
 
@@ -188,7 +188,7 @@
 
 (defgeneric end-of-buffer-p (cursor))
 
-(defmethod end-of-buffer-p ((cursor attached-cursor))
+(defmethod end-of-buffer-p (cursor)
   (and (end-of-line-p cursor)
        (last-line-p (line cursor))))
 
@@ -257,7 +257,7 @@
 ;;; second of these two lines from the tree in the buffer.
 (defgeneric line-join-line (line1 line2))
 
-(defmethod join-line ((cursor attached-cursor))
+(defmethod join-line (cursor)
   (let ((line (line cursor)))
     (when (last-line-p line)
       (error 'cluffer:end-of-buffer))
