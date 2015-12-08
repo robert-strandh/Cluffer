@@ -27,7 +27,8 @@
    #:cursor-detached
    #:beginning-of-buffer-p
    #:end-of-buffer-p
-   #:split-line))
+   #:split-line
+   #:join-line))
 
 (defpackage #:cluffer-internal
   (:use #:common-lisp)
