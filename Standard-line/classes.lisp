@@ -37,6 +37,9 @@
 
 (defclass right-sticky-mixin () ())
 
+(defclass detached-left-sticky-cursor (detached-cursor left-sticky-mixin)
+  ())
+
 ;;; At the moment, we represent open cursors and a closed cursors the
 ;;; same way, where the position is the logical position in the line.
 ;;; Later, we might represent open cursors by the physical position in
