@@ -69,9 +69,6 @@
 (defmethod buffer ((line line))
   (buffer (node line)))
 
-(defmethod buffer ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
 (defmethod buffer ((cursor attached-cursor))
   (buffer (line cursor)))
 
