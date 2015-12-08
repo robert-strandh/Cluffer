@@ -20,12 +20,13 @@
      (cluffer:item-count cursor)))
 
 ;;; Default method on FIRST-LINE-P.
-(defmethod first-line-p (line)
-  (= (line-number line) 0))
+(defmethod cluffer:first-line-p (line)
+  (= (cluffer:line-number line) 0))
 
 ;;; Default method on LAST-LINE-P.
-(defmethod last-line-p (line)
-  (= (line-number line) (1- (line-count (buffer (node line))))))
+(defmethod cluffer:last-line-p (line)
+  (= (cluffer:line-number line)
+     (1- (cluffer:line-count (cluffer:buffer line)))))
 
 ;;; Default method on BEGINNING-OF-BUFFER-P.
 (defmethod cluffer:beginning-of-buffer-p (cursor)
