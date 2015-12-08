@@ -255,9 +255,6 @@
 
 (defgeneric beginning-of-buffer-p (cursor))
 
-(defmethod beginning-of-buffer-p ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
 (defmethod beginning-of-buffer-p ((cursor attached-cursor))
   (and (beginning-of-line-p cursor)
        (first-line-p (line cursor))))
