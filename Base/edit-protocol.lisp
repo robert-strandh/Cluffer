@@ -340,3 +340,10 @@
 ;;; Generic function FIRST-LINE-P.
 
 (defgeneric first-line-p (line))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function LAST-LINE-P.
+
+(defgeneric last-line-p (line))
+

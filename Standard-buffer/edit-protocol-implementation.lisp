@@ -154,12 +154,6 @@
 	0
 	(line-count (clump-binary-tree:left node)))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Generic function LAST-LINE-P.
-
-(defgeneric last-line-p (line))
-
 (defmethod last-line-p (line)
   (= (line-number line) (1- (line-count (buffer (node line))))))
 
