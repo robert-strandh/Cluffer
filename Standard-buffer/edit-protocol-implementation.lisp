@@ -156,16 +156,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function BEGINNING-OF-BUFFER-P.
-
-(defgeneric beginning-of-buffer-p (cursor))
-
-(defmethod beginning-of-buffer-p (cursor)
-  (and (beginning-of-line-p cursor)
-       (first-line-p (line cursor))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Generic function END-OF-BUFFER-P.
 
 (defgeneric end-of-buffer-p (cursor))
