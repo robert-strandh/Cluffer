@@ -1,6 +1,6 @@
 (cl:in-package #:cluffer-standard-buffer)
 
-(defclass buffer ()
+(defclass buffer (cluffer:buffer)
   ((%current-time :initform 0 :initarg :current-time :accessor current-time)
    (%contents :initarg :contents :accessor contents)))
 
