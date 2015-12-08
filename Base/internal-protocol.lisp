@@ -2,4 +2,4 @@
 
 (defgeneric split-line (cursor))
 
-(defgeneric join-line (cursor))
+(defgeneric join-line (line1 line2))
