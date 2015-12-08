@@ -334,3 +334,9 @@
 ;;; Return the buffer of a node, a cursor, or a line.
 
 (defgeneric buffer (thing))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function FIRST-LINE-P.
+
+(defgeneric first-line-p (line))
