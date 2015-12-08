@@ -164,7 +164,7 @@
   nil)
 
 (defmethod cluffer:detach-cursor
-  ((cursor cluffer:right-sticky-mixin))
+  ((cursor right-sticky-mixin))
   (setf (cursors (cluffer:line cursor))
 	(remove cursor (cursors (cluffer:line cursor))))
   (change-class cursor 'detached-right-sticky-cursor)
@@ -247,7 +247,7 @@
     (setf (aref (contents line) (gap-start line)) item)
     (incf (gap-start line))
     (loop for cursor in (cursors line)
-	  do (when (or (and (typep cursor 'cluffer:right-sticky-mixin)
+	  do (when (or (and (typep cursor 'right-sticky-mixin)
 			    (>= (cluffer:cursor-position cursor) pos))
 		       (and (typep cursor 'left-sticky-mixin)
 			    (> (cluffer:cursor-position cursor) pos)))
@@ -463,7 +463,7 @@
 	  (subseq (contents line) 0 pos))
     (setf (cursors new-line)
 	  (loop for cursor in (cursors line)
-		when (or (and (typep cursor 'cluffer:right-sticky-mixin)
+		when (or (and (typep cursor 'right-sticky-mixin)
 			      (>= (cluffer:cursor-position cursor) pos))
 			 (and (typep cursor 'left-sticky-mixin)
 			      (> (cluffer:cursor-position cursor) pos)))
