@@ -6,6 +6,7 @@
    #:buffer
    #:line
    #:cursor
+   #:line-count
    #:item-count
    #:cursor-attached-p
    #:cursor-position
