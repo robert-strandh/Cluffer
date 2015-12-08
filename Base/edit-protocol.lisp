@@ -320,3 +320,9 @@
 ;;; Generic function ATTACH-CURSOR.
 
 (defgeneric attach-cursor (cursor line &optional position))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function DETACH-CURSOR.
+
+(defgeneric detach-cursor (cursor))

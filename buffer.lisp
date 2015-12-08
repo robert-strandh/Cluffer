@@ -31,10 +31,6 @@
 (defun make-right-sticky-cursor ()
   (make-instance 'detached-right-sticky-cursor))
 
-(defgeneric attach-cursor (cursor line &optional position))
-
-(defgeneric detach-cursor (cursor))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Buffer.
