@@ -170,9 +170,6 @@
 ;;;
 ;;; Methods on generic function DELETE-ITEM.
 
-(defmethod cluffer:delete-item ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
 (defmethod cluffer:delete-item :after ((cursor attached-cursor))
   (let ((node (node (line cursor)))
 	(buffer (buffer cursor)))
