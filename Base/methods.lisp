@@ -19,6 +19,10 @@
   (= (cluffer:cursor-position cursor)
      (cluffer:item-count cursor)))
 
+;;; Default method on FIRST-LINE-P.
+(defmethod first-line-p (line)
+  (= (line-number line) 0))
+
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
 (defmethod cluffer:cursor-position :before (cursor)
