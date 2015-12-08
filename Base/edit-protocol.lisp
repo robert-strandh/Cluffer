@@ -300,3 +300,9 @@
 ;;; Generic function SPLIT-LINE.
 
 (defgeneric split-line (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function JOIN-LINE.
+
+(defgeneric join-line (cursor))
