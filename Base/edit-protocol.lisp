@@ -9,10 +9,18 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Generic function LINE-COUNT.
+;;;
+;;; Return the number of lines in BUFFER.
+
+(defgeneric line-count (buffer))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Generic function ITEM-COUNT.
 ;;;
 ;;; Return the number of items in ENTITY.
-
+;;;
 ;;; If ENTITY is a buffer, then the total number of items in the
 ;;; buffer is returned.
 ;;;
