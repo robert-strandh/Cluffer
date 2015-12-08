@@ -294,3 +294,9 @@
 ;;; function might be different for performance reasons.
 
 (defgeneric end-of-buffer-p (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function SPLIT-LINE.
+
+(defgeneric split-line (cursor))
