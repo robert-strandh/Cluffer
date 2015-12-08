@@ -449,9 +449,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on LINE-SPLIT-LINE.
+;;; Methods on CLUFFER-INTERNAL:SPLIT-LINE.
 
-(defmethod cluffer:line-split-line ((cursor closed-cursor-mixin))
+(defmethod cluffer-internal:split-line ((cursor closed-cursor-mixin))
   (let* ((pos (cluffer:cursor-position cursor))
 	 (line (cluffer:line cursor))
 	 (contents (contents line))
@@ -475,23 +475,23 @@
 	  (set-difference (cursors line) (cursors new-line)))
     new-line))
 
-(defmethod cluffer:line-split-line ((cursor open-cursor-mixin))
+(defmethod cluffer-internal:split-line ((cursor open-cursor-mixin))
   (close-line (cluffer:line cursor))
-  (cluffer:line-split-line cursor))
+  (cluffer-internal:split-line cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on LINE-JOIN-LINE.
+;;; Methods on CLUFFER-INTERNAL:JOIN-LINE.
 
-(defmethod cluffer:line-join-line ((line1 open-line) line2)
+(defmethod cluffer-internal:join-line ((line1 open-line) line2)
   (close-line line1)
-  (cluffer:line-join-line line1 line2))
+  (cluffer-internal:join-line line1 line2))
 
-(defmethod cluffer:line-join-line (line1 (line2 open-line))
+(defmethod cluffer-internal:join-line (line1 (line2 open-line))
   (close-line line2)
-  (cluffer:line-join-line line1 line2))
+  (cluffer-internal:join-line line1 line2))
 
-(defmethod cluffer:line-join-line ((line1 closed-line) (line2 closed-line))
+(defmethod cluffer-internal:join-line ((line1 closed-line) (line2 closed-line))
   (loop with length = (length (contents line1))
 	for cursor in (cursors line2)
 	do (setf (cluffer:line cursor) line1)
