@@ -137,15 +137,6 @@
   (buffer (line cursor)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Generic function ITEM-AFTER-CURSOR.
-
-(defgeneric item-after-cursor (cursor))
-
-(defmethod item-after-cursor ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
 ;;; Generic function LINE-COUNT.
 
