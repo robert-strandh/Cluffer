@@ -96,7 +96,7 @@
 ;;; Detaching and attaching a cursor.
 
 (defmethod cluffer:attach-cursor
-    ((cursor cluffer:attached-cursor) line &optional position)
+    ((cursor attached-cursor) line &optional position)
   (declare (ignore line position))
   (error 'cluffer:cursor-attached))
 
@@ -188,7 +188,7 @@
 ;;; The default method just calls CURSOR-POSITION and returns true if
 ;;; and only if that position is 0.
 (defmethod cluffer:beginning-of-line-p
-    ((cursor cluffer:attached-cursor))
+    ((cursor attached-cursor))
   (zerop (cluffer:cursor-position cursor)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -203,7 +203,7 @@
 ;;; and only if that position is the same as the number of items in
 ;;; the line.
 (defmethod cluffer:end-of-line-p
-    ((cursor cluffer:attached-cursor))
+    ((cursor attached-cursor))
   (= (cluffer:cursor-position cursor)
      (cluffer:item-count (cluffer:line cursor))))
 
@@ -361,7 +361,7 @@
   (error 'cluffer:cursor-detached))
 
 (defmethod cluffer:beginning-of-line
-    ((cursor cluffer:attached-cursor))
+    ((cursor attached-cursor))
   (setf (cluffer:cursor-position cursor) 0))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -375,7 +375,7 @@
   (error 'cluffer:cursor-detached))
 
 (defmethod cluffer:end-of-line
-    ((cursor cluffer:attached-cursor))
+    ((cursor attached-cursor))
   (setf (cluffer:cursor-position cursor)
 	(cluffer:item-count (cluffer:line cursor))))
 
