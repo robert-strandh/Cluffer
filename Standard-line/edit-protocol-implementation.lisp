@@ -1,4 +1,4 @@
-(cl:in-package #:cluffer-line)
+(cl:in-package #:cluffer-standard-line)
 
 (defmethod cluffer:item-count ((line open-line))
   (- (length (contents line)) (- (gap-end line) (gap-start line))))
