@@ -28,7 +28,8 @@
    #:beginning-of-buffer-p
    #:end-of-buffer-p
    #:split-line
-   #:join-line))
+   #:join-line
+   #:items))
 
 (defpackage #:cluffer-internal
   (:use #:common-lisp)
