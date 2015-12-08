@@ -158,15 +158,15 @@
 
 (defmethod cluffer:detach-cursor
   ((cursor left-sticky-mixin))
-  (setf (cursors (cluffer:line cursor))
-	(remove cursor (cursors (cluffer:line cursor))))
+  (setf (cursors (line cursor))
+	(remove cursor (cursors (line cursor))))
   (change-class cursor 'detached-left-sticky-cursor)
   nil)
 
 (defmethod cluffer:detach-cursor
   ((cursor right-sticky-mixin))
-  (setf (cursors (cluffer:line cursor))
-	(remove cursor (cursors (cluffer:line cursor))))
+  (setf (cursors (line cursor))
+	(remove cursor (cursors (line cursor))))
   (change-class cursor 'detached-right-sticky-cursor)
   nil)
 
@@ -205,19 +205,19 @@
 (defmethod cluffer:end-of-line-p
     ((cursor attached-cursor))
   (= (cluffer:cursor-position cursor)
-     (cluffer:item-count (cluffer:line cursor))))
+     (cluffer:item-count (line cursor))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on INSERT-ITEM.
 
 (defmethod cluffer:insert-item ((cursor closed-cursor-mixin) item)
-  (open-line (cluffer:line cursor))
+  (open-line (line cursor))
   (cluffer:insert-item cursor item))
 
 (defmethod cluffer:insert-item ((cursor open-cursor-mixin) item)
   (let* ((pos (cluffer:cursor-position cursor))
-	 (line (cluffer:line cursor))
+	 (line (line cursor))
 	 (contents (contents line)))
     (cond ((= (gap-start line) (gap-end line))
 	   (let* ((new-length (* 2 (length contents)))
@@ -259,14 +259,14 @@
 ;;; Methods on DELETE-ITEM.
 
 (defmethod cluffer:delete-item ((cursor closed-cursor-mixin))
-  (open-line (cluffer:line cursor))
+  (open-line (line cursor))
   (cluffer:delete-item cursor))
 
 (defmethod cluffer:delete-item ((cursor open-cursor-mixin))
   (when (cluffer:end-of-line-p cursor)
     (error 'cluffer:end-of-line))
   (let* ((pos (cluffer:cursor-position cursor))
-	 (line (cluffer:line cursor))
+	 (line (line cursor))
 	 (contents (contents line)))
     (cond ((< pos (gap-start line))
 	   (decf (gap-end line) (- (gap-start line) pos))
@@ -306,7 +306,7 @@
 ;;; Methods on ERASE-ITEM.
 
 (defmethod cluffer:erase-item ((cursor closed-cursor-mixin))
-  (open-line (cluffer:line cursor))
+  (open-line (line cursor))
   (cluffer:erase-item cursor))
 
 (defmethod cluffer:erase-item ((cursor open-cursor-mixin))
@@ -377,7 +377,7 @@
 (defmethod cluffer:end-of-line
     ((cursor attached-cursor))
   (setf (cluffer:cursor-position cursor)
-	(cluffer:item-count (cluffer:line cursor))))
+	(cluffer:item-count (line cursor))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -388,7 +388,7 @@
     ((cursor closed-cursor-mixin))
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
-  (aref (contents (cluffer:line cursor))
+  (aref (contents (line cursor))
 	(1- (cluffer:cursor-position cursor))))
 
 (defmethod cluffer:item-before-cursor
@@ -396,7 +396,7 @@
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
   (let ((pos (1- (cluffer:cursor-position cursor)))
-	(line (cluffer:line cursor)))
+	(line (line cursor)))
     (aref (contents line)
 	  (if (< pos (gap-start line))
 	      pos
@@ -407,7 +407,7 @@
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
   (let ((pos (1- (cluffer:cursor-position cursor)))
-	(line (cluffer:line cursor)))
+	(line (line cursor)))
     (aref (contents line)
 	  (if (< pos (gap-start line))
 	      pos
@@ -422,7 +422,7 @@
     ((cursor closed-cursor-mixin))
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
-  (aref (contents (cluffer:line cursor))
+  (aref (contents (line cursor))
 	(cluffer:cursor-position cursor)))
 
 (defmethod cluffer:item-after-cursor
@@ -430,7 +430,7 @@
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
   (let ((pos (cluffer:cursor-position cursor))
-	(line (cluffer:line cursor)))
+	(line (line cursor)))
     (aref (contents line)
 	  (if (< pos (gap-start line))
 	      pos
@@ -441,7 +441,7 @@
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
   (let ((pos (cluffer:cursor-position cursor))
-	(line (cluffer:line cursor)))
+	(line (line cursor)))
     (aref (contents line)
 	  (if (< pos (gap-start line))
 	      pos
@@ -453,7 +453,7 @@
 
 (defmethod cluffer-internal:split-line ((cursor closed-cursor-mixin))
   (let* ((pos (cluffer:cursor-position cursor))
-	 (line (cluffer:line cursor))
+	 (line (line cursor))
 	 (contents (contents line))
 	 (new-contents (subseq contents pos))
 	 (new-line (make-instance 'closed-line
@@ -469,14 +469,14 @@
 			      (> (cluffer:cursor-position cursor) pos)))
 		  collect cursor))
     (loop for cursor in (cursors new-line)
-	  do (setf (cluffer:line cursor) new-line)
+	  do (setf (line cursor) new-line)
 	     (decf (cluffer:cursor-position cursor) pos))
     (setf (cursors line)
 	  (set-difference (cursors line) (cursors new-line)))
     new-line))
 
 (defmethod cluffer-internal:split-line ((cursor open-cursor-mixin))
-  (close-line (cluffer:line cursor))
+  (close-line (line cursor))
   (cluffer-internal:split-line cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -494,7 +494,7 @@
 (defmethod cluffer-internal:join-line ((line1 closed-line) (line2 closed-line))
   (loop with length = (length (contents line1))
 	for cursor in (cursors line2)
-	do (setf (cluffer:line cursor) line1)
+	do (setf (line cursor) line1)
 	   (incf (cluffer:cursor-position cursor) length))
   (setf (contents line1)
 	(concatenate 'vector (contents line1) (contents line2)))
