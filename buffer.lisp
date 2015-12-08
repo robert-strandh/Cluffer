@@ -184,9 +184,6 @@
 
 (defgeneric erase-item (cursor))
 
-(defmethod erase-item ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
 (defmethod erase-item :after ((cursor attached-cursor))
   (let ((node (node (line cursor)))
 	(buffer (buffer cursor)))
