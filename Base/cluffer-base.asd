@@ -6,6 +6,7 @@
   :components
   ((:file "packages")
    (:file "edit-protocol")
+   (:file "internal-protocol")
    (:file "conditions")
    (:file "condition-reporters-english")
    (:file "methods")))
