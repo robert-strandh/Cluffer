@@ -268,3 +268,21 @@
 ;;; performance reasons.
 
 (defgeneric beginning-of-buffer-p (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function END-OF-BUFFER-P.
+;;;
+;;; Return true if and only if CURSOR is positioned at the end
+;;; of the buffer.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+;;;
+;;; Calling this function has the same effect as calling the functions
+;;; LINE-COUNT, LINE-NUMBER, and END-OF-LINE-P, checking that the line
+;;; number of the cursor is the last line of the buffer and that
+;;; END-OF-LINE-P returns true, but the actual implementation of this
+;;; function might be different for performance reasons.
+
+(defgeneric end-of-buffer-p (cursor))
