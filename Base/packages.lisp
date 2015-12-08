@@ -28,6 +28,10 @@
    #:beginning-of-buffer-p
    #:end-of-buffer-p))
 
+(defpackage #:cluffer-internal
+  (:use #:common-lisp)
+  (:export #:split-line #:join-line))
+
 (defpackage #:cluffer-base
   (:use #:common-lisp)
   (:export))
