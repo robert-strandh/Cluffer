@@ -5,4 +5,5 @@
   :serial t
   :components
   ((:file "packages")
-   (:file "classes")))
+   (:file "classes")
+   (:file "edit-protocol-implementation")))
