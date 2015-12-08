@@ -499,3 +499,16 @@
   (setf (contents line1)
 	(concatenate 'vector (contents line1) (contents line2)))
   nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Methods on generic function BUFFER.
+;;;
+;;; Given a line or a cursor, return the buffer to which
+;;; the line or cursor belongs.
+
+(defmethod buffer ((line line))
+  (buffer (node line)))
+
+(defmethod buffer ((cursor attached-cursor))
+  (buffer (line cursor)))
