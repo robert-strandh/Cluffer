@@ -127,7 +127,7 @@
   nil)
   
 (defmethod cluffer:attach-cursor
-    ((cursor cluffer:detached-right-sticky-cursor)
+    ((cursor detached-right-sticky-cursor)
      (line open-line)
      &optional
        (position 0))
@@ -140,7 +140,7 @@
   nil)
 
 (defmethod cluffer:attach-cursor
-    ((cursor cluffer:detached-right-sticky-cursor)
+    ((cursor detached-right-sticky-cursor)
      (line closed-line)
      &optional
        (position 0))
@@ -167,7 +167,7 @@
   ((cursor cluffer:right-sticky-mixin))
   (setf (cursors (cluffer:line cursor))
 	(remove cursor (cursors (cluffer:line cursor))))
-  (change-class cursor 'cluffer:detached-right-sticky-cursor)
+  (change-class cursor 'detached-right-sticky-cursor)
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
