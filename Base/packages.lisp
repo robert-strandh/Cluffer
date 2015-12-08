@@ -33,7 +33,8 @@
    #:attach-cursor
    #:detach-cursor
    #:line-number
-   #:first-line-p))
+   #:first-line-p
+   #:last-line-p))
 
 (defpackage #:cluffer-internal
   (:use #:common-lisp)
