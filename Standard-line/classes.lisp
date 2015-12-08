@@ -29,6 +29,14 @@
 
 (defclass closed-line (line) ())
 
+(defclass attached-cursor () ())
+
+(defclass detached-cursor () ())
+
+(defclass left-sticky-mixin () ())
+
+(defclass right-sticky-mixin () ())
+
 ;;; At the moment, we represent open cursors and a closed cursors the
 ;;; same way, where the position is the logical position in the line.
 ;;; Later, we might represent open cursors by the physical position in
@@ -46,15 +54,15 @@
     :accessor cluffer:cursor-position)))
 
 (defclass closed-left-sticky-cursor
-    (cluffer:attached-cursor
+    (attached-cursor
      closed-cursor-mixin
-     cluffer:left-sticky-mixin)
+     left-sticky-mixin)
   ())
 
 (defclass closed-right-sticky-cursor
-    (cluffer:attached-cursor
+    (attached-cursor
      closed-cursor-mixin
-     cluffer:right-sticky-mixin)
+     right-sticky-mixin)
   ())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -62,9 +70,9 @@
 ;;; Class OPEN-LEFT-STICKY CURSOR.
 
 (defclass open-left-sticky-cursor
-    (cluffer:attached-cursor
+    (attached-cursor
      open-cursor-mixin
-     cluffer:left-sticky-mixin)
+     left-sticky-mixin)
   ())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -72,8 +80,8 @@
 ;;; Class OPEN-RIGHT-STICKY CURSOR.
 
 (defclass open-right-sticky-cursor
-    (cluffer:attached-cursor
+    (attached-cursor
      open-cursor-mixin
-     cluffer:right-sticky-mixin)
+     right-sticky-mixin)
   ())
 
