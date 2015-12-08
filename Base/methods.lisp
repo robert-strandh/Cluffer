@@ -110,3 +110,9 @@
 (defmethod cluffer:end-of-buffer-p :before (cursor)
   (unless (cluffer:cursor-attached-p cursor)
     (error 'cluffer:cursor-detached)))
+
+;;; This :BEFORE method checks whether the cursor is attached, and if
+;;; not, signals an error.
+(defmethod cluffer:split-line :before (cursor)
+  (unless (cluffer:cursor-attached-p cursor)
+    (error 'cluffer:cursor-detached)))
