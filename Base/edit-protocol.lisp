@@ -314,3 +314,9 @@
 ;;; Return the items of a line in a vector.
 
 (defgeneric items (line &key start end))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function ATTACH-CURSOR.
+
+(defgeneric attach-cursor (cursor line &optional position))
