@@ -154,9 +154,6 @@
 	0
 	(line-count (clump-binary-tree:left node)))))
 
-(defmethod last-line-p (line)
-  (= (line-number line) (1- (line-count (buffer (node line))))))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Generic function BEGINNING-OF-BUFFER-P.

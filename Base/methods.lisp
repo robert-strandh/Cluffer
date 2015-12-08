@@ -23,6 +23,10 @@
 (defmethod first-line-p (line)
   (= (line-number line) 0))
 
+;;; Default method on LAST-LINE-P.
+(defmethod last-line-p (line)
+  (= (line-number line) (1- (line-count (buffer (node line))))))
+
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
 (defmethod cluffer:cursor-position :before (cursor)
