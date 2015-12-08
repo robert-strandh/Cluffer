@@ -334,9 +334,6 @@
 ;;; second of these two lines from the tree in the buffer.
 (defgeneric line-join-line (line1 line2))
 
-(defmethod join-line ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
 (defmethod join-line ((cursor attached-cursor))
   (let ((line (line cursor)))
     (when (last-line-p line)
