@@ -158,9 +158,6 @@
 ;;;
 ;;; Methods on function INSERT-ITEM.
 
-(defmethod cluffer:insert-item ((cursor detached-cursor) item)
-  (error 'cluffer:cursor-detached))
-
 (defmethod cluffer:insert-item :after ((cursor attached-cursor) item)
   (let* ((node (node (line cursor)))
 	 (buffer (buffer cursor)))
