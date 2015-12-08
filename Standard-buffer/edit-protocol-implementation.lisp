@@ -1,35 +1,4 @@
-(cl:in-package #:cluffer-buffer)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Line, cursor.
-
-(defclass line ()
-  ((%node :initarg :node :initform nil :accessor node)))
-
-(defclass cursor () ())
-
-(defclass detached-cursor (cursor)
-  ())
-
-(defclass attached-cursor (cursor)
-  ((%line :initarg :line :accessor line)))
-
-(defclass left-sticky-mixin () ())
-
-(defclass right-sticky-mixin () ())
-
-(defclass detached-left-sticky-cursor (detached-cursor left-sticky-mixin)
-  ())
-
-(defclass detached-right-sticky-cursor (detached-cursor right-sticky-mixin)
-  ())
-
-(defun make-left-sticky-cursor ()
-  (make-instance 'detached-left-sticky-cursor))
-
-(defun make-right-sticky-cursor ()
-  (make-instance 'detached-right-sticky-cursor))
+(cl:in-package #:cluffer-standard-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
