@@ -265,9 +265,6 @@
 
 (defgeneric end-of-buffer-p (cursor))
 
-(defmethod end-of-buffer-p ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
 (defmethod end-of-buffer-p ((cursor attached-cursor))
   (and (end-of-line-p cursor)
        (last-line-p (line cursor))))
