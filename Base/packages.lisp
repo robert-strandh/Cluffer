@@ -29,7 +29,8 @@
    #:end-of-buffer-p
    #:split-line
    #:join-line
-   #:items))
+   #:items
+   #:attach-cursor))
 
 (defpackage #:cluffer-internal
   (:use #:common-lisp)
