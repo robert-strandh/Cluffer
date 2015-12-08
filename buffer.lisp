@@ -355,11 +355,3 @@
 	  (setf (clump-binary-tree:right node-line) right))
 	(line-join-line line next-line))))
   nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; ITEMS.
-;;;
-;;; Return the items of a line in a vector.  
-
-(defgeneric items (line &key start end))

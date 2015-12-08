@@ -306,3 +306,11 @@
 ;;; Generic function JOIN-LINE.
 
 (defgeneric join-line (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; ITEMS.
+;;;
+;;; Return the items of a line in a vector.
+
+(defgeneric items (line &key start end))
