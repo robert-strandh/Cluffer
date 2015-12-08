@@ -250,3 +250,21 @@
 ;;; END-OF-BUFFER is signaled.
 
 (defgeneric find-line (buffer line-number))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function BEGINNING-OF-BUFFER-P.
+;;;
+;;; Return true if and only if CURSOR is positioned at the beginning
+;;; of the buffer.
+;;;
+;;; If CURSOR is currently not attached to a line, then an error of
+;;; type DETACHED-CURSOR is signaled.
+;;;
+;;; Calling this function has the same effect as calling the functions
+;;; LINE-NUMBER and BEGINNING-OF-LINE-P, checking that the line number
+;;; of the cursor is 0 and that BEGINNING-OF-LINE-P returns true, but
+;;; the actual implementation of this function might be different for
+;;; performance reasons.
+
+(defgeneric beginning-of-buffer-p (cursor))
