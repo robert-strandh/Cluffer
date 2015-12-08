@@ -30,7 +30,8 @@
    #:split-line
    #:join-line
    #:items
-   #:attach-cursor))
+   #:attach-cursor
+   #:detach-cursor))
 
 (defpackage #:cluffer-internal
   (:use #:common-lisp)
