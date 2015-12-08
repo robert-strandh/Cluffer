@@ -142,7 +142,7 @@
 ;;; instead.
 (defmethod find-line ((buffer buffer) line-number)
   (when (minusp line-number)
-    (error 'cluffer:begining-of-buffer))
+    (error 'cluffer:beginning-of-buffer))
   (when (>= line-number (line-count buffer))
     (error 'cluffer:end-of-buffer))
   (labels ((traverse (node line-number)
