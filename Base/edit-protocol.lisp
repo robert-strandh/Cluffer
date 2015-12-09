@@ -3,7 +3,8 @@
 (defclass buffer () ())
 
 (defclass line ()
-  ((%dock :initarg :dock :initform nil :accessor dock)))
+  ((%dock :initarg :dock :initform nil
+	  :accessor cluffer-internal:dock)))
 
 (defclass cursor () ())
 
@@ -346,4 +347,3 @@
 ;;; Generic function LAST-LINE-P.
 
 (defgeneric last-line-p (line))
-
