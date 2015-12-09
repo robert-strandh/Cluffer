@@ -145,3 +145,7 @@
 (defmethod cluffer:buffer :before (cursor)
   (unless (cluffer:cursor-attached-p cursor)
     (error 'cluffer:cursor-detached)))
+
+(defmethod cluffer:line :before (cursor)
+  (unless (cluffer:cursor-attached-p cursor)
+    (error 'cluffer:cursor-detached)))
