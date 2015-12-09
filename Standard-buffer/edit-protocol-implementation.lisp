@@ -222,7 +222,7 @@
 
 (defmethod join-line (cursor)
   (let ((line (line cursor)))
-    (when (last-line-p line)
+    (when (cluffer:last-line-p line)
       (error 'cluffer:end-of-buffer))
     (let* ((line-number (cluffer:line-number line))
 	   (next-line (find-line (buffer (cluffer-internal:dock line))
