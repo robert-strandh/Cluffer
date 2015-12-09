@@ -1,0 +1,68 @@
+\documentclass{acm_proc_article-sp}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+
+\def\inputfig#1{\input #1}
+\def\inputtex#1{\input #1}
+\def\inputal#1{\input #1}
+\def\inputcode#1{\input #1}
+
+\inputtex{logos.tex}
+\inputtex{refmacros.tex}
+\inputtex{other-macros.tex}
+
+\begin{document}
+\title{A CLOS Protocol for Editor Buffers}
+\numberofauthors{1}
+\author{\alignauthor
+Robert Strandh\\
+\affaddr{University of Bordeaux}\\
+\affaddr{351, Cours de la Libération}\\
+\affaddr{Talence, France}\\
+\email{robert.strandh@u-bordeaux1.fr}}
+
+\toappear{Permission to make digital or hard copies of all or part of
+  this work for personal or classroom use is granted without fee
+  provided that copies are not made or distributed for profit or
+  commercial advantage and that copies bear this notice and the full
+  citation on the first page. Copyrights for components of this work
+  owned by others than the author(s) must be honored. Abstracting with
+  credit is permitted. To copy otherwise, or republish, to post on
+  servers or to redistribute to lists, requires prior specific
+  permission and/or a fee.
+
+Venue here....
+Copyright is held by the author.
+%  ACM 978-1-4503-2931-6/14/08\$15.00.???
+%  http://dx.doi.org/10.1145/2635648.2635656
+}
+
+\maketitle
+
+\begin{abstract}
+Many applications and libraries contain a data structure for storing
+and editing text...
+\end{abstract}
+
+\category{D.?.?}{Don't know}{Don't know}
+[Don't know]
+
+\terms{Design, Languages}
+
+\keywords{\clos{}, \commonlisp{}, Text editor}
+
+\inputtex{spec-macros.tex}
+
+\inputtex{sec-introduction.tex}
+\inputtex{sec-previous.tex}
+\inputtex{sec-our-method.tex}
+\inputtex{sec-benefits.tex}
+\inputtex{sec-conclusions.tex}
+\inputtex{sec-acknowledgments.tex}
+\inputtex{app-protocol.tex}
+
+\bibliographystyle{abbrv}
+\bibliography{cluffer}
+\end{document}
+
+%%  LocalWords:  sandboxing runtime

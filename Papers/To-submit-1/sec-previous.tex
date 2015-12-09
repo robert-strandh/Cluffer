@@ -1,0 +1,28 @@
+\section{Previous work}
+
+\subsection{GNU Emacs}
+
+GNU Emacs uses a gap buffer for the entire buffer
+\cite{GNUEmacsLispReferenceManual}
+\cite{CraftOfTextEditiing}
+
+\subsection{Multics Emacs}
+
+
+Multics Emacs%
+\footnote{The description in this section is a summary of the
+  information found here: http://www.multicians.org/mepap.html}
+used doubly-linked list of lines and each line was a
+sequence of characters.  Special instructions were added to the GE
+645...
+
+\subsection{Climacs}
+
+Like GNU Emacs, Climacs uses a gap buffer for the entire buffer.  It
+avoids the bad case by using a circular buffer.  If fact, it uses
+Flexichain \cite{flexichain}.
+
+\subsection{Others}
+
+Hemlock, Goatee, etc.
+
