@@ -51,7 +51,7 @@
 	 (buffer (make-instance 'buffer
 		   :current-time 1
 		   :contents node)))
-    (setf (node initial-line) node)
+    (setf (cluffer-internal:dock initial-line) node)
     (setf (buffer node) buffer)
     buffer))
 
@@ -82,7 +82,7 @@
 ;;; Methods on function INSERT-ITEM.
 
 (defmethod cluffer:insert-item :after (cursor item)
-  (let* ((node (node (line cursor)))
+  (let* ((node (cluffer-internal:dock (line cursor)))
 	 (buffer (buffer cursor)))
     (clump-binary-tree:splay node)
     (incf (item-count node))
@@ -94,7 +94,7 @@
 ;;; Methods on generic function DELETE-ITEM.
 
 (defmethod cluffer:delete-item :after (cursor)
-  (let ((node (node (line cursor)))
+  (let ((node (cluffer-internal:dock (line cursor)))
 	(buffer (buffer cursor)))
     (clump-binary-tree:splay node)
     (decf (item-count node))
@@ -108,7 +108,7 @@
 (defgeneric erase-item (cursor))
 
 (defmethod erase-item :after (cursor)
-  (let ((node (node (line cursor)))
+  (let ((node (cluffer-internal:dock (line cursor)))
 	(buffer (buffer cursor)))
     (clump-binary-tree:splay node)
     (decf (item-count node))
@@ -148,21 +148,11 @@
 ;;; Method on generic function LINE-NUMBER.
 
 (defmethod cluffer:line-number (line)
-  (let ((node (node line)))
+  (let ((node (cluffer-internal:dock line)))
     (clump-binary-tree:splay node)
     (if (null (clump-binary-tree:left node))
 	0
 	(line-count (clump-binary-tree:left node)))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Generic function END-OF-BUFFER-P.
-
-(defgeneric end-of-buffer-p (cursor))
-
-(defmethod end-of-buffer-p (cursor)
-  (and (end-of-line-p cursor)
-       (last-line-p (line cursor))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -183,11 +173,12 @@
 
 (defmethod split-line (cursor)
   (let* ((existing-line (line cursor))
-	 (existing-node (node existing-line))
+	 (existing-node (cluffer-internal:dock existing-line))
 	 (buffer (buffer existing-node))
 	 ;; The number of items that will be removed from the existing
 	 ;; line and also the number of items of the new line.
-	 (diff (- (item-count existing-line) (cursor-position cursor))))
+	 (diff (- (cluffer:item-count existing-line)
+		  (cluffer:cursor-position cursor))))
     ;; Make sure the existing line is the root of the tree.
     (clump-binary-tree:splay existing-node)
     (decf (item-count existing-node) diff)
@@ -206,7 +197,7 @@
 		       :modify-time time
 		       :max-modify-time time
 		       :line new-line)))
-      (setf (node new-line) new-node)
+      (setf (cluffer-internal:dock new-line) new-node)
       (let ((right-node (clump-binary-tree:right existing-node)))
 	(setf (clump-binary-tree:right existing-node) nil)
 	(setf (clump-binary-tree:left new-node) existing-node)
@@ -233,10 +224,11 @@
   (let ((line (line cursor)))
     (when (last-line-p line)
       (error 'cluffer:end-of-buffer))
-    (let* ((line-number (line-number line))
-	   (next-line (find-line (buffer (node line)) (1+ line-number))))
-      (let ((node-line (node line))
-	    (node-next-line (node next-line)))
+    (let* ((line-number (cluffer:line-number line))
+	   (next-line (find-line (buffer (cluffer-internal:dock line))
+				 (1+ line-number))))
+      (let ((node-line (cluffer-internal:dock line))
+	    (node-next-line (cluffer-internal:dock next-line)))
 	(clump-binary-tree:splay node-next-line)
 	(clump-binary-tree:splay node-line)
 	;; Now LINE is on top and NEXT-LINE is its right child.
