@@ -347,3 +347,14 @@
 ;;; Generic function LAST-LINE-P.
 
 (defgeneric last-line-p (line))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function LINE
+;;;
+;;; Return the line of CURSOR.
+;;;
+;;; If CURSOR is a cursor that is currently not attached to a line,
+;;; then an error of type DETACHED-CURSOR is signaled.
+
+(defgeneric line (cursor))
