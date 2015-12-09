@@ -508,7 +508,7 @@
 ;;; the line or cursor belongs.
 
 (defmethod buffer ((line line))
-  (buffer (node line)))
+  (cluffer:buffer (cluffer-internal:dock line)))
 
 (defmethod buffer ((cursor attached-cursor))
-  (buffer (line cursor)))
+  (cluffer:buffer (cluffer:line cursor)))
