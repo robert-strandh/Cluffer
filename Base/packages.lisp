@@ -38,7 +38,9 @@
 
 (defpackage #:cluffer-internal
   (:use #:common-lisp)
-  (:export #:split-line #:join-line))
+  (:export #:split-line
+	   #:join-line
+	   #:dock))
 
 (defpackage #:cluffer-base
   (:use #:common-lisp)
