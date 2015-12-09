@@ -33,6 +33,11 @@
   (and (cluffer:beginning-of-line-p cursor)
        (cluffer:first-line-p (cluffer:line cursor))))
 
+;;; Default method on END-OF-BUFFER-P.
+(defmethod cluffer:end-of-buffer-p (cursor)
+  (and (cluffer:end-of-line-p cursor)
+       (cluffer:last-line-p (cluffer:line cursor))))
+
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
 (defmethod cluffer:cursor-position :before (cursor)
