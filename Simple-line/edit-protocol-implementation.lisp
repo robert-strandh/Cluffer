@@ -149,16 +149,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on BACKWARD-ITEM
-
-(defmethod cluffer:backward-item ((cursor attached-cursor))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
-  (decf (cluffer:cursor-position cursor))
-  nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on BEGINNING-OF-LINE.
 ;;;
 ;;; Position the cursor at the beginning of the line.
