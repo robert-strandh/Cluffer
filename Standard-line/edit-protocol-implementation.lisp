@@ -309,13 +309,6 @@
   (open-line (line cursor))
   (cluffer:erase-item cursor))
 
-(defmethod cluffer:erase-item ((cursor open-cursor-mixin))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
-  (cluffer:backward-item cursor)
-  (cluffer:delete-item cursor)
-  nil)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on FORWARD-ITEM
