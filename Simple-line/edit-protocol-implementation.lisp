@@ -124,7 +124,18 @@
 ;;; Methods on DELETE-ITEM.
 
 (defmethod cluffer:delete-item ((cursor attached-cursor))
-  nil)
+  (when (cluffer:end-of-line-p cursor)
+    (error 'cluffer:end-of-line))
+  (let* ((line (line cursor))
+	 (contents (contents line))
+	 (position (cluffer:cursor-position cursor)))
+    (setf (contents line)
+	  (concatenate 'vector
+		       (subseq contents 0 position)
+		       (subseq contents (1+ position))))
+    (loop for cursor in (cursors line)
+	  do (when (> (cluffer:cursor-position cursor) position)
+	       (decf (cluffer:cursor-position cursor))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
