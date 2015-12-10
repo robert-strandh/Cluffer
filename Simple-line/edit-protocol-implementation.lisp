@@ -188,9 +188,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on LINE-SPLIT-LINE.
+;;; Methods on CLUFFER-INTERNAL:SPLIT-LINE.
 
-(defmethod cluffer:line-split-line ((cursor cursor-mixin))
+(defmethod cluffer-internal:split-line ((cursor cursor-mixin))
   (let* ((pos (cluffer:cursor-position cursor))
 	 (line (cluffer:line cursor))
 	 (contents (contents line))
@@ -216,9 +216,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on LINE-JOIN-LINE.
+;;; Methods on CLUFFER-INTERNAL:JOIN-LINE.
 
-(defmethod cluffer:line-join-line ((line1 line) (line2 line))
+(defmethod cluffer-internal:join-line ((line1 line) (line2 line))
   (loop with length = (length (contents line1))
 	for cursor in (cursors line2)
 	do (setf (cluffer:line cursor) line1)
