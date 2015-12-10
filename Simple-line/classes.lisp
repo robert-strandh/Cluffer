@@ -8,7 +8,10 @@
     (%cursors :initarg :cursors :accessor cursors)))
 
 (defclass attached-cursor (cluffer:cursor)
-  ((%line :initarg :line :accessor line)))
+  ((%line :initarg :line :accessor line)
+   (%cursor-position
+    :initarg :cursor-position
+    :accessor cluffer:cursor-position)))
 
 (defclass detached-cursor (cluffer:cursor) ())
 
