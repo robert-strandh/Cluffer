@@ -44,6 +44,12 @@
     (error 'cluffer:end-of-line))
   (incf (cluffer:cursor-position cursor)))
 
+;;; Default method on BACKWARD-ITEM.
+(defmethod cluffer:backward-item ((cursor cluffer:cursor))
+  (when (cluffer:beginning-of-line-p cursor)
+    (error 'cluffer:beginning-of-line))
+  (decf (cluffer:cursor-position cursor)))
+
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
 (defmethod cluffer:cursor-position :before ((cursor cluffer:cursor))
