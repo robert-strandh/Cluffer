@@ -29,10 +29,10 @@
 
 (defclass closed-line (line) ())
 
-(defclass attached-cursor ()
+(defclass attached-cursor (cluffer:cursor)
   ((%line :initarg :line :accessor line)))
 
-(defclass detached-cursor () ())
+(defclass detached-cursor (cluffer:cursor) ())
 
 (defclass left-sticky-mixin () ())
 
