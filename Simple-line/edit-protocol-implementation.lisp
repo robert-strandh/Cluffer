@@ -149,16 +149,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on FORWARD-ITEM
-
-(defmethod cluffer:forward-item ((cursor attached-cursor))
-  (when (cluffer:end-of-line-p cursor)
-    (error 'cluffer:end-of-line))
-  (incf (cluffer:cursor-position cursor))
-  nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on BACKWARD-ITEM
 
 (defmethod cluffer:backward-item ((cursor attached-cursor))
