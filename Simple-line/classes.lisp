@@ -7,10 +7,10 @@
    ((%contents :initarg :contents :accessor contents)
     (%cursors :initarg :cursors :accessor cursors)))
 
-(defclass attached-cursor ()
+(defclass attached-cursor (cluffer:cursor)
   ((%line :initarg :line :accessor line)))
 
-(defclass detached-cursor () ())
+(defclass detached-cursor (cluffer:cursor) ())
 
 (defclass left-sticky-mixin () ())
 
