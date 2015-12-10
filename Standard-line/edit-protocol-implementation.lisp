@@ -316,10 +316,6 @@
 ;;; Position the cursor at the beginning of the line.
 
 (defmethod cluffer:beginning-of-line
-    ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-(defmethod cluffer:beginning-of-line
     ((cursor attached-cursor))
   (setf (cluffer:cursor-position cursor) 0))
 
@@ -328,10 +324,6 @@
 ;;; Methods on END-OF-LINE.
 ;;;
 ;;; Position the cursor at the end of the line.
-
-(defmethod cluffer:end-of-line
-    ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
 
 (defmethod cluffer:end-of-line
     ((cursor attached-cursor))
