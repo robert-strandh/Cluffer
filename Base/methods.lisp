@@ -38,6 +38,12 @@
   (and (cluffer:end-of-line-p cursor)
        (cluffer:last-line-p (cluffer:line cursor))))
 
+;;; Default method on FORWARD-ITEM.
+(defmethod cluffer:forward-item ((cursor cluffer:cursor))
+  (when (cluffer:end-of-line-p cursor)
+    (error 'cluffer:end-of-line))
+  (incf (cluffer:cursor-position cursor)))
+
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
 (defmethod cluffer:cursor-position :before ((cursor cluffer:cursor))
