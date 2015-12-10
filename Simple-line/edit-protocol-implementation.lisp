@@ -139,16 +139,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on ERASE-ITEM.
-
-(defmethod cluffer:erase-item ((cursor attached-cursor))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
-  (cluffer:backward-item cursor)
-  (cluffer:delete-item cursor))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on BEGINNING-OF-LINE.
 ;;;
 ;;; Position the cursor at the beginning of the line.
