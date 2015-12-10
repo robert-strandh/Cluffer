@@ -143,9 +143,9 @@
 
 (defmethod cluffer:erase-item ((cursor attached-cursor))
   (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line)
-    (cluffer:backward-item cursor)
-    (cluffer:delete-item cursor)))
+    (error 'cluffer:beginning-of-line))
+  (cluffer:backward-item cursor)
+  (cluffer:delete-item cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
