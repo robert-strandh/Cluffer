@@ -106,28 +106,28 @@
 ;;;
 ;;; Methods on INSERT-ITEM.
 
-(defmethod cluffer:insert-item ((cursor cursor-mixin) item)
+(defmethod cluffer:insert-item ((cursor attached-cursor) item)
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on DELETE-ITEM.
 
-(defmethod cluffer:delete-item ((cursor cursor-mixin))
+(defmethod cluffer:delete-item ((cursor attached-cursor))
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on ERASE-ITEM.
 
-(defmethod cluffer:erase-item ((cursor cursor-mixin))
+(defmethod cluffer:erase-item ((cursor attached-cursor))
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on FORWARD-ITEM
 
-(defmethod cluffer:forward-item ((cursor cursor-mixin))
+(defmethod cluffer:forward-item ((cursor attached-cursor))
   (when (cluffer:end-of-line-p cursor)
     (error 'cluffer:end-of-line))
   (incf (cluffer:cursor-position cursor))
@@ -137,7 +137,7 @@
 ;;;
 ;;; Methods on BACKWARD-ITEM
 
-(defmethod cluffer:backward-item ((cursor cursor-mixin))
+(defmethod cluffer:backward-item ((cursor attached-cursor))
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
   (decf (cluffer:cursor-position cursor))
@@ -169,7 +169,7 @@
 ;;; Methods on ITEM-BEFORE-CURSOR.
 
 (defmethod cluffer:item-before-cursor
-    ((cursor cursor-mixin))
+    ((cursor attached-cursor))
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
   (aref (contents (cluffer:line cursor))
@@ -180,7 +180,7 @@
 ;;; Methods on ITEM-AFTER-CURSOR.
 
 (defmethod cluffer:item-after-cursor
-    ((cursor cursor-mixin))
+    ((cursor attached-cursor))
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
   (aref (contents (cluffer:line cursor))
@@ -190,7 +190,7 @@
 ;;;
 ;;; Methods on CLUFFER-INTERNAL:SPLIT-LINE.
 
-(defmethod cluffer-internal:split-line ((cursor cursor-mixin))
+(defmethod cluffer-internal:split-line ((cursor attached-cursor))
   (let* ((pos (cluffer:cursor-position cursor))
 	 (line (cluffer:line cursor))
 	 (contents (contents line))
