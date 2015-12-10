@@ -61,15 +61,15 @@
 
 (defmethod cluffer:detach-cursor
   ((cursor left-sticky-mixin))
-  (setf (cursors (cluffer:line cursor))
-	(remove cursor (cursors (cluffer:line cursor))))
+  (setf (cursors (line cursor))
+	(remove cursor (cursors (line cursor))))
   (change-class cursor 'detached-left-sticky-cursor)
   nil)
 
 (defmethod cluffer:detach-cursor
   ((cursor right-sticky-mixin))
-  (setf (cursors (cluffer:line cursor))
-	(remove cursor (cursors (cluffer:line cursor))))
+  (setf (cursors (line cursor))
+	(remove cursor (cursors (line cursor))))
   (change-class cursor 'detached-right-sticky-cursor)
   nil)
 
@@ -100,7 +100,7 @@
 (defmethod cluffer:end-of-line-p
     ((cursor attached-cursor))
   (= (cluffer:cursor-position cursor)
-     (cluffer:item-count (cluffer:line cursor))))
+     (cluffer:item-count (line cursor))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -162,7 +162,7 @@
 (defmethod cluffer:end-of-line
     ((cursor attached-cursor))
   (setf (cluffer:cursor-position cursor)
-	(cluffer:item-count (cluffer:line cursor))))
+	(cluffer:item-count (line cursor))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -172,7 +172,7 @@
     ((cursor attached-cursor))
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
-  (aref (contents (cluffer:line cursor))
+  (aref (contents (line cursor))
 	(1- (cluffer:cursor-position cursor))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -183,7 +183,7 @@
     ((cursor attached-cursor))
   (when (cluffer:beginning-of-line-p cursor)
     (error 'cluffer:beginning-of-line))
-  (aref (contents (cluffer:line cursor))
+  (aref (contents (line cursor))
 	(cluffer:cursor-position cursor)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -192,7 +192,7 @@
 
 (defmethod cluffer-internal:split-line ((cursor attached-cursor))
   (let* ((pos (cluffer:cursor-position cursor))
-	 (line (cluffer:line cursor))
+	 (line (line cursor))
 	 (contents (contents line))
 	 (new-contents (subseq contents pos))
 	 (new-line (make-instance 'line
@@ -208,7 +208,7 @@
 			      (> (cluffer:cursor-position cursor) pos)))
 		  collect cursor))
     (loop for cursor in (cursors new-line)
-	  do (setf (cluffer:line cursor) new-line)
+	  do (setf (line cursor) new-line)
 	     (decf (cluffer:cursor-position cursor) pos))
     (setf (cursors line)
 	  (set-difference (cursors line) (cursors new-line)))
@@ -221,7 +221,7 @@
 (defmethod cluffer-internal:join-line ((line1 line) (line2 line))
   (loop with length = (length (contents line1))
 	for cursor in (cursors line2)
-	do (setf (cluffer:line cursor) line1)
+	do (setf (line cursor) line1)
 	   (incf (cluffer:cursor-position cursor) length))
   (setf (contents line1)
 	(concatenate 'vector (contents line1) (contents line2)))
