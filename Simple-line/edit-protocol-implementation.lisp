@@ -24,16 +24,17 @@
 ;;;
 ;;; Detaching and attaching a cursor.
 
-(defmethod cluffer:attach-cursor
-    ((cursor attached-cursor) line &optional position)
+(defmethod cluffer:attach-cursor ((cursor attached-cursor)
+				  line
+				  &optional
+				    position)
   (declare (ignore line position))
   (error 'cluffer:cursor-attached))
 
-(defmethod cluffer:attach-cursor
-    ((cursor detached-left-sticky-cursor)
-     (line line)
-     &optional
-       (position 0))
+(defmethod cluffer:attach-cursor ((cursor detached-left-sticky-cursor)
+				  (line line)
+				  &optional
+				    (position 0))
   (when (> position (cluffer:item-count line))
     (error 'cluffer:end-of-line))
   (push cursor (cursors line))
@@ -42,11 +43,10 @@
 		:cursor-position position)
   nil)
 
-(defmethod cluffer:attach-cursor
-    ((cursor detached-right-sticky-cursor)
-     (line line)
-     &optional
-       (position 0))
+(defmethod cluffer:attach-cursor ((cursor detached-right-sticky-cursor)
+				  (line line)
+				  &optional
+				    (position 0))
   (when (> position (cluffer:item-count line))
     (error 'cluffer:end-of-line))
   (push cursor (cursors line))
@@ -55,19 +55,16 @@
 		:cursor-position position)
   nil)
 
-(defmethod cluffer:detach-cursor
-    ((cursor detached-cursor))
+(defmethod cluffer:detach-cursor ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
-(defmethod cluffer:detach-cursor
-  ((cursor left-sticky-mixin))
+(defmethod cluffer:detach-cursor ((cursor left-sticky-mixin))
   (setf (cursors (line cursor))
 	(remove cursor (cursors (line cursor))))
   (change-class cursor 'detached-left-sticky-cursor)
   nil)
 
-(defmethod cluffer:detach-cursor
-  ((cursor right-sticky-mixin))
+(defmethod cluffer:detach-cursor ((cursor right-sticky-mixin))
   (setf (cursors (line cursor))
 	(remove cursor (cursors (line cursor))))
   (change-class cursor 'detached-right-sticky-cursor)
