@@ -176,31 +176,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on BEGINNING-OF-LINE-P.
-;;;
-;;; Given a cursor, return true if and only if it is at the beginning
-;;; of the line.
-
-;;; The default method just calls CURSOR-POSITION and returns true if
-;;; and only if that position is 0.
-(defmethod cluffer:beginning-of-line-p
-    ((cursor attached-cursor))
-  (zerop (cluffer:cursor-position cursor)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Methods on END-OF-LINE-P.
-
-;;; The default method just calls CURSOR-POSITION and returns true if
-;;; and only if that position is the same as the number of items in
-;;; the line.
-(defmethod cluffer:end-of-line-p
-    ((cursor attached-cursor))
-  (= (cluffer:cursor-position cursor)
-     (cluffer:item-count (line cursor))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on INSERT-ITEM.
 
 (defmethod cluffer:insert-item ((cursor closed-cursor-mixin) item)
