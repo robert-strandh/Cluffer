@@ -25,12 +25,12 @@
 ;;; Detaching and attaching a cursor.
 
 (defmethod cluffer:attach-cursor
-    ((cursor cluffer:attached-cursor) line &optional position)
+    ((cursor attached-cursor) line &optional position)
   (declare (ignore line position))
   (error 'cluffer:cursor-attached))
 
 (defmethod cluffer:attach-cursor
-    ((cursor cluffer:detached-left-sticky-cursor)
+    ((cursor detached-left-sticky-cursor)
      (line line)
      &optional
        (position 0))
@@ -43,7 +43,7 @@
   nil)
 
 (defmethod cluffer:attach-cursor
-    ((cursor cluffer:detached-right-sticky-cursor)
+    ((cursor detached-right-sticky-cursor)
      (line line)
      &optional
        (position 0))
@@ -56,21 +56,21 @@
   nil)
 
 (defmethod cluffer:detach-cursor
-    ((cursor cluffer:detached-cursor))
+    ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 (defmethod cluffer:detach-cursor
-  ((cursor cluffer:left-sticky-mixin))
+  ((cursor left-sticky-mixin))
   (setf (cursors (cluffer:line cursor))
 	(remove cursor (cursors (cluffer:line cursor))))
-  (change-class cursor 'cluffer:detached-left-sticky-cursor)
+  (change-class cursor 'detached-left-sticky-cursor)
   nil)
 
 (defmethod cluffer:detach-cursor
-  ((cursor cluffer:right-sticky-mixin))
+  ((cursor right-sticky-mixin))
   (setf (cursors (cluffer:line cursor))
 	(remove cursor (cursors (cluffer:line cursor))))
-  (change-class cursor 'cluffer:detached-right-sticky-cursor)
+  (change-class cursor 'detached-right-sticky-cursor)
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -85,13 +85,13 @@
 ;;; of the line.
 
 (defmethod cluffer:beginning-of-line-p
-    ((cursor cluffer:detached-cursor))
+    ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 ;;; The default method just calls CURSOR-POSITION and returns true if
 ;;; and only if that position is 0.
 (defmethod cluffer:beginning-of-line-p
-    ((cursor cluffer:attached-cursor))
+    ((cursor attached-cursor))
   (zerop (cluffer:cursor-position cursor)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -99,14 +99,14 @@
 ;;; Methods on END-OF-LINE-P.
 
 (defmethod cluffer:end-of-line-p
-    ((cursor cluffer:detached-cursor))
+    ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 ;;; The default method just calls CURSOR-POSITION and returns true if
 ;;; and only if that position is the same as the number of items in
 ;;; the line.
 (defmethod cluffer:end-of-line-p
-    ((cursor cluffer:attached-cursor))
+    ((cursor attached-cursor))
   (= (cluffer:cursor-position cursor)
      (cluffer:item-count (cluffer:line cursor))))
 
@@ -158,11 +158,11 @@
 ;;; Position the cursor at the beginning of the line.
 
 (defmethod cluffer:beginning-of-line
-    ((cursor cluffer:detached-cursor))
+    ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 (defmethod cluffer:beginning-of-line
-    ((cursor cluffer:attached-cursor))
+    ((cursor attached-cursor))
   (setf (cluffer:cursor-position cursor) 0))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -172,11 +172,11 @@
 ;;; Position the cursor at the end of the line.
 
 (defmethod cluffer:end-of-line
-    ((cursor cluffer:detached-cursor))
+    ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
 
 (defmethod cluffer:end-of-line
-    ((cursor cluffer:attached-cursor))
+    ((cursor attached-cursor))
   (setf (cluffer:cursor-position cursor)
 	(cluffer:item-count (cluffer:line cursor))))
 
@@ -218,9 +218,9 @@
 	  (subseq (contents line) 0 pos))
     (setf (cursors new-line)
 	  (loop for cursor in (cursors line)
-		when (or (and (typep cursor 'cluffer:right-sticky-mixin)
+		when (or (and (typep cursor 'right-sticky-mixin)
 			      (>= (cluffer:cursor-position cursor) pos))
-			 (and (typep cursor 'cluffer:left-sticky-mixin)
+			 (and (typep cursor 'left-sticky-mixin)
 			      (> (cluffer:cursor-position cursor) pos)))
 		  collect cursor))
     (loop for cursor in (cursors new-line)
