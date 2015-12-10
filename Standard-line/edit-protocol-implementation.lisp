@@ -181,10 +181,6 @@
 ;;; Given a cursor, return true if and only if it is at the beginning
 ;;; of the line.
 
-(defmethod cluffer:beginning-of-line-p
-    ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
 ;;; The default method just calls CURSOR-POSITION and returns true if
 ;;; and only if that position is 0.
 (defmethod cluffer:beginning-of-line-p
@@ -194,10 +190,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on END-OF-LINE-P.
-
-(defmethod cluffer:end-of-line-p
-    ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
 
 ;;; The default method just calls CURSOR-POSITION and returns true if
 ;;; and only if that position is the same as the number of items in
