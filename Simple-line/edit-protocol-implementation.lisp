@@ -107,7 +107,17 @@
 ;;; Methods on INSERT-ITEM.
 
 (defmethod cluffer:insert-item ((cursor attached-cursor) item)
-  nil)
+  (let* ((line (line cursor))
+	 (contents (contents line))
+	 (position (cluffer:cursor-position cursor)))
+    (setf (contents line)
+	  (concatenate 'vector
+		       (subseq contents 0 position)
+		       (vector item)
+		       (subseq contents position)))
+    (loop for cursor in (cursors line)
+	  do (when (typep cursor 'right-sticky-mixin)
+	       (incf (cluffer:cursor-position cursor))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
