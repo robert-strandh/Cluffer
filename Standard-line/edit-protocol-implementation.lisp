@@ -311,40 +311,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on FORWARD-ITEM
-
-;;; No need to open the line just because the cursor moves.  
-(defmethod cluffer:forward-item ((cursor closed-cursor-mixin))
-  (when (cluffer:end-of-line-p cursor)
-    (error 'cluffer:end-of-line))
-  (incf (cluffer:cursor-position cursor))
-  nil)
-
-(defmethod cluffer:forward-item ((cursor open-cursor-mixin))
-  (when (cluffer:end-of-line-p cursor)
-    (error 'cluffer:end-of-line))
-  (incf (cluffer:cursor-position cursor))
-  nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Methods on BACKWARD-ITEM
-
-;;; No need to open the line just because the cursor moves.  
-(defmethod cluffer:backward-item ((cursor closed-cursor-mixin))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
-  (decf (cluffer:cursor-position cursor))
-  nil)
-
-(defmethod cluffer:backward-item ((cursor open-cursor-mixin))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
-  (decf (cluffer:cursor-position cursor))
-  nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on BEGINNING-OF-LINE.
 ;;;
 ;;; Position the cursor at the beginning of the line.
