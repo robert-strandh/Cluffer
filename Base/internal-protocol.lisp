@@ -6,4 +6,4 @@
 
 (defgeneric dock (line))
 
-(defgeneric notify-item-count-changed (buffer dock delta))
+(defgeneric notify-item-count-changed (dock delta))
