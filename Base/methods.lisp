@@ -1,5 +1,13 @@
 (cl:in-package #:cluffer-base)
 
+;;; Default method on ITEM-COUNT specialized to CURSOR.
+;;;
+;;; This method calls the generic function LINE with the cursor as
+;;; argument order to obtain the line to which the cursor is attached.
+;;; It then calls ITEM-COUNT on that line.
+(defmethod cluffer:item-count ((cursor cluffer:cursor))
+  (cluffer:item-count (cluffer:line cursor)))
+
 ;;; Default method on BEGINNING-OF-LINE-P.  
 ;;;
 ;;; Simple implementations of the line protocol can rely on the
