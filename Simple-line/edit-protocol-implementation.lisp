@@ -33,7 +33,7 @@
   (when (> position (cluffer:item-count line))
     (error 'cluffer:end-of-line))
   (push cursor (cursors line))
-  (change-class cursor 'left-sticky-cursor
+  (change-class cursor 'attached-left-sticky-cursor
 		:line line
 		:cursor-position position)
   nil)
@@ -45,7 +45,7 @@
   (when (> position (cluffer:item-count line))
     (error 'cluffer:end-of-line))
   (push cursor (cursors line))
-  (change-class cursor 'right-sticky-cursor
+  (change-class cursor 'attached-right-sticky-cursor
 		:line line
 		:cursor-position position)
   nil)
