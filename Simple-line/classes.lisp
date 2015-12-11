@@ -7,7 +7,9 @@
    ((%contents :initarg :contents
 	       :initform (make-array 0)
 	       :accessor contents)
-    (%cursors :initarg :cursors :accessor cursors)))
+    (%cursors :initarg :cursors
+	      :initform '()
+	      :accessor cursors)))
 
 (defclass attached-cursor (cluffer:cursor)
   ((%line :initarg :line :accessor line)
