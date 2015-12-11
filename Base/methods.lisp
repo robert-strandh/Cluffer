@@ -133,17 +133,38 @@
   (unless (cluffer:cursor-attached-p cursor)
     (error 'cluffer:cursor-detached)))
 
+;;; This :AFTER method calls the function NOTIFY-ITEM-COUNT-CHANGED in
+;;; the internal protocol.
+(defmethod cluffer:insert-item :after ((cursor cluffer:cursor) item)
+  (let* ((line (cluffer:line cursor))
+	 (dock (cluffer-internal:dock line)))
+    (cluffer-internal:notify-item-count-changed dock 1)))
+
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
 (defmethod cluffer:delete-item :before ((cursor cluffer:cursor))
   (unless (cluffer:cursor-attached-p cursor)
     (error 'cluffer:cursor-detached)))
 
+;;; This :AFTER method calls the function NOTIFY-ITEM-COUNT-CHANGED in
+;;; the internal protocol.
+(defmethod cluffer:delete-item :after ((cursor cluffer:cursor))
+  (let* ((line (cluffer:line cursor))
+	 (dock (cluffer-internal:dock line)))
+    (cluffer-internal:notify-item-count-changed dock -1)))
+
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
 (defmethod cluffer:erase-item :before ((cursor cluffer:cursor))
   (unless (cluffer:cursor-attached-p cursor)
     (error 'cluffer:cursor-detached)))
+
+;;; This :AFTER method calls the function NOTIFY-ITEM-COUNT-CHANGED in
+;;; the internal protocol.
+(defmethod cluffer:erase-item :after ((cursor cluffer:cursor))
+  (let* ((line (cluffer:line cursor))
+	 (dock (cluffer-internal:dock line)))
+    (cluffer-internal:notify-item-count-changed dock -1)))
 
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
