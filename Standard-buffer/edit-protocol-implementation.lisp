@@ -79,44 +79,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on function INSERT-ITEM.
-
-(defmethod cluffer:insert-item :after (cursor item)
-  (let* ((node (cluffer-internal:dock (line cursor)))
-	 (buffer (buffer cursor)))
-    (clump-binary-tree:splay node)
-    (incf (item-count node))
-    (setf (modify-time node) (incf (current-time buffer)))
-    (setf (max-modify-time node) (modify-time node))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Methods on generic function DELETE-ITEM.
-
-(defmethod cluffer:delete-item :after (cursor)
-  (let ((node (cluffer-internal:dock (line cursor)))
-	(buffer (buffer cursor)))
-    (clump-binary-tree:splay node)
-    (decf (item-count node))
-    (setf (modify-time node) (incf (current-time buffer)))
-    (setf (max-modify-time node) (modify-time node))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Generic function ERASE-ITEM.
-
-(defgeneric erase-item (cursor))
-
-(defmethod erase-item :after (cursor)
-  (let ((node (cluffer-internal:dock (line cursor)))
-	(buffer (buffer cursor)))
-    (clump-binary-tree:splay node)
-    (decf (item-count node))
-    (setf (modify-time node) (incf (current-time buffer)))
-    (setf (max-modify-time node) (modify-time node))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Generic function FIND-LINE.
 
 (defgeneric find-line (buffer line-number))
