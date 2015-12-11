@@ -4,7 +4,9 @@
 ;;;; objects for the contents and a list of cursors.
 
 (defclass line (cluffer:line)
-   ((%contents :initarg :contents :accessor contents)
+   ((%contents :initarg :contents
+	       :initform (make-array 0)
+	       :accessor contents)
     (%cursors :initarg :cursors :accessor cursors)))
 
 (defclass attached-cursor (cluffer:cursor)
