@@ -3,4 +3,6 @@
 (defpackage #:cluffer-simple-line
   (:use #:common-lisp)
   (:export
-   #:line))
+   #:line
+   #:detached-left-sticky-cursor
+   #:detached-right-sticky-cursor))
