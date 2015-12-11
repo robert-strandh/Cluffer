@@ -2,4 +2,5 @@
 
 (defpackage #:cluffer-simple-line
   (:use #:common-lisp)
-  (:export))
+  (:export
+   #:line))
