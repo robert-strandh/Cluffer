@@ -338,15 +338,15 @@
 ;;; No need to open the line.
 (defmethod cluffer:item-after-cursor
     ((cursor closed-cursor-mixin))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
+  (when (cluffer:end-of-line-p cursor)
+    (error 'cluffer:end-of-line))
   (aref (contents (line cursor))
 	(cluffer:cursor-position cursor)))
 
 (defmethod cluffer:item-after-cursor
     ((cursor open-left-sticky-cursor))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
+  (when (cluffer:end-of-line-p cursor)
+    (error 'cluffer:end-of-line))
   (let ((pos (cluffer:cursor-position cursor))
 	(line (line cursor)))
     (aref (contents line)
@@ -356,8 +356,8 @@
 
 (defmethod cluffer:item-after-cursor
     ((cursor open-right-sticky-cursor))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
+  (when (cluffer:end-of-line-p cursor)
+    (error 'cluffer:end-of-line))
   (let ((pos (cluffer:cursor-position cursor))
 	(line (line cursor)))
     (aref (contents line)
