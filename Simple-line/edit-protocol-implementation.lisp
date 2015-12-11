@@ -3,11 +3,6 @@
 (defmethod cluffer:item-count ((line line))
   (length (contents line)))
 
-(defun make-empty-line ()
-  (make-instance 'line
-    :cursors '()
-    :contents (make-array 0 :fill-pointer t)))
-    
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on ITEMS.
