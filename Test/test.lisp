@@ -83,12 +83,18 @@
     (cluffer:attach-cursor cursor line)
     (assert (cluffer:end-of-line-p cursor))))
 
+;;; Check that ITEM-COUNT returns 0 for an empty line.
+(defun test-simple-line-6 ()
+  (let ((line (make-instance 'cluffer-simple-line:line)))
+    (assert (zerop (cluffer:item-count line)))))
+
 (defun test-simple-line ()
   (test-simple-line-1)
   (test-simple-line-2)
   (test-simple-line-3)
   (test-simple-line-4)
-  (test-simple-line-5))
+  (test-simple-line-5)
+  (test-simple-line-6))
 
 (defun run-tests ()
   (test-simple-line))
