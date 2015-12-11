@@ -40,7 +40,8 @@
   (:use #:common-lisp)
   (:export #:split-line
 	   #:join-line
-	   #:dock))
+	   #:dock
+	   #:notify-item-count-changed))
 
 (defpackage #:cluffer-base
   (:use #:common-lisp)
