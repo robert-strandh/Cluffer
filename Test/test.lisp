@@ -21,6 +21,14 @@
 ;;; Check that moving forward on an empty simple line signals an error
 ;;; of type END-OF-LINE.
 (defun test-simple-line-2 ()
+  ;;; Run the test for a left-sticky cursor.
+  (let ((line (make-instance 'cluffer-simple-line:line))
+	(cursor (make-instance
+		    'cluffer-simple-line:detached-left-sticky-cursor)))
+    (cluffer:attach-cursor cursor line)
+    (assert (typep (nth-value 1 (ignore-errors (cluffer:forward-item cursor)))
+		   'cluffer:end-of-line)))
+  ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
 		    'cluffer-simple-line:detached-right-sticky-cursor)))
