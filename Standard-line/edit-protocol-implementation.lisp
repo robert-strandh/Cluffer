@@ -344,18 +344,7 @@
 	(cluffer:cursor-position cursor)))
 
 (defmethod cluffer:item-after-cursor
-    ((cursor open-left-sticky-cursor))
-  (when (cluffer:end-of-line-p cursor)
-    (error 'cluffer:end-of-line))
-  (let ((pos (cluffer:cursor-position cursor))
-	(line (line cursor)))
-    (aref (contents line)
-	  (if (< pos (gap-start line))
-	      pos
-	      (+ pos (- (gap-end line) (gap-start line)))))))
-
-(defmethod cluffer:item-after-cursor
-    ((cursor open-right-sticky-cursor))
+    ((cursor open-cursor-mixin))
   (when (cluffer:end-of-line-p cursor)
     (error 'cluffer:end-of-line))
   (let ((pos (cluffer:cursor-position cursor))
