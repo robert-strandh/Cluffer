@@ -28,3 +28,9 @@
 
 (defclass detached-right-sticky-cursor (detached-cursor right-sticky-mixin)
   ())
+
+(defclass attached-left-sticky-cursor (attached-cursor left-sticky-mixin)
+  ())
+
+(defclass attached-right-sticky-cursor (attached-cursor right-sticky-mixin)
+  ())
