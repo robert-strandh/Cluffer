@@ -67,11 +67,28 @@
     (cluffer:attach-cursor cursor line)
     (assert (cluffer:beginning-of-line-p cursor))))
 
+;;; Check that END-OF-LINE-P returns true for a cursor in an
+;;; empty line.
+(defun test-simple-line-5 ()
+  ;;; Run the test for a left-sticky cursor.
+  (let ((line (make-instance 'cluffer-simple-line:line))
+	(cursor (make-instance
+		    'cluffer-simple-line:detached-left-sticky-cursor)))
+    (cluffer:attach-cursor cursor line)
+    (assert (cluffer:end-of-line-p cursor)))
+  ;;; Run the test for a right-sticky cursor.
+  (let ((line (make-instance 'cluffer-simple-line:line))
+	(cursor (make-instance
+		    'cluffer-simple-line:detached-right-sticky-cursor)))
+    (cluffer:attach-cursor cursor line)
+    (assert (cluffer:end-of-line-p cursor))))
+
 (defun test-simple-line ()
   (test-simple-line-1)
   (test-simple-line-2)
   (test-simple-line-3)
-  (test-simple-line-4))
+  (test-simple-line-4)
+  (test-simple-line-5))
 
 (defun run-tests ()
   (test-simple-line))
