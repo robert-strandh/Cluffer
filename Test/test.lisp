@@ -106,6 +106,24 @@
     (assert (typep (nth-value 1 (ignore-errors (cluffer:item-before-cursor cursor)))
 		   'cluffer:beginning-of-line))))
 
+;;; Check that calling ITEM-AFTER-CURSOR on an empty simple line
+;;; signals an error of type BEGINNING-OF-LINE.
+(defun test-simple-line-8 ()
+  ;;; Run the test for a left-sticky cursor.
+  (let ((line (make-instance 'cluffer-simple-line:line))
+	(cursor (make-instance
+		    'cluffer-simple-line:detached-left-sticky-cursor)))
+    (cluffer:attach-cursor cursor line)
+    (assert (typep (nth-value 1 (ignore-errors (cluffer:item-after-cursor cursor)))
+		   'cluffer:end-of-line)))
+  ;;; Run the test for a right-sticky cursor.
+  (let ((line (make-instance 'cluffer-simple-line:line))
+	(cursor (make-instance
+		    'cluffer-simple-line:detached-right-sticky-cursor)))
+    (cluffer:attach-cursor cursor line)
+    (assert (typep (nth-value 1 (ignore-errors (cluffer:item-after-cursor cursor)))
+		   'cluffer:end-of-line))))
+
 (defun test-simple-line ()
   (test-simple-line-1)
   (test-simple-line-2)
@@ -113,7 +131,8 @@
   (test-simple-line-4)
   (test-simple-line-5)
   (test-simple-line-6)
-  (test-simple-line-7))
+  (test-simple-line-7)
+  (test-simple-line-8))
 
 (defun run-tests ()
   (test-simple-line))
