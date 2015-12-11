@@ -124,6 +124,24 @@
     (assert (typep (nth-value 1 (ignore-errors (cluffer:item-after-cursor cursor)))
 		   'cluffer:end-of-line))))
 
+;;; Check that CURSOR-ATTACHED-P returns true if and only if the
+;;; cursor is attached.
+(defun test-simple-line-9 ()
+  ;;; Run the test for a left-sticky cursor.
+  (let ((line (make-instance 'cluffer-simple-line:line))
+	(cursor (make-instance
+		    'cluffer-simple-line:detached-left-sticky-cursor)))
+    (assert (not (cluffer:cursor-attached-p cursor)))
+    (cluffer:attach-cursor cursor line)
+    (assert (cluffer:cursor-attached-p cursor)))
+  ;;; Run the test for a right-sticky cursor.
+  (let ((line (make-instance 'cluffer-simple-line:line))
+	(cursor (make-instance
+		    'cluffer-simple-line:detached-right-sticky-cursor)))
+    (assert (not (cluffer:cursor-attached-p cursor)))
+    (cluffer:attach-cursor cursor line)
+    (assert (cluffer:cursor-attached-p cursor))))
+
 (defun test-simple-line ()
   (test-simple-line-1)
   (test-simple-line-2)
@@ -132,7 +150,8 @@
   (test-simple-line-5)
   (test-simple-line-6)
   (test-simple-line-7)
-  (test-simple-line-8))
+  (test-simple-line-8)
+  (test-simple-line-9))
 
 (defun run-tests ()
   (test-simple-line))
