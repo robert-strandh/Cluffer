@@ -154,6 +154,7 @@
     (assert (not (cluffer:beginning-of-line-p rc)))
     (assert (not (zerop (cluffer:cursor-position rc))))
     (assert (cluffer:end-of-line-p rc))
+    (assert (= (cluffer:cursor-position rc) 1))
     (assert (not (cluffer:end-of-line-p lc)))
     (assert (eql (cluffer:item-after-cursor lc) 234))
     (assert (eql (cluffer:item-before-cursor rc) 234))
