@@ -150,6 +150,7 @@
     (cluffer:attach-cursor rc line)
     (cluffer:insert-item lc 234)
     (assert (cluffer:beginning-of-line-p lc))
+    (assert (zerop (cluffer:cursor-position lc)))
     (assert (not (cluffer:beginning-of-line-p rc)))
     (assert (cluffer:end-of-line-p rc))
     (assert (not (cluffer:end-of-line-p lc)))
