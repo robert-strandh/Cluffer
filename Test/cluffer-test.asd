@@ -6,4 +6,5 @@
   :components
   ((:file "packages")
    (:file "test-simple-line")
+   (:file "test-standard-line")
    (:file "test")))
