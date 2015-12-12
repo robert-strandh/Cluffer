@@ -5,4 +5,5 @@
   :serial t
   :components
   ((:file "packages")
+   (:file "test-simple-line")
    (:file "test")))
