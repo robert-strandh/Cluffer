@@ -158,6 +158,7 @@
     (assert (not (cluffer:end-of-line-p lc)))
     (assert (eql (cluffer:item-after-cursor lc) 234))
     (assert (eql (cluffer:item-before-cursor rc) 234))
+    (assert (equalp (cluffer:items line) #(234)))
     (assert (= (cluffer:item-count line) 1))
     (assert (= (cluffer:item-count lc) 1))
     (assert (= (cluffer:item-count rc) 1))))
