@@ -2,4 +2,7 @@
 
 (defpackage #:cluffer-standard-line
   (:use #:common-lisp)
-  (:export #:line))
+  (:export
+   #:line
+   #:detached-left-sticky-cursor
+   #:detached-right-sticky-cursor))
