@@ -1,5 +1,23 @@
 \chapter{External protocols}
 
+\section{Package}
+
+All symbols in the external protocol are in the package named
+\texttt{cluffer}.  We recommend against client code \emph{using} this
+package in the sense of the \texttt{:use} option to
+\texttt{defpackage} or in the sense of calling \texttt{use-package}.
+
+The reason for this recommendation is that we can not guarantee that
+future additions to this library will not define external symbols that
+conflict with symbols in the \texttt{common-lisp} package.
+
+Instead, we recommend that client code use explicit package prefixes,
+which in addition will make the origin of the symbol obvious from the
+source code.
+
+If, for some reason, it is not desirable to use explicit package
+prefixes, we suggest selectively importing the desired symbols.
+
 \inputtex{sec-line-edit-protocol.tex}
 \inputtex{sec-buffer-edit-protocol.tex}
 \inputtex{sec-buffer-update-protocol.tex}
