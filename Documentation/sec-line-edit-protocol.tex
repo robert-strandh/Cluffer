@@ -3,6 +3,13 @@
 
 \subsection{Protocol classes}
 
+\Defclass {line}
+
+This class is the base class for all lines.  It should not itself be
+instantiated.  Instead, \sysname{} contains two different modules
+each supplying a different subclass of \texttt{line} that can be
+instantiated.
+
 \Defclass {cursor}
 
 This is the base class for all cursors.
