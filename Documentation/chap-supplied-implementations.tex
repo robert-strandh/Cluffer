@@ -8,6 +8,31 @@
 The package named \texttt{cluffer-standard-line} is used for all names
 that are specific to the implementation of standard lines.
 
+\Defclass {line}
+
+This class is a subclass of the protocol class named \texttt{line} in
+the package named \texttt{cluffer}.
+
+\Defclass {open-line}
+
+This class is a subclass of the class named \texttt{line}.  It is used
+when the contents of the line is modified.
+
+For this class, the contents is represented as a simple \emph{gap
+  buffer} so that adding or deleting items is done at the beginning or
+the end of the gap.
+
+\Defclass {closed-line}
+
+This class is a subclass of the class named \texttt{line}.  It is used
+when the contents of the line has not been modified after an
+invocation of the function \texttt{items}.
+
+For this class, the contents is represented by a simple \commonlisp{}
+vector.  Whenever \texttt{items} is invoked on a closed line and the
+entire contents is asked for, this simple vector is returned, and no
+copy is made.
+
 \section{Simple line}
 
 \section{Standard buffer}
