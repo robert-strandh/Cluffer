@@ -2,6 +2,7 @@
 \label{chap-supplied-implementations}
 
 \section{Standard line}
+\label{sec-standard-line}
 
 \subsection{Package}
 
@@ -34,6 +35,21 @@ entire contents is asked for, this simple vector is returned, and no
 copy is made.
 
 \section{Simple line}
+
+\subsection{Package}
+
+The package named \texttt{cluffer-simple-line} is used for all names
+that are specific to the implementation of standard lines.
+
+\Defclass {line}
+
+This class is a subclass of the protocol class named \texttt{line} in
+the package named \texttt{cluffer}.
+
+Contrary to the standard line \seesec{sec-standard-line} the simple
+line has no concept of open or closed lines.  All lines are
+represented the same way with the items stored in a simple
+\commonlisp{} vector.
 
 \section{Standard buffer}
 
