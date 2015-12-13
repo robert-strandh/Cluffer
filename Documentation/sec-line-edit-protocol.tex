@@ -1,6 +1,8 @@
 \section{Line edit protocol}
 \label{sec-edit-protocol}
 
+\subsection{Protocol classes}
+
 \Defclass {cursor}
 
 This is the base class for all cursors.
@@ -9,6 +11,8 @@ This is the base class for all cursors.
 
 The class \texttt{cursor} accepts this initarg which is the line to
 which the new cursor is to be attached.
+
+\subsection{Operations on lines and cursors}
 
 \Defgeneric {beginning-of-line-p} {cursor}
 
