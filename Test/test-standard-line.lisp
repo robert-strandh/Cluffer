@@ -4,7 +4,7 @@
   (setf (cluffer:cursor-position cursor)
 	(random (1+ (cluffer:item-count cursor)))))
 
-(defun random-insertions ()
+(defun random-insertions-iteration ()
   (let ((linea (make-instance 'cluffer-simple-line:line))
 	(lineb (make-instance 'cluffer-standard-line:closed-line))
 	(cursorla (make-instance
@@ -38,3 +38,7 @@
 			(cluffer:cursor-position cursorrb)))
 	     (assert (equalp (cluffer:items cursorla)
 			     (cluffer:items cursorlb))))))
+
+(defun random-insertions ()
+  (loop repeat 100
+	do (random-insertions-iteration)))
