@@ -214,10 +214,9 @@
     (setf (aref (contents line) (gap-start line)) item)
     (incf (gap-start line))
     (loop for cursor in (cursors line)
-	  do (when (or (and (typep cursor 'right-sticky-mixin)
-			    (>= (cluffer:cursor-position cursor) pos))
-		       (and (typep cursor 'left-sticky-mixin)
-			    (> (cluffer:cursor-position cursor) pos)))
+	  do (when (or (> (cluffer:cursor-position cursor) pos)
+		       (and (= (cluffer:cursor-position cursor) pos)
+			    (typep cursor 'right-sticky-mixin)))
 	       (incf (cluffer:cursor-position cursor)))))
   nil)
 
