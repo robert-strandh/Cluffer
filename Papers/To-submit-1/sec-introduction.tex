@@ -59,6 +59,9 @@ inner or the outer control loop.
 The inner control loop is catered to by two different protocols; one
 containing operations on individual \emph{lines} of items (typically
 characters) and one containing operations at the \emph{buffer} level,
-concerning mainly the creation and deletion of lines.
+concerning mainly the creation and deletion of lines.  While we supply
+reasonable implementations of both these protocols, we also allow for
+sophisticated clients to substitute specific versions of each of these
+protocols.
 
 %%  LocalWords:  startup runtime
