@@ -27,7 +27,9 @@
 ;;; The contents of a closed line is a vector of items.  At the
 ;;; moment, it is always a simple vector.
 
-(defclass closed-line (line) ())
+(defclass closed-line (line)
+  ()
+  (:default-initargs :contents (vector)))
 
 (defclass attached-cursor (cluffer:cursor)
   ((%line :initarg :line :accessor line)))
