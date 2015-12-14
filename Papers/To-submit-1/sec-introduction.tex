@@ -12,4 +12,16 @@ structure with optimal asymptotic worst-case complexity would be
 considered as having too much overhead, both in terms of execution
 time, and in terms of memory requirements.
 
+For a text editor with advanced features such as keyboard macros, it
+is crucial to distinguish between two different control loops:
+
+\begin{itemize}
+\item The innermost loop consists of inserting and deleting individual
+  items (typically characters) in the buffer, and of moving one or
+  more \emph{cursor} from one position to an adjacent position.
+\item The outer loop consists of updating the \emph{views} into the
+  buffer.  Each view is typically an interval of less than around one
+  hundred lines of the buffer.
+\end{itemize}
+
 %%  LocalWords:  startup runtime
