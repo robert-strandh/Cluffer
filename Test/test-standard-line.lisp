@@ -19,7 +19,7 @@
     (cluffer:attach-cursor cursorra linea)
     (cluffer:attach-cursor cursorlb lineb)
     (cluffer:attach-cursor cursorrb lineb)
-    (loop for size from 0 to 10
+    (loop for size from 0 to 1000
 	  for pos1 = (random (1+ size))
 	  for pos2 = (random (1+ size))
 	  for item = (random 100000)
