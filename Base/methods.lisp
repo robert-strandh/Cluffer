@@ -65,6 +65,10 @@
   (cluffer:backward-item cursor)
   (cluffer:delete-item cursor))
 
+;;; Default method on ITEMS specialized to CURSOR
+(defmethod cluffer:items ((cursor cluffer:cursor) &key start end)
+  (cluffer:items (cluffer:line cursor) :start start :end end))
+
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
 (defmethod cluffer:cursor-position :before ((cursor cluffer:cursor))
