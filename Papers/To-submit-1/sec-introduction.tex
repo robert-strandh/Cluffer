@@ -24,4 +24,30 @@ is crucial to distinguish between two different control loops:
   hundred lines of the buffer.
 \end{itemize}
 
+When the user inserts or deletes individual items, the inner loop
+performs a single iteration for each iteration of the outer loop,
+i.e., the views are updated for each elementary operation issued by
+the user.
+
+When operations on multiple items are issued, such as the insertion or
+deletion of \emph{regions} of text, the inner loop can be executed a
+large number of iterations for a single iteration of the outermost
+loop.  While such multiple iterations could be avoided in the case of
+regions by providing operations on intervals of items, doing so does
+not solve the problem of \emph{keyboard macros} where a large number
+of small editing operations can be issued for a single execution of a
+macro.  Furthermore, to avoid large amounts of special-case code, it
+is preferable that operations on regions be possible to implement as
+repeated application of elementary editing operations.
+
+Roughly speaking, each iteration of the outer loop is performed for
+each character typed by the user.  Given the relatively modest typing
+speed of even a very fast typist, as long as an iteration can be
+accomplished in a few tens of milliseconds, performance will be
+acceptable.  This is sufficient time to perform a large number of
+fairly sophisticated operations.
+
+An iteration of the inner loop, on the other hand, must be several
+orders of magnitude faster than an iteration of the outer loop.
+
 %%  LocalWords:  startup runtime
