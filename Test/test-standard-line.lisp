@@ -6,7 +6,7 @@
 
 (defun random-insertions ()
   (let ((linea (make-instance 'cluffer-simple-line:line))
-	(lineb (make-instance 'cluffer-standard-line:line))
+	(lineb (make-instance 'cluffer-standard-line:closed-line))
 	(cursorla (make-instance
 		      'cluffer-simple-line:detached-left-sticky-cursor))
 	(cursorra (make-instance
