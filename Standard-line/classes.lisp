@@ -32,7 +32,7 @@
   (:default-initargs :contents (vector)))
 
 (defclass attached-cursor (cluffer:cursor)
-  ((%line :initarg :line :accessor line)))
+  ((%line :initarg :line :accessor cluffer:line)))
 
 (defmethod cluffer:cursor-attached-p ((cursor attached-cursor))
   t)
