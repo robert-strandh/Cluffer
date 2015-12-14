@@ -202,6 +202,11 @@
   (unless (cluffer:cursor-attached-p cursor)
     (error 'cluffer:cursor-detached)))
 
+(defmethod cluffer:items :before ((cursor cluffer:cursor) &key start end)
+  (declare (ignore start end))
+  (unless (cluffer:cursor-attached-p cursor)
+    (error 'cluffer:cursor-detached)))
+
 ;;; Default method on NOTIFY-ITEM-COUNT-CHANGED.  This method does
 ;;; nothing, and is used when a line is not attached to a buffer.
 (defmethod cluffer-internal:notify-item-count-changed ((doc null) delta)
