@@ -13,7 +13,28 @@
 		      'cluffer-simple-line:detached-right-sticky-cursor))
 	(cursorlb (make-instance
 		      'cluffer-standard-line:detached-left-sticky-cursor))
-	(cursorrr (make-instance
+	(cursorrb (make-instance
 		      'cluffer-standard-line:detached-right-sticky-cursor)))
-    nil))
-
+    (cluffer:attach-cursor cursorla linea)
+    (cluffer:attach-cursor cursorra linea)
+    (cluffer:attach-cursor cursorlb lineb)
+    (cluffer:attach-cursor cursorrb lineb)
+    (loop for size from 0 to 10
+	  for pos1 = (random (1+ size))
+	  for pos2 = (random (1+ size))
+	  for item1 = (random 100000)
+	  for item2 = (random 100000)
+	  do (setf (cluffer:cursor-position cursorla) pos1)
+	     (setf (cluffer:cursor-position cursorlb) pos1)
+	     (setf (cluffer:cursor-position cursorra) pos2)
+	     (setf (cluffer:cursor-position cursorrb) pos2)
+	     (cluffer:insert-item cursorla item1)
+	     (cluffer:insert-item cursorlb item1)
+	     (cluffer:insert-item cursorra item2)
+	     (cluffer:insert-item cursorrb item2)
+	     (assert (= (cluffer:cursor-position cursorla)
+			(cluffer:cursor-position cursorlb)))
+	     (assert (= (cluffer:cursor-position cursorra)
+			(cluffer:cursor-position cursorrb)))
+	     (assert (equalp (cluffer:items cursorla)
+			     (cluffer:items cursorlb))))))
