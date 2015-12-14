@@ -93,7 +93,9 @@
 		       (vector item)
 		       (subseq contents position)))
     (loop for cursor in (cursors line)
-	  do (when (typep cursor 'right-sticky-mixin)
+	  do (when (or (> (cluffer:cursor-position cursor) position)
+		       (and (= (cluffer:cursor-position cursor) position)
+			    (typep cursor 'right-sticky-mixin)))
 	       (incf (cluffer:cursor-position cursor))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
