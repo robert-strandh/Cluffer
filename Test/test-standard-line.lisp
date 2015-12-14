@@ -42,3 +42,6 @@
 (defun random-insertions ()
   (loop repeat 100
 	do (random-insertions-iteration)))
+
+(defun test-standard-line ()
+  (random-insertions))
