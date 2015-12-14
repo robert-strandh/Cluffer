@@ -1,6 +1,12 @@
 \chapter{Introduction}
 \pagenumbering{arabic}
 
+\sysname{} is a library for representing the buffer of a text editor.
+As such, it defines a set of \clos{} \emph{protocols} for client code
+to interact with the buffer contents in various ways, and it supplies
+different \emph{implementations} of those protocols for different
+purposes.
+
 The buffer protocols have been chosen so that they can fit a variety
 of editors.  As a consequence, they are not particularly
 Emacs-centric.  For example, in Emacs, a newline character is just
@@ -10,16 +16,16 @@ is located, and using the \texttt{delete-char} command when
 \emph{point} is to the left of a newline character joins the line to
 the next one.
 
-In contrast, the buffer protocols documented here are line oriented
-and there is no newline character; only a sequence of lines.  At some
-level, it is of course desired to have Emacs-compatible commands, but
-these commands are written separately, using this buffer protocol to
-accomplish the effects.  For example, the Emacs-compatible
-\texttt{forward-item} command checks whether it is at the end of a
-line, and if so, detaches the cursor from that line and attaches it to
-the next one.  Similarly, the Emacs compatible \texttt{delete-item}
-command calls \texttt{join-line} in the buffer protocol to obtain the
-desired effect when it is at the end of a line.
+In contrast, the buffer protocols documented here are \emph{line
+  oriented} and there is no newline character; only a sequence of
+lines.  At some level, it is of course desirable to have
+Emacs-compatible commands, but these commands are written separately,
+using this buffer protocol to accomplish the effects.  For example,
+the Emacs-compatible \texttt{forward-item} command checks whether it
+is at the end of a line, and if so, detaches the cursor from that line
+and attaches it to the next one.  Similarly, the Emacs compatible
+\texttt{delete-item} command calls \texttt{join-line} in the buffer
+protocol to obtain the desired effect when it is at the end of a line.
 
 By writing the editor commands in two levels like this, we hope it
 will be easier to use the buffer protocols to write emulators for
