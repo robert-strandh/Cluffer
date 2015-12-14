@@ -81,5 +81,10 @@
 	     (assert (equalp (cluffer:items cursorla)
 			     (cluffer:items cursorlb))))))
 
+(defun random-deletions ()
+  (loop repeat 100
+	do (random-deletions-iteration)))
+
 (defun test-standard-line ()
-  (random-insertions))
+  (random-insertions)
+  (random-deletions))
