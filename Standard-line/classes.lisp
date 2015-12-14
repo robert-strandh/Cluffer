@@ -34,7 +34,13 @@
 (defclass attached-cursor (cluffer:cursor)
   ((%line :initarg :line :accessor line)))
 
+(defmethod cluffer:cursor-attached-p ((cursor attached-cursor))
+  t)
+
 (defclass detached-cursor (cluffer:cursor) ())
+
+(defmethod cluffer:cursor-attached-p ((cursor detached-cursor))
+  nil)
 
 (defclass left-sticky-mixin () ())
 
