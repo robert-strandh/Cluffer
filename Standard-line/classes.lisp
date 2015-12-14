@@ -8,7 +8,7 @@
 
 (defclass line (cluffer:line)
    ((%contents :initarg :contents :accessor contents)
-    (%cursors :initarg :cursors :accessor cursors)))
+    (%cursors :initform '() :initarg :cursors :accessor cursors)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
