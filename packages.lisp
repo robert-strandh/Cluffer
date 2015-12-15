@@ -18,4 +18,5 @@
    #:item-after-cursor
    #:insert-item
    #:delete-item
-   #:erase-item))
+   #:erase-item
+   #:update))
