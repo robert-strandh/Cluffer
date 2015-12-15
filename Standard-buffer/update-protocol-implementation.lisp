@@ -1,4 +1,4 @@
-(cl:in-package #:cluffer-buffer)
+(cl:in-package #:cluffer-standard-buffer)
 
 ;;;; This function implements the buffer update protocol for a buffer
 ;;;; represented as a splay tree.
