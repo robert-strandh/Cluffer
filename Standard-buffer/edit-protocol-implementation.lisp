@@ -63,8 +63,6 @@
 ;;; 
 ;;; Generic function LINE-COUNT.
 
-(defgeneric line-count (buffer))
-
 (defmethod line-count ((buffer buffer))
   (line-count (contents buffer)))
 
