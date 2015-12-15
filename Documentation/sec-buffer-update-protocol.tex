@@ -53,9 +53,9 @@ representation of the buffer as it was after the previous call to
   is called \emph{first} to indicate that a \emph{prefix} of the
   buffer is unmodified, or after a \emph{sync} operation to indicate
   that that many lines following the one given as argument to the
-  \textit{sync} operation are unmodified.%
-  \fixme{Decide whether this operation should be called on an
-    unmodified \emph{suffix} of the buffer, or whether the last
-    \textit{sync} operation is enough.}
+  \textit{sync} operation are unmodified.  This operation is also
+  called when there are unmodified lines at the end of the buffer so
+  that the total line count of the buffer corresponds to the total
+  number of lines mentioned in the sequence of operations.
 \end{itemize}
 
