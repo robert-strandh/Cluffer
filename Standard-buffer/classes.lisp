@@ -1,7 +1,8 @@
 (cl:in-package #:cluffer-standard-buffer)
 
 (defclass buffer (cluffer:buffer)
-  ((%current-time :initform 0 :initarg :current-time :accessor current-time)
+  ((%current-time :initform 0 :initarg :current-time
+		  :accessor cluffer:current-time)
    (%contents :initarg :contents :accessor contents)))
 
 ;;; The node contains a reference to the buffer in which it is
