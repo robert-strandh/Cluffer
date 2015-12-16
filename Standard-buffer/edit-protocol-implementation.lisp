@@ -109,7 +109,7 @@
 ;;;
 ;;; Method on generic function SPLIT-LINE.
 
-(defmethod split-line (cursor)
+(defmethod cluffer:split-line (cursor)
   (let* ((existing-line (line cursor))
 	 (existing-node (cluffer-internal:dock existing-line))
 	 (buffer (buffer existing-node))
