@@ -78,10 +78,6 @@
 ;;; Method on generic function FIND-LINE.
 
 (defmethod cluffer:find-line ((buffer buffer) line-number)
-  (when (minusp line-number)
-    (error 'cluffer:beginning-of-buffer))
-  (when (>= line-number (line-count buffer))
-    (error 'cluffer:end-of-buffer))
   (loop with node = (contents buffer)
 	with relative-line-number = line-number
 	for left = (clump-binary-tree:left node)
