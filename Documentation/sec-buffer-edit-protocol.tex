@@ -48,13 +48,20 @@ located.
 
 The argument \textit{entity} may be a cursor or a line.
 
-\Defbeforemethod {line-number} {(cursor cursor)}
+If \textit{entity} is a cursor and that cursor is not attached to any
+line, a condition of type \texttt{cursor-detached} is signaled.
 
-If \textit{cursor} is not attached to any line, a condition of type
-\texttt{cursor-detached} is signaled.
+If \textit{entity} is a cursor and that cursor is attached to a line,
+then the generic function \texttt{line} \seesec{sec-edit-protocol} is
+called with \textit{entity} as an argument and the return value is
+used as argument in a recursive call to \texttt{line-number}.
 
-Return the line number of \textit{line}.  The first line of the buffer
-has the number $0$. 
+If \textit{entity} is a line and that line is not attached to a
+buffer, then \texttt{nil} is returned.
+
+If \textit{entity} is a line and that line is attached to a buffer,
+then the line number of \textit{line} in that buffer is returned.  The
+first line of the buffer has the number $0$.
 
 \Defgeneric {find-line} {buffer line-number}
 
