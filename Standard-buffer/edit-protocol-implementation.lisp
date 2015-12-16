@@ -149,15 +149,6 @@
 
 (defgeneric join-line (cursor))
 
-;;; This generic function is part of the line-editing protocol, and
-;;; should not be used directly by the application.  The application
-;;; uses JOIN-LINE, and JOIN-LINE calls LINE-JOIN-LINE.
-;;;
-;;; This generic function attaches all of the items of the second line
-;;; to the end of the first line.  JOIN-LINE must then delete the
-;;; second of these two lines from the tree in the buffer.
-(defgeneric line-join-line (line1 line2))
-
 (defmethod join-line (cursor)
   (let ((line (line cursor)))
     (when (cluffer:last-line-p line)
