@@ -39,10 +39,9 @@ Join the line in which \textit{cursor} is located and the following
 line.  If \textit{cursor} is located at the last line of the buffer,
 the error condition \texttt{end-of-buffer} will be signaled.
 
-\Defgeneric {line-count} {cursor}
+\Defgeneric {line-count} {buffer}
 
-Return the number of lines in the buffer in which \textit{cursor} is
-located.
+Return the number of lines in \textit{buffer}.
 
 \Defgeneric {line-number} {entity}
 
