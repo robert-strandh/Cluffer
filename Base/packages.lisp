@@ -33,6 +33,7 @@
    #:attach-cursor
    #:detach-cursor
    #:line-number
+   #:find-line
    #:first-line-p
    #:last-line-p
    #:current-time
