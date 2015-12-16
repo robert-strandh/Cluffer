@@ -80,7 +80,7 @@
 ;;; FIXME: This method should not use recursion since the splay tree
 ;;; is only statistically balanced.  Change it to use iteration
 ;;; instead.
-(defmethod find-line ((buffer buffer) line-number)
+(defmethod cluffer:find-line ((buffer buffer) line-number)
   (when (minusp line-number)
     (error 'cluffer:beginning-of-buffer))
   (when (>= line-number (line-count buffer))
