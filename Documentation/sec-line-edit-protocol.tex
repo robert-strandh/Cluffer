@@ -54,10 +54,19 @@ the beginning of the line, the error condition
 \Defgeneric {insert-item} {cursor item}
 
 Insert an item at the location of \textit{cursor}.  After this
-operation, any left-sticky cursor located at the same position as
-\textit{cursor} will be located before \textit{item}, and any
-right-sticky cursor located at the same position as \textit{cursor}
-will be located after \textit{item}.
+operation completes, what happens to \textit{cursor} and other cursors
+at the same position as \textit{cursor} depends on the class of the
+cursor and of the line to which \textit{cursor} is attached.  The
+\texttt{standard-line} implementation provides two kinds of cursors,
+namely \emph{left-sticky} cursors and \emph{right-sticky} cursors.
+For such an implementation, after this operation completes, any
+left-sticky cursor located at the same position as \textit{cursor}
+will be located before \textit{item}, and any right-sticky cursor
+located at the same position as \textit{cursor} will be located after
+\textit{item}.
+
+If \textit{cursor} is not currently attached to a line, a condition
+of type \texttt{cursor-detached} is signaled.
 
 \Defgeneric {delete-item} {cursor}
 
