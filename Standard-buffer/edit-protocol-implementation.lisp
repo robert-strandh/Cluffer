@@ -145,9 +145,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function JOIN-LINE.
-
-(defgeneric join-line (cursor))
+;;; Method on generic function JOIN-LINE.
 
 (defmethod join-line (cursor)
   (let ((line (line cursor)))
