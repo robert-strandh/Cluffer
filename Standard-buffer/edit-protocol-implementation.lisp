@@ -111,17 +111,6 @@
 
 (defgeneric split-line (cursor))
 
-;;; This generic function is part of the line-editing protocol, and
-;;; should not be used directly by the application.  The application
-;;; uses SPLIT-LINE, and SPLIT-LINE calls LINE-SPLIT-LINE.
-;;;
-;;; This generic function removes all the items to the right of the
-;;; cursor in the line in which the cursor is located before the call,
-;;; and returns a second line in which those items have been inserted.
-;;; SPLIT-LINE must then insert that new line AFTER the one that the
-;;; cursor is in before the call.
-(defgeneric line-split-line (cursor))
-
 (defmethod split-line (cursor)
   (let* ((existing-line (line cursor))
 	 (existing-node (cluffer-internal:dock existing-line))
