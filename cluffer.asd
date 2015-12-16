@@ -4,6 +4,7 @@
   :depends-on (:cluffer-base
 	       :cluffer-standard-line
 	       :cluffer-standard-buffer
-	       :cluffer-simple-line)
+	       :cluffer-simple-line
+	       :cluffer-simple-buffer)
   :components
   ())
