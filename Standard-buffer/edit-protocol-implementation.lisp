@@ -107,9 +107,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function SPLIT-LINE.
-
-(defgeneric split-line (cursor))
+;;; Method on generic function SPLIT-LINE.
 
 (defmethod split-line (cursor)
   (let* ((existing-line (line cursor))
