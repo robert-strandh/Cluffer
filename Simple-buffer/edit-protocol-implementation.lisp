@@ -18,3 +18,10 @@
 (defmethod cluffer:item-count ((buffer buffer))
   (loop for node across (contents buffer)
 	sum (cluffer:item-count (line node))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Method on generic function FIND-LINE.
+
+(defmethod cluffer:find-line ((buffer buffer) line-number)
+  (line (aref (contents buffer) line-number)))
