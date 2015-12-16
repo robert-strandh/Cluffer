@@ -77,27 +77,22 @@
 ;;;
 ;;; Method on generic function FIND-LINE.
 
-;;; FIXME: This method should not use recursion since the splay tree
-;;; is only statistically balanced.  Change it to use iteration
-;;; instead.
 (defmethod cluffer:find-line ((buffer buffer) line-number)
   (when (minusp line-number)
     (error 'cluffer:beginning-of-buffer))
   (when (>= line-number (line-count buffer))
     (error 'cluffer:end-of-buffer))
-  (labels ((traverse (node line-number)
-	     (let* ((left (clump-binary-tree:left node))
-		    (right (clump-binary-tree:right node))
-		    (left-count (if (null left)
-				    0
-				    (line-count left))))
-	       (cond ((< line-number left-count)
-		      (traverse left line-number))
-		     ((= line-number left-count)
-		      (line node))
-		     (t
-		      (traverse right (- line-number left-count 1)))))))
-    (traverse (contents buffer) line-number)))
+  (loop with node = (contents buffer)
+	with relative-line-number = line-number
+	for left = (clump-binary-tree:left node)
+	for right = (clump-binary-tree:right node)
+	for left-count = (if (null left) 0 (line-count left))
+	until (= relative-line-number left-count)
+	do (if (< relative-line-number left-count)
+	       (setf node left)
+	       (progn (setf node right)
+		      (decf relative-line-number (1+ left-count))))
+	finally (return (line node))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
