@@ -147,7 +147,7 @@
 ;;;
 ;;; Method on generic function JOIN-LINE.
 
-(defmethod join-line (cursor)
+(defmethod cluffer:join-line (cursor)
   (let ((line (line cursor)))
     (when (cluffer:last-line-p line)
       (error 'cluffer:end-of-buffer))
