@@ -103,10 +103,15 @@ condition \texttt{cursor-attached} will be signaled.
 Return the position of \textit{cursor} as two values: the line number
 and the item number within the line. 
 
-\Defgeneric {item-count} {cursor}
+\Defgeneric {item-count} {entity}
 
-Return the number of items in the line in which \textit{cursor} is
-located.
+If \textit{entity} is a line, then return the number of items in that
+line.  If \textit{entity} is a cursor, return the number of items in
+the line in which \textit{cursor} is located.
+
+Note: the argument \textit{entity} can also be a buffer, in which case
+the total number of items is returned.
+\seesec{sec-buffer-edit-protocol}
 
 \Defgeneric {line} {cursor}
 
