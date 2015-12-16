@@ -68,9 +68,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
-;;; Generic function ITEM-COUNT.
-
-(defgeneric item-count (buffer))
+;;; Method on generic function ITEM-COUNT.
 
 (defmethod item-count ((buffer buffer))
   (item-count (contents buffer)))
