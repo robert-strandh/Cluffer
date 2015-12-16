@@ -75,9 +75,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Generic function FIND-LINE.
-
-(defgeneric find-line (buffer line-number))
+;;; Method on generic function FIND-LINE.
 
 ;;; FIXME: This method should not use recursion since the splay tree
 ;;; is only statistically balanced.  Change it to use iteration
