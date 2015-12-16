@@ -44,7 +44,14 @@ the error condition \texttt{end-of-buffer} will be signaled.
 Return the number of lines in the buffer in which \textit{cursor} is
 located.
 
-\Defgeneric {line-number} {line}
+\Defgeneric {line-number} {entity}
+
+The argument \textit{entity} may be a cursor or a line.
+
+\Defbeforemethod {line-number} {(cursor cursor)}
+
+If \textit{cursor} is not attached to any line, a condition of type
+\texttt{cursor-detached} is signaled.
 
 Return the line number of \textit{line}.  The first line of the buffer
 has the number $0$. 
