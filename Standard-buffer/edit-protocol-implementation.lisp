@@ -70,7 +70,7 @@
 ;;; 
 ;;; Method on generic function ITEM-COUNT.
 
-(defmethod item-count ((buffer buffer))
+(defmethod cluffer:item-count ((buffer buffer))
   (item-count (contents buffer)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
