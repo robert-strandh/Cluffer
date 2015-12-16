@@ -61,7 +61,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 
-;;; Generic function LINE-COUNT.
+;;; Method on generic function LINE-COUNT.
 
 (defmethod cluffer:line-count ((buffer buffer))
   (line-count (contents buffer)))
