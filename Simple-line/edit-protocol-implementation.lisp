@@ -75,6 +75,23 @@
   (change-class cursor 'detached-right-sticky-cursor)
   nil)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Method on INSERT-ITEM-AT-POSITION.
+
+(defmethod cluffer:insert-item-at-position ((line line) item position)
+  (let ((contents (contents line)))
+    (setf (contents line)
+	  (concatenate 'vector
+		       (subseq contents 0 position)
+		       (vector item)
+		       (subseq contents position)))
+    (loop for cursor in (cursors line)
+	  do (when (or (> (cluffer:cursor-position cursor) position)
+		       (and (= (cluffer:cursor-position cursor) position)
+			    (typep cursor 'right-sticky-mixin)))
+	       (incf (cluffer:cursor-position cursor))))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Operations on cursors.
