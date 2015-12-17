@@ -58,13 +58,6 @@
     (error 'cluffer:beginning-of-line))
   (decf (cluffer:cursor-position cursor)))
 
-;;; Default method on ERASE-ITEM.
-(defmethod cluffer:erase-item ((cursor cluffer:cursor))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
-  (cluffer:backward-item cursor)
-  (cluffer:delete-item cursor))
-
 ;;; Default method on ITEMS specialized to CURSOR
 ;;;
 ;;; A :BEFORE method has already checked that the cursor is attached,
