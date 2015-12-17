@@ -58,14 +58,10 @@
 
 ;;; Default method on FORWARD-ITEM.
 (defmethod cluffer:forward-item ((cursor cluffer:cursor))
-  (when (cluffer:end-of-line-p cursor)
-    (error 'cluffer:end-of-line))
   (incf (cluffer:cursor-position cursor)))
 
 ;;; Default method on BACKWARD-ITEM.
 (defmethod cluffer:backward-item ((cursor cluffer:cursor))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
   (decf (cluffer:cursor-position cursor)))
 
 ;;; Default method on ITEMS specialized to CURSOR
