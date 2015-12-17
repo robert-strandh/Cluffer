@@ -255,52 +255,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on INSERT-ITEM.
-
-(defmethod cluffer:insert-item ((cursor closed-cursor-mixin) item)
-  (open-line (cluffer:line cursor))
-  (cluffer:insert-item cursor item))
-
-(defmethod cluffer:insert-item ((cursor open-cursor-mixin) item)
-  (let* ((pos (cluffer:cursor-position cursor))
-	 (line (cluffer:line cursor))
-	 (contents (contents line)))
-    (cond ((= (gap-start line) (gap-end line))
-	   (let* ((new-length (* 2 (length contents)))
-		  (diff (- new-length (length contents)))
-		  (new-contents (make-array new-length)))
-	     (replace new-contents contents
-		      :start2 0 :start1 0 :end2 pos)
-	     (replace new-contents contents
-		      :start2 pos :start1 (+ pos diff))
-	     (setf (gap-start line) pos)
-	     (setf (gap-end line) (+ pos diff))
-	     (setf (contents line) new-contents)))
-	  ((< pos (gap-start line))
-	   (decf (gap-end line) (- (gap-start line) pos))
-	   (replace contents contents
-		    :start2 pos :end2 (gap-start line)
-		    :start1 (gap-end line))
-	   (setf (gap-start line) pos))
-	  ((> pos (gap-start line))
-	   (replace contents contents
-		    :start2 (gap-end line)
-		    :start1 (gap-start line) :end1 pos)
-	   (incf (gap-end line) (- pos (gap-start line)))
-	   (setf (gap-start line) pos))
-	  (t
-	   nil))
-    (setf (aref (contents line) (gap-start line)) item)
-    (incf (gap-start line))
-    (loop for cursor in (cursors line)
-	  do (when (or (> (cluffer:cursor-position cursor) pos)
-		       (and (= (cluffer:cursor-position cursor) pos)
-			    (typep cursor 'right-sticky-mixin)))
-	       (incf (cluffer:cursor-position cursor)))))
-  nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on ERASE-ITEM.
 
 (defmethod cluffer:erase-item ((cursor closed-cursor-mixin))
