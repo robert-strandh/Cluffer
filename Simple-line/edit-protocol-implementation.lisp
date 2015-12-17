@@ -115,28 +115,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on ITEM-BEFORE-CURSOR.
-
-(defmethod cluffer:item-before-cursor
-    ((cursor attached-cursor))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
-  (aref (contents (cluffer:line cursor))
-	(1- (cluffer:cursor-position cursor))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Methods on ITEM-AFTER-CURSOR.
-
-(defmethod cluffer:item-after-cursor
-    ((cursor attached-cursor))
-  (when (cluffer:end-of-line-p cursor)
-    (error 'cluffer:end-of-line))
-  (aref (contents (cluffer:line cursor))
-	(cluffer:cursor-position cursor)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on CLUFFER-INTERNAL:SPLIT-LINE.
 
 (defmethod cluffer-internal:split-line ((cursor attached-cursor))
