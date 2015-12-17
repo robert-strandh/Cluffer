@@ -252,17 +252,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on END-OF-LINE.
-;;;
-;;; Position the cursor at the end of the line.
-
-(defmethod cluffer:end-of-line
-    ((cursor attached-cursor))
-  (setf (cluffer:cursor-position cursor)
-	(cluffer:item-count (cluffer:line cursor))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Method on ITEM-AT-POSITION.
 
 ;;; No need to open the line.
