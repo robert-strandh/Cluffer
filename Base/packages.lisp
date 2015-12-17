@@ -16,6 +16,7 @@
    #:backward-item
    #:beginning-of-line
    #:end-of-line
+   #:item-at-position
    #:item-before-cursor
    #:item-after-cursor
    #:insert-item-at-position
