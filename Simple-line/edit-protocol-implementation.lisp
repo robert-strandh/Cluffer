@@ -108,6 +108,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Method on ITEM-AT-POSITION.
+
+(defmethod cluffer:item-at-position ((line line) position)
+  (aref (contents line) position))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Methods on ITEM-BEFORE-CURSOR.
 
 (defmethod cluffer:item-before-cursor
