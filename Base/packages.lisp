@@ -19,6 +19,7 @@
    #:item-before-cursor
    #:item-after-cursor
    #:insert-item-at-position
+   #:delete-item-at-position
    #:insert-item
    #:delete-item
    #:erase-item
