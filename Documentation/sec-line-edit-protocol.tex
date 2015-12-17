@@ -47,7 +47,15 @@ signaled.
 \Defgeneric {beginning-of-line-p} {cursor}
 
 Return \textit{true} if and only if \textit{cursor} is located at the
-beginning of a line.
+beginning of the line to which \textit{cursor} is attached.
+
+If \textit{cursor} is not currently attached to a line, a condition
+of type \texttt{cursor-detached} is signaled.
+
+Calling this function is equivalent to calling the function
+\texttt{cursor-position} with \textit{cursor} as argument and
+comparing the return value to $0$.  However, this function might be
+implemented differently for reasons of performance.
 
 \Defgeneric {end-of-line-p} {cursor}
 
