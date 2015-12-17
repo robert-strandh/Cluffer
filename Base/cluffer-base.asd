@@ -10,4 +10,5 @@
    (:file "internal-protocol")
    (:file "conditions")
    (:file "condition-reporters-english")
+   (:file "check-cursor-attached")
    (:file "methods")))
