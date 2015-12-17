@@ -305,53 +305,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on DELETE-ITEM.
-
-(defmethod cluffer:delete-item ((cursor closed-cursor-mixin))
-  (open-line (cluffer:line cursor))
-  (cluffer:delete-item cursor))
-
-(defmethod cluffer:delete-item ((cursor open-cursor-mixin))
-  (when (cluffer:end-of-line-p cursor)
-    (error 'cluffer:end-of-line))
-  (let* ((pos (cluffer:cursor-position cursor))
-	 (line (cluffer:line cursor))
-	 (contents (contents line)))
-    (cond ((< pos (gap-start line))
-	   (decf (gap-end line) (- (gap-start line) pos))
-	   (replace contents contents
-		    :start2 pos :end2 (gap-start line)
-		    :start1 (gap-end line))
-	   (setf (gap-start line) pos))
-	  ((> pos (gap-start line))
-	   (replace contents contents
-		    :start2 (gap-end line)
-		    :start1 (gap-start line) :end1 pos)
-	   (incf (gap-end line) (- pos (gap-start line)))
-	   (setf (gap-start line) pos))
-	  (t
-	   nil))
-    (setf (aref contents (gap-end line)) 0)  ; for the GC
-    (incf (gap-end line))
-    (when (and (> (length contents) 32)
-	       (> (- (gap-end line) (gap-start line))
-		  (* 3/4 (length contents))))
-      (let* ((new-length (floor (length contents) 2))
-	     (diff (- (length contents) new-length))
-	     (new-contents (make-array new-length)))
-	(replace new-contents contents
-		 :start2 0 :start1 0 :end2 (gap-start line))
-	(replace new-contents contents
-		 :start2 (gap-end line) :start1 (- (gap-end line) diff))
-	(decf (gap-end line) diff)
-	(setf (contents line) new-contents)))
-    (loop for cursor in (cursors line)
-	  do (when (> (cluffer:cursor-position cursor) pos)
-	       (decf (cluffer:cursor-position cursor)))))
-  nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on ERASE-ITEM.
 
 (defmethod cluffer:erase-item ((cursor closed-cursor-mixin))
