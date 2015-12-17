@@ -18,6 +18,7 @@
    #:end-of-line
    #:item-before-cursor
    #:item-after-cursor
+   #:insert-item-at-position
    #:insert-item
    #:delete-item
    #:erase-item
