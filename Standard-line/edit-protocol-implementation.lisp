@@ -5,13 +5,6 @@
 
 (defmethod cluffer:item-count ((line closed-line))
   (length (contents line)))
-
-(defun make-empty-line ()
-  (make-instance 'open-line
-    :cursors '()
-    :contents (make-array 32 :initial-element 0)
-    :gap-start 0
-    :gap-end 32))
     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
