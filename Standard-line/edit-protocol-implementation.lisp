@@ -255,14 +255,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on ERASE-ITEM.
-
-(defmethod cluffer:erase-item ((cursor closed-cursor-mixin))
-  (open-line (cluffer:line cursor))
-  (cluffer:erase-item cursor))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on BEGINNING-OF-LINE.
 ;;;
 ;;; Position the cursor at the beginning of the line.
