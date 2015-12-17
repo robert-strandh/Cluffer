@@ -157,6 +157,14 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Generic function ITEM-AT-POSITION.
+;;;
+;;; Return the item at POSITION in LINE.
+
+(defgeneric item-at-position (line position))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Generic function ITEM-BEFORE-CURSOR.
 ;;;
 ;;; Return the item that occurs immediately before CURSOR.
