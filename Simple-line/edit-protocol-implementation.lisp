@@ -94,6 +94,20 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Method on DELETE-ITEM-AT-POSITION.
+
+(defmethod cluffer:delete-item-at-position ((line line) position)
+  (let ((contents (contents line)))
+    (setf (contents line)
+	  (concatenate 'vector
+		       (subseq contents 0 position)
+		       (subseq contents (1+ position))))
+    (loop for cursor in (cursors line)
+	  do (when (> (cluffer:cursor-position cursor) position)
+	       (decf (cluffer:cursor-position cursor))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Methods on DELETE-ITEM.
 
 (defmethod cluffer:delete-item ((cursor attached-cursor))
