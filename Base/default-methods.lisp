@@ -105,7 +105,7 @@
 ;;;
 ;;; A :BEFORE method on DELETE-ITEM-AT-POSITION will check that
 ;;; POSITION is a valid position for deletion.
-(defmethod cluffer:delete-item ((cursor cluffer:cursor))
+(defmethod cluffer:erase-item ((cursor cluffer:cursor))
   (let ((line (cluffer:line cursor))
 	(position (cluffer:cursor-position cursor)))
     (cluffer:delete-item-at-position line (1- position))))
