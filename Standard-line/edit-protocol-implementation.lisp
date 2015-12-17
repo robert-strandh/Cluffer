@@ -163,6 +163,10 @@
   (change-class cursor 'detached-right-sticky-cursor)
   nil)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Methods on INSERT-ITEM-AT-POSITION.
+
 (defmethod cluffer:insert-item-at-position ((line closed-line) item position)
   (open-line line)
   (cluffer:insert-item-at-position line item position))
