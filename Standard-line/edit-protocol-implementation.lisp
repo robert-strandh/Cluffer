@@ -214,6 +214,10 @@
 ;;;
 ;;; Methods on DELETE-ITEM-AT-POSITION.
 
+(defmethod cluffer:delete-item-at-position ((line closed-line) position)
+  (open-line line)
+  (cluffer:delete-item-at-position line position))
+
 (defmethod cluffer:delete-item-at-position ((line open-line) position)
   (let ((contents (contents line)))
     (cond ((< position (gap-start line))
