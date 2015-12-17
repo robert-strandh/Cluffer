@@ -51,6 +51,26 @@ Move \textit{cursor} backward one position.  If \emph{cursor} is at
 the beginning of the line, the error condition
 \texttt{beginning-of-line} will be signaled.
 
+\Defgeneric {insert-item-at-position} {line item position}
+
+Insert \textit{item} into \textit{line} at \textit{position}.
+
+If \textit{position} is less than zero, a condition of type
+\texttt{beginning-of-line} is signaled.  If \textit{position} is
+greater than the number of items in \textit{line} (See the definition
+of the generic function \texttt{item-count}.), a condition of type
+\texttt{end-of-line} is signaled.
+
+After this operation completes, what happens to cursors located at
+\textit{position} before the operation depends on the class of the
+cursor and of \textit{line}.  The \texttt{standard-line}
+implementation provides two kinds of cursors, namely
+\emph{left-sticky} cursors and \emph{right-sticky} cursors.  For such
+an implementation, after this operation completes, any left-sticky
+cursor located at \textit{position} will be located before
+\textit{item}, and any right-sticky cursor located \textit{position}
+will be located after \textit{item}.
+
 \Defgeneric {insert-item} {cursor item}
 
 Insert an item at the location of \textit{cursor}.  After this
