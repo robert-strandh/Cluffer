@@ -3,123 +3,28 @@
 (defmacro check-cursor-attached (name arguments)
   (let ((args (substitute '(cursor cluffer:cursor) 'cursor arguments)))
     `(defmethod ,name :before ,args
-       (declare (ignore ,@(remove 'cursor arguments)))
+       (declare (ignore ,@(set-difference (remove 'cursor arguments)
+					  lambda-list-keywords)))
        (unless (cluffer:cursor-attached-p cursor)
 	 (error 'cluffer:cursor-detached)))))
 
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:cursor-position :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod (setf cluffer:cursor-position) :before (position (cursor cluffer:cursor))
-  (declare (ignore position))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:beginning-of-line-p :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:end-of-line-p :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:forward-item :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:backward-item :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:beginning-of-line :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:end-of-line :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:item-before-cursor :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:item-after-cursor :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:insert-item :before ((cursor cluffer:cursor) item)
-  (declare (ignore item))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:delete-item :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:erase-item :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:beginning-of-buffer-p :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:end-of-buffer-p :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:split-line :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-;;; This :BEFORE method checks whether the cursor is attached, and if
-;;; not, signals an error.
-(defmethod cluffer:join-line :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-(defmethod cluffer:buffer :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-(defmethod cluffer:line :before ((cursor cluffer:cursor))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
-
-(defmethod cluffer:items :before ((cursor cluffer:cursor) &key start end)
-  (declare (ignore start end))
-  (unless (cluffer:cursor-attached-p cursor)
-    (error 'cluffer:cursor-detached)))
+(check-cursor-attached cluffer:cursor-position (cursor))
+(check-cursor-attached (setf cluffer:cursor-position) (position cursor))
+(check-cursor-attached cluffer:beginning-of-line-p (cursor))
+(check-cursor-attached cluffer:end-of-line-p (cursor))
+(check-cursor-attached cluffer:forward-item (cursor))
+(check-cursor-attached cluffer:backward-item (cursor))
+(check-cursor-attached cluffer:beginning-of-line (cursor))
+(check-cursor-attached cluffer:end-of-line (cursor))
+(check-cursor-attached cluffer:item-before-cursor (cursor))
+(check-cursor-attached cluffer:item-after-cursor (cursor))
+(check-cursor-attached cluffer:insert-item (cursor item))
+(check-cursor-attached cluffer:delete-item (cursor))
+(check-cursor-attached cluffer:erase-item (cursor))
+(check-cursor-attached cluffer:beginning-of-buffer-p (cursor))
+(check-cursor-attached cluffer:end-of-buffer-p (cursor))
+(check-cursor-attached cluffer:split-line (cursor))
+(check-cursor-attached cluffer:join-line (cursor))
+(check-cursor-attached cluffer:buffer (cursor))
+(check-cursor-attached cluffer:line (cursor))
+(check-cursor-attached cluffer:items (cursor &key start end))
