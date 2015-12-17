@@ -51,6 +51,16 @@ Move \textit{cursor} backward one position.  If \emph{cursor} is at
 the beginning of the line, the error condition
 \texttt{beginning-of-line} will be signaled.
 
+\Defgeneric {item-at-position} {line position}
+
+Return the item located at \textit{position} in \textit{line}.
+
+If \textit{position} is less than zero, a condition of type
+\texttt{beginning-of-line} is signaled.  If \textit{position} is
+greater than or equal to the number of items in \textit{line} (See the
+definition of the generic function \texttt{item-count}.), a condition
+of type \texttt{end-of-line} is signaled.
+
 \Defgeneric {insert-item-at-position} {line item position}
 
 Insert \textit{item} into \textit{line} at \textit{position}.
