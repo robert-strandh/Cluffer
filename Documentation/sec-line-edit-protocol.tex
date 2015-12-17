@@ -29,6 +29,21 @@ attached.
 If \textit{cursor} is not currently attached to a line, a condition
 of type \texttt{cursor-detached} is signaled.
 
+\Defgeneric {(setf cursor-position)} {new-position cursor}
+
+Set the position of \textit{cursor} to \textit{new-position} in the line
+to which \textit{cursor} is attached.
+
+If \textit{cursor} is not currently attached to a line, a condition
+of type \texttt{cursor-detached} is signaled.
+
+If \textit{new-position} is negative, then a condition of type
+\texttt{beginning-of-line} is signaled.  If \textit{new-position} is
+strictly greater than the number of items in the line to which
+\texttt{cursor} is attached (See the generic function
+\texttt{item-count}), then a condition of type \texttt{end-of-line} is
+signaled.
+
 \Defgeneric {beginning-of-line-p} {cursor}
 
 Return \textit{true} if and only if \textit{cursor} is located at the
