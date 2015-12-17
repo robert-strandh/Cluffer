@@ -60,7 +60,17 @@ implemented differently for reasons of performance.
 \Defgeneric {end-of-line-p} {cursor}
 
 Return \textit{true} if and only if \textit{cursor} is located at the
-end of a line.
+end of the line to which \textit{cursor} is attached.
+
+If \textit{cursor} is not currently attached to a line, a condition
+of type \texttt{cursor-detached} is signaled.
+
+Calling this function is equivalent to calling the function
+\texttt{cursor-position} with \textit{cursor} as argument and
+comparing the return value to the number of items in the line to which
+\textit{cursor} is attached (See the generic function
+\texttt{item-count}).  However, this function might be implemented
+differently for reasons of performance.
 
 \Defgeneric {beginning-of-line} {cursor}
 
