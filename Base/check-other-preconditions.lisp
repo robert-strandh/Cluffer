@@ -5,21 +5,21 @@
   (when (minusp position)
     (error 'cluffer:beginning-of-line))
   (when (>= position (cluffer:item-count line))
-    (error 'cluffer:end-of-buffer)))
+    (error 'cluffer:end-of-line)))
 
 (defmethod cluffer:insert-item-at-position :before
     ((line cluffer:line) item position)
   (when (minusp position)
     (error 'cluffer:beginning-of-line))
   (when (> position (cluffer:item-count line))
-    (error 'cluffer:end-of-buffer)))
+    (error 'cluffer:end-of-line)))
 
 (defmethod cluffer:delete-item-at-position :before
     ((line cluffer:line) position)
   (when (minusp position)
     (error 'cluffer:beginning-of-line))
   (when (>= position (cluffer:item-count line))
-    (error 'cluffer:end-of-buffer)))
+    (error 'cluffer:end-of-line)))
 
 (defmethod cluffer:find-line :before ((buffer cluffer:buffer) line-number)
   (when (minusp line-number)
