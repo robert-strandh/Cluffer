@@ -92,10 +92,6 @@
 			    (typep cursor 'right-sticky-mixin)))
 	       (incf (cluffer:cursor-position cursor))))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Operations on cursors.
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on DELETE-ITEM.
