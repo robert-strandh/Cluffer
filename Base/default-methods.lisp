@@ -80,9 +80,21 @@
 ;;; A :BEFORE method has already checked that the cursor is attached,
 ;;; so there is no need to do that again.
 ;;;
-;;; A :BEFORE method on ITEM-AT-POSITION will check that POSITION is a
-;;; valid item position
+;;; A :BEFORE method on ITEM-AT-POSITION will check that (1- POSITION)
+;;; is a valid item position.
 (defmethod cluffer:item-before-cursor ((cursor cluffer:cursor))
+  (let ((line (cluffer:line cursor))
+	(position (cluffer:cursor-position cursor)))
+    (cluffer:item-at-position line (1- position))))
+
+;;; Default method on ITEM-AFTER-CURSOR.
+;;;
+;;; A :BEFORE method has already checked that the cursor is attached,
+;;; so there is no need to do that again.
+;;;
+;;; A :BEFORE method on ITEM-AT-POSITION will check that POSITION is a
+;;; valid item position.
+(defmethod cluffer:item-after-cursor ((cursor cluffer:cursor))
   (let ((line (cluffer:line cursor))
 	(position (cluffer:cursor-position cursor)))
     (cluffer:item-at-position line position)))
