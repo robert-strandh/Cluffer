@@ -280,52 +280,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on ITEM-BEFORE-CURSOR.
-
-;;; No need to open the line.
-(defmethod cluffer:item-before-cursor
-    ((cursor closed-cursor-mixin))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
-  (aref (contents (cluffer:line cursor))
-	(1- (cluffer:cursor-position cursor))))
-
-(defmethod cluffer:item-before-cursor
-    ((cursor open-cursor-mixin))
-  (when (cluffer:beginning-of-line-p cursor)
-    (error 'cluffer:beginning-of-line))
-  (let ((pos (1- (cluffer:cursor-position cursor)))
-	(line (cluffer:line cursor)))
-    (aref (contents line)
-	  (if (< pos (gap-start line))
-	      pos
-	      (+ pos (- (gap-end line) (gap-start line)))))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Methods on ITEM-AFTER-CURSOR.
-
-;;; No need to open the line.
-(defmethod cluffer:item-after-cursor
-    ((cursor closed-cursor-mixin))
-  (when (cluffer:end-of-line-p cursor)
-    (error 'cluffer:end-of-line))
-  (aref (contents (cluffer:line cursor))
-	(cluffer:cursor-position cursor)))
-
-(defmethod cluffer:item-after-cursor
-    ((cursor open-cursor-mixin))
-  (when (cluffer:end-of-line-p cursor)
-    (error 'cluffer:end-of-line))
-  (let ((pos (cluffer:cursor-position cursor))
-	(line (cluffer:line cursor)))
-    (aref (contents line)
-	  (if (< pos (gap-start line))
-	      pos
-	      (+ pos (- (gap-end line) (gap-start line)))))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on CLUFFER-INTERNAL:SPLIT-LINE.
 
 (defmethod cluffer-internal:split-line ((cursor closed-cursor-mixin))
