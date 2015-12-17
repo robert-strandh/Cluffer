@@ -75,6 +75,18 @@
 (defmethod cluffer:items ((cursor cluffer:cursor) &key (start 0) end)
   (cluffer:items (cluffer:line cursor) :start start :end end))
 
+;;; Default method on ITEM-BEFORE-CURSOR.
+;;;
+;;; A :BEFORE method has already checked that the cursor is attached,
+;;; so there is no need to do that again.
+;;;
+;;; A :BEFORE method on ITEM-AT-POSITION will check that POSITION is a
+;;; valid item position
+(defmethod cluffer:item-before-cursor ((cursor cluffer:cursor))
+  (let ((line (cluffer:line cursor))
+	(position (cluffer:cursor-position cursor)))
+    (cluffer:item-at-position line position)))
+
 ;;; Default method on INSERT-ITEM.
 ;;;
 ;;; A :BEFORE method has already checked that the cursor is attached,
