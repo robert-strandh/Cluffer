@@ -1,5 +1,12 @@
 (cl:in-package #:cluffer-base)
 
+(defmacro check-cursor-attached (name arguments)
+  (let ((args (substitute '(cursor cluffer:cursor) 'cursor arguments)))
+    `(defmethod ,name :before ,args
+       (declare (ignore ,@(remove 'cursor arguments)))
+       (unless (cluffer:cursor-attached-p cursor)
+	 (error 'cluffer:cursor-detached)))))
+
 ;;; This :BEFORE method checks whether the cursor is attached, and if
 ;;; not, signals an error.
 (defmethod cluffer:cursor-position :before ((cursor cluffer:cursor))
