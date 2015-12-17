@@ -51,8 +51,7 @@ beginning of the line to which \textit{cursor} is attached.
 
 Calling this function is equivalent to calling the function
 \texttt{cursor-position} with \textit{cursor} as argument and
-comparing the return value to $0$.  However, this function might be
-implemented differently for reasons of performance.
+comparing the return value to $0$.  \howeverperformance{}
 
 \Defgeneric {end-of-line-p} {cursor}
 
@@ -65,8 +64,7 @@ Calling this function is equivalent to calling the function
 \texttt{cursor-position} with \textit{cursor} as argument and
 comparing the return value to the number of items in the line to which
 \textit{cursor} is attached (See the generic function
-\texttt{item-count}).  However, this function might be implemented
-differently for reasons of performance.
+\texttt{item-count}).  \howeverperformance{}
 
 \Defgeneric {beginning-of-line} {cursor}
 
@@ -77,8 +75,7 @@ is attached.
 
 Calling this function is equivalent to calling the function
 \texttt{(setf cursor-position)} with $0$ and \textit{cursor} as
-arguments.  However, this function might be implemented differently
-for reasons of performance.
+arguments.  \howeverperformance{}
 
 \Defgeneric {end-of-line} {cursor}
 
@@ -141,8 +138,7 @@ of type \texttt{end-of-line} is signaled.
 Calling this function is equivalent to calling
 \texttt{insert-item-at-position} with the line to which
 \textit{cursor} is attached, \textit{item}, and the position of
-\textit{cursor}.  However, this function might be implemented
-differently for reasons of performance.
+\textit{cursor}.  \howeverperformance{}
 
 \ifdetached{}
 
@@ -153,8 +149,7 @@ Delete the item immediately after \emph{cursor}.
 Calling this function is equivalent to calling
 \texttt{delete-item-at-position} with the line to which
 \textit{cursor} is attached and the position of \textit{cursor}.
-However, this function might be implemented differently for reasons of
-performance.
+\howeverperformance{}
 
 \ifdetached{}
 
@@ -165,8 +160,7 @@ Delete the item immediately before \emph{cursor}.
 Calling this function is equivalent to calling
 \texttt{delete-item-at-position} with the line to which
 \textit{cursor} is attached and the position of \textit{cursor} minus
-one.  However, this function might be implemented differently for
-reasons of performance.
+one.  \howeverperformance{}
 
 \ifdetached{}
 
