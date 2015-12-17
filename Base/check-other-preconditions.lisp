@@ -1,5 +1,12 @@
 (cl:in-package #:cluffer-base)
 
+(defmethod cluffer:item-at-position :before
+    ((line cluffer:line) item position)
+  (when (minusp position)
+    (error 'cluffer:beginning-of-line))
+  (when (>= position (cluffer:item-count line))
+    (error 'cluffer:end-of-buffer)))
+
 (defmethod cluffer:insert-item-at-position :before
     ((line cluffer:line) item position)
   (when (minusp position)
