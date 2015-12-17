@@ -21,6 +21,14 @@ which the new cursor is to be attached.
 
 \subsection{Operations on lines and cursors}
 
+\Defgeneric {cursor-position} {cursor}
+
+Return the position of \textit{cursor} in the line to which it is
+attached.
+
+If \textit{cursor} is not currently attached to a line, a condition
+of type \texttt{cursor-detached} is signaled.
+
 \Defgeneric {beginning-of-line-p} {cursor}
 
 Return \textit{true} if and only if \textit{cursor} is located at the
@@ -154,11 +162,6 @@ Attach \textit{cursor} to \textit{line} at \textit{position}.  If
 items in \textit{line}, the error condition \texttt{end-of-line} is
 signaled.  If \textit{cursor} is already attached to a line, the error
 condition \texttt{cursor-attached} will be signaled.
-
-\Defgeneric {cursor-position} {cursor}
-
-Return the position of \textit{cursor} as two values: the line number
-and the item number within the line. 
 
 \Defgeneric {item-count} {entity}
 
