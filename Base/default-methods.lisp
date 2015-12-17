@@ -69,6 +69,12 @@
 (defmethod cluffer:items ((cursor cluffer:cursor) &key (start 0) end)
   (cluffer:items (cluffer:line cursor) :start start :end end))
 
+;;; Default method on INSERT-ITEM.
+(defmethod cluffer:insert-item ((cursor cluffer:cursor) item)
+  (let ((line (cluffer:line cursor))
+	(position (cluffer:cursor-position cursor)))
+    (cluffer:insert-item-at-position line item position)))
+
 ;;; Default method on NOTIFY-ITEM-COUNT-CHANGED.  This method does
 ;;; nothing, and is used when a line is not attached to a buffer.
 (defmethod cluffer-internal:notify-item-count-changed ((doc null) delta)
