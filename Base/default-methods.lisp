@@ -86,6 +86,18 @@
 	(position (cluffer:cursor-position cursor)))
     (cluffer:insert-item-at-position line item position)))
 
+;;; Default method on DELETE-ITEM.
+;;;
+;;; A :BEFORE method has already checked that the cursor is attached,
+;;; so there is no need to do that again.
+;;;
+;;; A :BEFORE method on DELETE-ITEM-AT-POSITION will check that
+;;; POSITION is a valid position for deletion.
+(defmethod cluffer:delete-item ((cursor cluffer:cursor))
+  (let ((line (cluffer:line cursor))
+	(position (cluffer:cursor-position cursor)))
+    (cluffer:delete-item-at-position line position)))
+
 ;;; Default method on NOTIFY-ITEM-COUNT-CHANGED.  This method does
 ;;; nothing, and is used when a line is not attached to a buffer.
 (defmethod cluffer-internal:notify-item-count-changed ((doc null) delta)
