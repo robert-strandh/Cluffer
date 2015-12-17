@@ -185,6 +185,24 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Generic function INSERT-ITEM-AT-POSITION.
+;;;
+;;; Insert ITEM into the LINE at POSITION.
+;;;
+;;; How the positions of cursors located at POSITION are affected by
+;;; this operation is defined by the exact type of the line and the
+;;; exact types of these cursors.
+;;;
+;;; The STANDARD-LINE implementation supplies two different cursor
+;;; types, namely LEFT-STICKY and RIGHT-STICKY cursors.  each
+;;; LEFT-STICKY cursor at POSITION will maintain its position, whereas
+;;; each RIGHT-STICKY cursor at POSITION will have its position
+;;; incremented as a result of this operation.
+
+(defgeneric insert-item-at-position (line item position))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Generic function INSERT-ITEM.
 ;;;
 ;;; Insert ITEM into the line to which CURSOR is attached at the
