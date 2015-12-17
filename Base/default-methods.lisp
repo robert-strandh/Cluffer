@@ -66,6 +66,9 @@
   (cluffer:delete-item cursor))
 
 ;;; Default method on ITEMS specialized to CURSOR
+;;;
+;;; A :BEFORE method has already checked that the cursor is attached,
+;;; so there is no need to do that again.
 (defmethod cluffer:items ((cursor cluffer:cursor) &key (start 0) end)
   (cluffer:items (cluffer:line cursor) :start start :end end))
 
