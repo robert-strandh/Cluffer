@@ -266,6 +266,15 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Method on ITEM-AT-POSITION.
+
+;;; No need to open the line.
+(defmethod cluffer-item-at-position ((line closed-line) position)
+  (aref (contents (cluffer:line cursor))
+	(cluffer:cursor-position cursor)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Methods on ITEM-BEFORE-CURSOR.
 
 ;;; No need to open the line.
