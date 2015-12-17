@@ -1,7 +1,7 @@
 (cl:in-package #:cluffer-base)
 
 (defmethod cluffer:item-at-position :before
-    ((line cluffer:line) item position)
+    ((line cluffer:line) position)
   (when (minusp position)
     (error 'cluffer:beginning-of-line))
   (when (>= position (cluffer:item-count line))
