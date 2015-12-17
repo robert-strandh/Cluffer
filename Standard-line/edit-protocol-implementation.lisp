@@ -170,6 +170,46 @@
   (change-class cursor 'detached-right-sticky-cursor)
   nil)
 
+(defmethod cluffer:insert-item-at-position ((line closed-line) item position)
+  (open-line line)
+  (cluffer:insert-item-at-position line item position))
+
+(defmethod cluffer:insert-item-at-position ((line open-line) item position)
+  (let ((contents (contents line)))
+    (cond ((= (gap-start line) (gap-end line))
+	   (let* ((new-length (* 2 (length contents)))
+		  (diff (- new-length (length contents)))
+		  (new-contents (make-array new-length)))
+	     (replace new-contents contents
+		      :start2 0 :start1 0 :end2 position)
+	     (replace new-contents contents
+		      :start2 position :start1 (+ position diff))
+	     (setf (gap-start line) position)
+	     (setf (gap-end line) (+ position diff))
+	     (setf (contents line) new-contents)))
+	  ((< position (gap-start line))
+	   (decf (gap-end line) (- (gap-start line) position))
+	   (replace contents contents
+		    :start2 position :end2 (gap-start line)
+		    :start1 (gap-end line))
+	   (setf (gap-start line) position))
+	  ((> position (gap-start line))
+	   (replace contents contents
+		    :start2 (gap-end line)
+		    :start1 (gap-start line) :end1 position)
+	   (incf (gap-end line) (- position (gap-start line)))
+	   (setf (gap-start line) position))
+	  (t
+	   nil))
+    (setf (aref (contents line) (gap-start line)) item)
+    (incf (gap-start line))
+    (loop for cursor in (cursors line)
+	  do (when (or (> (cluffer:cursor-position cursor) position)
+		       (and (= (cluffer:cursor-position cursor) position)
+			    (typep cursor 'right-sticky-mixin)))
+	       (incf (cluffer:cursor-position cursor)))))
+  nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Operations on cursors.
