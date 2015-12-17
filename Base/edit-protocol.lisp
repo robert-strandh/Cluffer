@@ -187,7 +187,7 @@
 ;;;
 ;;; Generic function INSERT-ITEM-AT-POSITION.
 ;;;
-;;; Insert ITEM into the LINE at POSITION.
+;;; Insert ITEM into LINE at POSITION.
 ;;;
 ;;; How the positions of cursors located at POSITION are affected by
 ;;; this operation is defined by the exact type of the line and the
@@ -200,6 +200,14 @@
 ;;; incremented as a result of this operation.
 
 (defgeneric insert-item-at-position (line item position))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function DELETE-ITEM-AT-POSITION.
+;;;
+;;; Delete the item at POSITION in LINE.
+
+(defgeneric delete-item-at-position (line position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
