@@ -79,7 +79,16 @@ arguments.  \howeverperformance{}
 
 \Defgeneric {end-of-line} {cursor}
 
-Position \textit{cursor} at the very end of the line.
+Position \textit{cursor} at the very end of the line to which it
+is attached.
+
+\ifdetached{}
+
+Calling this function is equivalent to calling the function
+\texttt{(setf cursor-position)} with the number of items in the line
+to which \textit{cursor} is attached (See generic function
+\texttt{item-count}) and \textit{cursor} as arguments.
+\howeverperformance{}
 
 \Defgeneric {forward-item} {cursor}
 
