@@ -210,6 +210,45 @@
 	       (incf (cluffer:cursor-position cursor)))))
   nil)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Methods on DELETE-ITEM-AT-POSITION.
+
+(defmethod cluffer:delete-item-at-position ((line open-line) position)
+  (let ((contents (contents line)))
+    (cond ((< position (gap-start line))
+	   (decf (gap-end line) (- (gap-start line) position))
+	   (replace contents contents
+		    :start2 position :end2 (gap-start line)
+		    :start1 (gap-end line))
+	   (setf (gap-start line) position))
+	  ((> position (gap-start line))
+	   (replace contents contents
+		    :start2 (gap-end line)
+		    :start1 (gap-start line) :end1 position)
+	   (incf (gap-end line) (- position (gap-start line)))
+	   (setf (gap-start line) position))
+	  (t
+	   nil))
+    (setf (aref contents (gap-end line)) 0)  ; for the GC
+    (incf (gap-end line))
+    (when (and (> (length contents) 32)
+	       (> (- (gap-end line) (gap-start line))
+		  (* 3/4 (length contents))))
+      (let* ((new-length (floor (length contents) 2))
+	     (diff (- (length contents) new-length))
+	     (new-contents (make-array new-length)))
+	(replace new-contents contents
+		 :start2 0 :start1 0 :end2 (gap-start line))
+	(replace new-contents contents
+		 :start2 (gap-end line) :start1 (- (gap-end line) diff))
+	(decf (gap-end line) diff)
+	(setf (contents line) new-contents)))
+    (loop for cursor in (cursors line)
+	  do (when (> (cluffer:cursor-position cursor) position)
+	       (decf (cluffer:cursor-position cursor)))))
+  nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Operations on cursors.
