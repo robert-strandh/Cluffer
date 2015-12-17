@@ -11,4 +11,5 @@
    (:file "conditions")
    (:file "condition-reporters-english")
    (:file "check-cursor-attached")
+   (:file "check-other-preconditions")
    (:file "methods")))
