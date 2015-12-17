@@ -26,16 +26,14 @@ which the new cursor is to be attached.
 Return the position of \textit{cursor} in the line to which it is
 attached.
 
-If \textit{cursor} is not currently attached to a line, a condition
-of type \texttt{cursor-detached} is signaled.
+\ifdetached{}
 
 \Defgeneric {(setf cursor-position)} {new-position cursor}
 
 Set the position of \textit{cursor} to \textit{new-position} in the line
 to which \textit{cursor} is attached.
 
-If \textit{cursor} is not currently attached to a line, a condition
-of type \texttt{cursor-detached} is signaled.
+\ifdetached{}
 
 If \textit{new-position} is negative, then a condition of type
 \texttt{beginning-of-line} is signaled.  If \textit{new-position} is
@@ -49,8 +47,7 @@ signaled.
 Return \textit{true} if and only if \textit{cursor} is located at the
 beginning of the line to which \textit{cursor} is attached.
 
-If \textit{cursor} is not currently attached to a line, a condition
-of type \texttt{cursor-detached} is signaled.
+\ifdetached{}
 
 Calling this function is equivalent to calling the function
 \texttt{cursor-position} with \textit{cursor} as argument and
@@ -62,8 +59,7 @@ implemented differently for reasons of performance.
 Return \textit{true} if and only if \textit{cursor} is located at the
 end of the line to which \textit{cursor} is attached.
 
-If \textit{cursor} is not currently attached to a line, a condition
-of type \texttt{cursor-detached} is signaled.
+\ifdetached{}
 
 Calling this function is equivalent to calling the function
 \texttt{cursor-position} with \textit{cursor} as argument and
@@ -77,8 +73,7 @@ differently for reasons of performance.
 Position \textit{cursor} at the very beginning of the line to which it
 is attached.
 
-If \textit{cursor} is not currently attached to a line, a condition
-of type \texttt{cursor-detached} is signaled.
+\ifdetached{}
 
 Calling this function is equivalent to calling the function
 \texttt{(setf cursor-position)} with $0$ and \textit{cursor} as
@@ -149,8 +144,7 @@ Calling this function is equivalent to calling
 \textit{cursor}.  However, this function might be implemented
 differently for reasons of performance.
 
-If \textit{cursor} is not currently attached to a line, a condition
-of type \texttt{cursor-detached} is signaled.
+\ifdetached{}
 
 \Defgeneric {delete-item} {cursor}
 
@@ -162,8 +156,7 @@ Calling this function is equivalent to calling
 However, this function might be implemented differently for reasons of
 performance.
 
-If \textit{cursor} is not currently attached to a line, a condition
-of type \texttt{cursor-detached} is signaled.
+\ifdetached{}
 
 \Defgeneric {erase-item} {cursor}
 
@@ -175,8 +168,7 @@ Calling this function is equivalent to calling
 one.  However, this function might be implemented differently for
 reasons of performance.
 
-If \textit{cursor} is not currently attached to a line, a condition
-of type \texttt{cursor-detached} is signaled.
+\ifdetached{}
 
 \Defgeneric {item-after-cursor} {cursor}
 
