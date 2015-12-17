@@ -98,25 +98,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on INSERT-ITEM.
-
-(defmethod cluffer:insert-item ((cursor attached-cursor) item)
-  (let* ((line (cluffer:line cursor))
-	 (contents (contents line))
-	 (position (cluffer:cursor-position cursor)))
-    (setf (contents line)
-	  (concatenate 'vector
-		       (subseq contents 0 position)
-		       (vector item)
-		       (subseq contents position)))
-    (loop for cursor in (cursors line)
-	  do (when (or (> (cluffer:cursor-position cursor) position)
-		       (and (= (cluffer:cursor-position cursor) position)
-			    (typep cursor 'right-sticky-mixin)))
-	       (incf (cluffer:cursor-position cursor))))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Methods on DELETE-ITEM.
 
 (defmethod cluffer:delete-item ((cursor attached-cursor))
