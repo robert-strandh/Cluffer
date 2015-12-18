@@ -1,5 +1,11 @@
 (cl:in-package #:cluffer-base)
 
+(defmethod (setf cluffer:cursor-position) :before (new-position cursor)
+  (when (minusp new-position)
+    (error 'cluffer:beginning-of-line))
+  (when (> new-position (cluffer:item-count (cluffer:line cursor)))
+    (error 'cluffer:end-of-line)))
+
 (defmethod cluffer:item-at-position :before
     ((line cluffer:line) position)
   (when (minusp position)
