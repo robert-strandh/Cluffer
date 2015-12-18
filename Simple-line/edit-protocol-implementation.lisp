@@ -4,11 +4,8 @@
 ;;;
 ;;; Methods on CURSOR-ATTACHED-P.
 
-(defmethod cluffer:cursor-attached-p ((cursor detached-cursor))
-  nil)
-
-(defmethod cluffer:cursor-attached-p ((cursor attached-cursor))
-  t)
+(defmethod cluffer:cursor-attached-p ((cursor cursor))
+  (not (null (line cursor))))
 
 (defmethod cluffer:item-count ((line line))
   (length (contents line)))
@@ -29,51 +26,20 @@
 ;;;
 ;;; Detaching and attaching a cursor.
 
-(defmethod cluffer:attach-cursor ((cursor attached-cursor)
+(defmethod cluffer:attach-cursor ((cursor cursor)
 				  line
 				  &optional
-				    position)
+				    (position 0))
   (declare (ignore line position))
-  (error 'cluffer:cursor-attached))
-
-(defmethod cluffer:attach-cursor ((cursor detached-left-sticky-cursor)
-				  (line line)
-				  &optional
-				    (position 0))
-  (when (> position (cluffer:item-count line))
-    (error 'cluffer:end-of-line))
   (push cursor (cursors line))
-  (change-class cursor 'attached-left-sticky-cursor
-		:line line
-		:cursor-position position)
+  (setf (line cursor) line)
+  (setf (cluffer:cursor-position cursor) position)
   nil)
 
-(defmethod cluffer:attach-cursor ((cursor detached-right-sticky-cursor)
-				  (line line)
-				  &optional
-				    (position 0))
-  (when (> position (cluffer:item-count line))
-    (error 'cluffer:end-of-line))
-  (push cursor (cursors line))
-  (change-class cursor 'attached-right-sticky-cursor
-		:line line
-		:cursor-position position)
-  nil)
-
-(defmethod cluffer:detach-cursor ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-(defmethod cluffer:detach-cursor ((cursor left-sticky-mixin))
+(defmethod cluffer:detach-cursor ((cursor cursor))
   (setf (cursors (cluffer:line cursor))
 	(remove cursor (cursors (cluffer:line cursor))))
-  (change-class cursor 'detached-left-sticky-cursor)
-  nil)
-
-(defmethod cluffer:detach-cursor ((cursor right-sticky-mixin))
-  (setf (cursors (cluffer:line cursor))
-	(remove cursor (cursors (cluffer:line cursor))))
-  (change-class cursor 'detached-right-sticky-cursor)
-  nil)
+  (setf (cluffer:line cursor) nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -117,7 +83,7 @@
 ;;;
 ;;; Methods on CLUFFER-INTERNAL:SPLIT-LINE.
 
-(defmethod cluffer-internal:split-line ((cursor attached-cursor))
+(defmethod cluffer-internal:split-line ((cursor cursor))
   (let* ((pos (cluffer:cursor-position cursor))
 	 (line (cluffer:line cursor))
 	 (contents (contents line))
