@@ -32,7 +32,7 @@
 				    (position 0))
   (declare (ignore line position))
   (push cursor (cursors line))
-  (setf (line cursor) line)
+  (setf (cluffer:line cursor) line)
   (setf (cluffer:cursor-position cursor) position)
   nil)
 
