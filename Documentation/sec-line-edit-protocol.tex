@@ -92,9 +92,12 @@ to which \textit{cursor} is attached (See generic function
 
 \Defgeneric {forward-item} {cursor}
 
-Move \textit{cursor} forward one position.  If \emph{cursor} is at the
-end of the line, the error condition \texttt{end-of-line} will be
-signaled.
+Move \textit{cursor} forward one position.
+
+\ifdetached{}
+
+Calling this function is equivalent to incrementing the
+\texttt{cursor-position} of \textit{cursor}.  \howeverperformance{}
 
 \Defgeneric {backward-item} {cursor}
 
