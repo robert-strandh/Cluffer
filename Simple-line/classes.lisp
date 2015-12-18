@@ -12,7 +12,11 @@
 	      :accessor cursors)))
 
 (defclass cursor (cluffer:cursor)
-  ((%line :initform nil :initarg :line :accessor cluffer:line)
+  ((%line
+    :initform nil
+    :initarg :line
+    :accessor line
+    :accessor cluffer:line)
    (%cursor-position
     :initarg :cursor-position
     :accessor cluffer:cursor-position)))
