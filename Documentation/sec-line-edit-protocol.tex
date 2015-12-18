@@ -101,9 +101,12 @@ Calling this function is equivalent to incrementing the
 
 \Defgeneric {backward-item} {cursor}
 
-Move \textit{cursor} backward one position.  If \emph{cursor} is at
-the beginning of the line, the error condition
-\texttt{beginning-of-line} will be signaled.
+Move \textit{cursor} backward one position.
+
+\ifdetached{}
+
+Calling this function is equivalent to decrementing the
+\texttt{cursor-position} of \textit{cursor}.  \howeverperformance{}
 
 \Defgeneric {item-at-position} {line position}
 
