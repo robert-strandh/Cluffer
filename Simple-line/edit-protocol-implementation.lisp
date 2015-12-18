@@ -30,7 +30,6 @@
 				  line
 				  &optional
 				    (position 0))
-  (declare (ignore line position))
   (push cursor (cursors line))
   (setf (cluffer:line cursor) line)
   (setf (cluffer:cursor-position cursor) position)
@@ -55,7 +54,7 @@
     (loop for cursor in (cursors line)
 	  do (when (or (> (cluffer:cursor-position cursor) position)
 		       (and (= (cluffer:cursor-position cursor) position)
-			    (typep cursor 'right-sticky-mixin)))
+			    (typep cursor 'right-sticky-cursor)))
 	       (incf (cluffer:cursor-position cursor))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -95,9 +94,9 @@
 	  (subseq (contents line) 0 pos))
     (setf (cursors new-line)
 	  (loop for cursor in (cursors line)
-		when (or (and (typep cursor 'right-sticky-mixin)
+		when (or (and (typep cursor 'right-sticky-cursor)
 			      (>= (cluffer:cursor-position cursor) pos))
-			 (and (typep cursor 'left-sticky-mixin)
+			 (and (typep cursor 'left-sticky-cursor)
 			      (> (cluffer:cursor-position cursor) pos)))
 		  collect cursor))
     (loop for cursor in (cursors new-line)
