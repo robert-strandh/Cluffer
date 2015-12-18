@@ -4,5 +4,5 @@
   (:use #:common-lisp)
   (:export
    #:line
-   #:detached-left-sticky-cursor
-   #:detached-right-sticky-cursor))
+   #:left-sticky-cursor
+   #:right-sticky-cursor))
