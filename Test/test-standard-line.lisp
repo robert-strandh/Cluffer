@@ -8,9 +8,9 @@
   (let ((linea (make-instance 'cluffer-simple-line:line))
 	(lineb (make-instance 'cluffer-standard-line:closed-line))
 	(cursorla (make-instance
-		      'cluffer-simple-line:detached-left-sticky-cursor))
+		      'cluffer-simple-line:left-sticky-cursor))
 	(cursorra (make-instance
-		      'cluffer-simple-line:detached-right-sticky-cursor))
+		      'cluffer-simple-line:right-sticky-cursor))
 	(cursorlb (make-instance
 		      'cluffer-standard-line:detached-left-sticky-cursor))
 	(cursorrb (make-instance
@@ -47,9 +47,9 @@
   (let ((linea (make-instance 'cluffer-simple-line:line))
 	(lineb (make-instance 'cluffer-standard-line:closed-line))
 	(cursorla (make-instance
-		      'cluffer-simple-line:detached-left-sticky-cursor))
+		      'cluffer-simple-line:left-sticky-cursor))
 	(cursorra (make-instance
-		      'cluffer-simple-line:detached-right-sticky-cursor))
+		      'cluffer-simple-line:right-sticky-cursor))
 	(cursorlb (make-instance
 		      'cluffer-standard-line:detached-left-sticky-cursor))
 	(cursorrb (make-instance
