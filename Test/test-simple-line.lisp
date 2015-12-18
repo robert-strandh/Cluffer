@@ -6,14 +6,14 @@
   ;;; Run the test for a left-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-left-sticky-cursor)))
+		    'cluffer-simple-line:left-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (typep (nth-value 1 (ignore-errors (cluffer:backward-item cursor)))
 		   'cluffer:beginning-of-line)))
   ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-right-sticky-cursor)))
+		    'cluffer-simple-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (typep (nth-value 1 (ignore-errors (cluffer:backward-item cursor)))
 		   'cluffer:beginning-of-line))))
@@ -24,14 +24,14 @@
   ;;; Run the test for a left-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-left-sticky-cursor)))
+		    'cluffer-simple-line:left-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (typep (nth-value 1 (ignore-errors (cluffer:forward-item cursor)))
 		   'cluffer:end-of-line)))
   ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-right-sticky-cursor)))
+		    'cluffer-simple-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (typep (nth-value 1 (ignore-errors (cluffer:forward-item cursor)))
 		   'cluffer:end-of-line))))
@@ -41,13 +41,13 @@
   ;;; Run the test for a left-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-left-sticky-cursor)))
+		    'cluffer-simple-line:left-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (zerop (cluffer:cursor-position cursor))))
   ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-right-sticky-cursor)))
+		    'cluffer-simple-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (zerop (cluffer:cursor-position cursor)))))
 
@@ -57,13 +57,13 @@
   ;;; Run the test for a left-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-left-sticky-cursor)))
+		    'cluffer-simple-line:left-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (cluffer:beginning-of-line-p cursor)))
   ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-right-sticky-cursor)))
+		    'cluffer-simple-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (cluffer:beginning-of-line-p cursor))))
 
@@ -73,13 +73,13 @@
   ;;; Run the test for a left-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-left-sticky-cursor)))
+		    'cluffer-simple-line:left-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (cluffer:end-of-line-p cursor)))
   ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-right-sticky-cursor)))
+		    'cluffer-simple-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (cluffer:end-of-line-p cursor))))
 
@@ -94,14 +94,14 @@
   ;;; Run the test for a left-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-left-sticky-cursor)))
+		    'cluffer-simple-line:left-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (typep (nth-value 1 (ignore-errors (cluffer:item-before-cursor cursor)))
 		   'cluffer:beginning-of-line)))
   ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-right-sticky-cursor)))
+		    'cluffer-simple-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (typep (nth-value 1 (ignore-errors (cluffer:item-before-cursor cursor)))
 		   'cluffer:beginning-of-line))))
@@ -112,14 +112,14 @@
   ;;; Run the test for a left-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-left-sticky-cursor)))
+		    'cluffer-simple-line:left-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (typep (nth-value 1 (ignore-errors (cluffer:item-after-cursor cursor)))
 		   'cluffer:end-of-line)))
   ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-right-sticky-cursor)))
+		    'cluffer-simple-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (typep (nth-value 1 (ignore-errors (cluffer:item-after-cursor cursor)))
 		   'cluffer:end-of-line))))
@@ -130,22 +130,22 @@
   ;;; Run the test for a left-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-left-sticky-cursor)))
+		    'cluffer-simple-line:left-sticky-cursor)))
     (assert (not (cluffer:cursor-attached-p cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (cluffer:cursor-attached-p cursor)))
   ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
-		    'cluffer-simple-line:detached-right-sticky-cursor)))
+		    'cluffer-simple-line:right-sticky-cursor)))
     (assert (not (cluffer:cursor-attached-p cursor)))
     (cluffer:attach-cursor cursor line)
     (assert (cluffer:cursor-attached-p cursor))))
 
 (defun test-simple-line-10 ()
   (let ((line (make-instance 'cluffer-simple-line:line))
-	(lc (make-instance 'cluffer-simple-line:detached-left-sticky-cursor))
-	(rc (make-instance 'cluffer-simple-line:detached-right-sticky-cursor)))
+	(lc (make-instance 'cluffer-simple-line:left-sticky-cursor))
+	(rc (make-instance 'cluffer-simple-line:right-sticky-cursor)))
     (cluffer:attach-cursor lc line)
     (cluffer:attach-cursor rc line)
     (cluffer:insert-item lc 234)
