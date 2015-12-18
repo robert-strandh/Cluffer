@@ -11,26 +11,14 @@
 	      :initform '()
 	      :accessor cursors)))
 
-(defclass attached-cursor (cluffer:cursor)
-  ((%line :initarg :line :accessor cluffer:line)
+(defclass cursor (cluffer:cursor)
+  ((%line :initform nil :initarg :line :accessor cluffer:line)
    (%cursor-position
     :initarg :cursor-position
     :accessor cluffer:cursor-position)))
 
-(defclass detached-cursor (cluffer:cursor) ())
-
-(defclass left-sticky-mixin () ())
-
-(defclass right-sticky-mixin () ())
-
-(defclass detached-left-sticky-cursor (detached-cursor left-sticky-mixin)
+(defclass left-sticky-cursor (cursor)
   ())
 
-(defclass detached-right-sticky-cursor (detached-cursor right-sticky-mixin)
-  ())
-
-(defclass attached-left-sticky-cursor (attached-cursor left-sticky-mixin)
-  ())
-
-(defclass attached-right-sticky-cursor (attached-cursor right-sticky-mixin)
+(defclass right-sticky-cursor (cursor)
   ())
