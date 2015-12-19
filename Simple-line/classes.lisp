@@ -16,7 +16,7 @@
     :initform nil
     :initarg :line
     :accessor line
-    :accessor cluffer:line)
+    :reader cluffer:line)
    (%cursor-position
     :initarg :cursor-position
     :accessor cluffer:cursor-position)))
