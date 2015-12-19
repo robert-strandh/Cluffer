@@ -223,6 +223,9 @@ If \textit{entity} is a line, then return the number of items in that
 line.  If \textit{entity} is a cursor, return the number of items in
 the line in which \textit{cursor} is located.
 
+If \textit{entity} is a cursor that is not currently attached to a
+line, a condition of type \texttt{cursor-detached} is signaled.
+
 Note: the argument \textit{entity} can also be a buffer, in which case
 the total number of items is returned.
 \seesec{sec-buffer-edit-protocol}
