@@ -332,6 +332,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Generic function SPLIT-LINE-AT-POSITION.
+
+(defgeneric split-line-at-position (line position))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Generic function SPLIT-LINE.
 
 (defgeneric split-line (cursor))
