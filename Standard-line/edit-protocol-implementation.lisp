@@ -31,21 +31,12 @@
       (contents line)
       (subseq (contents line) start end)))
 
-(defgeneric close-cursor (cursor))
-
-(defmethod close-cursor ((cursor open-left-sticky-cursor))
-  (change-class cursor 'closed-left-sticky-cursor))
-  
-(defmethod close-cursor ((cursor open-right-sticky-cursor))
-  (change-class cursor 'closed-right-sticky-cursor))
-
 (defgeneric close-line (line))
 
 (defmethod close-line ((line closed-line))
   nil)
 
 (defmethod close-line ((line open-line))
-  (mapc #'close-cursor (cursors line))
   (let* ((item-count (cluffer:item-count line))
 	 (contents (contents line))
 	 (new-contents (make-array item-count)))
@@ -57,21 +48,12 @@
 		  :contents new-contents)
     nil))
 
-(defgeneric open-cursor (cursor))
-
-(defmethod open-cursor ((cursor closed-left-sticky-cursor))
-  (change-class cursor 'open-left-sticky-cursor))
-  
-(defmethod open-cursor ((cursor closed-right-sticky-cursor))
-  (change-class cursor 'open-right-sticky-cursor))
-
 (defgeneric open-line (line))
 
 (defmethod open-line ((line open-line))
   nil)
 
 (defmethod open-line ((line closed-line))
-  (mapc #'open-cursor (cursors line))
   (let* ((contents (contents line))
 	 (item-count (length contents))
 	 (new-length (max 32 item-count))
@@ -101,7 +83,7 @@
   (when (> position (cluffer:item-count line))
     (error 'cluffer:end-of-line))
   (push cursor (cursors line))
-  (change-class cursor 'open-left-sticky-cursor
+  (change-class cursor 'left-sticky-cursor
 		:line line
 		:cursor-position position)
   nil)
@@ -114,7 +96,7 @@
   (when (> position (cluffer:item-count line))
     (error 'cluffer:end-of-line))
   (push cursor (cursors line))
-  (change-class cursor 'closed-left-sticky-cursor
+  (change-class cursor 'left-sticky-cursor
 		:line line
 		:cursor-position position)
   nil)
@@ -127,7 +109,7 @@
   (when (> position (cluffer:item-count line))
     (error 'cluffer:end-of-line))
   (push cursor (cursors line))
-  (change-class cursor 'open-right-sticky-cursor
+  (change-class cursor 'right-sticky-cursor
 		:line line
 		:cursor-position position)
   nil)

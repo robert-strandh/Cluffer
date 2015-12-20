@@ -2,9 +2,7 @@
 
 ;;;; A line is either open or closed.  An open line has a
 ;;;; representation that lends itself to efficient editing.  For a
-;;;; closed line, a compact representation is more important.  The
-;;;; cursors attached to an open line are open cursors.  Similarly,
-;;;; the cursors attached to a closed line are closed cursors.
+;;;; closed line, a compact representation is more important.
 
 (defclass line (cluffer:line)
    ((%contents :initarg :contents :accessor contents)
@@ -52,51 +50,8 @@
 (defclass detached-right-sticky-cursor (detached-cursor right-sticky-mixin)
   ())
 
-;;; At the moment, we represent open cursors and a closed cursors the
-;;; same way, where the position is the logical position in the line.
-;;; Later, we might represent open cursors by the physical position in
-;;; the gap vector so as to avoid updating cursors when items are
-;;; inserted.  On the other hand, that would be an important
-;;; optimization only if the number of cursors is very large.
-(defclass open-cursor-mixin ()
-  ((%cursor-position
-    :initarg :cursor-position
-    :accessor cluffer:cursor-position)))
-
-(defclass closed-cursor-mixin ()
-  ((%cursor-position
-    :initarg :cursor-position
-    :accessor cluffer:cursor-position)))
-
-(defclass closed-left-sticky-cursor
-    (attached-cursor
-     closed-cursor-mixin
-     left-sticky-mixin)
+(defclass left-sticky-cursor (attached-cursor left-sticky-mixin)
   ())
 
-(defclass closed-right-sticky-cursor
-    (attached-cursor
-     closed-cursor-mixin
-     right-sticky-mixin)
+(defclass right-sticky-cursor (attached-cursor right-sticky-mixin)
   ())
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Class OPEN-LEFT-STICKY CURSOR.
-
-(defclass open-left-sticky-cursor
-    (attached-cursor
-     open-cursor-mixin
-     left-sticky-mixin)
-  ())
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Class OPEN-RIGHT-STICKY CURSOR.
-
-(defclass open-right-sticky-cursor
-    (attached-cursor
-     open-cursor-mixin
-     right-sticky-mixin)
-  ())
-
