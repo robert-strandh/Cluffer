@@ -7,6 +7,10 @@
 (defmethod cluffer:cursor-attached-p ((cursor cursor))
   (not (null (line cursor))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Methods on ITEM-COUNT.
+
 (defmethod cluffer:item-count ((line open-line))
   (- (length (contents line)) (- (gap-end line) (gap-start line))))
 
