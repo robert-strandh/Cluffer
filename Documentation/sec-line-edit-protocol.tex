@@ -207,7 +207,8 @@ one.  \howeverperformance{}
 
 Detach \textit{cursor} from the line to which it is attached.
 
-If \textit{cursor} is already detached, this operation has no effect.
+If \textit{cursor} is already detached, a condition of type
+\texttt{cursor-detached} is signaled.
 
 \Defgeneric {attach-cursor} {cursor line \optional (position 0)}
 
