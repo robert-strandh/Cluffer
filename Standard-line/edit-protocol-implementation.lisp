@@ -91,45 +91,6 @@
   (setf (cluffer:cursor-position cursor) position)
   nil)
 
-(defmethod cluffer:attach-cursor
-    ((cursor detached-left-sticky-cursor)
-     (line closed-line)
-     &optional
-       (position 0))
-  (when (> position (cluffer:item-count line))
-    (error 'cluffer:end-of-line))
-  (push cursor (cursors line))
-  (change-class cursor 'left-sticky-cursor
-		:line line
-		:cursor-position position)
-  nil)
-  
-(defmethod cluffer:attach-cursor
-    ((cursor detached-right-sticky-cursor)
-     (line open-line)
-     &optional
-       (position 0))
-  (when (> position (cluffer:item-count line))
-    (error 'cluffer:end-of-line))
-  (push cursor (cursors line))
-  (change-class cursor 'right-sticky-cursor
-		:line line
-		:cursor-position position)
-  nil)
-
-(defmethod cluffer:attach-cursor
-    ((cursor detached-right-sticky-cursor)
-     (line closed-line)
-     &optional
-       (position 0))
-  (when (> position (cluffer:item-count line))
-    (error 'cluffer:end-of-line))
-  (push cursor (cursors line))
-  (change-class cursor 'closed-right-sticky-cursor
-		:line line
-		:cursor-position position)
-  nil)
-
 (defmethod cluffer:detach-cursor
     ((cursor detached-cursor))
   (error 'cluffer:cursor-detached))
