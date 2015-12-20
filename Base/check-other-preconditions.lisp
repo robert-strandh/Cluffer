@@ -32,3 +32,8 @@
     (error 'cluffer:beginning-of-buffer))
   (when (>= line-number (cluffer:line-count buffer))
     (error 'cluffer:end-of-buffer)))
+
+(defmethod cluffer:attach-cursor :before
+    ((cursor cluffer:cursor) (line cluffer:line) &optional position)
+  (when (cluffer:cursor-attached-p cursor)
+    (error 'cursor-attached)))
