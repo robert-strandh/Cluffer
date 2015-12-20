@@ -41,3 +41,10 @@
 (defmethod cluffer:detach-cursor :before ((cursor cluffer:cursor))
   (unless (cluffer:cursor-attached-p cursor)
     (error 'cursor-detached)))
+
+(defmethod cluffer:split-line-at-position :before
+    ((line cluffer:line) position)
+  (when (minusp position)
+    (error 'cluffer:beginning-of-line))
+  (when (> position (cluffer:item-count line))
+    (error 'cluffer:end-of-line)))
