@@ -2,7 +2,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on CURSOR-ATTACHED-P.
+;;; Method on CURSOR-ATTACHED-P.
 
 (defmethod cluffer:cursor-attached-p ((cursor cursor))
   (not (null (line cursor))))
