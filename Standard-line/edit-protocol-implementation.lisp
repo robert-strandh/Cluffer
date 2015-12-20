@@ -82,16 +82,13 @@
 ;;; Detaching and attaching a cursor.
 
 (defmethod cluffer:attach-cursor
-    ((cursor detached-left-sticky-cursor)
-     (line open-line)
+    ((cursor cursor)
+     (line line)
      &optional
        (position 0))
-  (when (> position (cluffer:item-count line))
-    (error 'cluffer:end-of-line))
   (push cursor (cursors line))
-  (change-class cursor 'left-sticky-cursor
-		:line line
-		:cursor-position position)
+  (setf (line cursor) line)
+  (setf (cluffer:cursor-position cursor) position)
   nil)
 
 (defmethod cluffer:attach-cursor
