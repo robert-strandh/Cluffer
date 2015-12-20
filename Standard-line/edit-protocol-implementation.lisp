@@ -1,5 +1,12 @@
 (cl:in-package #:cluffer-standard-line)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Method on CURSOR-ATTACHED-P.
+
+(defmethod cluffer:cursor-attached-p ((cursor cursor))
+  (not (null (line cursor))))
+
 (defmethod cluffer:item-count ((line open-line))
   (- (length (contents line)) (- (gap-end line) (gap-start line))))
 
