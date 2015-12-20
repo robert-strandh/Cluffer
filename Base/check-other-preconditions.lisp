@@ -37,3 +37,7 @@
     ((cursor cluffer:cursor) (line cluffer:line) &optional position)
   (when (cluffer:cursor-attached-p cursor)
     (error 'cursor-attached)))
+
+(defmethod cluffer:detach-cursor :before ((cursor cluffer:cursor))
+  (unless (cluffer:cursor-attached-p cursor)
+    (error 'cursor-detached)))
