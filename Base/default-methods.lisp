@@ -137,3 +137,11 @@
 ;;; nothing, and is used when a line is not attached to a buffer.
 (defmethod cluffer-internal:notify-item-count-changed ((doc null) delta)
   nil)
+
+;;; Default method on SPLIT-LINE.  This method calls
+;;; SLIT-LINE-AT-POSITION with the line of the cursor and the position
+;;; of the cursor as arguments.
+(defmethod cluffer:split-line ((cursor cluffer:cursor))
+  (let ((line (cluffer:line cursor))
+	(position (cluffer:cursor-position cursor)))
+    (cluffer:split-line-at-position line position)))
