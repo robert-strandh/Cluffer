@@ -91,23 +91,10 @@
   (setf (cluffer:cursor-position cursor) position)
   nil)
 
-(defmethod cluffer:detach-cursor
-    ((cursor detached-cursor))
-  (error 'cluffer:cursor-detached))
-
-(defmethod cluffer:detach-cursor
-  ((cursor left-sticky-mixin))
-  (setf (cursors (cluffer:line cursor))
-	(remove cursor (cursors (cluffer:line cursor))))
-  (change-class cursor 'detached-left-sticky-cursor)
-  nil)
-
-(defmethod cluffer:detach-cursor
-  ((cursor right-sticky-mixin))
-  (setf (cursors (cluffer:line cursor))
-	(remove cursor (cursors (cluffer:line cursor))))
-  (change-class cursor 'detached-right-sticky-cursor)
-  nil)
+(defmethod cluffer:detach-cursor ((cursor cursor))
+  (setf (cursors (line cursor))
+	(remove cursor (cursors (line cursor))))
+  (setf (line cursor) nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
