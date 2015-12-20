@@ -29,29 +29,22 @@
   ()
   (:default-initargs :contents (vector)))
 
-(defclass attached-cursor (cluffer:cursor)
-  ((%line :initarg :line :accessor cluffer:line)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Class CURSOR.
 
-(defmethod cluffer:cursor-attached-p ((cursor attached-cursor))
-  t)
+(defclass cursor (cluffer:cursor)
+  ((%line
+    :initform nil
+    :initarg :line
+    :accessor line
+    :reader cluffer:line)
+   (%cursor-position
+    :initarg :cursor-position
+    :accessor cluffer:cursor-position)))
 
-(defclass detached-cursor (cluffer:cursor) ())
-
-(defmethod cluffer:cursor-attached-p ((cursor detached-cursor))
-  nil)
-
-(defclass left-sticky-mixin () ())
-
-(defclass right-sticky-mixin () ())
-
-(defclass detached-left-sticky-cursor (detached-cursor left-sticky-mixin)
+(defclass left-sticky-cursor (cursor)
   ())
 
-(defclass detached-right-sticky-cursor (detached-cursor right-sticky-mixin)
-  ())
-
-(defclass left-sticky-cursor (attached-cursor left-sticky-mixin)
-  ())
-
-(defclass right-sticky-cursor (attached-cursor right-sticky-mixin)
+(defclass right-sticky-cursor (cursor)
   ())
