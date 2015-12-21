@@ -63,7 +63,7 @@
 ;;;;    unmodified.  Client code should move the cursor forward N
 ;;;;    positions.
 
-(defmethod update ((buffer buffer) time sync skip modify create)
+(defmethod cluffer:update ((buffer buffer) time sync skip modify create)
   (let (;; We maintain a STATE that can be either :SKIP or :MODIFY.
 	;; Initially, we are in the :SKIP state.
 	(state :skip)
