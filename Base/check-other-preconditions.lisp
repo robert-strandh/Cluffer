@@ -35,6 +35,7 @@
 
 (defmethod cluffer:attach-cursor :before
     ((cursor cluffer:cursor) (line cluffer:line) &optional position)
+  (declare (ignore position))
   (when (cluffer:cursor-attached-p cursor)
     (error 'cursor-attached)))
 
