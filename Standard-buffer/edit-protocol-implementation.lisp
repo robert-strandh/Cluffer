@@ -105,23 +105,18 @@
 ;;;
 ;;; Method on generic function SPLIT-LINE.
 
-(defmethod cluffer:split-line (cursor)
-  (let* ((existing-line (line cursor))
-	 (existing-node (cluffer-internal:dock existing-line))
-	 (buffer (buffer existing-node))
+(defmethod cluffer:split-line-at-position ((buffer buffer) line position)
+  (let* ((existing-node (cluffer-internal:dock line))
 	 ;; The number of items that will be removed from the existing
 	 ;; line and also the number of items of the new line.
-	 (diff (- (cluffer:item-count existing-line)
-		  (cluffer:cursor-position cursor))))
+	 (diff (- (cluffer:item-count line) position)))
     ;; Make sure the existing line is the root of the tree.
     (clump-binary-tree:splay existing-node)
     (decf (item-count existing-node) diff)
-    ;; If the cursor is at the end of the line, then the line
-    ;; is not modified, but we don't take that into account.
     (let ((time (incf (current-time buffer))))
       (setf (modify-time existing-node) time)
       (setf (max-modify-time existing-node) time))
-    (let* ((new-line (cluffer-internal:split-line cursor))
+    (let* ((new-line (cluffer-internal:split-line line position))
 	   (time (incf (current-time buffer)))
 	   (new-node (make-instance 'node
 		       :buffer buffer
