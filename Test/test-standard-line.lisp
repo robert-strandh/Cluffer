@@ -12,9 +12,9 @@
 	(cursorra (make-instance
 		      'cluffer-simple-line:right-sticky-cursor))
 	(cursorlb (make-instance
-		      'cluffer-standard-line:detached-left-sticky-cursor))
+		      'cluffer-standard-line:left-sticky-cursor))
 	(cursorrb (make-instance
-		      'cluffer-standard-line:detached-right-sticky-cursor)))
+		      'cluffer-standard-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursorla linea)
     (cluffer:attach-cursor cursorra linea)
     (cluffer:attach-cursor cursorlb lineb)
@@ -51,9 +51,9 @@
 	(cursorra (make-instance
 		      'cluffer-simple-line:right-sticky-cursor))
 	(cursorlb (make-instance
-		      'cluffer-standard-line:detached-left-sticky-cursor))
+		      'cluffer-standard-line:left-sticky-cursor))
 	(cursorrb (make-instance
-		      'cluffer-standard-line:detached-right-sticky-cursor)))
+		      'cluffer-standard-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursorla linea)
     (cluffer:attach-cursor cursorra linea)
     (cluffer:attach-cursor cursorlb lineb)
