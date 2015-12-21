@@ -1,5 +1,10 @@
 (cl:in-package #:cluffer-internal)
 
+;;; This class is the base class for all classes representing points
+;;; in a buffer structure where lines are attached.
+(defclass dock ()
+  ((%line :initarg :line :reader line)))
+
 ;;; This generic function removes all the items to the right of
 ;;; POSITION in LINE, and returns a second line in which those items
 ;;; have been inserted.  Cursors that are located at positions
