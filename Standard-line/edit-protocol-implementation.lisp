@@ -258,5 +258,5 @@
 (defmethod buffer ((line line))
   (cluffer:buffer (cluffer-internal:dock line)))
 
-(defmethod buffer ((cursor attached-cursor))
+(defmethod buffer ((cursor cursor))
   (cluffer:buffer (cluffer:line cursor)))
