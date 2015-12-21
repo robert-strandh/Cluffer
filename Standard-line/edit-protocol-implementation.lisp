@@ -223,10 +223,6 @@
 	  (set-difference (cursors line) (cursors new-line)))
     new-line))
 
-(defmethod cluffer-internal:split-line ((cursor open-cursor-mixin))
-  (close-line (cluffer:line cursor))
-  (cluffer-internal:split-line cursor))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on CLUFFER-INTERNAL:JOIN-LINE.
