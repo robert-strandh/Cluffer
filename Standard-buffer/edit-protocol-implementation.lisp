@@ -113,11 +113,11 @@
     ;; Make sure the existing line is the root of the tree.
     (clump-binary-tree:splay existing-node)
     (decf (item-count existing-node) diff)
-    (let ((time (incf (current-time buffer))))
+    (let ((time (incf (cluffer:current-time buffer))))
       (setf (modify-time existing-node) time)
       (setf (max-modify-time existing-node) time))
     (let* ((new-line (cluffer-internal:split-line line position))
-	   (time (incf (current-time buffer)))
+	   (time (incf (cluffer:current-time buffer)))
 	   (new-node (make-instance 'node
 		       :buffer buffer
 		       :line-count 1
@@ -151,7 +151,7 @@
 	(clump-binary-tree:splay node-line)
 	;; Now LINE is on top and NEXT-LINE is its right child.
 	;; Furthermore NEXT-LINE does not have any left children.
-	(let ((time (incf (current-time (buffer node-line)))))
+	(let ((time (incf (cluffer:current-time (buffer node-line)))))
 	  (setf (modify-time node-line) time)
 	  (setf (max-modify-time node-line) time))
 	(let ((right (clump-binary-tree:right node-next-line)))
