@@ -13,4 +13,5 @@
    (:file "check-cursor-attached")
    (:file "check-other-preconditions")
    (:file "default-methods")
+   (:file "default-internal-methods")
    (:file "methods")))
