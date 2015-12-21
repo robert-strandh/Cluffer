@@ -18,6 +18,11 @@
 ;;; to the end of the first line.
 (defgeneric join-line (line1 line2))
 
+;;; Given a line, return a DOCK object that identifies the position of
+;;; LINE in the buffer to which LINE belongs.  If LINE does not belong
+;;; to any buffer, then this function returns NIL.  The exact nature
+;;; of the dock object depends on the type of the buffer to which LINE
+;;; belongs.
 (defgeneric dock (line))
 
 (defgeneric notify-item-count-changed (dock delta))
