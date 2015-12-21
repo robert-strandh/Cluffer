@@ -32,3 +32,9 @@
 ;;; passing the result of calling the generic function DOCK on the
 ;;; line and the line itself as arguments.
 (defgeneric dock-line-number (dock line))
+
+;;; This generic function is called by the default method on the
+;;; internal generic function DOCK-LINE-NUMBER (specialized to DOCK),
+;;; passing the result of calling the generic function BUFFER on the
+;;; DOCK object, the dock object itself, and the line.
+(defgeneric buffer-line-number (buffer dock line))
