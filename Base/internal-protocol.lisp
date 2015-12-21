@@ -26,3 +26,9 @@
 (defgeneric dock (line))
 
 (defgeneric notify-item-count-changed (dock delta))
+
+;;; This generic function is called by the default method on the
+;;; external generic function LINE-NUMBER (specialized to LINE),
+;;; passing the result of calling the generic function DOCK on the
+;;; line and the line itself as arguments.
+(defgeneric dock-line-number (dock line))
