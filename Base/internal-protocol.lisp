@@ -27,6 +27,10 @@
 
 (defgeneric notify-item-count-changed (dock delta))
 
+;;; Given a DOCK object, return the buffer to which that dock object
+;;; belongs.
+(defgeneric buffer (dock))
+
 ;;; This generic function is called by the default method on the
 ;;; external generic function LINE-NUMBER (specialized to LINE),
 ;;; passing the result of calling the generic function DOCK on the
@@ -35,6 +39,6 @@
 
 ;;; This generic function is called by the default method on the
 ;;; internal generic function DOCK-LINE-NUMBER (specialized to DOCK),
-;;; passing the result of calling the generic function BUFFER on the
-;;; DOCK object, the dock object itself, and the line.
+;;; passing the result of calling the internal generic function BUFFER
+;;; on the DOCK object, the dock object itself, and the line.
 (defgeneric buffer-line-number (buffer dock line))
