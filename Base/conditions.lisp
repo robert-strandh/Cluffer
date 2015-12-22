@@ -30,6 +30,8 @@
 (define-condition cursor-attached (error acclimation:condition)
   ())
 
+;;; This condition is signaled when an attempt is made to use a cursor
+;;; in an operation that requires that cursor to be attached, but the
+;;; cursor used in the operation is not attached to any line.
 (define-condition cursor-detached (error acclimation:condition)
   ())
-
