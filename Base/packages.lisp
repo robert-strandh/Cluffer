@@ -28,6 +28,7 @@
    #:end-of-buffer
    #:cursor-attached
    #:cursor-detached
+   #:line-detached
    #:beginning-of-buffer-p
    #:end-of-buffer-p
    #:split-line-at-position
