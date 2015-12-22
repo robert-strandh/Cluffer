@@ -50,3 +50,6 @@
     (error 'cluffer:beginning-of-line))
   (when (> position (cluffer:item-count line))
     (error 'cluffer:end-of-line)))
+
+(defmethod cluffer-internal:dock-line-number ((dock null) (line cluffer:line))
+  (error 'cluffer:line-detached))
