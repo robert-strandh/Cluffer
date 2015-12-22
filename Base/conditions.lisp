@@ -35,3 +35,12 @@
 ;;; cursor used in the operation is not attached to any line.
 (define-condition cursor-detached (error acclimation:condition)
   ())
+
+;;; This condition is signaled when an attempt is made to use a line
+;;; in an operation that requires the line to be attached to a buffer,
+;;; but the line used in the operation is not attached to a buffer.
+;;; An example of such an operation would be to attempt to get the
+;;; line number of the line, given that the line number of a line is
+;;; determined by the buffer to which the line is attached.
+(define-condition line-detached (error acclimation:condition)
+  ())
