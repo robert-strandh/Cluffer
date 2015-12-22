@@ -24,6 +24,9 @@
 (define-condition end-of-buffer (error acclimation:condition)
   ())
 
+;;; This condition is signaled when an attempt is made to use a cursor
+;;; in an operation that requires that cursor to be detached, but the
+;;; cursor used in the operation is attached to a line.
 (define-condition cursor-attached (error acclimation:condition)
   ())
 
