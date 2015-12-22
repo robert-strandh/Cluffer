@@ -6,6 +6,15 @@
 (define-condition beginning-of-line (error acclimation:condition)
   ())
 
+;;; This condition is signaled when an attempt is made to use a
+;;; position that is too large, either by moving a cursor there, or by
+;;; attempting to access an item in such a position.  Notice that in
+;;; some cases, "too large" means "strictly greater than the number of
+;;; items in a line", and sometimes it means "greater than or equal to
+;;; the number of items in a line".  For example, it is perfectly
+;;; acceptable to move a cursor to a position that is equal to the
+;;; number of items in a line, but it is not acceptable to attempt to
+;;; access an item in a line at that position.
 (define-condition end-of-line (error acclimation:condition)
   ())
 
