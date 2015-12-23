@@ -49,6 +49,7 @@
   (:export #:split-line
 	   #:join-line
 	   #:dock
+	   #:buffer-line-number
 	   #:notify-item-count-changed))
 
 (defpackage #:cluffer-base
