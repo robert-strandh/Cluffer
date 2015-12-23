@@ -25,3 +25,11 @@
 
 (defmethod cluffer:find-line ((buffer buffer) line-number)
   (line (aref (contents buffer) line-number)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Method on internal generic function BUFFER-LINE-NUMBER.
+
+(defmethod cluffer-internal:buffer-line-number
+    ((buffer buffer) (dock node) line)
+  (position line (contents buffer) :test #'eq :key #'line))
