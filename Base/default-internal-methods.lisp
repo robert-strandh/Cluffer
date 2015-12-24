@@ -5,3 +5,7 @@
 
 (defmethod dock-line-number ((dock dock) (line cluffer:line))
   (buffer-line-number (buffer dock) dock line))
+
+(defmethod dock-split-line ((dock null) (line cluffer:line) position)
+  (declare (ignore position))
+  (error 'cluffer:line-detached))
