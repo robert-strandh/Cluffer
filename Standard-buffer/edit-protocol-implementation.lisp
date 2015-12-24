@@ -103,19 +103,20 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Method on generic function SPLIT-LINE.
+;;; Method on internal generic function BUFFER-SPLIT-LINE.
 
-(defmethod cluffer:split-line-at-position ((buffer buffer) line position)
-  (let* ((existing-node (cluffer-internal:dock line))
+(defmethod cluffer-internal:buffer-split-line
+    ((buffer buffer) (dock node) (line cluffer:line) position)
+  (let* ((dock (cluffer-internal:dock line))
 	 ;; The number of items that will be removed from the existing
 	 ;; line and also the number of items of the new line.
 	 (diff (- (cluffer:item-count line) position)))
     ;; Make sure the existing line is the root of the tree.
-    (clump-binary-tree:splay existing-node)
-    (decf (item-count existing-node) diff)
+    (clump-binary-tree:splay dock)
+    (decf (item-count dock) diff)
     (let ((time (incf (cluffer:current-time buffer))))
-      (setf (modify-time existing-node) time)
-      (setf (max-modify-time existing-node) time))
+      (setf (modify-time dock) time)
+      (setf (max-modify-time dock) time))
     (let* ((new-line (cluffer-internal:split-line line position))
 	   (time (incf (cluffer:current-time buffer)))
 	   (new-node (make-instance 'node
@@ -127,9 +128,9 @@
 		       :max-modify-time time
 		       :line new-line)))
       (setf (cluffer-internal:dock new-line) new-node)
-      (let ((right-node (clump-binary-tree:right existing-node)))
-	(setf (clump-binary-tree:right existing-node) nil)
-	(setf (clump-binary-tree:left new-node) existing-node)
+      (let ((right-node (clump-binary-tree:right dock)))
+	(setf (clump-binary-tree:right dock) nil)
+	(setf (clump-binary-tree:left new-node) dock)
 	(setf (clump-binary-tree:right new-node) right-node)
 	(setf (contents buffer) new-node))))
   nil)
