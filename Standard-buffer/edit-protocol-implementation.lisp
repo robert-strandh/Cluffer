@@ -92,14 +92,14 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Method on generic function LINE-NUMBER.
+;;; Method on internal generic function BUFFER-LINE-NUMBER.
 
-(defmethod cluffer:line-number (line)
-  (let ((node (cluffer-internal:dock line)))
-    (clump-binary-tree:splay node)
-    (if (null (clump-binary-tree:left node))
-	0
-	(line-count (clump-binary-tree:left node)))))
+(defmethod cluffer-internal:buffer-line-number
+    ((buffer buffer) (node node) line)
+  (clump-binary-tree:splay node)
+  (if (null (clump-binary-tree:left node))
+      0
+      (line-count (clump-binary-tree:left node))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
