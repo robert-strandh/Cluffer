@@ -48,4 +48,6 @@
 ;;; on the DOCK object, the dock object itself, and the line.
 (defgeneric buffer-line-number (buffer dock line))
 
+(defgeneric dock-split-line (dock line position))
+
 (defgeneric buffer-split-line (buffer dock line position))
