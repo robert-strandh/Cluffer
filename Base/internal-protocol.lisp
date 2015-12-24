@@ -47,3 +47,5 @@
 ;;; passing the result of calling the internal generic function BUFFER
 ;;; on the DOCK object, the dock object itself, and the line.
 (defgeneric buffer-line-number (buffer dock line))
+
+(defgeneric buffer-split-line (buffer dock line position))
