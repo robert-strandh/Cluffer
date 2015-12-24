@@ -50,6 +50,7 @@
 	   #:join-line
 	   #:dock
 	   #:buffer-line-number
+	   #:buffer-split-line
 	   #:notify-item-count-changed))
 
 (defpackage #:cluffer-base
