@@ -169,3 +169,10 @@
 (defmethod cluffer:line-count (buffer)
   (error 'cluffer:object-must-be-buffer
 	 :object buffer))
+
+;;; Default method on FIND-LINE, invoked when the BUFFER argument is
+;;; not an instance of BUFFER.
+(defmethod cluffer:find-line (buffer line-number)
+  (declare (ignore line-number))
+  (error 'cluffer:object-must-be-buffer
+	 :object buffer))
