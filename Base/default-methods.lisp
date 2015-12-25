@@ -163,3 +163,9 @@
 (defmethod cluffer:delete-item-at-position (line position)
   (error 'cluffer:object-must-be-line
 	 :object line))
+
+;;; Default method on LINE-COUNT, invoked when the BUFFER argument is
+;;; not an instance of BUFFER.
+(defmethod cluffer:line-count (buffer)
+  (error 'cluffer:object-must-be-buffer
+	 :object buffer))
