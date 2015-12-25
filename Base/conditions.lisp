@@ -50,3 +50,9 @@
 ;;; object was given.
 (define-condition object-must-be-line (error acclimation:condition)
   ((%object :initarg :object :reader object)))
+
+;;; This condition is signaled by protocol generic functions that take
+;;; a buffer object as an argument, but something other than a buffer
+;;; object was given.
+(define-condition object-must-be-buffer (error acclimation:condition)
+  ((%object :initarg :object :reader object)))
