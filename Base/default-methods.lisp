@@ -161,6 +161,7 @@
 ;;; Default method on DELETE-ITEM-AT-POSITION, invoked when the LINE
 ;;; argument is not an instance of LINE.
 (defmethod cluffer:delete-item-at-position (line position)
+  (declare (ignore position))
   (error 'cluffer:object-must-be-line
 	 :object line))
 
