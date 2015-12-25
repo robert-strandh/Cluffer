@@ -157,3 +157,9 @@
 (defmethod cluffer:insert-item-at-position (line item position)
   (error 'cluffer:object-must-be-line
 	 :object line))
+
+;;; Default method on DELETE-ITEM-AT-POSITION, invoked when the LINE
+;;; argument is not an instance of LINE.
+(defmethod cluffer:delete-item-at-position (line position)
+  (error 'cluffer:object-must-be-line
+	 :object line))
