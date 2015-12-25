@@ -145,3 +145,9 @@
   (let ((line (cluffer:line cursor))
 	(position (cluffer:cursor-position cursor)))
     (cluffer:split-line-at-position (cluffer:buffer line) line position)))
+
+;;; Default method on ITEM-AT-POSITION, invoked when the LINE argument
+;;; is not an instance of LINE.
+(defmethod cluffer:item-at-position (line position)
+  (error 'cluffer:object-must-be-line
+	 :object line))
