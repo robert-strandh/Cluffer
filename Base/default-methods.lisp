@@ -155,6 +155,7 @@
 ;;; Default method on INSERT-ITEM-AT-POSITION, invoked when the LINE
 ;;; argument is not an instance of LINE.
 (defmethod cluffer:insert-item-at-position (line item position)
+  (declare (ignore item position))
   (error 'cluffer:object-must-be-line
 	 :object line))
 
