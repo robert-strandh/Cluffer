@@ -17,7 +17,7 @@
 ;;; For this implementation, left-sticky cursors located at POSITION
 ;;; remain in LINE and right-sticky cursors located at POSITION are
 ;;; moved to the beginning of the new line.
-(defgeneric split-line (line position))
+(defgeneric line-split-line (line position))
 
 ;;; This generic function attaches all of the items of the second line
 ;;; to the end of the first line.
