@@ -29,6 +29,7 @@
    #:cursor-attached
    #:cursor-detached
    #:line-detached
+   #:object-must-be-line
    #:beginning-of-buffer-p
    #:end-of-buffer-p
    #:split-line-at-position
