@@ -44,3 +44,9 @@
 ;;; determined by the buffer to which the line is attached.
 (define-condition line-detached (error acclimation:condition)
   ())
+
+;;; This condition is signaled by protocol generic functions that take
+;;; a line object as an argument, but something other than a line
+;;; object was given.
+(define-condition object-must-be-line (error acclimation:condition)
+  ((%object :initarg :object :reader object)))
