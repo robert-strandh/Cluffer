@@ -30,6 +30,7 @@
    #:cursor-detached
    #:line-detached
    #:object-must-be-line
+   #:object-must-be-buffer
    #:beginning-of-buffer-p
    #:end-of-buffer-p
    #:split-line-at-position
