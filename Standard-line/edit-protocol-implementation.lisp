@@ -188,10 +188,10 @@
 ;;; Method on ITEM-AT-POSITION.
 
 ;;; No need to open the line.
-(defmethod cluffer-item-at-position ((line closed-line) position)
+(defmethod cluffer:item-at-position ((line closed-line) position)
   (aref (contents line) position))
 
-(defmethod cluffer-item-at-position ((line open-line) position)
+(defmethod cluffer:item-at-position ((line open-line) position)
   (aref (contents line)
 	(if (< position (gap-start line))
 	    position
