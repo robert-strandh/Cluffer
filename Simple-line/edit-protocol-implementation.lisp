@@ -84,9 +84,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on CLUFFER-INTERNAL:SPLIT-LINE.
+;;; Methods on CLUFFER-INTERNAL:LINE-SPLIT-LINE.
 
-(defmethod cluffer-internal:split-line ((line line) position)
+(defmethod cluffer-internal:line-split-line ((line line) position)
   (let* ((contents (contents line))
 	 (new-contents (subseq contents position))
 	 (new-line (make-instance 'line
