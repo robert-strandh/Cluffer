@@ -49,7 +49,7 @@
     (replace new-contents contents :start1 (+ line-number 2)
 				   :start2 (1+ line-number))
     (setf (modify-time dock) (incf (cluffer:current-time buffer)))
-    (let* ((new-line (cluffer-internal:split-line line position))
+    (let* ((new-line (cluffer-internal:line-split-line line position))
 	   (time (incf (cluffer:current-time buffer)))
 	   (new-node (make-instance 'node
 		       :buffer buffer

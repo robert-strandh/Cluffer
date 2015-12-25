@@ -117,7 +117,7 @@
     (let ((time (incf (cluffer:current-time buffer))))
       (setf (modify-time dock) time)
       (setf (max-modify-time dock) time))
-    (let* ((new-line (cluffer-internal:split-line line position))
+    (let* ((new-line (cluffer-internal:line-split-line line position))
 	   (time (incf (cluffer:current-time buffer)))
 	   (new-node (make-instance 'node
 		       :buffer buffer
