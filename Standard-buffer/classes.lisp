@@ -10,7 +10,9 @@
 ;;; is splayed, that node must be explicitly assigned to the CONTENTS
 ;;; slot of the buffer.
 (defclass node (clump-binary-tree:node-with-parent)
-  ((%buffer :initform nil :initarg :buffer :accessor buffer)
+  ((%buffer :initform nil
+	    :initarg :buffer
+	    :accessor cluffer-internal:buffer)
    (;; The line count of the entire subtree.
     %line-count :initarg :line-count :accessor line-count)
    (;; The item count of the entire subtree.
