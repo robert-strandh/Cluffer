@@ -51,6 +51,7 @@
   (:export #:line-split-line
 	   #:line-join-line
 	   #:dock
+	   #:buffer
 	   #:buffer-line-number
 	   #:dock-split-line
 	   #:buffer-split-line
