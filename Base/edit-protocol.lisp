@@ -372,9 +372,9 @@
 ;;;
 ;;; Generic function BUFFER.
 ;;;
-;;; Return the buffer of a node, a cursor, or a line.
+;;; Return the buffer of a cursor or a line.
 
-(defgeneric buffer (thing))
+(defgeneric buffer (entity))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
