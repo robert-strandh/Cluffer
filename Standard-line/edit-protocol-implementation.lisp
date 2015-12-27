@@ -252,8 +252,8 @@
 ;;; Given a line or a cursor, return the buffer to which
 ;;; the line or cursor belongs.
 
-(defmethod buffer ((line line))
+(defmethod cluffer:buffer ((line line))
   (cluffer:buffer (cluffer-internal:dock line)))
 
-(defmethod buffer ((cursor cursor))
+(defmethod cluffer:buffer ((cursor cursor))
   (cluffer:buffer (cluffer:line cursor)))
