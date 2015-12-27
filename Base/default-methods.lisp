@@ -189,3 +189,7 @@
 ;;; Default method on BUFFER specialized to CURSOR.
 (defmethod cluffer:buffer ((entity cluffer:cursor))
   (cluffer:buffer (cluffer:line entity)))
+
+;;; Default method on BUFFER specialized to LINE.
+(defmethod cluffer:buffer ((entity cluffer:line))
+  (cluffer-internal:buffer (cluffer-internal:dock entity)))
