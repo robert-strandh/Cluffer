@@ -185,3 +185,7 @@
   (declare (ignore line-number))
   (error 'cluffer:object-must-be-buffer
 	 :object buffer))
+
+;;; Default method on BUFFER specialized to CURSOR.
+(defmethod cluffer:buffer ((entity cluffer:cursor))
+  (cluffer:buffer (cluffer:line entity)))
