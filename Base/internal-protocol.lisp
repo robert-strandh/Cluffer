@@ -51,3 +51,5 @@
 (defgeneric dock-split-line (dock line position))
 
 (defgeneric buffer-split-line (buffer dock line position))
+
+(defgeneric dock-join-line (dock line))
