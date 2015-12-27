@@ -110,9 +110,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on CLUFFER-INTERNAL:JOIN-LINE.
+;;; Methods on CLUFFER-INTERNAL:LINE-JOIN-LINE.
 
-(defmethod cluffer-internal:join-line ((line1 line) (line2 line))
+(defmethod cluffer-internal:line-join-line ((line1 line) (line2 line))
   (loop with length = (length (contents line1))
 	for cursor in (cursors line2)
 	do (setf (line cursor) line1)

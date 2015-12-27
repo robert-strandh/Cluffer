@@ -21,7 +21,7 @@
 
 ;;; This generic function attaches all of the items of the second line
 ;;; to the end of the first line.
-(defgeneric join-line (line1 line2))
+(defgeneric line-join-line (line1 line2))
 
 ;;; Given a line, return a DOCK object that identifies the position of
 ;;; LINE in the buffer to which LINE belongs.  If LINE does not belong

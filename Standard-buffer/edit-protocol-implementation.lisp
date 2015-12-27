@@ -159,5 +159,5 @@
 	  (setf (clump-binary-tree:right node-line) nil)
 	  (setf (clump-binary-tree:right node-next-line) nil)
 	  (setf (clump-binary-tree:right node-line) right))
-	(cluffer-internal:join-line line next-line))))
+	(cluffer-internal:line-join-line line next-line))))
   nil)

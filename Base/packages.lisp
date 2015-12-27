@@ -49,7 +49,7 @@
 (defpackage #:cluffer-internal
   (:use #:common-lisp)
   (:export #:line-split-line
-	   #:join-line
+	   #:line-join-line
 	   #:dock
 	   #:buffer-line-number
 	   #:dock-split-line

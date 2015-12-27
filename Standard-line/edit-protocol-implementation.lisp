@@ -225,17 +225,18 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Methods on CLUFFER-INTERNAL:JOIN-LINE.
+;;; Methods on CLUFFER-INTERNAL:LINE-JOIN-LINE.
 
-(defmethod cluffer-internal:join-line ((line1 open-line) line2)
+(defmethod cluffer-internal:line-join-line ((line1 open-line) line2)
   (close-line line1)
-  (cluffer-internal:join-line line1 line2))
+  (cluffer-internal:line-join-line line1 line2))
 
-(defmethod cluffer-internal:join-line (line1 (line2 open-line))
+(defmethod cluffer-internal:line-join-line (line1 (line2 open-line))
   (close-line line2)
-  (cluffer-internal:join-line line1 line2))
+  (cluffer-internal:line-join-line line1 line2))
 
-(defmethod cluffer-internal:join-line ((line1 closed-line) (line2 closed-line))
+(defmethod cluffer-internal:line-join-line
+    ((line1 closed-line) (line2 closed-line))
   (loop with length = (length (contents line1))
 	for cursor in (cursors line2)
 	do (setf (line cursor) line1)
