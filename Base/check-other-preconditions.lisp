@@ -44,8 +44,7 @@
     (error 'cursor-detached)))
 
 (defmethod cluffer:split-line-at-position :before
-    ((buffer cluffer:buffer) (line cluffer:line) position)
-  (declare (ignore buffer))
+    ((line cluffer:line) position)
   (when (minusp position)
     (error 'cluffer:beginning-of-line))
   (when (> position (cluffer:item-count line))
