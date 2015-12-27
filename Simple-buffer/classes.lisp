@@ -6,7 +6,9 @@
    (%contents :initarg :contents :accessor contents)))
 
 (defclass node ()
-  ((%buffer :initform nil :initarg :buffer :accessor buffer)
+  ((%buffer :initform nil
+	    :initarg :buffer
+	    :accessor cluffer-internal:buffer)
    (%create-time :initarg :create-time :reader create-time)
    (%modify-time :initarg :modify-time :accessor modify-time)
    (%line :initarg :line :accessor line)))
