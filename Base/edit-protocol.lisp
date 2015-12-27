@@ -334,7 +334,7 @@
 ;;;
 ;;; Generic function SPLIT-LINE-AT-POSITION.
 
-(defgeneric split-line-at-position (buffer line position))
+(defgeneric split-line-at-position (line position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
