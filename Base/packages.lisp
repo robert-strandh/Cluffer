@@ -52,6 +52,7 @@
 	   #:join-line
 	   #:dock
 	   #:buffer-line-number
+	   #:dock-split-line
 	   #:buffer-split-line
 	   #:notify-item-count-changed))
 
