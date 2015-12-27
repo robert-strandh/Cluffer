@@ -244,16 +244,3 @@
   (setf (contents line1)
 	(concatenate 'vector (contents line1) (contents line2)))
   nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Methods on generic function BUFFER.
-;;;
-;;; Given a line or a cursor, return the buffer to which
-;;; the line or cursor belongs.
-
-(defmethod cluffer:buffer ((line line))
-  (cluffer:buffer (cluffer-internal:dock line)))
-
-(defmethod cluffer:buffer ((cursor cursor))
-  (cluffer:buffer (cluffer:line cursor)))
