@@ -15,3 +15,6 @@
 
 (defmethod dock-join-line ((dock null) (line cluffer:line))
   (error 'cluffer:line-detached))
+
+(defmethod dock-join-line ((dock dock) (line cluffer:line))
+  (buffer-join-line (buffer dock) dock line))
