@@ -150,7 +150,8 @@
 ;;; internal generic function DOCK-SPLIT-LINE with the dock of the
 ;;; line, the line, and the position.
 (defmethod cluffer:split-line-at-position ((line cluffer:line) position)
-  (cluffer-internal:dock-split-line (cluffer-internal:dock line) position))
+  (cluffer-internal:dock-split-line
+   (cluffer-internal:dock line) line position))
 
 ;;; Default method on ITEM-AT-POSITION, invoked when the LINE argument
 ;;; is not an instance of LINE.
