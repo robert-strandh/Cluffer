@@ -236,3 +236,16 @@ the total number of items is returned.
 Return the line in which \textit{cursor} is located. 
 
 \ifdetached{}
+
+\Defgeneric {buffer} {entity}
+
+Return the buffer of \textit{entity}.  If \textit{entity} is a line,
+then return the buffer to which the line is attached.  If
+\textit{entity} is a cursor, then return the buffer of the line to
+which the cursor is attached.
+
+If \textit{entity} is a cursor that is not currently attached to a
+line, a condition of type \texttt{cursor-detached} is signaled.
+
+If \textit{entity} is a line that is not currently attached to a
+buffer, a condition of type \texttt{line-detached} is signaled.

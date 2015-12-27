@@ -74,11 +74,6 @@ Return the line in the buffer with the given \textit{line-number}.  If
 greater than or equal to the number of lines in the buffer, then the
 error \texttt{end-of-buffer} is signaled.
 
-\Defgeneric {buffer} {object}
-
-Return the buffer in which \textit{object} is located, where
-\textit{object} is a \emph{cursor} or a \emph{line}.
-
 Notice that the edit protocol does not contain any
 \texttt{delete-line} operation.  This design decision was made on
 purpose.  By only providing \texttt{join-line}, we guarantee that
