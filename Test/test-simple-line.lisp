@@ -191,6 +191,13 @@
     (assert (cluffer:end-of-line-p rc))
     (assert (zerop (cluffer:cursor-position rc)))))
 
+(defun test-simple-line-12 ()
+  (let ((line (make-instance 'cluffer-simple-line:line)))
+    (multiple-value-bind (value error)
+	(ignore-errors (cluffer:insert-item-at-position line 234 -1))
+      (declare (ignore value))
+      (assert (typep error 'cluffer:beginning-of-line)))))
+
 (defun test-simple-line ()
   (test-simple-line-1)
   (test-simple-line-2)
@@ -202,4 +209,5 @@
   (test-simple-line-8)
   (test-simple-line-9)
   (test-simple-line-10)
-  (test-simple-line-11))
+  (test-simple-line-11)
+  (test-simple-line-12))
