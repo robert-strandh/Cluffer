@@ -217,7 +217,12 @@
     (multiple-value-bind (value error)
 	(ignore-errors (cluffer:attach-cursor lc line))
       (declare (ignore value))
-      (assert (typep error 'cluffer:cursor-attached)))))
+      (assert (typep error 'cluffer:cursor-attached)))
+    (cluffer:detach-cursor lc)
+    (multiple-value-bind (value error)
+	(ignore-errors (cluffer:detach-cursor lc))
+      (declare (ignore value))
+      (assert (typep error 'cluffer:cursor-detached)))))
 
 (defun test-simple-line ()
   (test-simple-line-1)
