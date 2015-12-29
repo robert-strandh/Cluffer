@@ -70,8 +70,6 @@
   (let* ((line-number (cluffer-internal:buffer-line-number buffer dock line))
 	 (contents (contents buffer))
 	 (line-count (length contents)))
-    (when (= line-number (1- line-count))
-      (error 'cluffer:end-of-buffer))
     (let ((next-line (cluffer:find-line buffer (1+ line-number)))
 	  (new-contents (make-array (1- line-count))))
       (cluffer-internal:line-join-line line next-line)
