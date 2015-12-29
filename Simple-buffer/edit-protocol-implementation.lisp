@@ -60,3 +60,26 @@
       (setf (aref new-contents (1+ line-number)) new-node))
     (setf (contents buffer) new-contents))
   nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Method on internal generic function BUFFER-JOIN-LINE.
+
+(defmethod cluffer-internal:buffer-join-line
+    ((buffer buffer) (dock node) (line cluffer:line))
+  (let* ((line-number (cluffer-internal:buffer-line-number buffer dock line))
+	 (contents (contents buffer))
+	 (line-count (length contents)))
+    (when (= line-number (1- line-count))
+      (error 'cluffer:end-of-buffer))
+    (let ((next-line (cluffer:find-line buffer (1+ line-number)))
+	  (new-contents (make-array (1- line-count))))
+      (cluffer-internal:line-join-line line next-line)
+      (replace new-contents contents :start1 0
+				     :start2 0
+				     :end2 (1+ line-number))
+      (replace new-contents contents :start1 (1+ line-number)
+				     :start2 (+ line-number 2))
+      (setf (modify-time dock) (incf (cluffer:current-time buffer)))
+      (setf (contents buffer) new-contents)))
+  nil)
