@@ -4,7 +4,8 @@
   (let* ((line (make-instance 'cluffer-simple-line:line))
 	 (buffer (make-instance 'cluffer-simple-buffer:buffer
 		   :initial-line line)))
-    (assert (= (cluffer:line-count buffer) 1))))
+    (assert (= (cluffer:line-count buffer) 1))
+    (assert (= (cluffer:item-count buffer) 0))))
 
 (defun test-simple-buffer ()
   (test-simple-buffer-1))
