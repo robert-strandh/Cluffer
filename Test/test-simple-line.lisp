@@ -210,6 +210,15 @@
       (declare (ignore value))
       (assert (typep error 'cluffer:end-of-line)))))
 
+(defun test-simple-line-13 ()
+  (let ((line (make-instance 'cluffer-simple-line:line))
+	(lc (make-instance 'cluffer-simple-line:left-sticky-cursor)))
+    (cluffer:attach-cursor lc line)
+    (multiple-value-bind (value error)
+	(ignore-errors (cluffer:attach-cursor lc line))
+      (declare (ignore value))
+      (assert (typep error 'cluffer:cursor-attached)))))
+
 (defun test-simple-line ()
   (test-simple-line-1)
   (test-simple-line-2)
@@ -222,4 +231,5 @@
   (test-simple-line-9)
   (test-simple-line-10)
   (test-simple-line-11)
-  (test-simple-line-12))
+  (test-simple-line-12)
+  (test-simple-line-13))
