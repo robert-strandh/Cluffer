@@ -235,6 +235,12 @@
       (declare (ignore value))
       (assert (typep error 'cluffer:end-of-line)))))
 
+(defun test-simple-line-15 ()
+  (multiple-value-bind (value error)
+      (ignore-errors (cluffer:item-at-position nil 0))
+    (declare (ignore value))
+    (assert (typep error 'cluffer:object-must-be-line))))
+
 (defun test-simple-line ()
   (test-simple-line-1)
   (test-simple-line-2)
@@ -249,4 +255,5 @@
   (test-simple-line-11)
   (test-simple-line-12)
   (test-simple-line-13)
-  (test-simple-line-14))
+  (test-simple-line-14)
+  (test-simple-line-15))
