@@ -239,6 +239,10 @@
   (multiple-value-bind (value error)
       (ignore-errors (cluffer:item-at-position nil 0))
     (declare (ignore value))
+    (assert (typep error 'cluffer:object-must-be-line)))
+  (multiple-value-bind (value error)
+      (ignore-errors (cluffer:insert-item-at-position nil 234 0))
+    (declare (ignore value))
     (assert (typep error 'cluffer:object-must-be-line))))
 
 (defun test-simple-line ()
