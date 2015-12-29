@@ -2,4 +2,5 @@
 
 (defun run-tests ()
   (test-simple-line)
-  (test-standard-line))
+  (test-standard-line)
+  (test-simple-buffer))
