@@ -161,7 +161,10 @@
     (assert (equalp (cluffer:items line) #(234)))
     (assert (= (cluffer:item-count line) 1))
     (assert (= (cluffer:item-count lc) 1))
-    (assert (= (cluffer:item-count rc) 1))))
+    (assert (= (cluffer:item-count rc) 1))
+    (cluffer:insert-item lc 123)
+    (assert (equalp (cluffer:items line :start 0 :end 1) #(123)))
+    (assert (equalp (cluffer:items line :start 1) #(234)))))
 
 (defun test-simple-line-11 ()
   (let ((line (make-instance 'cluffer-simple-line:line))
