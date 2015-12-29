@@ -8,4 +8,5 @@
    (:file "utilities")
    (:file "test-simple-line")
    (:file "test-standard-line")
+   (:file "test-simple-buffer")
    (:file "test")))
