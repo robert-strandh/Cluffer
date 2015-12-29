@@ -11,7 +11,8 @@
   (let* ((line (make-instance 'cluffer-simple-line:line))
 	 (buffer (make-instance 'cluffer-simple-buffer:buffer
 		   :initial-line line)))
-    (assert (eq line (cluffer:find-line buffer 0)))))
+    (assert (eq line (cluffer:find-line buffer 0)))
+    (assert (= (cluffer:line-number line) 0))))
 
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
