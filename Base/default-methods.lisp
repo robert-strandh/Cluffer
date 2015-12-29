@@ -153,6 +153,12 @@
   (cluffer-internal:dock-split-line
    (cluffer-internal:dock line) line position))
 
+;;; Default method on LINE-NUMBER.  This method calls the internal
+;;; generic function DOCK-LINE-NUMBER with the dock of the line and
+;;; the line.
+(defmethod cluffer:line-number ((line cluffer:line))
+  (cluffer-internal:dock-line-number (cluffer-internal:dock line) line))
+
 ;;; Default method on ITEM-AT-POSITION, invoked when the LINE argument
 ;;; is not an instance of LINE.
 (defmethod cluffer:item-at-position (line position)
