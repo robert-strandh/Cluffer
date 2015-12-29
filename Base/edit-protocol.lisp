@@ -345,8 +345,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Generic function JOIN-LINE.
+;;;
+;;; If entity is a line, then the line following it is appended to
+;;; the end of this line.  If entity is a cursor, then the line to
+;;; which the cursor is attached is joined with the line following it.
 
-(defgeneric join-line (cursor))
+(defgeneric join-line (entity))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
