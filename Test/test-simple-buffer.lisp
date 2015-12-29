@@ -33,7 +33,9 @@
     (assert (= (cluffer:item-count buffer) 10))
     (assert (equalp (cluffer:items line) #(1 2 3 4 5)))
     (assert (equalp (cluffer:items (cluffer:find-line buffer 1))
-		    #(6 7 8 9 10)))))
+		    #(6 7 8 9 10)))
+    (cluffer:join-line line)
+    (assert (equalp (cluffer:items line) #(1 2 3 4 5 6 7 8 9 10)))))
 
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
