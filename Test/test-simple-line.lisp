@@ -224,6 +224,13 @@
       (declare (ignore value))
       (assert (typep error 'cluffer:cursor-detached)))))
 
+(defun test-simple-line-14 ()
+  (let ((line (make-instance 'cluffer-simple-line:line)))
+    (multiple-value-bind (value error)
+	(ignore-errors (cluffer:split-line-at-position line -1))
+      (declare (ignore value))
+      (assert (typep error 'cluffer:beginning-of-line)))))
+
 (defun test-simple-line ()
   (test-simple-line-1)
   (test-simple-line-2)
@@ -237,4 +244,5 @@
   (test-simple-line-10)
   (test-simple-line-11)
   (test-simple-line-12)
-  (test-simple-line-13))
+  (test-simple-line-13)
+  (test-simple-line-14))
