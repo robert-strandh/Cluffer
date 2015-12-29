@@ -229,7 +229,11 @@
     (multiple-value-bind (value error)
 	(ignore-errors (cluffer:split-line-at-position line -1))
       (declare (ignore value))
-      (assert (typep error 'cluffer:beginning-of-line)))))
+      (assert (typep error 'cluffer:beginning-of-line)))
+    (multiple-value-bind (value error)
+	(ignore-errors (cluffer:split-line-at-position line 1))
+      (declare (ignore value))
+      (assert (typep error 'cluffer:end-of-line)))))
 
 (defun test-simple-line ()
   (test-simple-line-1)
