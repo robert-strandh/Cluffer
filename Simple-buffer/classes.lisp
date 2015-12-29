@@ -5,7 +5,7 @@
 		  :accessor cluffer:current-time)
    (%contents :initarg :contents :accessor contents)))
 
-(defclass node ()
+(defclass node (cluffer-internal:dock)
   ((%buffer :initform nil
 	    :initarg :buffer
 	    :accessor cluffer-internal:buffer)
