@@ -153,6 +153,11 @@
   (cluffer-internal:dock-split-line
    (cluffer-internal:dock line) line position))
 
+;; Default method on JOIN-LINE specialized to CURSOR.  This method
+;; calls JOIN-LINE with the line to which the cursor is attached.
+(defmethod cluffer:join-line ((cursor cluffer:cursor))
+  (cluffer:join-line (cluffer:line cursor)))
+
 ;;; Default method on LINE-NUMBER.  This method calls the internal
 ;;; generic function DOCK-LINE-NUMBER with the dock of the line and
 ;;; the line.
