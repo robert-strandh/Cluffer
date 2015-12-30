@@ -51,6 +51,5 @@
     (error 'cluffer:end-of-line)))
 
 (defmethod cluffer:join-line :before ((line cluffer:line))
-  (when (= (1+ (cluffer:line-number line))
-	   (cluffer:line-count (cluffer:buffer line)))
+  (when (cluffer:last-line-p line)
     (error 'cluffer:end-of-buffer)))
