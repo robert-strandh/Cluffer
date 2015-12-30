@@ -37,8 +37,16 @@
     (cluffer:join-line line)
     (assert (equalp (cluffer:items line) #(1 2 3 4 5 6 7 8 9 10)))))
 
+(defun test-simple-buffer-5 ()
+  (let* ((line (make-instance 'cluffer-simple-line:line))
+	 (buffer (make-instance 'cluffer-simple-buffer:buffer
+		   :initial-line line)))
+    (assert-error (cluffer:find-line buffer -1)
+		  cluffer:beginning-of-buffer)))
+
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
   (test-simple-buffer-2)
   (test-simple-buffer-3)
-  (test-simple-buffer-4))
+  (test-simple-buffer-4)
+  (test-simple-buffer-5))
