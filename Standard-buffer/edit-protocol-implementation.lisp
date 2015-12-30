@@ -141,8 +141,6 @@
 
 (defmethod cluffer:join-line (cursor)
   (let ((line (line cursor)))
-    (when (cluffer:last-line-p line)
-      (error 'cluffer:end-of-buffer))
     (let* ((line-number (cluffer:line-number line))
 	   (next-line (cluffer:find-line (buffer (cluffer-internal:dock line))
 					 (1+ line-number))))
