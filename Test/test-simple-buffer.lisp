@@ -44,6 +44,8 @@
     (assert-error (cluffer:find-line buffer -1)
 		  cluffer:beginning-of-buffer)
     (assert-error (cluffer:find-line buffer 1)
+		  cluffer:end-of-buffer)
+    (assert-error (cluffer:join-line line)
 		  cluffer:end-of-buffer)))
 
 (defun test-simple-buffer ()
