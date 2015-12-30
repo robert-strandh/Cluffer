@@ -51,6 +51,8 @@
 (defun test-simple-buffer-6 ()
   (let ((line (make-instance 'cluffer-simple-line:line)))
     (assert-error (cluffer:line-number line)
+		  cluffer:line-detached)
+    (assert-error (cluffer:split-line-at-position line 0)
 		  cluffer:line-detached)))
 
 (defun test-simple-buffer ()
