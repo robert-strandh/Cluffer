@@ -48,9 +48,15 @@
     (assert-error (cluffer:join-line line)
 		  cluffer:end-of-buffer)))
 
+(defun test-simple-buffer-6 ()
+  (let ((line (make-instance 'cluffer-simple-line:line)))
+    (assert-error (cluffer:line-number line)
+		  cluffer:line-detached)))
+
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
   (test-simple-buffer-2)
   (test-simple-buffer-3)
   (test-simple-buffer-4)
-  (test-simple-buffer-5))
+  (test-simple-buffer-5)
+  (test-simple-buffer-6))
