@@ -53,6 +53,8 @@
     (assert-error (cluffer:line-number line)
 		  cluffer:line-detached)
     (assert-error (cluffer:split-line-at-position line 0)
+		  cluffer:line-detached)
+    (assert-error (cluffer:join-line line)
 		  cluffer:line-detached)))
 
 (defun test-simple-buffer ()
