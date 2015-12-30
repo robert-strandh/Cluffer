@@ -6,4 +6,5 @@
   :components
   ((:file "packages")
    (:file "classes")
-   (:file "edit-protocol-implementation")))
+   (:file "edit-protocol-implementation")
+   (:file "update-protocol-implementation")))
