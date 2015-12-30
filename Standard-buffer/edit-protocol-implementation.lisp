@@ -139,23 +139,21 @@
 ;;;
 ;;; Method on generic function JOIN-LINE.
 
-(defmethod cluffer:join-line (cursor)
-  (let ((line (line cursor)))
-    (let* ((line-number (cluffer:line-number line))
-	   (next-line (cluffer:find-line (buffer (cluffer-internal:dock line))
-					 (1+ line-number))))
-      (let ((node-line (cluffer-internal:dock line))
-	    (node-next-line (cluffer-internal:dock next-line)))
-	(clump-binary-tree:splay node-next-line)
-	(clump-binary-tree:splay node-line)
-	;; Now LINE is on top and NEXT-LINE is its right child.
-	;; Furthermore NEXT-LINE does not have any left children.
-	(let ((time (incf (cluffer:current-time (buffer node-line)))))
-	  (setf (modify-time node-line) time)
-	  (setf (max-modify-time node-line) time))
-	(let ((right (clump-binary-tree:right node-next-line)))
-	  (setf (clump-binary-tree:right node-line) nil)
-	  (setf (clump-binary-tree:right node-next-line) nil)
-	  (setf (clump-binary-tree:right node-line) right))
-	(cluffer-internal:line-join-line line next-line))))
+(defmethod cluffer-internal:buffer-join-line
+    ((buffer buffer) (dock node) (line cluffer:line))
+  (let* ((line-number (cluffer:line-number line))
+	 (next-line (cluffer:find-line buffer (1+ line-number))))
+    (let ((node-next-line (cluffer-internal:dock next-line)))
+      (clump-binary-tree:splay node-next-line)
+      (clump-binary-tree:splay dock)
+      ;; Now LINE is on top and NEXT-LINE is its right child.
+      ;; Furthermore NEXT-LINE does not have any left children.
+      (let ((time (incf (cluffer:current-time buffer))))
+	(setf (modify-time dock) time)
+	(setf (max-modify-time dock) time))
+      (let ((right (clump-binary-tree:right node-next-line)))
+	(setf (clump-binary-tree:right dock) nil)
+	(setf (clump-binary-tree:right node-next-line) nil)
+	(setf (clump-binary-tree:right dock) right))
+      (cluffer-internal:line-join-line line next-line)))
   nil)
