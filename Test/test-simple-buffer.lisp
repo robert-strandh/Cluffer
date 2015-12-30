@@ -42,7 +42,9 @@
 	 (buffer (make-instance 'cluffer-simple-buffer:buffer
 		   :initial-line line)))
     (assert-error (cluffer:find-line buffer -1)
-		  cluffer:beginning-of-buffer)))
+		  cluffer:beginning-of-buffer)
+    (assert-error (cluffer:find-line buffer 1)
+		  cluffer:end-of-buffer)))
 
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
