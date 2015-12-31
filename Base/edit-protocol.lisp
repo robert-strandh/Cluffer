@@ -1,12 +1,12 @@
-(cl:in-package #:cluffer)
+(cl:in-package #:cluffer-base)
 
-(defclass buffer () ())
+(defclass cluffer:buffer () ())
 
-(defclass line ()
+(defclass cluffer:line ()
   ((%dock :initarg :dock :initform nil
 	  :accessor cluffer-internal:dock)))
 
-(defclass cursor () ())
+(defclass cluffer:cursor () ())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -14,7 +14,7 @@
 ;;;
 ;;; Return the number of lines in BUFFER.
 
-(defgeneric line-count (buffer))
+(defgeneric cluffer:line-count (buffer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -35,7 +35,7 @@
 ;;; If ENTITY is a cursor that is currently not attached to a line,
 ;;; then an error of type DETACHED-CURSOR is signaled.
 
-(defgeneric item-count (entity))
+(defgeneric cluffer:item-count (entity))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -44,7 +44,7 @@
 ;;; Given a cursor, return true if and only if the cursor is attached
 ;;; to a line.
 
-(defgeneric cursor-attached-p (cursor))
+(defgeneric cluffer:cursor-attached-p (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -55,7 +55,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric cursor-position (cursor))
+(defgeneric cluffer:cursor-position (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -69,7 +69,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric (setf cursor-position) (position cursor))
+(defgeneric (setf cluffer:cursor-position) (position cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -85,7 +85,7 @@
 ;;; CURSOR-POSITION and checking whether the return value is zero, but
 ;;; this function might be implemented differently.
 
-(defgeneric beginning-of-line-p (cursor))
+(defgeneric cluffer:beginning-of-line-p (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -101,7 +101,7 @@
 ;;; CURSOR-POSITION and ITEM-COUNT checking whether the return values
 ;;; are the same, but this function might be implemented differently.
 
-(defgeneric end-of-line-p (cursor))
+(defgeneric cluffer:end-of-line-p (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -115,7 +115,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric forward-item (cursor))
+(defgeneric cluffer:forward-item (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -129,7 +129,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric backward-item (cursor))
+(defgeneric cluffer:backward-item (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -141,7 +141,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric beginning-of-line (cursor))
+(defgeneric cluffer:beginning-of-line (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -153,7 +153,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric end-of-line (cursor))
+(defgeneric cluffer:end-of-line (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -161,7 +161,7 @@
 ;;;
 ;;; Return the item at POSITION in LINE.
 
-(defgeneric item-at-position (line position))
+(defgeneric cluffer:item-at-position (line position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -175,7 +175,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric item-before-cursor (cursor))
+(defgeneric cluffer:item-before-cursor (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -189,7 +189,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric item-after-cursor (cursor))
+(defgeneric cluffer:item-after-cursor (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -215,7 +215,7 @@
 ;;;
 ;;; Delete the item at POSITION in LINE.
 
-(defgeneric delete-item-at-position (line position))
+(defgeneric cluffer:delete-item-at-position (line position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -231,7 +231,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric insert-item (cursor item))
+(defgeneric cluffer:insert-item (cursor item))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -245,7 +245,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric delete-item (cursor))
+(defgeneric cluffer:delete-item (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -259,7 +259,7 @@
 ;;; If CURSOR is currently not attached to a line, then an error of
 ;;; type DETACHED-CURSOR is signaled.
 
-(defgeneric erase-item (cursor))
+(defgeneric cluffer:erase-item (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -277,7 +277,7 @@
 ;;; If ENTITY is a cursor that is currently not attached to a line,
 ;;; then an error of type DETACHED-CURSOR is signaled.
 
-(defgeneric line-number (entity))
+(defgeneric cluffer:line-number (entity))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -292,7 +292,7 @@
 ;;; or equal to the number of lines in BUFFER, then an error of type
 ;;; END-OF-BUFFER is signaled.
 
-(defgeneric find-line (buffer line-number))
+(defgeneric cluffer:find-line (buffer line-number))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -310,7 +310,7 @@
 ;;; the actual implementation of this function might be different for
 ;;; performance reasons.
 
-(defgeneric beginning-of-buffer-p (cursor))
+(defgeneric cluffer:beginning-of-buffer-p (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -334,13 +334,13 @@
 ;;;
 ;;; Generic function SPLIT-LINE-AT-POSITION.
 
-(defgeneric split-line-at-position (line position))
+(defgeneric cluffer:split-line-at-position (line position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Generic function SPLIT-LINE.
 
-(defgeneric split-line (cursor))
+(defgeneric cluffer:split-line (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -350,7 +350,7 @@
 ;;; the end of this line.  If entity is a cursor, then the line to
 ;;; which the cursor is attached is joined with the line following it.
 
-(defgeneric join-line (entity))
+(defgeneric cluffer:join-line (entity))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -364,13 +364,13 @@
 ;;;
 ;;; Generic function ATTACH-CURSOR.
 
-(defgeneric attach-cursor (cursor line &optional position))
+(defgeneric cluffer:attach-cursor (cursor line &optional position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Generic function DETACH-CURSOR.
 
-(defgeneric detach-cursor (cursor))
+(defgeneric cluffer:detach-cursor (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -378,13 +378,13 @@
 ;;;
 ;;; Return the buffer of a cursor or a line.
 
-(defgeneric buffer (entity))
+(defgeneric cluffer:buffer (entity))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Generic function FIRST-LINE-P.
 
-(defgeneric first-line-p (line))
+(defgeneric cluffer:first-line-p (line))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -401,4 +401,4 @@
 ;;; If CURSOR is a cursor that is currently not attached to a line,
 ;;; then an error of type DETACHED-CURSOR is signaled.
 
-(defgeneric line (cursor))
+(defgeneric cluffer:line (cursor))
