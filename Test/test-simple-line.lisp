@@ -242,6 +242,14 @@
     (cluffer:end-of-line cursor)
     (assert (= (cluffer:cursor-position cursor) 1))))
 
+(defun test-simple-line-17 ()
+  (let ((line (make-instance 'cluffer-simple-line:line))
+	(rc (make-instance 'cluffer-simple-line:right-sticky-cursor)))
+    (cluffer:attach-cursor rc line)
+    (cluffer:insert-item-at-position line 234 0)
+    (cluffer:erase-item rc)
+    (assert (zerop (cluffer:item-count line)))))
+
 (defun test-simple-line ()
   (test-simple-line-1)
   (test-simple-line-2)
@@ -258,4 +266,5 @@
   (test-simple-line-13)
   (test-simple-line-14)
   (test-simple-line-15)
-  (test-simple-line-16))
+  (test-simple-line-16)
+  (test-simple-line-17))
