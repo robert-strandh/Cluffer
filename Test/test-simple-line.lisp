@@ -8,8 +8,8 @@
 	(cursor (make-instance
 		    'cluffer-simple-line:left-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
-    (assert (typep (nth-value 1 (ignore-errors (cluffer:backward-item cursor)))
-		   'cluffer:beginning-of-line)))
+    (assert-error (cluffer:backward-item cursor)
+		  cluffer:beginning-of-line))
   ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
