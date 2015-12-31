@@ -34,7 +34,7 @@
   (let* ((line1 (make-instance 'cluffer-simple-line:line))
 	 (buffer1 (make-instance 'cluffer-simple-buffer:buffer
 		    :initial-line line1))
-	 (line2 (make-instance 'cluffer-standard-line:line))
+	 (line2 (make-instance 'cluffer-standard-line:open-line))
 	 (buffer2 (make-instance 'cluffer-standard-buffer:buffer
 		    :initial-line line2)))
     (loop repeat n
