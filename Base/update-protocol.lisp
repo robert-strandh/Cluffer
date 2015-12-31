@@ -1,5 +1,5 @@
-(cl:in-package #:cluffer)
+(cl:in-package #:cluffer-base)
 
-(defgeneric current-time (buffer))
+(defgeneric cluffer:current-time (buffer))
 
-(defgeneric update (buffer time sync skip modify create))
+(defgeneric cluffer:update (buffer time sync skip modify create))
