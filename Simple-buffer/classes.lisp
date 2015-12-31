@@ -10,8 +10,7 @@
 	    :initarg :buffer
 	    :accessor cluffer-internal:buffer)
    (%create-time :initarg :create-time :reader create-time)
-   (%modify-time :initarg :modify-time :accessor modify-time)
-   (%line :initarg :line :accessor line)))
+   (%modify-time :initarg :modify-time :accessor modify-time)))
 
 (defmethod initialize-instance :after ((buffer buffer) &key initial-line)
   (let ((node (make-instance 'node
