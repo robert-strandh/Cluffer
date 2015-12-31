@@ -328,7 +328,7 @@
 ;;; END-OF-LINE-P returns true, but the actual implementation of this
 ;;; function might be different for performance reasons.
 
-(defgeneric end-of-buffer-p (cursor))
+(defgeneric cluffer:end-of-buffer-p (cursor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
