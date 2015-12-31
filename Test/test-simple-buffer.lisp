@@ -71,7 +71,8 @@
     (cluffer:insert-item cursor 234)
     (cluffer:insert-item cursor 234)
     (cluffer:forward-item cursor)
-    (assert (not (cluffer:beginning-of-buffer-p cursor)))))
+    (assert (not (cluffer:beginning-of-buffer-p cursor)))
+    (assert (not (cluffer:end-of-buffer-p cursor)))))
 
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
