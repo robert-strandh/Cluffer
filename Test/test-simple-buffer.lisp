@@ -60,10 +60,13 @@
 (defun test-simple-buffer-7 ()
   (let* ((line (make-instance 'cluffer-simple-line:line))
 	 (buffer (make-instance 'cluffer-simple-buffer:buffer
-		   :initial-line line)))
+		   :initial-line line))
+	 (cursor (make-instance 'cluffer-simple-line:left-sticky-cursor)))
     (declare (ignore buffer))
+    (cluffer:attach-cursor cursor line)
     (assert (cluffer:first-line-p line))
-    (assert (cluffer:last-line-p line))))
+    (assert (cluffer:last-line-p line))
+    (assert (cluffer:beginning-of-buffer-p cursor))))
 
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
