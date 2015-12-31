@@ -207,7 +207,7 @@
 ;;; each RIGHT-STICKY cursor at POSITION will have its position
 ;;; incremented as a result of this operation.
 
-(defgeneric insert-item-at-position (line item position))
+(defgeneric cluffer:insert-item-at-position (line item position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
