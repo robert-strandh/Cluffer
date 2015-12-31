@@ -33,8 +33,8 @@
 	(cursor (make-instance
 		    'cluffer-simple-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
-    (assert (typep (nth-value 1 (ignore-errors (cluffer:forward-item cursor)))
-		   'cluffer:end-of-line))))
+    (assert-error (cluffer:forward-item cursor)
+		   cluffer:end-of-line)))
 
 ;;; Check that the cursor position of a cursor in an empty line is 0.
 (defun test-simple-line-3 ()
