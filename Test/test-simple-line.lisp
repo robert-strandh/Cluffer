@@ -26,8 +26,8 @@
 	(cursor (make-instance
 		    'cluffer-simple-line:left-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
-    (assert (typep (nth-value 1 (ignore-errors (cluffer:forward-item cursor)))
-		   'cluffer:end-of-line)))
+    (assert-error (cluffer:forward-item cursor)
+		   cluffer:end-of-line))
   ;;; Run the test for a right-sticky cursor.
   (let ((line (make-instance 'cluffer-simple-line:line))
 	(cursor (make-instance
