@@ -74,6 +74,10 @@
     (assert (not (cluffer:beginning-of-buffer-p cursor)))
     (assert (not (cluffer:end-of-buffer-p cursor)))))
 
+(defun test-simple-buffer-8 ()
+  (assert-error (cluffer:find-line 234 234)
+		cluffer:object-must-be-buffer))
+
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
   (test-simple-buffer-2)
@@ -81,4 +85,5 @@
   (test-simple-buffer-4)
   (test-simple-buffer-5)
   (test-simple-buffer-6)
-  (test-simple-buffer-7))
+  (test-simple-buffer-7)
+  (test-simple-buffer-8))
