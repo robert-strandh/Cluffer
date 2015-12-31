@@ -29,3 +29,16 @@
 	       (item (random 100000)))
 	   (cluffer:insert-item-at-position line1 item position)
 	   (cluffer:insert-item-at-position line2 item position)))))
+
+(defun test-standard-buffer-1 (n)
+  (let* ((line1 (make-instance 'cluffer-simple-line:line))
+	 (buffer1 (make-instance 'cluffer-simple-buffer:buffer
+		    :initial-line line1))
+	 (line2 (make-instance 'cluffer-standard-line:line))
+	 (buffer2 (make-instance 'cluffer-standard-buffer:buffer
+		    :initial-line line2)))
+    (loop repeat n
+	  for line-number = (random (cluffer:line-count buffer1))
+	  do (random-operation (cluffer:find-line buffer1 line-number)
+			       (cluffer:find-line buffer2 line-number))
+	     (check-buffers-probably-same buffer1 buffer2))))
