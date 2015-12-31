@@ -57,10 +57,18 @@
     (assert-error (cluffer:join-line line)
 		  cluffer:line-detached)))
 
+(defun test-simple-buffer-7 ()
+  (let* ((line (make-instance 'cluffer-simple-line:line))
+	 (buffer (make-instance 'cluffer-simple-buffer:buffer
+		   :initial-line line)))
+    (declare (ignore buffer))
+    (assert (cluffer:first-line-p line))))
+
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
   (test-simple-buffer-2)
   (test-simple-buffer-3)
   (test-simple-buffer-4)
   (test-simple-buffer-5)
-  (test-simple-buffer-6))
+  (test-simple-buffer-6)
+  (test-simple-buffer-7))
