@@ -62,7 +62,8 @@
 	 (buffer (make-instance 'cluffer-simple-buffer:buffer
 		   :initial-line line)))
     (declare (ignore buffer))
-    (assert (cluffer:first-line-p line))))
+    (assert (cluffer:first-line-p line))
+    (assert (cluffer:last-line-p line))))
 
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
