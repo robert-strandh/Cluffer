@@ -15,8 +15,9 @@
 ;;; The items of an open line are stored in a gap buffer.
 
 (defclass open-line (line)
-  ((%gap-start :initarg :gap-start :accessor gap-start)
-   (%gap-end :initarg :gap-end :accessor gap-end)))
+  ((%gap-start :initform 0 :initarg :gap-start :accessor gap-start)
+   (%gap-end :initform  10 :initarg :gap-end :accessor gap-end))
+  (:default-initargs :contents (make-array 10)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
