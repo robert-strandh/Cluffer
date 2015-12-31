@@ -356,9 +356,14 @@
 ;;;
 ;;; ITEMS.
 ;;;
-;;; Return the items of a line in a vector.
+;;; Return the items of ENTITY in a vector.  If ENTITY is a line, then
+;;; return the items in that line.  If ENTITY is a cursor, then return
+;;; the items in the line to which the cursor is attached.
+;;;
+;;; If entity is a cursor that is not currently attached to a line,
+;;; then signal a condition of type CURSOR-DETACHED.
 
-(defgeneric items (line &key start end))
+(defgeneric cluffer:items (entity &key start end))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
