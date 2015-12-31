@@ -37,6 +37,17 @@
 (defmethod cluffer:beginning-of-line ((cursor cluffer:cursor))
   (setf (cluffer:cursor-position cursor) 0))
 
+;;; Default method on END-OF-LINE.
+;;;
+;;; Simple implementations of the line protocol can rely on the
+;;; existence of this method.  More sophisticated implementations
+;;; might use a more optimized way of positioning the cursor at the
+;;; end of the line.
+
+(defmethod cluffer:end-of-line ((cursor cluffer:cursor))
+  (setf (cluffer:cursor-position cursor)
+	(cluffer:item-count cursor)))
+
 ;;; Default method on FIRST-LINE-P.
 (defmethod cluffer:first-line-p ((line cluffer:line))
   (= (cluffer:line-number line) 0))
