@@ -18,3 +18,7 @@
 
 (defmethod dock-join-line ((dock dock) (line cluffer:line))
   (buffer-join-line (buffer dock) dock line))
+
+(defmethod notify-item-count-changed ((dock null) delta)
+  (declare (ignore delta))
+  nil)
