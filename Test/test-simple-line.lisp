@@ -15,8 +15,8 @@
 	(cursor (make-instance
 		    'cluffer-simple-line:right-sticky-cursor)))
     (cluffer:attach-cursor cursor line)
-    (assert (typep (nth-value 1 (ignore-errors (cluffer:backward-item cursor)))
-		   'cluffer:beginning-of-line))))
+    (assert-error (cluffer:backward-item cursor)
+		  cluffer:beginning-of-line)))
 
 ;;; Check that moving forward on an empty simple line signals an error
 ;;; of type END-OF-LINE.
