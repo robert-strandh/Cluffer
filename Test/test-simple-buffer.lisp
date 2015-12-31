@@ -75,6 +75,8 @@
     (assert (not (cluffer:end-of-buffer-p cursor)))))
 
 (defun test-simple-buffer-8 ()
+  (assert-error (cluffer:line-count 234)
+		cluffer:object-must-be-buffer)
   (assert-error (cluffer:find-line 234 234)
 		cluffer:object-must-be-buffer))
 
