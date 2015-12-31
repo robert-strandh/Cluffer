@@ -395,7 +395,7 @@
 ;;;
 ;;; Generic function LAST-LINE-P.
 
-(defgeneric last-line-p (line))
+(defgeneric cluffer:last-line-p (line))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
