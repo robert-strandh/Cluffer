@@ -17,14 +17,14 @@
 
 (defmethod cluffer:item-count ((buffer buffer))
   (loop for node across (contents buffer)
-	sum (cluffer:item-count (line node))))
+	sum (cluffer:item-count (cluffer-internal:line node))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Method on generic function FIND-LINE.
 
 (defmethod cluffer:find-line ((buffer buffer) line-number)
-  (line (aref (contents buffer) line-number)))
+  (cluffer-internal:line (aref (contents buffer) line-number)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -32,7 +32,9 @@
 
 (defmethod cluffer-internal:buffer-line-number
     ((buffer buffer) (dock node) line)
-  (position line (contents buffer) :test #'eq :key #'line))
+  (position line (contents buffer)
+	    :test #'eq
+	    :key #'cluffer-internal:line))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
