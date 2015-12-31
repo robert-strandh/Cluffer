@@ -66,7 +66,8 @@
     (cluffer:attach-cursor cursor line)
     (assert (cluffer:first-line-p line))
     (assert (cluffer:last-line-p line))
-    (assert (cluffer:beginning-of-buffer-p cursor))))
+    (assert (cluffer:beginning-of-buffer-p cursor))
+    (assert (cluffer:end-of-buffer-p cursor))))
 
 (defun test-simple-buffer ()
   (test-simple-buffer-1)
