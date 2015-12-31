@@ -238,7 +238,9 @@
     (cluffer:insert-item cursor 234)
     (assert (= (cluffer:cursor-position cursor) 1))
     (cluffer:beginning-of-line cursor)
-    (assert (= (cluffer:cursor-position cursor) 0))))
+    (assert (= (cluffer:cursor-position cursor) 0))
+    (cluffer:end-of-line cursor)
+    (assert (= (cluffer:cursor-position cursor) 1))))
 
 (defun test-simple-line ()
   (test-simple-line-1)
