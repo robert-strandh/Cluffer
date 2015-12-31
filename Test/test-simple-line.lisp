@@ -230,6 +230,16 @@
   (assert-error (cluffer:delete-item-at-position nil 0)
 		cluffer:object-must-be-line))
 
+(defun test-simple-line-16 ()
+  (let ((line (make-instance 'cluffer-simple-line:line))
+	(cursor (make-instance
+		    'cluffer-simple-line:right-sticky-cursor)))
+    (cluffer:attach-cursor cursor line)
+    (cluffer:insert-item cursor 234)
+    (assert (= (cluffer:cursor-position cursor) 1))
+    (cluffer:beginning-of-line cursor)
+    (assert (= (cluffer:cursor-position cursor) 0))))
+
 (defun test-simple-line ()
   (test-simple-line-1)
   (test-simple-line-2)
@@ -245,4 +255,5 @@
   (test-simple-line-12)
   (test-simple-line-13)
   (test-simple-line-14)
-  (test-simple-line-15))
+  (test-simple-line-15)
+  (test-simple-line-16))
