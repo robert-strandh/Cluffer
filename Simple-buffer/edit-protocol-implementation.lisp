@@ -1,11 +1,25 @@
 (cl:in-package #:cluffer-simple-buffer)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Method on internal generic function NOTIFY-ITEM-COUNT-CHANGED.
+;;;
+;;; The simple buffer does not register changes in item count for
+;;; individual lines, because it recomputes the item count each time
+;;; this information is requested, by adding up individual item counts
+;;; for every line of the buffer.
+
+(defmethod cluffer-internal:notify-item-count-changed
+    ((dock node) delta)
+  (declare (ignore delta))
+  nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Edit protocol
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Method on generic function LINE-COUNT.
 
 (defmethod cluffer:line-count ((buffer buffer))
