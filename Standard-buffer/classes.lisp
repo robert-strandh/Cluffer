@@ -19,8 +19,7 @@
     %item-count :initarg :item-count :accessor item-count)
    (%create-time :initarg :create-time :reader create-time)
    (%modify-time :initarg :modify-time :accessor modify-time)
-   (%max-modify-time :initarg :max-modify-time :accessor max-modify-time)
-   (%line :initarg :line :accessor line)))
+   (%max-modify-time :initarg :max-modify-time :accessor max-modify-time)))
 
 (defmethod initialize-instance :after ((buffer buffer) &key initial-line)
   (let ((node (make-instance 'node
