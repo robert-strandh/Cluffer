@@ -12,7 +12,7 @@
 (defclass node (clump-binary-tree:node-with-parent cluffer-internal:dock)
   ((%buffer :initform nil
 	    :initarg :buffer
-	    :accessor buffer)
+	    :accessor cluffer-internal:buffer)
    (;; The line count of the entire subtree.
     %line-count :initarg :line-count :accessor line-count)
    (;; The item count of the entire subtree.
