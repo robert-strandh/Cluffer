@@ -144,11 +144,6 @@
 	(position (cluffer:cursor-position cursor)))
     (cluffer:delete-item-at-position line (1- position))))
 
-;;; Default method on NOTIFY-ITEM-COUNT-CHANGED.  This method does
-;;; nothing, and is used when a line is not attached to a buffer.
-(defmethod cluffer-internal:notify-item-count-changed ((doc null) delta)
-  nil)
-
 ;;; Default method on SPLIT-LINE.  This method calls
 ;;; SLIT-LINE-AT-POSITION with the line of the cursor and the position
 ;;; of the cursor as arguments.
