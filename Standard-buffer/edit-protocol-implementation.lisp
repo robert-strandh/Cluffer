@@ -1,14 +1,16 @@
 (cl:in-package #:cluffer-standard-buffer)
 
-(defmethod (setf clump-binary-tree:left) :before ((new-left null) (node node))
-  (unless (null (clump-binary-tree:left node))
-    (decf (line-count node) (line-count (clump-binary-tree:left node)))
-    (decf (item-count node) (item-count (clump-binary-tree:left node)))
-    (setf (max-modify-time node)
-	  (max (modify-time node)
-	       (if (null (clump-binary-tree:right node))
-		   0
-		   (max-modify-time (clump-binary-tree:right node)))))))
+(defmethod (setf clump-binary-tree:left) :before (new-left (node node))
+  (declare (ignore new-left))
+  (let ((left (clump-binary-tree:left node)))
+    (unless (null left)
+      (decf (line-count node) (line-count left))
+      (decf (item-count node) (item-count left))
+      (setf (max-modify-time node)
+	    (max (modify-time node)
+		 (if (null (clump-binary-tree:right node))
+		     0
+		     (max-modify-time (clump-binary-tree:right node))))))))
 
 (defmethod (setf clump-binary-tree:left) :after ((new-left node) (node node))
   (incf (line-count node) (line-count new-left))
@@ -17,15 +19,17 @@
 	(max (max-modify-time node)
 	     (max-modify-time new-left))))
 
-(defmethod (setf clump-binary-tree:right) :before ((new-right null) (node node))
-  (unless (null (clump-binary-tree:right node))
-    (decf (line-count node) (line-count (clump-binary-tree:right node)))
-    (decf (item-count node) (item-count (clump-binary-tree:right node)))
-    (setf (max-modify-time node)
-	  (max (modify-time node)
-	       (if (null (clump-binary-tree:left node))
-		   0
-		   (max-modify-time (clump-binary-tree:left node)))))))
+(defmethod (setf clump-binary-tree:right) :before (new-right (node node))
+  (declare (ignore new-right))
+  (let ((right (clump-binary-tree:right node)))
+    (unless (null right)
+      (decf (line-count node) (line-count right))
+      (decf (item-count node) (item-count right))
+      (setf (max-modify-time node)
+	    (max (modify-time node)
+		 (if (null (clump-binary-tree:left node))
+		     0
+		     (max-modify-time (clump-binary-tree:left node))))))))
 
 (defmethod (setf clump-binary-tree:right) :after ((new-right node) (node node))
   (incf (line-count node) (line-count new-right))
@@ -70,7 +74,7 @@
 	       (setf node left)
 	       (progn (setf node right)
 		      (decf relative-line-number (1+ left-count))))
-	finally (return (line node))))
+	finally (return (cluffer-internal:line node))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
