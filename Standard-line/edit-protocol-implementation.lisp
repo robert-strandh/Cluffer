@@ -201,7 +201,11 @@
 ;;;
 ;;; Methods on CLUFFER-INTERNAL:LINE-SPLIT-LINE.
 
-(defmethod cluffer-internal:line-split-line ((line line) position)
+(defmethod cluffer-internal:line-split-line ((line open-line) position)
+  (close-line line)
+  (cluffer-internal:line-split-line line position)
+
+(defmethod cluffer-internal:line-split-line ((line closed-line) position)
   (let* ((contents (contents line))
 	 (new-contents (subseq contents position))
 	 (new-line (make-instance 'closed-line
