@@ -23,12 +23,13 @@
    (%line :initarg :line :accessor line)))
 
 (defmethod initialize-instance :after ((buffer buffer) &key initial-line)
-  (setf (contents buffer)
-	(make-instance 'node
-	  :buffer buffer
-	  :line-count 1
-	  :item-count 0
-	  :create-time 0
-	  :modify-time 0
-	  :max-modify-time 0
-	  :line initial-line)))
+  (let ((node (make-instance 'node
+		:buffer buffer
+		:line-count 1
+		:item-count 0
+		:create-time 0
+		:modify-time 0
+		:max-modify-time 0
+		:line initial-line)))
+    (setf (contents buffer) node)
+    (setf (cluffer-internal:dock initial-line) node)))
