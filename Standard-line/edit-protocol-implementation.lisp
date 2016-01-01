@@ -100,11 +100,9 @@
 ;;;
 ;;; Methods on INSERT-ITEM-AT-POSITION.
 
-(defmethod cluffer:insert-item-at-position ((line closed-line) item position)
-  (open-line line)
-  (cluffer:insert-item-at-position line item position))
-
-(defmethod cluffer:insert-item-at-position ((line open-line) item position)
+;;; Helper function to capture commonalities between the two methods.
+;;; LINE is always an open line.
+(defun insert-item-at-position (line item position)
   (let ((contents (contents line)))
     (cond ((= (gap-start line) (gap-end line))
 	   (let* ((new-length (* 2 (length contents)))
@@ -140,15 +138,20 @@
 	       (incf (cluffer:cursor-position cursor)))))
   nil)
 
+(defmethod cluffer:insert-item-at-position ((line closed-line) item position)
+  (open-line line)
+  (insert-item-at-position line item position))
+
+(defmethod cluffer:insert-item-at-position ((line open-line) item position)
+  (insert-item-at-position line item position))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on DELETE-ITEM-AT-POSITION.
 
-(defmethod cluffer:delete-item-at-position ((line closed-line) position)
-  (open-line line)
-  (cluffer:delete-item-at-position line position))
-
-(defmethod cluffer:delete-item-at-position ((line open-line) position)
+;;; Helper function to capture commonalities between the two methods.
+;;; LINE is always an open line.
+(defun delete-item-at-position (line position)
   (let ((contents (contents line)))
     (cond ((< position (gap-start line))
 	   (decf (gap-end line) (- (gap-start line) position))
@@ -182,6 +185,13 @@
 	  do (when (> (cluffer:cursor-position cursor) position)
 	       (decf (cluffer:cursor-position cursor)))))
   nil)
+
+(defmethod cluffer:delete-item-at-position ((line closed-line) position)
+  (open-line line)
+  (delete-item-at-position line position))
+
+(defmethod cluffer:delete-item-at-position ((line open-line) position)
+  (delete-item-at-position line position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
