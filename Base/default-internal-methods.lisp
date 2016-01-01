@@ -19,6 +19,8 @@
 (defmethod dock-join-line ((dock dock) (line cluffer:line))
   (buffer-join-line (buffer dock) dock line))
 
+;;; Default method on NOTIFY-ITEM-COUNT-CHANGED.  This method does
+;;; nothing, and is used when a line is not attached to a buffer.
 (defmethod notify-item-count-changed ((dock null) delta)
   (declare (ignore delta))
   nil)
