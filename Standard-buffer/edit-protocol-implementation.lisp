@@ -37,24 +37,6 @@
 (defmethod clump-binary-tree:splay :after ((node node))
   (setf (contents (buffer node)) node))
 
-;;; Make an empty buffer.  Client code can decide what line
-;;; implementation to use by passing in instance of the desired class
-;;; as the initial line for the buffer.
-(defun make-empty-buffer (initial-line)
-  (let* ((node (make-instance 'node
-		     :line-count 1
-		     :item-count 0
-		     :create-time 0
-		     :modify-time 0
-		     :max-modify-time 0
-		     :line initial-line))
-	 (buffer (make-instance 'buffer
-		   :current-time 1
-		   :contents node)))
-    (setf (cluffer-internal:dock initial-line) node)
-    (setf (buffer node) buffer)
-    buffer))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Edit protocol
