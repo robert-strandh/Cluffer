@@ -93,10 +93,9 @@
 
 (defmethod cluffer-internal:buffer-split-line
     ((buffer buffer) (dock node) (line cluffer:line) position)
-  (let* ((dock (cluffer-internal:dock line))
-	 ;; The number of items that will be removed from the existing
-	 ;; line and also the number of items of the new line.
-	 (diff (- (cluffer:item-count line) position)))
+  (let (;; The number of items that will be removed from the existing
+	;; line and also the number of items of the new line.
+	(diff (- (cluffer:item-count line) position)))
     ;; Make sure the existing line is the root of the tree.
     (clump-binary-tree:splay dock)
     (decf (item-count dock) diff)
