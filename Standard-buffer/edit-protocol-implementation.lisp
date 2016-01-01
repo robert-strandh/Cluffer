@@ -35,7 +35,7 @@
 	     (max-modify-time new-right))))
 
 (defmethod clump-binary-tree:splay :after ((node node))
-  (setf (contents (buffer node)) node))
+  (setf (contents (cluffer-internal:buffer node)) node))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

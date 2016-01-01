@@ -5,7 +5,7 @@
 ;;; Method on function NOTIFY-ITEM-COUNT-CHANGED.
 
 (defmethod cluffer-internal:notify-item-count-changed ((node node) delta)
-  (let ((buffer (buffer node)))
+  (let ((buffer (cluffer-internal:buffer node)))
     (clump-binary-tree:splay node)
     (incf (item-count node) delta)
     (setf (modify-time node) (incf (cluffer:current-time buffer)))
