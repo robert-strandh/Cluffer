@@ -203,7 +203,7 @@
 
 (defmethod cluffer-internal:line-split-line ((line open-line) position)
   (close-line line)
-  (cluffer-internal:line-split-line line position)
+  (cluffer-internal:line-split-line line position))
 
 (defmethod cluffer-internal:line-split-line ((line closed-line) position)
   (let* ((contents (contents line))
@@ -212,7 +212,7 @@
 		     :cursors '()
 		     :contents new-contents)))
     (setf (contents line)
-	  (subseq (contents line) 0 position))
+	  (subseq contents 0 position))
     (setf (cursors new-line)
 	  (loop for cursor in (cursors line)
 		when (or (and (typep cursor 'right-sticky-cursor)
