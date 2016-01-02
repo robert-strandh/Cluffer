@@ -22,26 +22,26 @@
     (push operation *operations*)))
 
 (defun join (line1 line2 line-number)
-  (format t "join ~d~%" line-number)
+  (record `(join ,line-number))
   (cluffer:join-line line1)
   (cluffer:join-line line2))
 
 (defun random-split (line1 line2 line-number)
   (let ((position (random (1+ (cluffer:item-count line1)))))
-    (format t "split ~d ~d~%" line-number position)
+    (record `(split ,line-number ,position))
     (cluffer:split-line-at-position line1 position)
     (cluffer:split-line-at-position line2 position)))
 
 (defun random-insert (line1 line2 line-number)
   (let ((position (random (1+ (cluffer:item-count line1))))
 	(item (random 100000)))
-    (format t "insert ~d ~d ~d~%" line-number position item)
+    (record `(insert ,line-number ,position ,item))
     (cluffer:insert-item-at-position line1 item position)
     (cluffer:insert-item-at-position line2 item position)))
 
 (defun random-delete (line1 line2 line-number)
   (let ((position (random (cluffer:item-count line1))))
-    (format t "delete ~d ~d~%" line-number position)
+    (record `(delete ,line-number ,position))
     (cluffer:delete-item-at-position line1 position)
     (cluffer:delete-item-at-position line2 position)))
 
