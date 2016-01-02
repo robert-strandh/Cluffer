@@ -26,7 +26,7 @@
 (defun random-insert (line1 line2 line-number)
   (let ((position (random (1+ (cluffer:item-count line1))))
 	(item (random 100000)))
-    (format t "insert ~d ~d~%" line-number position)
+    (format t "insert ~d ~d ~d~%" line-number position item)
     (cluffer:insert-item-at-position line1 item position)
     (cluffer:insert-item-at-position line2 item position)))
 
