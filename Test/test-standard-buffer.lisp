@@ -16,6 +16,10 @@
 
 (defparameter *recording-p* t)
 
+(defun record (operation)
+  (when *recording-p*
+    (push operation *operations*)))
+
 (defun join (line1 line2 line-number)
   (format t "join ~d~%" line-number)
   (cluffer:join-line line1)
