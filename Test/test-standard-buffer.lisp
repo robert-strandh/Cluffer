@@ -26,11 +26,14 @@
   (cluffer:join-line line1)
   (cluffer:join-line line2))
 
+(defun split (line1 line2 line-number position)
+  (record `(split ,line-number ,position))
+  (cluffer:split-line-at-position line1 position)
+  (cluffer:split-line-at-position line2 position))
+
 (defun random-split (line1 line2 line-number)
   (let ((position (random (1+ (cluffer:item-count line1)))))
-    (record `(split ,line-number ,position))
-    (cluffer:split-line-at-position line1 position)
-    (cluffer:split-line-at-position line2 position)))
+    (split line1 line2 line-number position)))
 
 (defun random-insert (line1 line2 line-number)
   (let ((position (random (1+ (cluffer:item-count line1))))
