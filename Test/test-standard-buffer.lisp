@@ -18,6 +18,7 @@
 
 (defun record (operation)
   (when *recording-p*
+    (format t "~s~%" operation)
     (push operation *operations*)))
 
 (defun join (line1 line2 line-number)
