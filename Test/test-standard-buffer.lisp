@@ -12,6 +12,8 @@
 	  do (check-lines-same (cluffer:find-line buffer1 i)
 			       (cluffer:find-line buffer2 i))))
 
+(defparameter *operations* '())
+
 (defun join (line1 line2 line-number)
   (format t "join ~d~%" line-number)
   (cluffer:join-line line1)
