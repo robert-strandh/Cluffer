@@ -90,3 +90,18 @@
 	       (assert (= (cluffer:line-count buffer2) lc))
 	       (assert (= (cluffer:item-count buffer1) ic))
 	       (assert (= (cluffer:item-count buffer2) ic))))))
+
+(defun replay (operations)
+  (let* ((line1 (make-instance 'cluffer-simple-line:line))
+	 (buffer1 (make-instance 'cluffer-simple-buffer:buffer
+		    :initial-line line1))
+	 (line2 (make-instance 'cluffer-standard-line:open-line))
+	 (buffer2 (make-instance 'cluffer-standard-buffer:buffer
+		    :initial-line line2))
+	 (lc 1)
+	 (ic 0))
+    (loop for (name line-number . arguments) in operations
+	  for line1 = (cluffer:find-line buffer1 line-number)
+	  for line2 = (cluffer:find-line buffer2 line-number)
+	  do (apply name line1 line2 line-number arguments))
+    (values buffer1 buffer2)))
