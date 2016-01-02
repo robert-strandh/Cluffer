@@ -35,12 +35,15 @@
   (let ((position (random (1+ (cluffer:item-count line1)))))
     (split line1 line2 line-number position)))
 
+(defun insert (line1 line2 line-number position item)
+  (record `(insert ,line-number ,position ,item))
+  (cluffer:insert-item-at-position line1 item position)
+  (cluffer:insert-item-at-position line2 item position))
+
 (defun random-insert (line1 line2 line-number)
   (let ((position (random (1+ (cluffer:item-count line1))))
 	(item (random 100000)))
-    (record `(insert ,line-number ,position ,item))
-    (cluffer:insert-item-at-position line1 item position)
-    (cluffer:insert-item-at-position line2 item position)))
+    (insert line1 line2 line-number position item)))
 
 (defun random-delete (line1 line2 line-number)
   (let ((position (random (cluffer:item-count line1))))
