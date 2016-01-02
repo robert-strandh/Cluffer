@@ -69,6 +69,7 @@
 	 (values 0 1))))
 
 (defun test-standard-buffer-1 (n)
+  (setf *operations* '())
   (let* ((line1 (make-instance 'cluffer-simple-line:line))
 	 (buffer1 (make-instance 'cluffer-simple-buffer:buffer
 		    :initial-line line1))
