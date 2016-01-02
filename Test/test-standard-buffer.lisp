@@ -45,11 +45,14 @@
 	(item (random 100000)))
     (insert line1 line2 line-number position item)))
 
+(defun delete (line1 line2 line-number position)
+  (record `(delete ,line-number ,position))
+  (cluffer:delete-item-at-position line1 position)
+  (cluffer:delete-item-at-position line2 position))
+
 (defun random-delete (line1 line2 line-number)
   (let ((position (random (cluffer:item-count line1))))
-    (record `(delete ,line-number ,position))
-    (cluffer:delete-item-at-position line1 position)
-    (cluffer:delete-item-at-position line2 position)))
+    (delete line1 line2 line-number position)))
 
 (defun random-operation (line1 line2 line-number)
   (cond ((and (not (cluffer:last-line-p line1)) (< (random 1.0) 0.01))
