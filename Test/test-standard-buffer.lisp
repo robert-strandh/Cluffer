@@ -14,7 +14,7 @@
 
 (defparameter *operations* '())
 
-(defparameter *recording-p* t)
+(defparameter *recording-p* nil)
 
 (defun record (operation)
   (when *recording-p*
