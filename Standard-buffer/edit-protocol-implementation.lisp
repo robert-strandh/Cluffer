@@ -138,6 +138,8 @@
 	(setf (max-modify-time dock) time))
       (let ((right (clump-binary-tree:right node-next-line)))
 	(setf (clump-binary-tree:right dock) nil)
+	(incf (item-count dock)
+	      (cluffer:item-count next-line))
 	(setf (clump-binary-tree:right node-next-line) nil)
 	(setf (clump-binary-tree:right dock) right))
       (cluffer-internal:line-join-line line next-line)))
