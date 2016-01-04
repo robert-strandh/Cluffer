@@ -105,3 +105,7 @@
 	  for line2 = (cluffer:find-line buffer2 line-number)
 	  do (apply name line1 line2 line-number arguments))
     (values buffer1 buffer2)))
+
+(defun test-standard-buffer ()
+  (loop repeat 30
+	do (test-standard-buffer-1 30000)))
