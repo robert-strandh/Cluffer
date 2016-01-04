@@ -97,9 +97,7 @@
 		    :initial-line line1))
 	 (line2 (make-instance 'cluffer-standard-line:open-line))
 	 (buffer2 (make-instance 'cluffer-standard-buffer:buffer
-		    :initial-line line2))
-	 (lc 1)
-	 (ic 0))
+		    :initial-line line2)))
     (loop for (name line-number . arguments) in operations
 	  for line1 = (cluffer:find-line buffer1 line-number)
 	  for line2 = (cluffer:find-line buffer2 line-number)
