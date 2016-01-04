@@ -42,12 +42,7 @@
       (contents line)
       (subseq (contents line) start end)))
 
-(defgeneric close-line (line))
-
-(defmethod close-line ((line closed-line))
-  nil)
-
-(defmethod close-line ((line open-line))
+(defun close-line (line)
   (let* ((item-count (cluffer:item-count line))
 	 (contents (contents line))
 	 (new-contents (make-array item-count)))
@@ -59,12 +54,7 @@
 		  :contents new-contents)
     nil))
 
-(defgeneric open-line (line))
-
-(defmethod open-line ((line open-line))
-  nil)
-
-(defmethod open-line ((line closed-line))
+(defun open-line (line)
   (let* ((contents (contents line))
 	 (item-count (length contents))
 	 (new-length (max 32 item-count))
