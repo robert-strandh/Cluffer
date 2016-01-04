@@ -1,0 +1,18 @@
+(cl:in-package #:cluffer-test)
+
+(defun make-update-trace (buffer time)
+  (let ((result '()))
+    (flet ((sync (line)
+	     (declare (ignore line))
+	     (push `(sync) result))
+	   (skip (n)
+	     (push `(skip ,n) result))
+	   (modify (line)
+      	     (declare (ignore line))
+	     (push `(modify) result))
+	   (create (line)
+      	     (declare (ignore line))
+	     (push `(create) result)))
+      (cluffer:update buffer time #'sync #'skip #'modify #'create)
+      (nreverse result))))
+
