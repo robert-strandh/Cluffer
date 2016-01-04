@@ -55,10 +55,10 @@
     (delete line1 line2 line-number position)))
 
 (defun random-operation (line1 line2 line-number)
-  (cond ((and (not (cluffer:last-line-p line1)) (< (random 1.0) 0.01))
+  (cond ((and (not (cluffer:last-line-p line1)) (< (random 1.0) 0.001))
 	 (join line1 line2 line-number)
 	 (values -1 0))
-	((< (random 1.0) 0.06)
+	((< (random 1.0) 0.002)
 	 (random-split line1 line2 line-number)
 	 (values 1 0))
 	((and (plusp (cluffer:item-count line1)) (< (random 1.0) 0.4))
