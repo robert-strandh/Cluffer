@@ -88,92 +88,99 @@
 	     (clump-binary-tree:left node))
 	   (right (node)
 	     (clump-binary-tree:right node)))
-      (clump-binary-tree:iterative-traversal
-       (contents buffer)
-       ;; Function PRE.
-       (lambda (node)
-	 (if (eq state :skip)
-	     (if (> (max-modify-time node) time)
-		 ;; We are in the :SKIP state and some nodes of this
-		 ;; sub-tree have been modified.  We must traverse the
-		 ;; left sub-tree in case some of theme are located
-		 ;; there.  Return true to inform ITERATIVE-TRAVERSAL
-		 ;; that it should traverse the left sub-tree.
-		 t
-		 ;; We are in the :SKIP state and none of the nodes of
-		 ;; this sub-tree have been modified.
-		 (progn (incf offset (line-count (left node)))
-			;; Return NIL to inform ITERATIVE-TRAVERSAL
-			;; that it should skip the left sub-tree.
-			nil))
-	     ;; We are in the modify state.  Whether any nodes of this
-	     ;; sub-tree have been modified or not, we need to go down
-	     ;; the left sub-tree, either to find more modified modes,
-	     ;; or to find the first unmodified not in order to issue
-	     ;; a SYNC operation.  Therefore, return true to inform
-	     ;; ITERATIVE-TRAVERSAL that it should traverse the left
-	     ;; sub-tree.
-	     t))
-       ;; Function IN.
-       (lambda (node)
-	 (if (eq state :skip)
-	     ;; We are in the :SKIP state
-	     (if (> (max-modify-time node) time)
-		 ;; We are in the :SKIP state and none of the nodes in
-		 ;; this sub-tree have been modified.
-		 (progn (incf offset (1+ (line-count (right node))))
-			;; Return false to inform ITERATIVE-TRAVERSAL
-			;; that it should not traverse the right
-			;; sub-tree.
-			nil)
-		 ;; We are in the :SKIP state and some nodes in this
-		 ;; sub-tree have been modified.
-		 (if (> (modify-time node) time)
-		     ;; We are in the :SKIP state and the current node
-		     ;; has been modified.  We must issue a SKIP
-		     ;; operation and then either a CREATE or a MODIFY
-		     ;; operation according to whether the current
-		     ;; node is new or not.
-		     (progn (issue-skip)
-			    (if (> (create-time node) time)
-				(funcall create node)
-				(funcall modify node))
-			    (setf state :modify)
-			    (incf offset)
-			    ;; Return true to inform ITERATIVE-TRAVERSAL
-			    ;; that it should traverse the right sub-tree.
-			    t)
-		     ;; We are in the SKIP state and this node has not
-		     ;; been modified.  But some other nodes in this
-		     ;; sub-tree have been modified.
-		     (progn (incf offset)
-			    ;; Return true to inform ITERATIVE-TRAVERSAL
-			    ;; that it should traverse the right sub-tree.
-			    t)))
-	     ;; We are in the MODIFY state
-	     (if (> (modify-time node) time)
-		 ;; We are in the :MODIFY state and this node has been
-		 ;; modified.  We must issue either a MODIFY or a
-		 ;; CREATE operation.
-		 (progn (if (> (create-time node) time)
-			    (funcall create node)
-			    (funcall modify node))
-			(incf offset)
-			;; Return true to inform ITERATIVE-TRAVERSAL
-			;; that it should traverse the right sub-tree.
-			t)
-		 ;; We are in the :MODIFY state and this node has NOT
-		 ;; been modified.  We issue a SYNC operations and set
-		 ;; the state to :SKIP
-		 (progn (funcall sync node)
-			(incf offset)
-			(setf state :SKIP)
-			;; Return true to inform ITERATIVE-TRAVERSAL
-			;; that it should traverse the right sub-tree.
-			t))))
-       ;; Function POST.
-       #'identity)
-      ;; Now, if we are in the :SKIP state at the end of the buffer,
-      ;; we issue a skip with the number of remaining nodes to skip.
-      (issue-skip)))
+      (flet ((pre (node)
+	       (if (eq state :skip)
+		   (if (> (max-modify-time node) time)
+		       ;; We are in the :SKIP state and some nodes of
+		       ;; this sub-tree have been modified.  We must
+		       ;; traverse the left sub-tree in case some of
+		       ;; theme are located there.  Return true to
+		       ;; inform ITERATIVE-TRAVERSAL that it should
+		       ;; traverse the left sub-tree.
+		       t
+		       ;; We are in the :SKIP state and none of the
+		       ;; nodes of this sub-tree have been modified.
+		       (progn (incf offset (line-count (left node)))
+			      ;; Return NIL to inform
+			      ;; ITERATIVE-TRAVERSAL that it should
+			      ;; skip the left sub-tree.
+			      nil))
+		   ;; We are in the modify state.  Whether any nodes
+		   ;; of this sub-tree have been modified or not, we
+		   ;; need to go down the left sub-tree, either to
+		   ;; find more modified modes, or to find the first
+		   ;; unmodified not in order to issue a SYNC
+		   ;; operation.  Therefore, return true to inform
+		   ;; ITERATIVE-TRAVERSAL that it should traverse the
+		   ;; left sub-tree.
+		   t))
+	     (in (node)
+	       (if (eq state :skip)
+		   ;; We are in the :SKIP state
+		   (if (> (max-modify-time node) time)
+		       ;; We are in the :SKIP state and none of the
+		       ;; nodes in this sub-tree have been modified.
+		       (progn (incf offset (1+ (line-count (right node))))
+			      ;; Return false to inform
+			      ;; ITERATIVE-TRAVERSAL that it should
+			      ;; not traverse the right sub-tree.
+			      nil)
+		       ;; We are in the :SKIP state and some nodes in
+		       ;; this sub-tree have been modified.
+		       (if (> (modify-time node) time)
+			   ;; We are in the :SKIP state and the
+			   ;; current node has been modified.  We must
+			   ;; issue a SKIP operation and then either a
+			   ;; CREATE or a MODIFY operation according
+			   ;; to whether the current node is new or
+			   ;; not.
+			   (progn (issue-skip)
+				  (if (> (create-time node) time)
+				      (funcall create node)
+				      (funcall modify node))
+				  (setf state :modify)
+				  (incf offset)
+				  ;; Return true to inform
+				  ;; ITERATIVE-TRAVERSAL that it
+				  ;; should traverse the right
+				  ;; sub-tree.
+				  t)
+			   ;; We are in the SKIP state and this node
+			   ;; has not been modified.  But some other
+			   ;; nodes in this sub-tree have been
+			   ;; modified.
+			   (progn (incf offset)
+				  ;; Return true to inform
+				  ;; ITERATIVE-TRAVERSAL that it
+				  ;; should traverse the right
+				  ;; sub-tree.
+				  t)))
+		   ;; We are in the MODIFY state
+		   (if (> (modify-time node) time)
+		       ;; We are in the :MODIFY state and this node
+		       ;; has been modified.  We must issue either a
+		       ;; MODIFY or a CREATE operation.
+		       (progn (if (> (create-time node) time)
+				  (funcall create node)
+				  (funcall modify node))
+			      (incf offset)
+			      ;; Return true to inform
+			      ;; ITERATIVE-TRAVERSAL that it should
+			      ;; traverse the right sub-tree.
+			      t)
+		       ;; We are in the :MODIFY state and this node
+		       ;; has NOT been modified.  We issue a SYNC
+		       ;; operations and set the state to :SKIP
+		       (progn (funcall sync node)
+			      (incf offset)
+			      (setf state :SKIP)
+			      ;; Return true to inform
+			      ;; ITERATIVE-TRAVERSAL that it should
+			      ;; traverse the right sub-tree.
+			      t)))))
+	(clump-binary-tree:iterative-traversal
+	 (contents buffer) #'pre #'in #'identity)
+	;; Now, if we are in the :SKIP state at the end of the buffer,
+	;; we issue a skip with the number of remaining nodes to skip.
+	(issue-skip))))
   (current-time buffer))
