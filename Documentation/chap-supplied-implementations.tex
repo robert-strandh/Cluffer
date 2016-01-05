@@ -107,6 +107,20 @@ cursor.   It is a subclass of the class \texttt{cursor}.
 
 \section{Simple line}
 
+\subsection{Characteristics}
+
+The simple line implementation was written mainly for testing
+purposes.  No attempt has been made to optimize the implementation of
+the operations of a simple line.
+
+A line in this implementation is implemented as \commonlisp{} simple
+vector.  Every simple editing operation requires that this vector be
+re-allocated with a different size.
+
+Another use for this line implementation is as an illustration of the
+semantics of the various protocol generic functions, so that it can be
+used as a model for new implementations of the line-edit protocol.
+
 \subsection{Package}
 
 The package named \texttt{cluffer-simple-line} is used for all names
