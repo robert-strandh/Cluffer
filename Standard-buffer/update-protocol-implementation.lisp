@@ -97,7 +97,7 @@
 		 ;; We are in the :SKIP state and some nodes of this
 		 ;; sub-tree have been modified.  We must traverse the
 		 ;; left sub-tree in case some of theme are located
-		 ;; there.  Return true not inform ITERATIVE-TRAVERSAL
+		 ;; there.  Return true to inform ITERATIVE-TRAVERSAL
 		 ;; that it should traverse the left sub-tree.
 		 t
 		 ;; We are in the :SKIP state and none of the nodes of
@@ -110,7 +110,7 @@
 	     ;; sub-tree have been modified or not, we need to go down
 	     ;; the left sub-tree, either to find more modified modes,
 	     ;; or to find the first unmodified not in order to issue
-	     ;; a SYNC operation.  Therefore, return true not inform
+	     ;; a SYNC operation.  Therefore, return true to inform
 	     ;; ITERATIVE-TRAVERSAL that it should traverse the left
 	     ;; sub-tree.
 	     t))
