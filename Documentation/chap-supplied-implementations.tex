@@ -44,6 +44,18 @@ elementary editing operations without affecting performance.  As long
 as the contents of the line is not asked for (presumably for that
 contents to be displayed), the line remains open.
 
+In addition to two different types of line, the \texttt{standard-line}
+implementation provides two types of \emph{cursors}, namely
+\emph{left-sticky} and \emph{right-sticky} cursors.  The two cursor
+types differ in behavior when an item is inserted at the very position
+of the cursor.  In this case, the left-sticky cursor keeps its old
+position, whereas the position of any right-sticky cursor is
+incremented.  A right-sticky cursor is typically used for the place
+where end-user editing operations take place (the \emph{point} in the
+terminology of \emacs{}).  A left-sticky cursor can be used to mark
+the end of a region when the desired effect is that an insertion of an
+item at the end of the region should not be included in the region.
+
 \subsection{Package}
 
 The package named \texttt{cluffer-standard-line} is used for all names
