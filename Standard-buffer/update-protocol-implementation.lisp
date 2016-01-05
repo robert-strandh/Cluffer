@@ -175,4 +175,5 @@
        #'identity)
       ;; Now, if we are in the :SKIP state at the end of the buffer,
       ;; we issue a skip with the number of remaining nodes to skip.
-      (issue-skip))))
+      (issue-skip)))
+  (current-time buffer))
