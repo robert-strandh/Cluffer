@@ -64,9 +64,9 @@
 				   :end1 (1+ line-number))
     (replace new-contents contents :start1 (+ line-number 2)
 				   :start2 (1+ line-number))
-    (setf (modify-time dock) (incf (cluffer:current-time buffer)))
+    (setf (modify-time dock) (incf (current-time buffer)))
     (let* ((new-line (cluffer-internal:line-split-line line position))
-	   (time (incf (cluffer:current-time buffer)))
+	   (time (incf (current-time buffer)))
 	   (new-node (make-instance 'node
 		       :buffer buffer
 		       :create-time time
@@ -94,6 +94,6 @@
 				     :end2 (1+ line-number))
       (replace new-contents contents :start1 (1+ line-number)
 				     :start2 (+ line-number 2))
-      (setf (modify-time dock) (incf (cluffer:current-time buffer)))
+      (setf (modify-time dock) (incf (current-time buffer)))
       (setf (contents buffer) new-contents)))
   nil)
