@@ -15,7 +15,8 @@
 
 (defmethod cluffer-internal:notify-item-count-changed
     ((dock node) delta)
-  (setf (modify-time dock) (incf (current-time (cluffer:buffer dock))))
+  (setf (modify-time dock)
+	(incf (current-time (cluffer-internal:buffer dock))))
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
