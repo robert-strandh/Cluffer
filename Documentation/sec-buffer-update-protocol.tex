@@ -9,14 +9,15 @@ want the view to be updated only once, when all those edit operations
 have been executed.
 
 At the center of the update protocol is the concept of a \emph{time
-  stamp}.  Each buffer manages a \emph{current time} which is a
-non-negative integer that has the initial value $0$.  Whenever a line
-is modified or created, it is marked with the current time of the
-buffer, and then the current time of the buffer is incremented.
+  stamp}.  The nature of this time stamp is not specified, other than
+the fact that its value is incremented for each operation that alters
+the contents of the buffer.  The only operation allowed by client code
+on a time stamp is to store it and pass it as an argument to the
+protocol function \texttt{update}.
 
 \Defgeneric {current-time} {buffer}
 
-Return the current time of the buffer.
+Return the current time of the buffer as a time stamp.
 
 \Defgeneric {items} {line \key start end}
 
