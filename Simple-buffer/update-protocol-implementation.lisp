@@ -2,6 +2,8 @@
 
 (defmethod cluffer:update
     ((buffer buffer) time sync skip modify create)
+  (when (null time)
+    (setf time -1))
   (let* ((contents (contents buffer))
 	 (length (length contents))
 	 (i 0)
