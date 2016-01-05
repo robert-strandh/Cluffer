@@ -43,7 +43,6 @@
    #:find-line
    #:first-line-p
    #:last-line-p
-   #:current-time
    #:update))
 
 (defpackage #:cluffer-internal
