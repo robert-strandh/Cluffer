@@ -2,7 +2,7 @@
 \label{chap-supplied-implementations}
 
 \section{Standard line}
-\label{sec-standard-line}
+\label{sec-implementation-standard-line}
 
 \subsection{Characteristics}
 
@@ -106,6 +106,7 @@ incremented when an item is inserted at the very position of the
 cursor.   It is a subclass of the class \texttt{cursor}.
 
 \section{Simple line}
+\label{sec-implementation-simple-line}
 
 \subsection{Characteristics}
 
@@ -133,11 +134,13 @@ that are specific to the implementation of simple lines.
 This class is a subclass of the protocol class named \texttt{line} in
 the package named \texttt{cluffer}.
 
-Contrary to the standard line \seesec{sec-standard-line} the simple
-line has no concept of open or closed lines.  All lines are
-represented the same way with the items stored in a simple
-\commonlisp{} vector.
+Contrary to the standard line
+\seesec{sec-implementation-standard-line} the simple line has no
+concept of open or closed lines.  All lines are represented the same
+way with the items stored in a simple \commonlisp{} vector.
 
 \section{Standard buffer}
+\label{sec-implementation-standard-buffer}
 
 \section{Simple buffer}
+\label{sec-implementation-simple-buffer}
