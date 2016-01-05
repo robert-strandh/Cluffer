@@ -25,8 +25,15 @@ Return the items of \textit{line} as a vector.  The keyword parameters
 
 The \textit{buffer} parameter is a buffer that might have been
 modified since the last update operation.  The \textit{time} parameter
-is the last time the update operation was called, so that the
-\texttt{update} function will report modifications since that time. 
+is the time stamp of the last time the update operation was called, so
+that the \texttt{update} function will report modifications since that
+time.  In addition to time stamps, the \textit{time} argument can also
+be \texttt{nil}, which is interpreted as the beginning of time.  Thus,
+when \texttt{nil} is given as a value of this argument, the operations
+generated correspond to the creation of the buffer.
+
+The \texttt{update} function returns a new time stamp to be used as
+the \textit{time} argument in the next call to \texttt{update}.
 
 The parameters \textit{sync}, \textit{skip}, \textit{modify}, and
 \textit{create}, are functions that are called by the \texttt{update}
