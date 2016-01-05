@@ -14,7 +14,7 @@
 
 (defclass buffer (cluffer:buffer)
   ((%current-time :initform 0 :initarg :current-time
-		  :accessor cluffer:current-time)
+		  :accessor current-time)
    (%contents :initarg :contents :accessor contents)))
 
 (defclass node (cluffer-internal:dock)
