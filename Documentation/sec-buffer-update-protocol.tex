@@ -15,10 +15,6 @@ the contents of the buffer.  The only operation allowed by client code
 on a time stamp is to store it and pass it as an argument to the
 protocol function \texttt{update}.
 
-\Defgeneric {current-time} {buffer}
-
-Return the current time of the buffer as a time stamp.
-
 \Defgeneric {items} {line \key start end}
 
 Return the items of \textit{line} as a vector.  The keyword parameters
