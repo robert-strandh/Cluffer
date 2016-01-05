@@ -35,6 +35,11 @@ generated correspond to the creation of the buffer.
 The \texttt{update} function returns a new time stamp to be used as
 the \textit{time} argument in the next call to \texttt{update}.
 
+The time stamp is specific to each buffer, and more importantly, to
+each \emph{buffer implementation}.  The consequences are unspecified
+if a time stamp returned by calling \texttt{update} on one buffer is
+used in a call to \texttt{update} with a different buffer.
+
 The parameters \textit{sync}, \textit{skip}, \textit{modify}, and
 \textit{create}, are functions that are called by the \texttt{update}
 function.  They are to be considered as \emph{edit operations} on some
