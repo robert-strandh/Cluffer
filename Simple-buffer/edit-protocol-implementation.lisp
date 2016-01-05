@@ -8,10 +8,14 @@
 ;;; individual lines, because it recomputes the item count each time
 ;;; this information is requested, by adding up individual item counts
 ;;; for every line of the buffer.
+;;;
+;;; However, for the benefit of the update protocol, we must still
+;;; mark the node as being modified and we must increment the
+;;; CURRENT-TIME of the buffer.
 
 (defmethod cluffer-internal:notify-item-count-changed
     ((dock node) delta)
-  (declare (ignore delta))
+  (setf (modify-time dock) (incf (current-time (cluffer:buffer dock))))
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
