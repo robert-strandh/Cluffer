@@ -4,6 +4,46 @@
 \section{Standard line}
 \label{sec-standard-line}
 
+\subsection{Characteristics}
+
+The \emph{standard line} implementation provides a
+reasonably-efficient implementation of the line-edit protocol.  Two
+different line classes are provided, one called \emph{open} and the
+other one called \emph{closed}.
+
+A line is open if it has been modified after the last time client code
+asked for its contents (as provided by the protocol generic function
+\texttt{items}).  Otherwise the line is closed.  Open lines are
+typically efficient for a number of consecutive editing operations at
+positions that are close to one another, as is typically the case when
+a region of text is inserted or deleted.  Closed lines, on the other
+hand, are efficient when client code asks for the items contained in
+them.
+
+Notice that for the typical scenario where an end user types text as
+one character at a time, the line into which the text is typed is
+going to be opened and closed once for every keystroke.  When the end
+user types the character, the line will be opened in order to prepare
+it for the editing operation.  Immediately after the editing operation
+terminates, the visible part of the text buffer is going to be
+\emph{displayed} in some window on the screen.  This display operation
+requires the client code to ask for the contents of the line, which
+will require the line to be closed.
+
+While this alternate opening and closing of the line may seem
+unreasonably inefficient, notice that it is happening at typing speed,
+so that there is typically ample time for these operations between two
+keystrokes typed.  More importantly, the scenario of an end user
+typing text is not the one for which this design was optimized.
+Instead, it was designed for cases where a single keystroke results in
+multiple editing operations.  Typical such scenarios include inserting
+and deleting a region of text, or executing a keyboard macro that
+results in multiple editing operations.  The design of the standard
+line allows such operations to be implemented as a sequence of
+elementary editing operations without affecting performance.  As long
+as the contents of the line is not asked for (presumably for that
+contents to be displayed), the line remains open.
+
 \subsection{Package}
 
 The package named \texttt{cluffer-standard-line} is used for all names
