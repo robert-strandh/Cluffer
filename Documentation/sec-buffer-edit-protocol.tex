@@ -5,7 +5,13 @@
 
 \Defclass {buffer}
 
-This is the class to instantiate in order to create a buffer.
+This is the base class for all buffers.  It should not itself be
+instantiated.  Instead, \sysname{} contains different modules, each
+providing a different subclass of this class that can be instantiated.
+
+By default, it is recommended that client code instantiate the class
+\texttt{buffer} in the package \texttt{cluffer-standard-buffer}.
+\seesec{sec-implementation-standard-buffer}
 
 \subsection{Operations on buffers}
 
