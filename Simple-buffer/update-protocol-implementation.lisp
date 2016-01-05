@@ -42,4 +42,5 @@
 	      (setf skip-count 0)
 	      (incf i)
 	      (go skipping)))
-     out)))
+     out))
+  (current-time buffer))
