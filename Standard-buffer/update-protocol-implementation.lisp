@@ -149,7 +149,7 @@
 				    ;; should traverse the right
 				    ;; sub-tree.
 				    t))
-			 ;; We are in the :SKIP state and none nodes in
+			 ;; We are in the :SKIP state and no nodes in
 			 ;; this sub-tree have been modified.
 			 (progn (incf offset (1+ (line-count (right node))))
 				;; Return false to inform
