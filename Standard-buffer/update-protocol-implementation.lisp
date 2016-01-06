@@ -175,6 +175,7 @@
 			 (progn (funcall sync line)
 				(incf offset)
 				(setf state :SKIP)
+				(setf first-skip offset)
 				;; Return true to inform
 				;; ITERATIVE-TRAVERSAL that it should
 				;; traverse the right sub-tree.
@@ -183,5 +184,6 @@
 	 (contents buffer) #'pre #'in #'identity)
 	;; Now, if we are in the :SKIP state at the end of the buffer,
 	;; we issue a skip with the number of remaining nodes to skip.
-	(issue-skip))))
+	(when (eq state :skip)
+	  (issue-skip)))))
   (current-time buffer))
