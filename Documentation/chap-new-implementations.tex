@@ -13,5 +13,14 @@ the \texttt{common-lisp} package.  For that reason, in the remainder
 of this chapter, we use explicit package prefixes to make it clear
 what symbols are referred to.
 
+\subsection{Classes}
+
+A class that is a subclass of \texttt{cluffer:line} must be provided.
+
+It is not mandatory to provide any implementation of the \emph{cursor}
+abstraction, but if such an abstraction is provided, it is recommended
+that the root class of all cursor classes be a subclass of
+\texttt{cluffer:cursor}.
+
 \section{Writing new buffer implementations}
 
