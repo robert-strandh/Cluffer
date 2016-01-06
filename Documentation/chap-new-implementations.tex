@@ -24,7 +24,18 @@ In the remainder of this section we refer to this class as
 It is not mandatory to provide any implementation of the \emph{cursor}
 abstraction, but if such an abstraction is provided, it is recommended
 that the root class of all cursor classes be a subclass of
-\texttt{cluffer:cursor}.
+\texttt{cluffer:cursor}.  In the remainder of this section we refer to
+this class as \texttt{new-line:cursor}.
+
+Both the \emph{standard line}
+\seesec{sec-implementation-standard-line} and the \emph{simple line}
+\seesec{sec-implementation-simple-line} provide two kinds of cursor
+abstractions, namely \emph{left-sticky} cursors and
+\emph{right-sticky} cursors.  If the new implementation provides
+different kinds of cursors, the different behavior can be accomplished
+either by subclassing as is done in both provided implementations, or
+it can be accomplished by some other means such as storing additional
+information in slots of the root class.
 
 \section{Writing new buffer implementations}
 
