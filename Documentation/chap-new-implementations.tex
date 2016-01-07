@@ -59,11 +59,21 @@ auxiliary method on \texttt{item-at-position} specialized to
 \texttt{cluffer:line}.
 
 As with \texttt{item-count}, if the new implementation defines
-subclasses of \texttt{new-line:line} for which the item at a
-particular position is computed differently, as is the case for the
-standard line \seesec{sec-implementation-standard-line} then this
+subclasses of the root class \texttt{new-line:line} for which the item
+at a particular position is computed differently, as is the case for
+the standard line \seesec{sec-implementation-standard-line} then this
 method must be replaced by a method for each subclass with a specific
 way of computing the item count.
+
+\Defmethod {insert-item-at-position} {(line \texttt{new-line:line}) item position}
+
+This method should insert \textit{item} at \textit{position} in
+\textit{line}.
+
+There is no need to check that \textit{position} is a valid insertion
+position in \textit{line}.  This check is already taken care of by an
+auxiliary method on the generic function
+\texttt{insert-item-at-position} specialized to \texttt{cluffer:line}.
 
 \section{Writing new buffer implementations}
 
