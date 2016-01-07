@@ -10,6 +10,5 @@
 	     (push `(modify ,(cluffer:item-count line)) result))
 	   (create (line)
 	     (push `(create ,(cluffer:item-count line)) result)))
-      (cluffer:update buffer time #'sync #'skip #'modify #'create)
-      (nreverse result))))
-
+      (values (cluffer:update buffer time #'sync #'skip #'modify #'create)
+	      (nreverse result)))))
