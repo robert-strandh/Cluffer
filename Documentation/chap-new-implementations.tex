@@ -84,5 +84,18 @@ position in \textit{line}.  This check is already taken care of by an
 auxiliary method on the generic function
 \texttt{delete-item-at-position} specialized to \texttt{cluffer:line}.
 
+\Defmethod {items} {(line \texttt{new-line:line})}
+
+This method should return all the items in \textit{line}.
+
+The generic function \texttt{items} is typically not called by
+implementations of the buffer protocol; only by client code.
+Therefore, the data type used to return the items is a matter between
+the line implementation and the application.  Both the simple line
+\seesec{sec-implementation-simple-line} and the standard line
+\seesec{sec-implementation-standard-line} return the items as a simple
+vector.  For applications that allow only character items, it might be
+a good idea to return the contents as a string instead.
+
 \section{Writing new buffer implementations}
 
