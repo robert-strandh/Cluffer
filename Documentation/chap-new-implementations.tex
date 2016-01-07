@@ -171,6 +171,12 @@ any cursors attached to \textit{line2}, and attaching those cursors to
 
 \section{Writing new buffer implementations}
 
+\subsection{Package}
+
+It is generally a good idea to define a new package for a new
+implementation of the concept of a buffer.  For the remainder of this
+section, we use the name \texttt{new-buffer} for this package.
+
 \subsection{Methods}
 
 \Defmethod {line-count} {(buffer new-buffer:buffer)}
