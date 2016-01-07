@@ -97,5 +97,10 @@ the line implementation and the application.  Both the simple line
 vector.  For applications that allow only character items, it might be
 a good idea to return the contents as a string instead.
 
+It is even possible to omit this method altogether, since it is always
+possible for client code to obtain the items of a line by calling the
+generic function \texttt{item-at-position} for each possible position
+of the line.
+
 \section{Writing new buffer implementations}
 
