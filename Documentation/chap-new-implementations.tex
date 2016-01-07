@@ -116,5 +116,19 @@ There is no need to check that \textit{cursor} is attached to a line.
 This check is already taken care of by an auxiliary method on the
 generic function \texttt{cursor-position}.
 
+\Defmethod {(setf cursor-position)} {new-position (cursor new-line:cursor)}
+
+This method should set the position of \textit{cursor} to
+\textit{new-position} in the line to which \textit{cursor} is attached
+
+There is no need to check that \textit{cursor} is attached to a line.
+This check is already taken care of by an auxiliary method on
+\texttt{(setf cursor-position)}.
+
+There is also no need to check that \textit{new-position} is a valid
+cursor position in the line to which \textit{cursor} is attached.
+This check is already taken care of by another auxiliary method on the
+generic function \texttt{(setf cursor-position)}.
+
 \section{Writing new buffer implementations}
 
