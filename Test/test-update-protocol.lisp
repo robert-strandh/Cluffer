@@ -23,7 +23,7 @@
 	 (buffer2 (make-instance 'cluffer-standard-buffer:buffer
 		    :initial-line line2))
 	 (time2 nil))
-    (loop repeat 100
+    (loop repeat 10000
 	  do (loop repeat 10
 		   for line-number = (random (cluffer:line-count buffer1))
 		   do (random-operation (cluffer:find-line buffer1 line-number)
@@ -33,6 +33,6 @@
 		 (make-update-trace buffer1 time1)
 	       (multiple-value-bind (new-time2 result2)
 		   (make-update-trace buffer2 time2)
+		 (assert (equal result1 result2))
 		 (setf time1 new-time1)
-		 (setf time2 new-time2)
-		 (assert (equal result1 result2)))))))
+		 (setf time2 new-time2))))))
