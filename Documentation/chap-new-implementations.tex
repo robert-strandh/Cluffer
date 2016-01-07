@@ -39,6 +39,17 @@ information in slots of the root class.
 
 \subsection{Methods}
 
+In addition to the methods documented in this section, a new
+implementation may define methods on generic functions for which
+default methods are provided.
+
+In particular, \sysname{} provides default methods on many cursor
+operations such as \texttt{delete-item}, \texttt{forward-item},
+etc. that call more basic generic functions to accomplish the task.
+It might be advantageous for performance reasons for a new
+implementation to define methods on such functions in addition to the
+ones document here.
+
 \Defmethod {item-count} {(line \texttt{new-line:line})}
 
 This method should return the number of items in \textit{line}.
