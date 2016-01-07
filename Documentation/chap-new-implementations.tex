@@ -182,3 +182,9 @@ section, we use the name \texttt{new-buffer} for this package.
 \Defmethod {line-count} {(buffer new-buffer:buffer)}
 
 This method should return the number of lines in \textit{buffer}.
+
+\Defmethod {item-count} {(buffer new-buffer:buffer)}
+
+This method should return the number of items in \textit{buffer}.
+The number of items in the buffer is defined to be the sum of the
+number of items in each line of the buffer.
