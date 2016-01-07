@@ -37,5 +37,16 @@ either by subclassing as is done in both provided implementations, or
 it can be accomplished by some other means such as storing additional
 information in slots of the root class.
 
+\subsection{Methods}
+
+\Defmethod {item-count} {(line \texttt{new-line:line})}
+
+This method should return the number of items in \textit{line}.  If
+the new implementation defines subclasses of \texttt{new-line:line}
+for which the item count is computed differently, as is the case for
+the standard line \seesec{sec-implementation-standard-line} then this
+method must be replaced by a method for each subclass with a specific
+way of computing the item count.
+
 \section{Writing new buffer implementations}
 
