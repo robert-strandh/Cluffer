@@ -141,5 +141,26 @@ cursor position in the line to which \textit{cursor} is attached.
 This check is already taken care of by another auxiliary method on the
 generic function \texttt{(setf cursor-position)}.
 
+\Defmethod {cluffer-internal:line-split-line} {(line newline:line) position}
+
+This method should split \textit{line} at \textit{position} and return
+the newly-created line, i.e., the line that holds the items that are
+initially located after \textit{position} in \textit{line}.
+
+Cursors that are initially located after \textit{position} in
+\textit{line} should be detached from \textit{line} and attached to
+the newly-created line.
+
+Cursors that are initially located exactly at \textit{position} can
+either be left attached to \textit{line} (and will then be at the
+end), or they can be detached from \textit{line} and attached to the
+newly-created line (and will then be at the beginning).  Both the
+simple line \seesec{sec-implementation-simple-line} and the standard
+line \seesec{sec-implementation-standard-line} provide two different
+kinds of cursors, namely \emph{left-sticky} and \emph{right-sticky}
+cursors that behave differently in this situations in that left-sticky
+cursors remain in the initial line and right-sticky cursors will be
+attached to the newly-created line.
+
 \section{Writing new buffer implementations}
 
