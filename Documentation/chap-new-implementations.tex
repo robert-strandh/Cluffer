@@ -141,7 +141,7 @@ cursor position in the line to which \textit{cursor} is attached.
 This check is already taken care of by another auxiliary method on the
 generic function \texttt{(setf cursor-position)}.
 
-\Defmethod {cluffer-internal:line-split-line} {(line newline:line) position}
+\Defmethod {cluffer-internal:line-split-line} {(line new-line:line) position}
 
 This method should split \textit{line} at \textit{position} and return
 the newly-created line, i.e., the line that holds the items that are
@@ -162,5 +162,17 @@ cursors that behave differently in this situations in that left-sticky
 cursors remain in the initial line and right-sticky cursors will be
 attached to the newly-created line.
 
+\Defmethod {cluffer-internal:line-join-line} {(line1 new-line:line) line2}
+
+This method should join \textit{line1} and \textit{line2} by adding
+the items of \textit{line2} to the end of \textit{line1}, detaching
+any cursors attached to \textit{line2}, and attaching those cursors to
+\textit{line1} in the appropriate position.
+
 \section{Writing new buffer implementations}
 
+\subsection{Methods}
+
+\Defmethod {line-count} {(buffer new-buffer:buffer)}
+
+This method should return the number of lines in \textit{buffer}.
