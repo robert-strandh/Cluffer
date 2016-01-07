@@ -102,5 +102,10 @@ possible for client code to obtain the items of a line by calling the
 generic function \texttt{item-at-position} for each possible position
 of the line.
 
+\Defmethod {cursor-attached-p} {(cursor new-line:cursor)}
+
+This method should return \emph{true} if and only if \textit{cursor}
+is currently attached to a line.
+
 \section{Writing new buffer implementations}
 
