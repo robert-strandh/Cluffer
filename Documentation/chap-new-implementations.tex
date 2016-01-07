@@ -55,8 +55,7 @@ This method should return the item at \textit{position} in \textit{line}.
 
 There is no need to check that \textit{position} is a valid item
 position in \textit{line}.  This check is already taken care of by an
-auxiliary method on \texttt{item-at-position} specialized to
-\texttt{cluffer:line}.
+auxiliary method on \texttt{item-at-position}.
 
 As with \texttt{item-count}, if the new implementation defines
 subclasses of the root class \texttt{new-line:line} for which the item
@@ -73,7 +72,7 @@ This method should insert \textit{item} at \textit{position} in
 There is no need to check that \textit{position} is a valid insertion
 position in \textit{line}.  This check is already taken care of by an
 auxiliary method on the generic function
-\texttt{insert-item-at-position} specialized to \texttt{cluffer:line}.
+\texttt{insert-item-at-position}.
 
 \Defmethod {delete-item-at-position} {(line \texttt{new-line:line}) position}
 
@@ -82,7 +81,7 @@ This method should delete the item at \textit{position} in \textit{line}.
 There is no need to check that \textit{position} is a valid item
 position in \textit{line}.  This check is already taken care of by an
 auxiliary method on the generic function
-\texttt{delete-item-at-position} specialized to \texttt{cluffer:line}.
+\texttt{delete-item-at-position}.
 
 \Defmethod {items} {(line \texttt{new-line:line})}
 
@@ -107,6 +106,7 @@ of the line.
 This method should return \emph{true} if and only if \textit{cursor}
 is currently attached to a line.
 
+
 \Defmethod {cursor-position} {(cursor new-line:cursor)}
 
 This method should return the position of \textit{cursor} in the line
@@ -114,8 +114,7 @@ to which \textit{cursor} is attached.
 
 There is no need to check that \textit{cursor} is attached to a line.
 This check is already taken care of by an auxiliary method on the
-generic function \texttt{cursor-position} specialized to
-\texttt{cluffer:cursor}.
+generic function \texttt{cursor-position}.
 
 \section{Writing new buffer implementations}
 
