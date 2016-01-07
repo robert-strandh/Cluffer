@@ -75,5 +75,14 @@ position in \textit{line}.  This check is already taken care of by an
 auxiliary method on the generic function
 \texttt{insert-item-at-position} specialized to \texttt{cluffer:line}.
 
+\Defmethod {delete-item-at-position} {(line \texttt{new-line:line}) position}
+
+This method should delete the item at \textit{position} in \textit{line}.
+
+There is no need to check that \textit{position} is a valid item
+position in \textit{line}.  This check is already taken care of by an
+auxiliary method on the generic function
+\texttt{delete-item-at-position} specialized to \texttt{cluffer:line}.
+
 \section{Writing new buffer implementations}
 
