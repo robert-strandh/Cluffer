@@ -12,6 +12,20 @@ possibly-empty \emph{suffix} of the contents is stored at the end of
 the vector, leaving a possibly-empty \emph{gap} between the prefix and
 the suffix.
 
+Buffer items are moved from the end of the prefix to the beginning of
+the suffix, and vice-versa, in order to position the gap where an item
+is about to be inserted or deleted.  The typical use case for text
+editing has a very high probability that two subsequent editing
+operations will be \emph{close} to each other (in terms of the number
+of items between the two.  Therefore, this data structure is very
+efficient for editing operations in most cases.
+
+Clearly, in the worst case, all buffer items must be moved for every
+editing operation.  This case happens when editing operations
+alternate between the beginning of the buffer and the end of the
+buffer.  Even so, moving all the items even in a very large buffer
+does not represent a serious performance problem.
+
 \subsection{Multics Emacs}
 
 
