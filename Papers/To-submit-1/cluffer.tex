@@ -41,7 +41,17 @@ Copyright is held by the author.
 
 \begin{abstract}
 Many applications and libraries contain a data structure for storing
-and editing text...
+and editing text.  Frequently, this data structure is chosen in a
+somewhat arbitrary way, without taking into account typical use cases
+and their consequence to performance.  In this paper, we present a
+data structure in the form of a \clos{} protocol (together with two
+implementations of it) that addresses these issues.  In particular,
+the protocol is divided into an \emph{edit} protocol and an
+\emph{update} protocol, designed to be executed at different
+frequencies.  The update protocol is based on the concept of
+\emph{time stamps} allowing multiple \emph{views} without any need for
+\emph{observers} or similar techniques for informing the views of
+changes to the model (i.e., the text buffer).
 \end{abstract}
 
 \category{D.?.?}{Don't know}{Don't know}
