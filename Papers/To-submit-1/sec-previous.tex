@@ -49,6 +49,19 @@ operations to turn the screen contents into the updated version.  Of
 course, most of the time, the task consisted of positioning the cursor
 and inserting a single character.
 
+Today, there is no need to minimize the number of editing operations
+on a terminal; it is perfectly feasible to redraw the entire view for
+each iteration of the event loop.  However, today we have many more
+requirements on a text editor.  In the most advanced cases, we would
+like for an \emph{incremental parser} in the view to keep a structured
+version of the buffer contents, for various purposes, such as syntax
+highlighting, language-specific completion and parsing, etc.  An
+incremental parser may require considerable computing power.  It is
+therefore of utmost importance that as little work as possible is done
+each time around the event loop.  Representing the entire editor
+buffer as a gap buffer does not lend itself to such advanced
+incremental processing.
+
 \subsection{Multics Emacs}
 
 
