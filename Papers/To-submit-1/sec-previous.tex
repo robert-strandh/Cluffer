@@ -2,9 +2,15 @@
 
 \subsection{GNU Emacs}
 
-GNU Emacs uses a gap buffer for the entire buffer
-\cite{GNUEmacsLispReferenceManual}
-\cite{CraftOfTextEditiing}
+GNU Emacs uses a so-called \emph{gap buffer} for the entire buffer of
+text \cite{GNUEmacsLispReferenceManual} \cite{CraftOfTextEditiing}.  A
+gap buffer can be thought of as a vector holding the items of the
+buffer (typically characters) but with some additional free space.  In
+a typical gap-buffer implementation, a possibly-empty \emph{prefix} of
+the buffer contents is stored at the beginning of the vector, and a
+possibly-empty \emph{suffix} of the contents is stored at the end of
+the vector, leaving a possibly-empty \emph{gap} between the prefix and
+the suffix.
 
 \subsection{Multics Emacs}
 
