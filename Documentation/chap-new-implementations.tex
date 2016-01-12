@@ -177,6 +177,12 @@ It is generally a good idea to define a new package for a new
 implementation of the concept of a buffer.  For the remainder of this
 section, we use the name \texttt{new-buffer} for this package.
 
+\subsection{Classes}
+
+A class that is a subclass of \texttt{cluffer:buffer} must be
+provided.  In the remainder of this section, we refer to this class as
+\texttt{new-buffer:buffer}.
+
 \subsection{Methods}
 
 \Defmethod {line-count} {(buffer new-buffer:buffer)}
