@@ -105,3 +105,13 @@ This time, the performance challenge has to do with the \emph{update
   protocol} rather than with the edit protocols.  A naive buffer
 implementation would have to iterate over all the lines each time the
 update protocol is invoked.
+
+To obtain reasonable performance in the presence of multiple views,
+the standard buffer implementation uses a \emph{splay tree}
+\cite{Sleator:1985:SBS:3828.3835} with a node for each line in the
+buffer.  A splay tree is a \emph{self adjusting} binary tree, in that
+nodes that are frequently used migrate close to the root of the tree.
+Although the typical use of splay trees and other tree types is to
+serve as implementation of \emph{dictionaries}, an often overlooked
+fact is that all trees can be used to implement \emph{editable
+  sequences}, which is how we use the splay tree here.
