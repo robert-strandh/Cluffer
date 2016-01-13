@@ -32,3 +32,15 @@ and the \emph{simple buffer} implementation.
 The standard line implementation is the one that a typical application
 would always use, unless an application-specific line implementation
 is desired.
+
+This implementation supplies two different representations of the line
+that we call \emph{open} and \emph{closed} respectively.  An line is
+\emph{open} if the last operation on it was an editing operation.  It
+is \emph{closed} if the last operation was a contents query in the
+form of a call to the generic function \texttt{items}.  Accordingly, a
+line is changed from being open to being closed whenever there is a
+contents query, and from closed to open when there is call to an
+editing operation.
+
+A closed line is represented as a \commonlisp{} simple vector.  An
+open line is represented as a gap buffer. \seesec{sec-previous-work}
