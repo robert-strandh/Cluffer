@@ -55,3 +55,10 @@ editing operation.
 
 A closed line is represented as a \commonlisp{} simple vector.  An
 open line is represented as a gap buffer. \seesec{sec-previous-work}
+The protocol specifically does not allow for the caller of a contents
+query to modify the vector returned by the query.  This restriction
+allows us to return the same vector each time there is a contents
+query without any intervening editing operation, thus making it
+efficient for views to query closed lines repeatedly.  Similarly,
+repeated editing operations maintain the line open, making such a
+sequence of operations efficient as well.
