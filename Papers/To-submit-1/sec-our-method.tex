@@ -78,3 +78,15 @@ query without any intervening editing operation, thus making it
 efficient for views to query closed lines repeatedly.  Similarly,
 repeated editing operations maintain the line open, making such a
 sequence of operations efficient as well.
+
+Clearly, the typical use case when a user issues keystrokes, each one
+resulting in a simple editing operation such as inserting or deleting
+an item, followed by an update of one or more views of the buffer
+contents is not terribly efficient.  The reason is that this use case
+results in a line being alternately opened (as a result of the editing
+operation) and closed (as a result of the view update) for each
+keystroke.  However, this use case does not have to be very efficient,
+again because it all happens at the frequency of the event loop.  The
+use case for which the standard line design was optimized is the one
+where a single keystroke results in several simple editing operations,
+which is exactly when performance is crucial.
