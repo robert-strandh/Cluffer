@@ -91,6 +91,31 @@ use case for which the standard line design was optimized is the one
 where a single keystroke results in several simple editing operations,
 which is exactly when performance is crucial.
 
+\subsubsection{Simple line implementation}
+
+We supply a second implementation for the line editing protocol,
+called the \emph{simple line}.  The main purpose of this
+implementation is to serve as a reference for \emph{random tests}.
+The idea here is that the implementation of the simple line is
+trivial, so that the correctness of the implementation is mostly
+obvious from inspecting the code, and in any case, it is unlikely that
+the a defect in the simple line and another defect in the standard
+line will result in the same external behavior on a large body of
+randomly-generated operations.
+
+In addition to serving as a reference implementation for testing the
+standard line, the implementation of the simple line can also serve as
+a reference for programmers who would like to create their own
+implementation of the line editing protocol.
+
+The simple line implementation provides a single line abstraction,
+implemented as a \commonlisp{} simple vector.  Each editing operation
+is implemented as reallocation of a new vector followed by calls to
+\texttt{replace} to copy items from the original line contents to the
+one resulting from the editing operation.  Clearly, this technique is
+very inefficient.  For that reason, it is not recommended to use the
+simple implementation in client code.
+
 \subsubsection{Standard buffer implementation}
 
 The main performance challenge for the buffer implementation is to
