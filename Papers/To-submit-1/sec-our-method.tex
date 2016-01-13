@@ -33,6 +33,17 @@ The standard line implementation is the one that a typical application
 would always use, unless an application-specific line implementation
 is desired.
 
+To appreciate the design of the standard line, we need to distinguish
+between two different \emph{categories} of operations on a line.  We
+call these categories \emph{editing operations} and \emph{contents
+  queries}, respectively.  An editing operation is one in which the
+contents of the line is modified in some way, and is the result of the
+interaction of a user typing text, inserting or removing a
+\emph{region} of text, or executing a \emph{keyboard macro} that
+results in one or more editing operations.  A contents query happens
+as a result of an \emph{event loop} or a \emph{command loop} updating
+one or more \emph{views} of the contents.
+
 This implementation supplies two different representations of the line
 that we call \emph{open} and \emph{closed} respectively.  An line is
 \emph{open} if the last operation on it was an editing operation.  It
