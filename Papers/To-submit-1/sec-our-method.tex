@@ -141,6 +141,14 @@ serve as implementation of \emph{dictionaries}, an often overlooked
 fact is that all trees can be used to implement \emph{editable
   sequences}, which is how we use the splay tree here.
 
+In addition to containing a reference to the associated line, each
+node in the splay tree contains time stamps corresponding to when the
+line was created and last modified.  In addition, each node also
+contains summary information for the entire subtree rooted at this
+node.  This summary information is what allows us to skip entire
+subtrees when a view requests update information and no node in the
+subtree has been modified since the last update request.
+
 \subsubsection{Simple buffer implementation}
 
 As with the implementations of the line-edit protocol, we supply a
