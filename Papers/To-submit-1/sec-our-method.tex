@@ -140,3 +140,17 @@ Although the typical use of splay trees and other tree types is to
 serve as implementation of \emph{dictionaries}, an often overlooked
 fact is that all trees can be used to implement \emph{editable
   sequences}, which is how we use the splay tree here.
+
+\subsubsection{Simple buffer implementation}
+
+As with the implementations of the line-edit protocol, we supply a
+second implementation for the buffer editing protocol as well, called
+the \emph{simple buffer}.  Again, the main purpose of this
+implementation is to serve as a reference for \emph{random tests}.  As
+with the simple line implementation, the implementation of the simple
+buffer is trivial, so that the correctness of the implementation is
+mostly obvious from inspecting the code.
+
+The simple buffer implementation represents the buffer as a
+\commonlisp{} vector of nodes, where each node contains a line and
+time stamps indicating when a line was created and last modified.
