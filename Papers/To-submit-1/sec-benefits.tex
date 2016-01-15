@@ -1,3 +1,33 @@
-\section{Benefits of our method}
+\section{Benefits of our technique}
  
-Faster.
+There are several advantages to our technique compared to other
+existing solutions.
+
+First, most techniques expose a more concrete representation of the
+buffer to client code, such as a doubly-linked list of lines.  Our
+technique is defined in terms of an abstract \clos{} protocol that can
+have several potential implementations.
+
+Furthermore, our \emph{update protocol} based on time stamps provides
+an elegant solution to the problem of updating multiple views at
+different times and with different frequencies.  In addition, the
+standard buffer implementation provided by our library provides an
+efficient implementation of the update protocol.
+
+Our technique can be \emph{customized} by the fact that the buffer
+editing protocol and the line editing protocol are independent.
+Client code with specific needs can therefore replace the
+implementation of one or the other or both according to its
+requirements.  Thanks to the existence of the \clos{} protocol, such
+customization can be done gradually, starting with the supplied
+implementations and replacing them as requirements change.
+
+The standard line implementation supplied makes it possible to obtain
+reasonable performance for aggregate editing operations even when
+these operations are implemented as iterative calls to elementary
+editing operations.  This quality makes it possible for client code to
+be simpler, for obvious benefits.
+
+Finally, our technique is not specific to the abstractions of any
+particular existing editor, making our library useful in a variety of
+potential clients.
