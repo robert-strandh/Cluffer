@@ -62,6 +62,11 @@ Delete the item at \textit{position} in \textit{line}.
 Return the position of \textit{cursor} in the line to which it is
 attached.
 
+\Defgeneric {(setf cursor-position)} {new-position cursor}
+
+Set the position of \textit{cursor} to \textit{new-position} in the
+line to which \textit{cursor} is attached.
+
 \Defgeneric {insert-item} {cursor item}
 
 Calling this function is equivalent to calling
