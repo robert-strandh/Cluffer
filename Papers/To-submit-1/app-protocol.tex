@@ -36,6 +36,11 @@ instantiated by client code.
 
 \Defgeneric {item-count} {entity}
 
+If \textit{entity} is a line, then return the number of items in that
+line.  If \textit{entity} is a cursor, return the number of items in
+the line in which \textit{cursor} is located.  If \textit{entity} is a
+buffer, then return the number of items in the buffer.
+
 \Defgeneric {item-at-position} {line position}
 
 Return the item located at \textit{position} in \textit{line}.
