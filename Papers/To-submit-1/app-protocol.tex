@@ -47,6 +47,12 @@ Return the item located at \textit{position} in \textit{line}.
 
 \Defgeneric {insert-item-at-position} {line item position}
 
+Insert \textit{item} into \textit{line} at \textit{position}.
+
+After this operation completes, what happens to cursors located at
+\textit{position} before the operation depends on the class of the
+cursor and of \textit{line}.
+
 \Defgeneric {delete-item-at-position} {line position}
 
 \Defgeneric {cursor-position} {cursor}
