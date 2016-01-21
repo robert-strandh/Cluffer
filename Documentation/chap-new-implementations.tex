@@ -183,6 +183,12 @@ A class that is a subclass of \texttt{cluffer:buffer} must be
 provided.  In the remainder of this section, we refer to this class as
 \texttt{new-buffer:buffer}.
 
+A class that is a subclass of \texttt{cluffer-internal:dock} must be
+provided.  The purpose of this class is to serve as an intermediate
+between a line and the buffer in which the line is contained.
+In the remainder of this section, we refer to this class as
+\texttt{new-buffer:dock}.
+
 \subsection{Methods}
 
 \Defmethod {line-count} {(buffer new-buffer:buffer)}
