@@ -194,3 +194,12 @@ This method should return the number of lines in \textit{buffer}.
 This method should return the number of items in \textit{buffer}.
 The number of items in the buffer is defined to be the sum of the
 number of items in each line of the buffer.
+
+\Defmethod {find-line} {(buffer new-buffer:buffer) line-number}
+
+This method should return the line with the given \textit{line-number}
+in \textit{buffer}.
+
+There is no need to check that \textit{line-number} is valid.
+This check is already taken care of by an auxiliary method on
+\texttt{line-number}.
