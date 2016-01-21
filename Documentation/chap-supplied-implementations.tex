@@ -142,5 +142,19 @@ way with the items stored in a simple \commonlisp{} vector.
 \section{Standard buffer}
 \label{sec-implementation-standard-buffer}
 
+\subsection{Characteristics}
+
+The standard buffer representation organizes the lines in a
+\emph{splay tree} \cite{Sleator:1985:SBS:3828.3835}.  This
+organization has several advantages:
+
+\begin{itemize}
+\item A line that is modified moves to the root of the tree, and
+  recently used lines stay close to the root, making some editing
+  operations more efficient.
+\item It is computationally cheap to know the line number of the
+  current line at all times.
+\end{itemize}
+
 \section{Simple buffer}
 \label{sec-implementation-simple-buffer}
