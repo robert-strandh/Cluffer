@@ -177,3 +177,14 @@ connected.
 
 \section{Simple buffer}
 \label{sec-implementation-simple-buffer}
+
+\subsection{Characteristics}
+
+The simple buffer implementation was written mainly for testing
+purposes.  No attempt has been made to optimize the implementation of
+the operations of a simple buffer.
+
+The lines are stored in a \commonlisp{} simple vector.  Whenever a
+line is added or removed, the vector is reallocated.  To compute the
+number of items in the buffer, the sum of the items of each line is
+computed.
