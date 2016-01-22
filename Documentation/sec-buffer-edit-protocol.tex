@@ -50,11 +50,23 @@ Calling this function is equivalent to calling
 
 \ifdetached{}
 
-\Defgeneric {join-line} {cursor}
+\Defgeneric {join-line} {entity}
 
-Join the line in which \textit{cursor} is located and the following
-line.  If \textit{cursor} is located at the last line of the buffer,
-the error condition \texttt{end-of-buffer} will be signaled.
+If \textit{entity} is a line, then join that line with the line
+following it in the buffer to which the line is attached.  If
+\textit{entity} is a cursor, join the line to which the cursor is
+attached with the line following it in the buffer to which the line is
+attached.
+
+If \textit{entity} is a cursor that is not currently attached to a
+line, a condition of type \texttt{cursor-detached} is signaled.
+
+If \textit{entity} is a line that is not currently attached to a
+buffer, a condition of type \texttt{line-detached} is signaled.
+
+If \textit{entity} is a cursor and it is attached to the last line of
+the buffer, the error condition \texttt{end-of-buffer} will be
+signaled.
 
 \Defgeneric {line-count} {buffer}
 
