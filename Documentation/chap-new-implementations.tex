@@ -222,7 +222,7 @@ Implementations can choose to ignore either the \textit{buffer} or the
 \textit{dock} parameter, depending on how the buffer is represented.
 
 \Defmethod {cluffer-internal:buffer-split-line}\\
-{(buffer buffer) (dock node) (line cluffer:line) position}
+{(buffer new-buffer:buffer) (dock new-buffer:dock) (line cluffer:line) position}
 
 This method is part of the internal protocol for communicating between
 the line implementation and the buffer implementation.
