@@ -218,6 +218,7 @@ the line implementation and the buffer implementation.
 
 It should return the line number if \textit{line} in \textit{buffer}.
 The parameter \textit{dock} is the dock to which the line is attached.
+
 Implementations can choose to ignore either the \textit{buffer} or the
 \textit{dock} parameter, depending on how the buffer is represented.
 
@@ -232,3 +233,6 @@ It must call \texttt{cluffer-internal:line-split-line} with
 insert into its buffer representation, and it must take into account
 that \textit{line} now has fewer items in it as indicated by
 \textit{position}.
+
+Implementations can choose to ignore either the \textit{buffer} or the
+\textit{dock} parameter, depending on how the buffer is represented.
