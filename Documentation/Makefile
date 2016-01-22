@@ -1,4 +1,4 @@
-NAME=cluffer
+NAME=cluffer-documentation
 
 TEXFILES=$(NAME).tex $(shell ./tex-dependencies $(NAME).tex)
 BIBFILES=$(NAME).bib
