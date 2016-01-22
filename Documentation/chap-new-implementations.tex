@@ -250,3 +250,9 @@ account that the items in it will be appended to \textit{line}.
 
 Implementations can choose to ignore either the \textit{buffer} or the
 \textit{dock} parameter, depending on how the buffer is represented.
+
+\Defmethod {cluffer:update}\\
+{(buffer new-buffer:buffer) time sync skip modify create}
+
+This method is part of the update protocol.  It should implement the
+update protocol as described in \refSec{sec-update-protocol}.
