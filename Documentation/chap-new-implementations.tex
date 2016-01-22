@@ -236,3 +236,17 @@ that \textit{line} now has fewer items in it as indicated by
 
 Implementations can choose to ignore either the \textit{buffer} or the
 \textit{dock} parameter, depending on how the buffer is represented.
+
+\Defmethod {cluffer-internal:buffer-join-line}\\
+{(buffer new-buffer:buffer) (dock new-buffer:dock) (line cluffer:line)}
+
+This method is part of the internal protocol for communicating between
+the line implementation and the buffer implementation.
+
+It must call \texttt{cluffer-internal:line-join-line}, passing it
+\textit{line} and the line following \textit{line} in \textit{buffer},
+and it must eliminate the line following \textit{line} and take into
+account that the items in it will be appended to \textit{line}.
+
+Implementations can choose to ignore either the \textit{buffer} or the
+\textit{dock} parameter, depending on how the buffer is represented.
