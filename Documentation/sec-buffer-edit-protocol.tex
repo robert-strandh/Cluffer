@@ -33,15 +33,22 @@ Position \textit{cursor} at the very beginning of the buffer.
 
 Position \textit{cursor} at the very end of the buffer.
 
+\Defgeneric {split-line-at-position} {line position}
+
+Split \textit{line} into two lines, the first cone containing the
+items preceding \textit{position} and the second one containing the
+items following \textit{position}.  After this operation, any
+left-sticky cursor located at \textit{position} will be located at the
+end of the first line, and any right-sticky cursor located at
+\textit{position} will be located at the beginning of the second line.
+
 \Defgeneric {split-line} {cursor}
 
-Split the line in which \textit{cursor} is located into two lines, the
-first cone containing the text preceding \textit{cursor} and the
-second one containing the text following \textit{cursor}.  After this
-operation, any left-sticky cursor located at the same position as
-\textit{cursor} will be located at the end of the first line, and any
-right-sticky cursor located at the same position as \textit{cursor}
-will be located at the beginning of the second line.
+Calling this function is equivalent to calling
+\texttt{split-line-at-position}, passing it the line to which
+\textit{cursor} is attached, and the position of \textit{cursor}.
+
+\ifdetached{}
 
 \Defgeneric {join-line} {cursor}
 
