@@ -209,3 +209,14 @@ in \textit{buffer}.
 There is no need to check that \textit{line-number} is valid.
 This check is already taken care of by an auxiliary method on
 \texttt{line-number}.
+
+\Defmethod {cluffer-internal:buffer-line-number}\\
+{(buffer new-buffer:buffer) (dock new-buffer:dock) line}
+
+This method is part of the internal protocol for communicating between
+the line implementation and the buffer implementation.
+
+It should return the line number if \textit{line} in \textit{buffer}.
+The parameter \textit{dock} is the dock to which the line is attached.
+Implementations can choose to ignore either the \textit{buffer} or the
+\textit{dock} parameter, depending on how the buffer is represented.
