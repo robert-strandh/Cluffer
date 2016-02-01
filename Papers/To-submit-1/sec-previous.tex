@@ -81,21 +81,17 @@ Furthermore, the number of lines in a typical buffer is typically very
 modest.  For that reason, a line-oriented representation does not
 incur any serious performance penalty compared to a gap buffer.
 
-\subsection{Existing editors}
+\subsection{Updating views}
 
-\subsubsection{GNU Emacs}
-
-GNU Emacs \cite{GNUEmacsLispReferenceManual}
-\cite{CraftOfTextEditiing} uses a \emph{gap buffer} for the entire
-buffer of text as described in \refSec{sec-previous-gap-buffer}.
-
-When GNU Emacs was designed, the main issue with updating a view was
-to minimize the number of bytes that had to be sent to a CRT terminal.
-To accomplish this optimization, the \emph{redisplay} function
-compared the previous view to the next one, and attempted to issue
-terminal-specific editing operations to turn the screen contents into
-the updated version.  Of course, most of the time, the task consisted
-of positioning the cursor and inserting a single character.
+When interactive full-display text editors first started to appear,
+the main issue with updating a view was to minimize the number of
+bytes that had to be sent to a CRT terminal, due to the relative
+slowness of the communication line between the computer and the
+terminal.  To accomplish this optimization, the \emph{redisplay}
+function compared the previous view to the next one, and attempted to
+issue terminal-specific editing operations to turn the screen contents
+into the updated version.  Of course, most of the time, the task
+consisted of positioning the cursor and inserting a single character.
 
 Today, there is no need to minimize the number of editing operations
 on a terminal; it is perfectly feasible to redraw the entire view for
@@ -110,8 +106,15 @@ each time around the event loop.  Representing the entire editor
 buffer as a gap buffer does not lend itself to such advanced
 incremental processing.
 
-\subsubsection{Multics Emacs}
+\subsection{Existing editors}
 
+\subsubsection{GNU Emacs}
+
+GNU Emacs \cite{GNUEmacsLispReferenceManual}
+\cite{CraftOfTextEditiing} uses a \emph{gap buffer} for the entire
+buffer of text as described in \refSec{sec-previous-gap-buffer}.
+
+\subsubsection{Multics Emacs}
 
 Multics Emacs%
 \footnote{The description in this section is a summary of the
