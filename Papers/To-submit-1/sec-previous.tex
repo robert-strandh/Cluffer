@@ -106,6 +106,10 @@ each time around the event loop.  Representing the entire editor
 buffer as a gap buffer does not lend itself to such advanced
 incremental processing.
 
+Most existing editors have very primitive parsers, mainly because the
+buffer representation does not necessarily lend itself to efficient
+incremental parsing.
+
 \subsection{Existing editors}
 
 \subsubsection{GNU Emacs}
@@ -131,6 +135,19 @@ sequence of characters.  Special instructions were added to the GE
 Like GNU Emacs, Climacs uses a gap buffer for the entire buffer.  It
 avoids the bad case by using a circular buffer.  In fact, it uses
 Flexichain \cite{flexichain}.
+
+Climacs is able to accommodate fairly sophisticated parsers for the
+buffer contents.  But in order to avoid a complete analysis of the
+entire buffer contents for each view update, such parsers must be
+\emph{incremental}.
+
+Information about the state of such parsers at various positions in
+the buffer must be kept and compared between view updates.
+Unfortunately, the gap-buffer representation does not necessarily lend
+itself to storing such information.  The workaround used in Climacs is
+to define a large number of \emph{cursors} to hold parser state at
+various places in the buffer, but managing these cursors is a
+non-trivial task.
 
 \subsubsection{Others}
 
