@@ -1,10 +1,12 @@
 \section{Previous work}
 \label{sec-previous-work}
 
+\subsection{Representing items in a buffer}
+
 There are two basic techniques for representing the items in an editor
 buffer, namely \emph{gap buffer} and \emph{line oriented}.
 
-\subsection{Gap buffer}
+\subsubsection{Gap buffer}
 \label{sec-previous-gap-buffer}
 
 A gap buffer can be thought of as a vector holding the items of the
@@ -45,7 +47,7 @@ event loop, whereas the manipulation of \emph{regions} of items and
 especially the use of \emph{keyboard macros} may make the frequency of
 editing operations orders of magnitude higher.
 
-\subsection{Line oriented}
+\subsubsection{Line oriented}
 \label{sec-previous-line-oriented}
 
 Another common way of representing the editor buffer recognizes that
