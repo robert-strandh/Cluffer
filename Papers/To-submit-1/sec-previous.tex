@@ -79,7 +79,9 @@ Furthermore, the number of lines in a typical buffer is typically very
 modest.  For that reason, a line-oriented representation does not
 incur any serious performance penalty compared to a gap buffer.
 
-\subsection{GNU Emacs}
+\subsection{Existing editors}
+
+\subsubsection{GNU Emacs}
 
 GNU Emacs \cite{GNUEmacsLispReferenceManual}
 \cite{CraftOfTextEditiing} uses a \emph{gap buffer} for the entire
@@ -106,7 +108,7 @@ each time around the event loop.  Representing the entire editor
 buffer as a gap buffer does not lend itself to such advanced
 incremental processing.
 
-\subsection{Multics Emacs}
+\subsubsection{Multics Emacs}
 
 
 Multics Emacs%
@@ -119,13 +121,13 @@ Multics Emacs used a doubly-linked list of lines and each line was a
 sequence of characters.  Special instructions were added to the GE
 645...
 
-\subsection{Climacs}
+\subsubsection{Climacs}
 
 Like GNU Emacs, Climacs uses a gap buffer for the entire buffer.  It
 avoids the bad case by using a circular buffer.  In fact, it uses
 Flexichain \cite{flexichain}.
 
-\subsection{Others}
+\subsubsection{Others}
 
 Hemlock, Goatee, etc.
 
