@@ -45,6 +45,25 @@ event loop, whereas the manipulation of \emph{regions} of items and
 especially the use of \emph{keyboard macros} may make the frequency of
 editing operations orders of magnitude higher.
 
+\subsection{Line oriented}
+\label{sec-previous-line-oriented}
+
+Another common way of representing the editor buffer recognizes that
+text is usually divided into \emph{lines}, where each line typically
+has a very moderate number of items (typically characters) in it.
+
+In a line-oriented representation, we are dealing with a
+\emph{two-level sequence}.  At the outer level, we have a sequence of
+lines, and each element of that sequence is a sequence of items.
+Every possible combination of representations of these two sequences
+is possible.  However, since the number of items in an individual line
+is usually small, most existing editors do not go to great lengths to
+optimize the representation of individual lines.  Furthermore, while
+the number of lines in a buffer is typically significantly greater
+than the number of items in a line, a typical buffer may contain at
+most a few thousand lines, making the representation of the outer
+sequence fairly insignificant as well.
+
 \subsection{GNU Emacs}
 
 GNU Emacs \cite{GNUEmacsLispReferenceManual}
