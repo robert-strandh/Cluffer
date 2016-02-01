@@ -1,11 +1,13 @@
 \section{Previous work}
 \label{sec-previous-work}
 
-\subsection{GNU Emacs}
+There are two basic techniques for representing the items in an editor
+buffer, namely \emph{gap buffer} and \emph{line oriented}.
 
-GNU Emacs uses a so-called \emph{gap buffer} for the entire buffer of
-text \cite{GNUEmacsLispReferenceManual} \cite{CraftOfTextEditiing}.  A
-gap buffer can be thought of as a vector holding the items of the
+\subsection{Gap buffer}
+\label{sec-previous-gap-buffer}
+
+A gap buffer can be thought of as a vector holding the items of the
 buffer (typically characters) but with some additional free space.  In
 a typical gap-buffer implementation, a possibly-empty \emph{prefix} of
 the buffer contents is stored at the beginning of the vector, and a
@@ -41,14 +43,21 @@ updating possibly multiple \emph{views}.  As we discussed in
 \refSec{sec-introduction}, views are updated at the frequency of the
 event loop, whereas the manipulation of \emph{regions} of items and
 especially the use of \emph{keyboard macros} may make the frequency of
-editing operations orders of magnitude higher.  When GNU Emacs was
-designed, the main issue with updating a view was to minimize the
-number of bytes that had to be sent to a CRT terminal.  To accomplish
-this optimization, the \emph{redisplay} function compared the previous
-view to the next one, and attempted to issue terminal-specific editing
-operations to turn the screen contents into the updated version.  Of
-course, most of the time, the task consisted of positioning the cursor
-and inserting a single character.
+editing operations orders of magnitude higher.
+
+\subsection{GNU Emacs}
+
+GNU Emacs \cite{GNUEmacsLispReferenceManual}
+\cite{CraftOfTextEditiing} uses a \emph{gap buffer} for the entire
+buffer of text as described in \refSec{sec-previous-gap-buffer}.
+
+When GNU Emacs was designed, the main issue with updating a view was
+to minimize the number of bytes that had to be sent to a CRT terminal.
+To accomplish this optimization, the \emph{redisplay} function
+compared the previous view to the next one, and attempted to issue
+terminal-specific editing operations to turn the screen contents into
+the updated version.  Of course, most of the time, the task consisted
+of positioning the cursor and inserting a single character.
 
 Today, there is no need to minimize the number of editing operations
 on a terminal; it is perfectly feasible to redraw the entire view for
