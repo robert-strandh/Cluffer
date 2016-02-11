@@ -2,3 +2,21 @@
 
 In this paper, we have defined a \clos{} protocol for manipulating
 text editor buffers.
+
+\subsection{Layer for Emacs compatibility}
+
+We plan to define a protocol layer on top of the edit protocols with
+operations that have the same semantics as the buffer protocol of GNU
+Emacs.  Mainly, this work involves hiding the existence of individual
+lines, and treating the separation between lines as if it contained a
+\emph{newline} character.
+
+When a cursor is moved forward beyond the end of a line, or backward
+beyond the beginning of a line, this compatibility layer will have to
+detach the cursor from the line that it is currently attached to and
+re-attach it to the following or preceding line as appropriate.
+
+Other minor operations need to be adapted, such as computing the item
+count of the entire buffer.  This calculation will have to consider
+the separation of each pair of lines to contribute another item to the
+item count of the buffer.
