@@ -20,3 +20,32 @@ Other minor operations need to be adapted, such as computing the item
 count of the entire buffer.  This calculation will have to consider
 the separation of each pair of lines to contribute another item to the
 item count of the buffer.
+
+\subsection{Incremental \commonlisp{} parser}
+
+One of the essential reasons for the present work is to serve as an
+intermediate step towards the creation of a fully-featured editor for
+\commonlisp{} code, entirely written in \commonlisp{}.  Such an editor
+must be able to analyze the buffer contents at least at the same
+frequency as that of the update of a view.
+
+To that end, we plan to create a framework that allows the incremental
+parsing of the buffer contents as \commonlisp{} code.  Such a
+framework should allow for features such as syntax highlighting and
+automatic code indentation.  Preferably, it should have a fairly
+accurate representation of the code such that the role of various code
+fragments can be determined.  For example, it would be preferable to
+distinguish between a symbol in the \texttt{common-lisp} package when
+it is used to name a \commonlisp{} function and when (as the
+\commonlisp{} standard allows) it is used as a lexical variable with
+no relation to the standard function.
+
+The first step of this incremental parser framework will be to adapt
+an implementation of the \commonlisp{} \texttt{read} function so that
+it can be used for incremental parsing, and so that the interpretation
+of \emph{tokens} can take into account the specific situation of an
+editor buffer.
+
+To take into account the different roles of symbols, the framework
+needs to include a \emph{code walker} so that the occurrence of macro
+calls will not hamper the analysis.
