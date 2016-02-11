@@ -17,6 +17,14 @@ possibly-empty \emph{suffix} of the contents is stored at the end of
 the vector, leaving a possibly-empty \emph{gap} between the prefix and
 the suffix.
 
+\begin{figure}
+\begin{center}
+\inputfig{fig-gap-buffer.pdf_t}
+\end{center}
+\caption{\label{fig-gap-buffer}
+Gap buffer.}
+\end{figure}
+
 Buffer items are moved from the end of the prefix to the beginning of
 the suffix, and vice-versa, in order to position the gap where an item
 is about to be inserted or deleted.  The typical use case for text
