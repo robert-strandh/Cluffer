@@ -149,10 +149,10 @@ node.  This summary information is what allows us to skip entire
 subtrees when a view requests update information and no node in the
 subtree has been modified since the last update request.
 
-Finally, each node contains line count and item count for the entire
-subtree, so that the offset of a particular line or a particular item
-can be computed efficiently, at least for nodes that are close to the
-root of the tree.
+Finally, each node contains a line count and an item count for the
+entire subtree, so that the offset of a particular line or a
+particular item can be computed efficiently, at least for nodes that
+are close to the root of the tree.
 
 \subsubsection{Simple buffer implementation}
 
