@@ -19,7 +19,7 @@ is crucial to distinguish between two different control loops:
 \begin{itemize}
 \item The innermost loop consists of inserting and deleting individual
   items (typically characters) in the buffer, and of moving one or
-  more \emph{cursor} from one position to an adjacent position.
+  more \emph{cursors} from one position to an adjacent position.
 \item The outer loop consists of updating the \emph{views} into the
   buffer.  Each view is typically an interval of less than around one
   hundred lines of the buffer.
@@ -53,7 +53,7 @@ orders of magnitude faster than an iteration of the outer loop.
 
 In this paper, we propose a data structure that has a fairly small
 overhead, both in terms of execution time and in terms of storage
-requirement.  More importantly, our data structure is defined as a
+requirements.  More importantly, our data structure is defined as a
 collection of \clos{} \emph{protocols} each one aimed either at the
 inner or the outer control loop.
 
