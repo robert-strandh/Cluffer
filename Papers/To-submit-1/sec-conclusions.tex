@@ -49,3 +49,32 @@ editor buffer.
 To take into account the different roles of symbols, the framework
 needs to include a \emph{code walker} so that the occurrence of macro
 calls will not hamper the analysis.
+
+\subsection{Tread safety}
+
+The current implementation assumes that access is single threaded.  We
+plan to make multi-threaded access possible and safe.  Implementing
+thread safety is not particularly difficult in itself.  The
+interesting part would be to determine whether it is possible to
+achieve multi-threaded access without using a global lock for the
+entire buffer for every elementary operation.
+
+Since each line is a separate object, it would appear that locking a
+single line would be sufficient for most operations such as inserting
+or deleting a single item.  However, the current implementation also
+keeps the \emph{item count} of the entire buffer up to date for each
+such operation.
+
+However, the item count for the entire buffer is typically asked for
+only at the frequency of the update protocol, for instance, in order
+to display this information to the end user.  Other situations exist
+when this information is needed, for example when an operation to go
+to a particular item offset is issued.  But such operations are
+relatively rare.
+
+This analysis suggests that it may be possible to update the global
+item count lazily.  Each line would be allowed to have a different
+item count from what is currently stored in the buffer data structure,
+and the buffer itself would maintain a set of lines with modified item
+counts.  When the global item count of the buffer is needed, this set
+is first processed so that the global item count is up to date.
