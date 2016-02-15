@@ -149,9 +149,10 @@ Multics Emacs%
 was the first Emacs implementation written in \lisp{}, in this case
 \multics{} \maclisp{}.  It therefore pre-dates GNU Emacs.
 
-Multics Emacs used a doubly-linked list of lines and each line was a
-sequence of characters.  Special instructions were added to the GE
-645...
+Multics Emacs used a doubly-linked list of lines, with the line
+contents itself separate from the linked structure.  All but a single
+line were said to be \emph{closed} and the contents of a closed line
+was represented as a compact character string.
 
 \subsubsection{Climacs}
 
