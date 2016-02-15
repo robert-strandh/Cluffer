@@ -16,18 +16,21 @@ the repository at GitHub.%
 
 \Defprotoclass {buffer}
 
+\vskip 1mm\noindent
 This class is the base class of all buffers.  Each different buffer
 implementation defines specific implementation classes to be
 instantiated by client code.
 
 \Defprotoclass {line}
 
+\vskip 1mm\noindent
 This class is the base class of all lines.  Each different line
 implementation defines specific implementation classes to be
 instantiated by client code.
 
 \Defprotoclass {cursor}
 
+\vskip 1mm\noindent
 This class is the base class of all cursors.  Each different line
 implementation defines specific implementation classes to be
 instantiated by client code.
@@ -36,6 +39,7 @@ instantiated by client code.
 
 \Defgeneric {item-count} {entity}
 
+\vskip 1mm\noindent
 If \textit{entity} is a line, then return the number of items in that
 line.  If \textit{entity} is a cursor, return the number of items in
 the line in which \textit{cursor} is located.  If \textit{entity} is a
@@ -43,10 +47,12 @@ buffer, then return the number of items in the buffer.
 
 \Defgeneric {item-at-position} {line position}
 
+\vskip 1mm\noindent
 Return the item located at \textit{position} in \textit{line}.
 
 \Defgeneric {insert-item-at-position} {line item position}
 
+\vskip 1mm\noindent
 Insert \textit{item} into \textit{line} at \textit{position}.
 
 After this operation completes, what happens to cursors located at
@@ -55,20 +61,24 @@ cursor and of \textit{line}.
 
 \Defgeneric {delete-item-at-position} {line position}
 
+\vskip 1mm\noindent
 Delete the item at \textit{position} in \textit{line}.
 
 \Defgeneric {cursor-position} {cursor}
 
+\vskip 1mm\noindent
 Return the position of \textit{cursor} in the line to which it is
 attached.
 
 \Defgeneric {(setf cursor-position)} {new-position cursor}
 
+\vskip 1mm\noindent
 Set the position of \textit{cursor} to \textit{new-position} in the
 line to which \textit{cursor} is attached.
 
 \Defgeneric {insert-item} {cursor item}
 
+\vskip 1mm\noindent
 Calling this function is equivalent to calling
 \texttt{insert-item-at-position} with the line to which
 \textit{cursor} is attached, \textit{item}, and the position of
@@ -76,6 +86,7 @@ Calling this function is equivalent to calling
 
 \Defgeneric {delete-item} {cursor}
 
+\vskip 1mm\noindent
 Delete the item immediately after \emph{cursor}.
 
 Calling this function is equivalent to calling
@@ -84,6 +95,7 @@ Calling this function is equivalent to calling
 
 \Defgeneric {erase-item} {cursor}
 
+\vskip 1mm\noindent
 Delete the item immediately before \emph{cursor}.
 
 Calling this function is equivalent to calling
@@ -93,41 +105,50 @@ one.
 
 \Defgeneric {cursor-attached-p} {cursor}
 
+\vskip 1mm\noindent
 Return \emph{true} if and only if \textit{cursor} is currently
 attached to some line.
 
 \Defgeneric {detach-cursor} {cursor}
 
+\vskip 1mm\noindent
 Detach \textit{cursor} from the line to which it is attached.
 
 \Defgeneric {attach-cursor} {cursor line \optional (position 0)}
 
+\vskip 1mm\noindent
 Attach \textit{cursor} to \textit{line} at \textit{position}.
 
 \Defgeneric {beginning-of-line-p} {cursor}
 
+\vskip 1mm\noindent
 Return \textit{true} if and only if \textit{cursor} is located at the
 beginning of the line to which \textit{cursor} is attached.
 
 \Defgeneric {end-of-line-p} {cursor}
 
+\vskip 1mm\noindent
 Return \textit{true} if and only if \textit{cursor} is located at the
 end of the line to which \textit{cursor} is attached.
 
 \Defgeneric {beginning-of-line} {cursor}
 
+\vskip 1mm\noindent
 Position \textit{cursor} at the very beginning of the line to which it
 is attached.
 
 \Defgeneric {end-of-line} {cursor}
 
+\vskip 1mm\noindent
 Position \textit{cursor} at the very end of the line to which it
 is attached.
 
 \Defgeneric {forward-item} {cursor}
 
+\vskip 1mm\noindent
 Move \textit{cursor} forward one position.
 
 \Defgeneric {backward-item} {cursor}
 
+\vskip 1mm\noindent
 Move \textit{cursor} backward one position.
