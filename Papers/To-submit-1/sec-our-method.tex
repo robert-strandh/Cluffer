@@ -19,11 +19,14 @@ one.
 The outer control loop is catered to by the \emph{update protocol}.
 This protocol is based on the concept of \emph{time stamps}.  When
 client code requests an update, it supplies the time stamp of the
-previous similar request, and our protocol calls a set of functions
-supplied as argument in a specific order that mimics a sequence of
-editing operations.  Client code interprets these editing operations
-as changes to its previous idea of the buffer contents in order to
-transform it to the current contents.
+previous similar request in addition to four different functions
+(\texttt{sync}, \texttt{skip}, \texttt{modify}, and \texttt{create}).
+These functions can be thought of as representing editing operations
+on the lines of the buffer.  Our protocol implementation calls these
+function in an order that will update the buffer contents from its
+previous to its current state.  The implementations of these functions
+are supplied by client code according to its own representation of the
+buffer contents.
 
 \refFig{fig-external-protocols} illustrates the relationship between
 these protocols.
