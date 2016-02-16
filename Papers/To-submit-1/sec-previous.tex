@@ -10,13 +10,12 @@ buffer, namely \emph{gap buffer} and \emph{line oriented}.
 \label{sec-previous-gap-buffer}
 
 A gap buffer can be thought of as a vector holding the items of the
-buffer (typically characters) but with some additional free space.  In
-a typical gap-buffer implementation, a possibly-empty \emph{prefix} of
-the buffer contents is stored at the beginning of the vector, and a
-possibly-empty \emph{suffix} of the contents is stored at the end of
-the vector, leaving a possibly-empty \emph{gap} between the prefix and
-the suffix.  This representation is illustrated in
-\refFig{fig-gap-buffer}.
+buffer but with some additional free space.  In a typical gap-buffer
+implementation, a possibly-empty \emph{prefix} of the buffer contents
+is stored at the beginning of the vector, and a possibly-empty
+\emph{suffix} of the contents is stored at the end of the vector,
+leaving a possibly-empty \emph{gap} between the prefix and the suffix.
+This representation is illustrated in \refFig{fig-gap-buffer}.
 
 \begin{figure}
 \begin{center}
