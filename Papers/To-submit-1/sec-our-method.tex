@@ -54,6 +54,11 @@ different protocols, omitting the update protocol.
 Participation of classes in protocols.}
 \end{figure}
 
+The internal protocol contains generic functions for which methods
+must be created that specialize to different \emph{implementations} of
+the buffer-edit and the line-edit protocols.  Client code using the
+library is not concerned with the existence of the internal protocol.
+
 \subsection{Supplied implementations}
 
 For the \emph{line protocol}, we supply two different implementations,
