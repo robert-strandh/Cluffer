@@ -18,7 +18,12 @@ is crucial to distinguish between two different control loops:
 
 \begin{itemize}
 \item The innermost loop consists of inserting and deleting individual
-  items (typically characters) in the buffer, and of moving one or
+  items%
+\footnote{In a typical editor buffer, the items it contains are
+  individual characters.  Since our protocols and our implementations
+  are not restricted to characters, we refer to the objects contained
+  in it as ``items'' rather than characters.}
+in the buffer, and of moving one or
   more \emph{cursors} from one position to an adjacent position.
 \item The outer loop consists of updating the \emph{views} into the
   buffer.  Each view is typically an interval of less than a
