@@ -22,7 +22,9 @@ is crucial to distinguish between two different control loops:
 \footnote{In a typical editor buffer, the items it contains are
   individual characters.  Since our protocols and our implementations
   are not restricted to characters, we refer to the objects contained
-  in it as ``items'' rather than characters.}
+  in it as ``items'' rather than characters.  An item is simply an
+  object that occupies a single place in the editable sequence that
+  the buffer defines.}
 in the buffer, and of moving one or
   more \emph{cursors} from one position to an adjacent position.
 \item The outer loop consists of updating the \emph{views} into the
