@@ -57,21 +57,4 @@ requirements.  More importantly, our data structure is defined as a
 collection of \clos{} \emph{protocols} each one aimed either at the
 inner or the outer control loop.
 
-The inner control loop is catered to by two different protocols; one
-containing operations on individual \emph{lines} of items (typically
-characters) and one containing operations at the \emph{buffer} level,
-concerning mainly the creation and deletion of lines.  While we supply
-reasonable implementations of both these protocols, we also allow for
-sophisticated clients to substitute specific versions of each of these
-protocols.
-
-The outer control loop is catered to by the \emph{update protocol}.
-This protocol is based on the concept of \emph{time stamps}.  When
-client code requests an update, it supplies the time stamp of the
-previous similar request, and our protocol calls a set of functions
-supplied as argument in a specific order that mimics a sequence of
-editing operations.  Client code interprets these editing operations
-as changes to its previous idea of the buffer contents in order to
-transform it to the current contents.
-
 %%  LocalWords:  startup runtime

@@ -2,6 +2,39 @@
 
 \subsection{Protocols}
 
+Recall from \refSec{sec-introduction} the existence of two nested
+control loops, the \emph{inner} control loops in which each iteration
+is executing a single edit operation, and the \emph{outer} control
+loop for the purpose of updating views.
+
+The inner control loop is catered to by two different protocols; one
+containing operations on individual \emph{lines} of items (typically
+characters) and one containing operations at the \emph{buffer} level,
+concerning mainly the creation and deletion of lines.  While we supply
+reasonable implementations of both these protocols, we also allow for
+sophisticated clients to substitute specific versions of each of these
+protocols.
+
+The outer control loop is catered to by the \emph{update protocol}.
+This protocol is based on the concept of \emph{time stamps}.  When
+client code requests an update, it supplies the time stamp of the
+previous similar request, and our protocol calls a set of functions
+supplied as argument in a specific order that mimics a sequence of
+editing operations.  Client code interprets these editing operations
+as changes to its previous idea of the buffer contents in order to
+transform it to the current contents.
+
+\refFig{fig-external-protocols} illustrates the relationship between
+these protocols.
+
+\begin{figure}
+\begin{center}
+\inputfig{fig-external-protocols.pdf_t}
+\end{center}
+\caption{\label{fig-external-protocols}
+External protocols.}
+\end{figure}
+
 We suggest a \clos{}-based \emph{protocol} defining the set of
 operations on a buffer.  In fact, the protocol can be divided into
 three fairly-independent protocols:
@@ -18,14 +51,6 @@ three fairly-independent protocols:
 \item An internal protocol that manages the interaction between the
   line abstraction and the buffer abstraction.
 \end{itemize}
-
-\begin{figure}
-\begin{center}
-\inputfig{fig-external-protocols.pdf_t}
-\end{center}
-\caption{\label{fig-external-protocols}
-External protocols.}
-\end{figure}
 
 \begin{figure}
 \begin{center}
