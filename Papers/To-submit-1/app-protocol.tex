@@ -152,3 +152,19 @@ Move \textit{cursor} forward one position.
 
 \vskip 1mm\noindent
 Move \textit{cursor} backward one position.
+
+\Defgeneric {update} {buffer time sync skip modify create}
+
+\vskip 1mm\noindent
+This generic function is the essence of the update protocol.
+The \textit{time} argument is a time stamp that can be \texttt{nil}
+(meaning the creation time of the buffer) or a value returned by
+previous invocations of \texttt{update}.  The
+arguments \textit{sync}, \textit{skip}, \textit{modify},
+and \textit{create}, are functions.  The \textit{sync} function is
+called with the first unmodified line following a sequence of modified
+lines.  The \textit{skip} function is called with a number indicating
+the number of lines that have not been altered.  The \textit{modify}
+function is called with a line that has been modified.
+The \textit{create} function is called with a line that has been
+created.
