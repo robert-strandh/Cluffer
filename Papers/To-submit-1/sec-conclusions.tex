@@ -1,7 +1,17 @@
 \section{Conclusions and future work}
 
 In this paper, we have defined a \clos{} protocol for manipulating
-text editor buffers.
+text editor buffers.  The protocol is divided into several
+sub-protocols, so that sophisticated clients can provide specific
+implementations according to the requirements of the application.
+
+The \emph{update} sub-protocol was designed to be used by an arbitrary
+number of \emph{views}.  The implementation we supply is fast so that
+this protocol can be invoked for events such as keystrokes, exposures,
+and changes of window geometry.
+
+In the remainder of this section, we outline future plans for the
+library.
 
 \subsection{Layer for Emacs compatibility}
 
