@@ -38,10 +38,11 @@ different frequencies.  The update protocol is based on the concept of
 changes to the model (i.e., the text buffer).
 
 In addition to the protocol definition, we also present two different
-implementations of the definition.  The main implementation uses a splay
-tree of lines, where each line is represented either as an ordinary
-vector or as a gap buffer, depending on whether the line is being
-edited or not.
+implementations of the definition.  The main implementation uses a
+splay tree of lines, where each line is represented either as an
+ordinary vector or as a gap buffer, depending on whether the line is
+being edited or not.  The other implementation is very simple and
+supplied only for the purpose of testing the main implementation.
 \end{abstract}
 
 \begin{CCSXML}
