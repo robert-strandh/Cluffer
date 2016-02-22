@@ -30,9 +30,9 @@ the suffix, and vice-versa, in order to position the gap where an item
 is about to be inserted or deleted.  The typical use case for text
 editing has a very high probability that two subsequent editing
 operations will be \emph{close} to each other (in terms of the number
-of items between the two).  Therefore, in most cases at most a few
+of items between the two).  Therefore, in most cases, few
 items will have to be moved, making this data structure very
-efficient for editing operations in most cases.
+efficient for editing operations corresponding to this use case.
 
 Clearly, in the worst case, all buffer items must be moved for every
 editing operation.  This case happens when editing operations
