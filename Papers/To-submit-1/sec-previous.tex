@@ -98,9 +98,9 @@ incur any serious performance penalty compared to a gap buffer.
 
 When interactive full-display text editors first started to appear,
 the main issue with updating a view was to minimize the number of
-bytes that had to be sent to a CRT terminal, due to the relative
-slowness of the communication line between the computer and the
-terminal.  To accomplish this optimization, the \emph{redisplay}
+bytes that had to be sent to a CRT terminal; this issue was due to the
+relative slowness of the communication line between the computer and
+the terminal.  To accomplish this optimization, the \emph{redisplay}
 function compared the previous view to the next one, and attempted to
 issue terminal-specific editing operations to turn the screen contents
 into the updated version.  Of course, most of the time, the task
