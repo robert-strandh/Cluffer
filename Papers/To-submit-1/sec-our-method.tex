@@ -17,8 +17,8 @@ sophisticated clients to substitute specific implementations of each
 one.
 
 The outer control loop is catered to by the \emph{update protocol}.
-This protocol is based on the concept of \emph{time stamps}.  When
-client code requests an update, it supplies the time stamp of the
+This protocol is based on the concept of \emph{time stamps}.  In order
+to request an update, client code supplies the time stamp of the
 previous similar request in addition to four different functions
 (\texttt{sync}, \texttt{skip}, \texttt{modify}, and \texttt{create}).
 These functions can be thought of as representing editing operations
@@ -40,10 +40,10 @@ External protocols.}
 \end{figure}
 
 The protocols illustrated in \refFig{fig-external-protocols} are
-related to one another by what \emph{protocol classes} they operate
-on.  The buffer-edit protocol operates on instances of the protocol
-class named \texttt{buffer}.  The line-edit protocol operates on
-instances of the two protocol classes \texttt{line} and
+related to one another by the \emph{protocol classes} that they
+operate on.  The buffer-edit protocol operates on instances of the
+protocol class named \texttt{buffer}.  The line-edit protocol operates
+on instances of the two protocol classes \texttt{line} and
 \texttt{cursor}.  These protocols are tied together using an internal
 protocol class named \texttt{dock}.  \refFig{fig-participation}
 illustrates the participation of these protocol classes in the
