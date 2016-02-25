@@ -48,12 +48,12 @@ macro.  Furthermore, to avoid large amounts of special-case code, it
 is preferable that operations on regions be possible to implement as
 repeated application of elementary editing operations.
 
-Roughly speaking, each iteration of the outer loop is performed for
-each character typed by the user.  Given the relatively modest typing
-speed of even a very fast typist, as long as an iteration can be
-accomplished in a few tens of milliseconds, performance will be
-acceptable.  This is sufficient time to perform a large number of
-fairly sophisticated operations.
+Roughly speaking, we can say that each iteration of the outer loop is
+performed for each character typed by the user.  Given the relatively
+modest typing speed of even a very fast typist, as long as an
+iteration can be accomplished in a few tens of milliseconds,
+performance will be acceptable.  This is sufficient time to perform a
+large number of fairly sophisticated operations.
 
 An iteration of the inner loop, on the other hand, must be several
 orders of magnitude faster than an iteration of the outer loop.
