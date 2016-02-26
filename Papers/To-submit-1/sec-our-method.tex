@@ -23,10 +23,10 @@ previous similar request in addition to four different functions
 (\texttt{sync}, \texttt{skip}, \texttt{modify}, and \texttt{create}).
 These functions can be thought of as representing editing operations
 on the lines of the buffer.  Our protocol implementation calls these
-functions in an order that will update the buffer contents from its
+functions in an order that will update the buffer content from its
 previous to its current state.  The implementations of these functions
 are supplied by client code according to its own representation of the
-buffer contents.
+buffer content.
 
 \refFig{fig-external-protocols} illustrates the relationship between
 these protocols.
@@ -78,16 +78,16 @@ is desired.
 
 To appreciate the design of the standard line, we need to distinguish
 between two different \emph{categories} of operations on a line.  We
-call these categories \emph{editing operations} and \emph{contents
+call these categories \emph{editing operations} and \emph{content
   queries}, respectively.  An editing operation is one in which the
-contents of the line is modified in some way, and is the result of the
+content of the line is modified in some way, and is the result of the
 interaction of a user typing text, inserting or removing a
 \emph{region} of text, or executing a \emph{keyboard macro} that
-results in one or more editing operations.  A contents query happens
+results in one or more editing operations.  A content query happens
 as a result of an \emph{event loop} or a \emph{command loop} updating
-one or more \emph{views} of the contents.
+one or more \emph{views} of the content.
 
-A crucial observation related to these categories is that contents
+A crucial observation related to these categories is that content
 queries are the result of \emph{events}; typically the user typing
 text or executing commands.  The frequency of such events is fairly
 low, giving us ample time to satisfy such a query.  Editing
@@ -106,17 +106,17 @@ a very large number of editing operations.%
 This implementation supplies two different representations of the line
 that we call \emph{open} and \emph{closed} respectively.  A line is
 \emph{open} if the last operation on it was an editing operation.  It
-is \emph{closed} if the last operation was a contents query in the
+is \emph{closed} if the last operation was a content query in the
 form of a call to the generic function \texttt{items}.  Accordingly, a
 line is changed from being open to being closed whenever there is a
-contents query, and from closed to open when there is call to an
+content query, and from closed to open when there is call to an
 editing operation.
 
 A closed line is represented as a \commonlisp{} simple vector.  An
 open line is represented as a gap buffer. \seesec{sec-previous-work}
-The protocol specifically does not allow for the caller of a contents
+The protocol specifically does not allow for the caller of a content
 query to modify the vector returned by the query.  This restriction
-allows us to return the same vector each time there is a contents
+allows us to return the same vector each time there is a content
 query without any intervening editing operation, thus making it
 efficient for views to query closed lines repeatedly.  Similarly,
 repeated editing operations maintain the line open, making such a
@@ -125,7 +125,7 @@ sequence of operations efficient as well.
 Clearly, the typical use case when a user issues keystrokes, each one
 resulting in a simple editing operation such as inserting or deleting
 an item, followed by an update of one or more views of the buffer
-contents is not terribly efficient.  The reason is that this use case
+content is not terribly efficient.  The reason is that this use case
 results in a line being alternately opened (as a result of the editing
 operation) and closed (as a result of the view update) for each
 keystroke.  However, this use case does not have to be very efficient,
@@ -154,7 +154,7 @@ implementation of the line editing protocol.
 The simple line implementation provides a single line abstraction,
 implemented as a \commonlisp{} simple vector.  Each editing operation
 is implemented as reallocation of a new vector followed by calls to
-\texttt{replace} to copy items from the original line contents to the
+\texttt{replace} to copy items from the original line content to the
 one resulting from the editing operation.  Clearly, this technique is
 very inefficient.  For that reason, it is not recommended to use the
 simple implementation in client code.

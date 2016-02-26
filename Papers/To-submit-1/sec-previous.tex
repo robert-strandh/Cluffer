@@ -11,9 +11,9 @@ buffer, namely \emph{gap buffer} and \emph{line oriented}.
 
 A gap buffer can be thought of as a vector holding the items of the
 buffer but with some additional free space.  In a typical gap-buffer
-implementation, a possibly empty \emph{prefix} of the buffer contents
+implementation, a possibly empty \emph{prefix} of the buffer content
 is stored at the beginning of the vector, and a possibly empty
-\emph{suffix} of the contents is stored at the end of the vector,
+\emph{suffix} of the content is stored at the end of the vector,
 leaving a possibly empty \emph{gap} between the prefix and the suffix.
 This representation is illustrated in \refFig{fig-gap-buffer}.
 
@@ -47,7 +47,7 @@ Perhaps the main disadvantage of representing the entire buffer as a
 single gap buffer is that it is difficult to associate additional
 information with specific points in the buffer.  One might, for
 instance, want to associate some state of an \emph{incremental parser}
-that keeps track of the buffer contents in a more structured form.
+that keeps track of the buffer content in a more structured form.
 One possible solution to this problem is to introduce a \emph{cursor}%
 \footnote{What we call a \emph{cursor} in this paper is called a
   \emph{point} in GNU Emacs terminology.} at the points where it is
@@ -84,7 +84,7 @@ compared to a gap-buffer representation is that transferring items to
 and from a file is slower.  With a gap-buffer representation, the
 representation in memory and the representation in a file are very
 similar, making the transfer almost trivial.  With a line-oriented
-representation, when a buffer is created from the contents of a file,
+representation, when a buffer is created from the content of a file,
 each line separator must be handled by the creation of a new
 representation of a line.
 
@@ -102,7 +102,7 @@ bytes that had to be sent to a CRT terminal; this issue was due to the
 relative slowness of the communication line between the computer and
 the terminal.  To accomplish this optimization, the \emph{redisplay}
 function compared the previous view to the next one, and attempted to
-issue terminal-specific editing operations to turn the screen contents
+issue terminal-specific editing operations to turn the screen content
 into the updated version.  Of course, most of the time, the task
 consisted of positioning the cursor and inserting a single character.
 
@@ -111,7 +111,7 @@ on a terminal; it is perfectly feasible to redraw the entire view for
 each iteration of the event loop.  However, today we have many more
 requirements on a text editor.  In the most advanced cases, we would
 like for an \emph{incremental parser} in the view to keep a structured
-version of the buffer contents, for various purposes, such as syntax
+version of the buffer content, for various purposes, such as syntax
 highlighting, language-specific completion and parsing, etc.  An
 incremental parser may require considerable computing power.  It is
 therefore of utmost importance that as little work as possible is done
@@ -131,7 +131,7 @@ GNU Emacs \cite{GNUEmacsLispReferenceManual}
 \cite{CraftOfTextEditiing} uses a \emph{gap buffer} for the entire
 buffer of text, as described in \refSec{sec-previous-gap-buffer}.
 
-Creating sophisticated parsers for the contents of a buffer in GNU
+Creating sophisticated parsers for the content of a buffer in GNU
 Emacs is not trivial.  For that reason, existing parsers are typically
 fairly simple.  For example, the parser for \commonlisp{} source code
 is unable to recognize the role of symbols in different contexts, such
@@ -149,8 +149,8 @@ was the first Emacs implementation written in \lisp{}, specifically,
 \multics{} \maclisp{}.  It therefore pre-dates GNU Emacs.
 
 \multics{} Emacs used a doubly linked list of lines, with the line
-contents itself separate from the linked structure.  All but a single
-line were said to be \emph{closed} and the contents of a closed line
+content itself separate from the linked structure.  All but a single
+line were said to be \emph{closed} and the content of a closed line
 was represented as a compact character string.
 
 For the current line, a new \maclisp{} data type was added to the
@@ -167,8 +167,8 @@ avoids the bad case by using a circular buffer.  In fact, it uses
 Flexichain \cite{flexichain}.
 
 Climacs is able to accommodate fairly sophisticated parsers for the
-buffer contents.  But in order to avoid a complete analysis of the
-entire buffer contents for each view update, such parsers must be
+buffer content.  But in order to avoid a complete analysis of the
+entire buffer content for each view update, such parsers must be
 \emph{incremental}.
 
 Information about the state of such parsers at various positions in
@@ -184,13 +184,13 @@ non-trivial task.
 Hemlock uses a doubly linked list of lines.  Each line is a
 \texttt{struct} containing a reference to the previous line and a
 reference to the next line.  No more than one line is \emph{open} at any
-point in time, and then the contents are stored separately in a gap
+point in time, and then the content is stored separately in a gap
 buffer.  The gap-buffer data is contained in special variables and not
 encapsulated in a class or a \texttt{struct}.
 
 Goatee was written to be the input editor of McCLIM.  Like Hemlock, it
 uses a doubly linked list of lines, with the difference that the line
-contents itself is separate from the doubly linked structure.  Lines
+content itself is separate from the doubly linked structure.  Lines
 are represented by a gap buffer.  The gap buffer is encapsulated in
 a library called Flexivector, which was later extended to become the
 Flexichain library.
