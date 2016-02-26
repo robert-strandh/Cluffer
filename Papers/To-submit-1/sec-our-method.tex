@@ -44,7 +44,7 @@ related to one another by the \emph{protocol classes} that they
 operate on.  The buffer-edit protocol operates on instances of the
 protocol class named \texttt{buffer}.  The line-edit protocol operates
 on instances of the two protocol classes \texttt{line} and
-\texttt{cursor}.  These protocols are tied together using an internal
+\texttt{cursor}.  These protocols are tied together by an internal
 protocol class named \texttt{dock}.  \refFig{fig-participation}
 illustrates the participation of these protocol classes in the
 different protocols, omitting the update protocol.
@@ -88,8 +88,8 @@ as a result of an \emph{event loop} or a \emph{command loop} updating
 one or more \emph{views} of the content.
 
 A crucial observation related to these categories is that content
-queries are the result of \emph{events}; typically the user typing
-text or executing commands.  The frequency of such events is fairly
+queries are the result of \emph{events} (typically, the user typing
+text or executing commands).  The frequency of such events is fairly
 low, giving us ample time to satisfy such a query.  Editing
 operations, on the other hand, can be arbitrarily more frequent,
 simply because a single keystroke on the part of the user can trigger
