@@ -125,14 +125,15 @@ sequence of operations efficient as well.
 Clearly, the typical use case when a user issues keystrokes, each one
 resulting in a simple editing operation such as inserting or deleting
 an item, followed by an update of one or more views of the buffer
-content is not terribly efficient.  The reason is that this use case
-results in a line being alternately opened (as a result of the editing
-operation) and closed (as a result of the view update) for each
-keystroke.  However, this use case does not have to be very efficient,
-again because it all happens at the frequency of the event loop.  The
-use case for which the standard line design was optimized is the one
-where a single keystroke results in several simple editing operations,
-which is exactly when performance is crucial.
+content is not terribly efficient.  The reason for this inefficiency
+is that this use case results in a line being alternately opened (as a
+result of the editing operation) and closed (as a result of the view
+update) for each keystroke.  However, this use case does not have to
+be very efficient, again because the costly operations are invoked at
+the frequency of the event loop.  The use case for which the standard
+line design was optimized is the one where a single keystroke results
+in several simple editing operations, i.e., the exact situation in
+which performance is crucial.
 
 \subsubsection{Simple line implementation}
 
