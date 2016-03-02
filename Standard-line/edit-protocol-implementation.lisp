@@ -45,7 +45,7 @@
 (defun close-line (line)
   (let* ((item-count (cluffer:item-count line))
 	 (contents (contents line))
-	 (new-contents (make-array item-count)))
+	 (new-contents (make-string item-count)))
     (replace new-contents contents
 	     :start1 0 :start2 0 :end2 (gap-start line))
     (replace new-contents contents
@@ -58,7 +58,7 @@
   (let* ((contents (contents line))
 	 (item-count (length contents))
 	 (new-length (max 32 item-count))
-	 (new-contents (make-array new-length)))
+	 (new-contents (make-string new-length)))
     (replace new-contents contents
 	     :start1 (- new-length item-count) :start2 0)
     (change-class line 'open-line
@@ -97,7 +97,7 @@
     (cond ((= (gap-start line) (gap-end line))
 	   (let* ((new-length (* 2 (length contents)))
 		  (diff (- new-length (length contents)))
-		  (new-contents (make-array new-length)))
+		  (new-contents (make-string new-length)))
 	     (replace new-contents contents
 		      :start2 0 :start1 0 :end2 position)
 	     (replace new-contents contents
@@ -164,7 +164,7 @@
 		  (* 3/4 (length contents))))
       (let* ((new-length (floor (length contents) 2))
 	     (diff (- (length contents) new-length))
-	     (new-contents (make-array new-length)))
+	     (new-contents (make-string new-length)))
 	(replace new-contents contents
 		 :start2 0 :start1 0 :end2 (gap-start line))
 	(replace new-contents contents
