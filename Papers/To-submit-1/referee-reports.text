@@ -141,22 +141,6 @@ OVERALL EVALUATION: 2 (accept)
 REVIEWER'S CONFIDENCE: 4 (high)
 
 ----------- Review -----------
-This paper deals with the buffer data structure, which is very
-commonly used when we need to manipulate texts. This is a very applied
-paper, which proposes CLOS protocols (one for editing and one for
-updating) to efficiently implement this data structure, eventually by
-adapting them to a given need.
-
-After an exposition of the problem in the introduction, the author
-presents the basic techniques generally used to implement buffers, and
-the consequences they imply on both performance and memory
-usage. Thus, the protocols are defined and their implementations are
-sketched. For each protocol, there are two implementations, a standard
-one which is efficient in the general case and a simple one whose
-implementation is quite direct. Standard implementations are well
-described and the challenge they resolve are clearly exposed. Finally,
-the end of the paper consists of a short evaluation of the technique
-described in the paper as well as its envisioned extensions.
 
 Globally, this paper is pleasant to read. The main gripe that I have
 about the paper lies in the insufficient description of the update
