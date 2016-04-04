@@ -1,0 +1,201 @@
+
+------------------------------------------------------------
+Rules:
+
+1- All submissions should be formatted following the ACM SIGS
+guidelines and include ACM classification categories and terms. For
+more information on the submission guidelines and the ACM keywords,
+see:
+http://www.acm.org/sigs/publications/proceedings-templates and http://www.acm.org/about/class/1998
+The conference proceedings will be referenced in the ACM Digital Library.
+
+2- The paper should not be longer than 8 pages.
+
+3- The pdf file should not contain any page number.
+
+4- In the bibliography, urls should not be used unless there is a
+retreive date with it. See
+http://www.cs.ucy.ac.cy/~chryssis/specs/ACM-refguide.pdf
+------------------------------------------------------------
+
+
+----------------------- REVIEW 1 ---------------------
+PAPER: 3
+TITLE: A CLOS Protocol for Editor Buffers
+AUTHORS: Robert Strandh
+
+OVERALL EVALUATION: 1 (weak accept)
+REVIEWER'S CONFIDENCE: 5 (expert)
+
+----------- Review -----------
+This paper is interesting and reasonably well written. I found section
+3 a bit too informal and somewhat fuzzy. For instance, it was not
+clear from the start which kind of internal representation were chosen
+for what -- gap or line based -- and it finally appears that a
+conjunction of both are used. The whole paper (in particular section
+3) would benefit from being written in a more formal, less narrative
+fashion. Also, I find that some important discussion is left out of
+it. See below for more details.
+
+Section 2.1.1:
+* "moving all the items even in a very large buffer does not represent
+  a serious performance problem". I would like to see this claim
+  justified.
+* another disadvantage of representing a whole buffer with a single
+  gap buffer is that you cannot easily implement collaborative
+  editing.
+
+Section 2.3.1: I'm not sure to what extend the gap-buffer based
+representation in Emacs explains the lack of proper
+parsers. Historically, the existing facilities (such as text
+properties and overlays [extents in XEmacs]) were too low level and
+inefficient, so most libraries ended-up doing regexp-based parsing
+plus some ad-hoc code. So I think the problem was the lack of a proper
+API for implementing syntactic analysis, regardless of the underlying
+buffer representation.
+
+Section 4 indicates that the buffer and line editing protocols are
+independents. It is not clear to me what happens for complex editing
+operations involving both line and buffer edits. For instance,
+consider deleting a region beginning and ending in the middle of two
+different lines. Such operations clearly involve both line and buffer
+protocols at the same time. And by the way, these are examples of
+operations requiring the locking of several lines at the same time
+(Cf. section 5.3).
+
+In don't really understand the semantics of the UPDATE protocol, as
+described in the appendix. SYNC is claimed to be called with the first
+line following a sequence of unmodified lines, but MODIFIY is called
+with /one/ modified line. So what if several lines were modified? Is
+MODIFY called several times in a row? Or UPDATE itself? Same question
+for CREATE (consider again the example of pasting several lines at
+once). Also about SKIP, does this mean N /consecutive/ lines that have
+not been altered? This whole description of UPDATE needs to be made
+much clearer and formal, and I think, does not belong to the appendix
+but to section 3 (see my comment about the fuzziness about this
+section; this is what I meant).
+
+
+Finally, I find that at least three important matters of discussion
+are left out of this paper.
+
+1. Influence of character encoding. The paper doesn't say a word about
+which character encodings are supported, planned to be, or even
+whether it is a matter taken into consideration. The issue is an
+important one however. Most notably, whether characters are
+represented in fixed or variable width will have a dramatic influence
+on basically all editing operations (not only buffer modifications but
+also searching), and hence on the underlying representation. At a
+first glance, it seems to me that the conjunction of a splay tree
+(whole buffer) and vectors/gap buffers (individual lines) allows for
+supporting all kinds of encoding equally easily, which is good if
+that's the case. Nevertheless, this matter should be addressed.
+
+2. Non-character items. The footnote on page one hides and important
+question, also not addressed in this paper: that of non-character
+items. What other kind of items do the authors expect to handle? My
+suspicion is that they envision some form of encoding for syntactic
+information on the buffer's contents (such as beginning and end of
+expression markers, or Emacs-like overlays / text properties). As long
+as these items don't have any visual representation, everything's
+fine. In modern editors, however, other kinds of items are supported,
+such as images spanning multiple lines and columns. Note that I'm not
+talking about visual clues added on top of text (e.g. line wrap
+icons), which do not belong to the buffer's contents per-se, but
+actual, non textual contents. In such a situation, an item cannot be
+defined as a "single place in the editable sequence that the buffer
+defines", because the buffer may not be defining a sequence
+anymore. I'm aware that the author targets the editing of Lisp code
+primarily, but this matter should be addressed anyway.
+
+3. Finally, the proposed infrastructure is provided as a set of CLOS
+protocols so that, in particular, clients may implement their own
+/views/ on top of it. This is a commendable intention, but I'm
+wondering whether forcing this layer under the programmer's feet
+wouldn't turn out to be a performance showstopper, when modern
+graphical display needs to be supported. I'm thinking, for instance,
+variable width fonts, mixing of text and other visual entities,
+pixel-based scrolling etc. which are known to be a nightmare to
+implement in text editors such as Emacs. In other words, I'm skeptical
+as to whether the proposed infrastructure would be of any practical
+value for anything else than pure-text, fixed sized editing, and I
+would like to know the author's opinion on this.
+
+Minor remarks:
+
+- Introduction:
+  * end the sentence before the itemize with a colon instead of a semi-colon.
+  * "can be executed a large number of iterations"
+- Section 2.3.1: tweak LaTeX to issue [3,1] instead of [3] [1] as a
+  reference.
+- Section 3.2.1: remove the (4) footnote as it's redundant. The same text
+  appears somewhere earlier in the article.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 3
+TITLE: A CLOS Protocol for Editor Buffers
+AUTHORS: Robert Strandh
+
+OVERALL EVALUATION: 2 (accept)
+REVIEWER'S CONFIDENCE: 4 (high)
+
+----------- Review -----------
+This paper deals with the buffer data structure, which is very
+commonly used when we need to manipulate texts. This is a very applied
+paper, which proposes CLOS protocols (one for editing and one for
+updating) to efficiently implement this data structure, eventually by
+adapting them to a given need.
+
+After an exposition of the problem in the introduction, the author
+presents the basic techniques generally used to implement buffers, and
+the consequences they imply on both performance and memory
+usage. Thus, the protocols are defined and their implementations are
+sketched. For each protocol, there are two implementations, a standard
+one which is efficient in the general case and a simple one whose
+implementation is quite direct. Standard implementations are well
+described and the challenge they resolve are clearly exposed. Finally,
+the end of the paper consists of a short evaluation of the technique
+described in the paper as well as its envisioned extensions.
+
+Globally, this paper is pleasant to read. The main gripe that I have
+about the paper lies in the insufficient description of the update
+protocol. This protocol consists of a single function, with six
+parameters whose four are functions. More explanation and an example
+would be probably helpful here.
+
+Furthermore, since this article is for a Lisp conference, I really
+think that a point about the interest of a functional language for
+this implementation should be more clearly claimed in the paper.
+
+Some points that could improve the paper (in no particular order)
+
+- all the editors presented in the state of the art belongs to a the
+  Emacs family (surely not a problem for a Lisp conference, but perhaps it
+  exists some vi Lispers in the world, who could find this is a biased
+  view...)
+
+- References on Climacs, Hemlock, Goatee are missing.
+
+- Section 4 is short and could probably be merged with the conclusion
+
+- It is said that that time stamps permit to avoid observers. Why?
+
+- The description of the dock is useless in the context of the paper
+  and could be omitted.
+
+- Inverting standard and simple implementations descriptions seems
+  more natural (at least for me).
+
+
+----------------------- REVIEW 4 ---------------------
+PAPER: 3
+TITLE: A CLOS Protocol for Editor Buffers
+AUTHORS: Robert Strandh
+
+OVERALL EVALUATION: 3 (strong accept)
+REVIEWER'S CONFIDENCE: 3 (medium)
+
+----------- Review -----------
+A very interesting approach. The paper is well written. I strongly
+recommend to accept the paper for presentation at the conference.
