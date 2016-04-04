@@ -123,14 +123,8 @@ would like to know the author's opinion on this.
 
 Minor remarks:
 
-- Introduction:
-  * end the sentence before the itemize with a colon instead of a semi-colon.
-  * "can be executed a large number of iterations"
 - Section 2.3.1: tweak LaTeX to issue [3,1] instead of [3] [1] as a
   reference.
-- Section 3.2.1: remove the (4) footnote as it's redundant. The same text
-  appears somewhere earlier in the article.
-
 
 ----------------------- REVIEW 2 ---------------------
 PAPER: 3
