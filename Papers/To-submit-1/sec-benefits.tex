@@ -12,12 +12,13 @@ Furthermore, our \emph{update protocol} based on time stamps provides
 an elegant solution to the problem of updating multiple views at
 different times and with different frequencies.  As opposed to the
 technique of using \emph{observers} preferred in the object-oriented
-literature, time stamps require no communication from the model to the
-views as a result of modifications; indeed, such communication would
-be undesirable because of the high frequency of modifications to the
-model compared to the frequency of view updates.  The standard buffer
-implementation provided by our library provides an efficient
-implementation of the update protocol.
+literature \cite{Gamma:1998:DPC:551551}, time stamps require no
+communication from the model to the views as a result of
+modifications; indeed, such communication would be undesirable because
+of the high frequency of modifications to the model compared to the
+frequency of view updates.  The standard buffer implementation
+provided by our library provides an efficient implementation of the
+update protocol.
 
 Our technique can be \emph{customized} by the fact that the buffer
 editing protocol and the line editing protocol are independent.
