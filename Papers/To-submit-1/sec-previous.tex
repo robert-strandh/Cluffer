@@ -192,7 +192,10 @@ and then the content is stored separately in a gap buffer.  The
 gap-buffer data is contained in special variables and not encapsulated
 in a class or a \texttt{struct}.
 
-Goatee was written to be the input editor of McCLIM.  Like Hemlock, it
+Goatee%
+\footnote{Goatee is part McCLIM which can be found at this location:
+https://github.com/robert-strandh/McCLIM}
+was written to be the input editor of McCLIM.  Like Hemlock, it
 uses a doubly linked list of lines, with the difference that the line
 content itself is separate from the doubly linked structure.  Lines
 are represented by a gap buffer.  The gap buffer is encapsulated in
