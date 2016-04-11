@@ -38,9 +38,6 @@ fashion. Also, I find that some important discussion is left out of
 it. See below for more details.
 
 Section 2.1.1:
-* "moving all the items even in a very large buffer does not represent
-  a serious performance problem". I would like to see this claim
-  justified.
 * another disadvantage of representing a whole buffer with a single
   gap buffer is that you cannot easily implement collaborative
   editing.
