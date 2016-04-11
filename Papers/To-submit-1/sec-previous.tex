@@ -38,10 +38,19 @@ Clearly, in the worst case, all buffer items must be moved for every
 editing operation.  This case happens when editing operations
 alternate between the beginning of the buffer and the end of the
 buffer.  Even so, moving all the items even in a very large buffer
-does not represent a serious performance problem.  Furthermore, the
-pathological case can be largely avoided by considering the vector
-holding the items as being \emph{circular} (as Flexichain
-\cite{flexichain} does).
+does not represent a serious performance problem.  For example, on a
+64-bit 3MHz%
+\footnote{For this experiment, memory latency is of course much more
+  important than CPU clock frequency.  We intend this experiment to
+  provide a rough idea of the expected performance, rather than exact
+  number, which is why detailed information on the system is omitted.}
+Intel-based GNU/Linux system purchased in 2010 and runing
+SBCL, using the \commonlisp{} function \texttt{replace} to move $10^8$
+full words in a vector takes less than a second, and that number of
+words is several orders of magnitude larger than most files being
+edited.  Furthermore, the pathological case can be largely avoided by
+considering the vector holding the items as being \emph{circular} (as
+Flexichain \cite{flexichain} does).
 
 Perhaps the main disadvantage of representing the entire buffer as a
 single gap buffer is that it is difficult to associate additional
