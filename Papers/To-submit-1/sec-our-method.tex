@@ -70,6 +70,30 @@ implementation.  Similarly, for the \emph{buffer protocol}, we supply
 two different implementations, the \emph{standard buffer} implementation
 and the \emph{simple buffer} implementation.
 
+\subsubsection{Simple line implementation}
+
+We supply an implementation, called the \emph{simple line}, for
+the line editing protocol.  The main purpose of this implementation is
+to serve as a reference for \emph{random tests}.  The idea here is
+that the implementation of the simple line is trivial, so that the
+correctness of the implementation is mostly obvious from inspecting
+the code, and in any case, it is unlikely that a defect in the simple
+line and another defect in the standard line will result in the same
+external behavior on a large body of randomly generated operations.
+
+In addition to serving as a reference implementation for testing the
+standard line, this implementation can also serve as a reference for
+programmers who would like to create their own implementation of the
+line editing protocol.
+
+The simple line implementation provides a single line abstraction,
+implemented as a \commonlisp{} simple vector.  Each editing operation
+is implemented as reallocation of a new vector followed by calls to
+\texttt{replace} to copy items from the original line content to the
+one resulting from the editing operation.  Clearly, this technique is
+very inefficient.  For that reason, it is not recommended to use the
+simple implementation in client code.
+
 \subsubsection{Standard line implementation}
 
 The standard line implementation is the one that a typical application
@@ -135,29 +159,19 @@ line design was optimized is the one where a single keystroke results
 in several simple editing operations, i.e., the exact situation in
 which performance is crucial.
 
-\subsubsection{Simple line implementation}
+\subsubsection{Simple buffer implementation}
 
-We supply a second implementation, called the \emph{simple line}, for
-the line editing protocol.  The main purpose of this implementation is
-to serve as a reference for \emph{random tests}.  The idea here is
-that the implementation of the simple line is trivial, so that the
-correctness of the implementation is mostly obvious from inspecting
-the code, and in any case, it is unlikely that a defect in the simple
-line and another defect in the standard line will result in the same
-external behavior on a large body of randomly generated operations.
+As with the implementations of the line-edit protocol, we supply an
+implementation, called the \emph{simple buffer}, for the buffer
+editing protocol as well.  Again, the main purpose of this
+implementation is to serve as a reference for \emph{random tests}.  As
+with the simple line implementation, the implementation of the simple
+buffer is trivial, so that the correctness of the implementation is
+mostly obvious from inspecting the code.
 
-In addition to serving as a reference implementation for testing the
-standard line, this implementation can also serve as a reference for
-programmers who would like to create their own implementation of the
-line editing protocol.
-
-The simple line implementation provides a single line abstraction,
-implemented as a \commonlisp{} simple vector.  Each editing operation
-is implemented as reallocation of a new vector followed by calls to
-\texttt{replace} to copy items from the original line content to the
-one resulting from the editing operation.  Clearly, this technique is
-very inefficient.  For that reason, it is not recommended to use the
-simple implementation in client code.
+The simple buffer implementation represents the buffer as a
+\commonlisp{} vector of nodes, where each node contains a line and
+time stamps indicating when a line was created and last modified.
 
 \subsubsection{Standard buffer implementation}
 
@@ -196,17 +210,3 @@ Finally, each node contains both a line count and an item count for
 the entire subtree, so that the offset of a particular line or a
 particular item can be computed efficiently, at least for nodes that
 are close to the root of the tree.
-
-\subsubsection{Simple buffer implementation}
-
-As with the implementations of the line-edit protocol, we supply a
-second implementation, called the \emph{simple buffer}, for the buffer
-editing protocol as well.  Again, the main purpose of this
-implementation is to serve as a reference for \emph{random tests}.  As
-with the simple line implementation, the implementation of the simple
-buffer is trivial, so that the correctness of the implementation is
-mostly obvious from inspecting the code.
-
-The simple buffer implementation represents the buffer as a
-\commonlisp{} vector of nodes, where each node contains a line and
-time stamps indicating when a line was created and last modified.
