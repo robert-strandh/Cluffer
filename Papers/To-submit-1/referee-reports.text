@@ -113,11 +113,6 @@ as to whether the proposed infrastructure would be of any practical
 value for anything else than pure-text, fixed sized editing, and I
 would like to know the author's opinion on this.
 
-Minor remarks:
-
-- Section 2.3.1: tweak LaTeX to issue [3,1] instead of [3] [1] as a
-  reference.
-
 ----------------------- REVIEW 2 ---------------------
 PAPER: 3
 TITLE: A CLOS Protocol for Editor Buffers
