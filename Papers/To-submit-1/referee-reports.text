@@ -37,11 +37,6 @@ conjunction of both are used. The whole paper (in particular section
 fashion. Also, I find that some important discussion is left out of
 it. See below for more details.
 
-Section 2.1.1:
-* another disadvantage of representing a whole buffer with a single
-  gap buffer is that you cannot easily implement collaborative
-  editing.
-
 Section 2.3.1: I'm not sure to what extend the gap-buffer based
 representation in Emacs explains the lack of proper
 parsers. Historically, the existing facilities (such as text
