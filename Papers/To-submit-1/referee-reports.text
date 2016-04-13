@@ -46,15 +46,6 @@ plus some ad-hoc code. So I think the problem was the lack of a proper
 API for implementing syntactic analysis, regardless of the underlying
 buffer representation.
 
-Section 4 indicates that the buffer and line editing protocols are
-independents. It is not clear to me what happens for complex editing
-operations involving both line and buffer edits. For instance,
-consider deleting a region beginning and ending in the middle of two
-different lines. Such operations clearly involve both line and buffer
-protocols at the same time. And by the way, these are examples of
-operations requiring the locking of several lines at the same time
-(Cf. section 5.3).
-
 In don't really understand the semantics of the UPDATE protocol, as
 described in the appendix. SYNC is claimed to be called with the first
 line following a sequence of unmodified lines, but MODIFIY is called
