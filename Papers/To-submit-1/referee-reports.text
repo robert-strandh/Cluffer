@@ -46,19 +46,6 @@ plus some ad-hoc code. So I think the problem was the lack of a proper
 API for implementing syntactic analysis, regardless of the underlying
 buffer representation.
 
-In don't really understand the semantics of the UPDATE protocol, as
-described in the appendix. SYNC is claimed to be called with the first
-line following a sequence of unmodified lines, but MODIFIY is called
-with /one/ modified line. So what if several lines were modified? Is
-MODIFY called several times in a row? Or UPDATE itself? Same question
-for CREATE (consider again the example of pasting several lines at
-once). Also about SKIP, does this mean N /consecutive/ lines that have
-not been altered? This whole description of UPDATE needs to be made
-much clearer and formal, and I think, does not belong to the appendix
-but to section 3 (see my comment about the fuzziness about this
-section; this is what I meant).
-
-
 Finally, I find that at least three important matters of discussion
 are left out of this paper.
 
@@ -113,12 +100,6 @@ OVERALL EVALUATION: 2 (accept)
 REVIEWER'S CONFIDENCE: 4 (high)
 
 ----------- Review -----------
-
-Globally, this paper is pleasant to read. The main gripe that I have
-about the paper lies in the insufficient description of the update
-protocol. This protocol consists of a single function, with six
-parameters whose four are functions. More explanation and an example
-would be probably helpful here.
 
 Furthermore, since this article is for a Lisp conference, I really
 think that a point about the interest of a functional language for
