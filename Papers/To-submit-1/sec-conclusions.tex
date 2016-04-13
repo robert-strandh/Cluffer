@@ -67,7 +67,11 @@ plan to make multi-threaded access possible and safe.  Implementing
 thread safety is not particularly difficult in itself.  The
 interesting part would be to determine whether it is possible to
 achieve multi-threaded access without using a global lock for the
-entire buffer for every elementary operation.
+entire buffer for every elementary operation.  Clearly some high-level
+operations such as deleting a region that spans several lines may
+require a global lock, since such an operation involves several
+elementary operations involving both the buffer-level and the
+line-level editing protocols.
 
 Since each line is a separate object, it would appear that locking a
 single line would be sufficient for most operations such as inserting
