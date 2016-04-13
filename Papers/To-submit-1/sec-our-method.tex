@@ -39,6 +39,38 @@ previous to its current state.  The implementations of these functions
 are supplied by client code according to its own representation of the
 buffer content.
 
+Presumably, client code maintains a sequence of lines and some kind of
+index into that sequence.  The function \texttt{skip} is called with a
+positive integer argument, indicating that client code should
+increment the sequence index by that amount.  The function
+\texttt{create} is called with a single line as an argument and it
+indicates that the line should be inserted at the place indicated by
+the sequence index.  The function \texttt{modify} is also called with
+a single line as an argument.  If the sequence index does not refer to
+the line of the argument, client code must firsts delete lines at the
+sequence index until the modified line becomes the one at the index.
+The \texttt{sync} function is called with a single unmodified line as
+an argument.  It is called after a sequence of calls to the functions
+\texttt{modify} and \texttt{create}.  Again, client code responds by
+deleting lines until the one passed as an argument become the one at
+the sequence index.
+
+There are two main challenges that are addressed by the update
+protocol.  The first one is that it has to be efficient when there is
+little or no modification to the buffer between two calls to the
+\texttt{update} function by client code.  Our protocol handles this
+case by calling the \texttt{skip} function with a number of
+consecutive unmodified lines, as described above.
+
+The second challenge has to do with deleted lines.  The buffer does
+not hold on to deleted lines, but the protocol does not contain a
+function for deleting a line.  Instead, it requires the contents of a
+line to be joined at the end of the preceding line.  With this
+technique, a sequence of deleted lines leaves a trace in the form of
+an updated time stamp on the line immediately preceding the sequence
+of deleted ones.  The \texttt{sync} operation allows for client code
+to be informed about the end of the sequence of deleted lines.
+
 \refFig{fig-external-protocols} illustrates the relationship between
 these protocols.
 
