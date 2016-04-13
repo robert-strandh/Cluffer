@@ -52,6 +52,12 @@ edited.  Furthermore, the pathological case can be largely avoided by
 considering the vector holding the items as being \emph{circular} (as
 Flexichain \cite{flexichain} does).
 
+The gap-buffer representation has one great advantage, namely that a
+large region of text can be treated as a single interval, even when
+the region covers several lines of text.  Newlines are handled just
+like any other character, making operations on a region simple no
+matter how large that region is.
+
 Perhaps the main disadvantage of representing the entire buffer as a
 single gap buffer is that it is difficult to associate additional
 information with specific points in the buffer.  One might, for
