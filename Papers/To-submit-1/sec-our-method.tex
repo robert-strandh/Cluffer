@@ -16,6 +16,17 @@ implementations of both these protocols, we also allow for
 sophisticated clients to substitute specific implementations of each
 one.
 
+Although the protocol containing operations one individual lines and
+the protocol containing operations at the buffer level are
+independent, some high-level operations may involve both protocols
+simultaneously.  For example, as mentioned in
+\refSec{sec-previous-line-oriented}, deleting a region that spans
+several lines may require deleting several lines and editing the two
+lines at the beginning and the end of the region.  Deleting a line is
+an operation that belongs to the buffer-level protocol, whereas
+editing a line is an operation that belongs to the line-level
+protocol.
+
 The outer control loop is catered to by the \emph{update protocol}.
 This protocol is based on the concept of \emph{time stamps}.  In order
 to request an update, client code supplies the time stamp of the
