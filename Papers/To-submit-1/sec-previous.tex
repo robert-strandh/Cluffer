@@ -115,6 +115,12 @@ Furthermore, the number of lines in a typical buffer is usually very
 modest.  For that reason, a line-oriented representation does not
 incur any serious performance penalty compared to a gap buffer.
 
+Another disadvantage with a line-oriented representation is that
+operations on regions that span over several lines become more
+difficult.  For example, deleting such a region, may involve deleting
+one or more lines, and modifying the contents of the line where the
+region starts as well as the one where it ends.
+
 \subsection{Updating views}
 
 When interactive full-display text editors first started to appear,
