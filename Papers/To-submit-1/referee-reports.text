@@ -116,16 +116,3 @@ Some points that could improve the paper (in no particular order)
 
 - The description of the dock is useless in the context of the paper
   and could be omitted.
-
-
------------------------ REVIEW 4 ---------------------
-PAPER: 3
-TITLE: A CLOS Protocol for Editor Buffers
-AUTHORS: Robert Strandh
-
-OVERALL EVALUATION: 3 (strong accept)
-REVIEWER'S CONFIDENCE: 3 (medium)
-
------------ Review -----------
-A very interesting approach. The paper is well written. I strongly
-recommend to accept the paper for presentation at the conference.
