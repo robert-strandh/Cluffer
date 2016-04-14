@@ -35,6 +35,19 @@ these operations are implemented as iterative calls to elementary
 editing operations.  This quality makes it possible for client code to
 be simpler, for obvious benefits.
 
+A reasonable question that one might ask is whether the additional
+abstraction layer in the form of generic functions will have a
+negative impact on overall performance of an editor that uses our
+technique, especially since the protocols allow for the buffer to
+contain not only characters, but arbitrary objects.  One important
+reason for designing these protocols was that we are convinced that
+the performance bottleneck is not in the communication between the
+buffer and the views, in particular given the design of the update
+protocol.  Instead, the main performance challenge lies in how the
+views organize the data supplied by our protocols and how they
+interpret and display the data, and such design decisions are
+independent of the buffer protocols.
+
 Finally, our technique is not specific to the abstractions of any
 particular existing editor, making our library useful in a variety of
 potential clients.
