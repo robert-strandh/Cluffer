@@ -10,6 +10,20 @@ number of \emph{views}.  The implementation we supply is fast so that
 this protocol can be invoked for events such as keystrokes, exposures,
 and changes of window geometry.
 
+The features provided by \clos{} are invaluable for the design of
+protocols like these.  These features allow for partial or total
+customization of a large number of the details of the protocols while
+still providing reasonable default design choices that are workable
+for the majority of clients.
+
+Our technique will have very little influence on the harder parts of
+editor design, such as managing variable-size fonts and the mixture of
+text and other objects to be displayed.  The objective of our
+technique is more modest, namely to eliminate the necessity for
+creators of editors to make decisions about the organization of the
+buffer, and as a consequence also diminish the maintenance
+requirements on the code for buffer management.
+
 In the remainder of this section, we outline future plans for the
 library.
 
