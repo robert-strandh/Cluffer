@@ -78,19 +78,6 @@ defines", because the buffer may not be defining a sequence
 anymore. I'm aware that the author targets the editing of Lisp code
 primarily, but this matter should be addressed anyway.
 
-3. Finally, the proposed infrastructure is provided as a set of CLOS
-protocols so that, in particular, clients may implement their own
-/views/ on top of it. This is a commendable intention, but I'm
-wondering whether forcing this layer under the programmer's feet
-wouldn't turn out to be a performance showstopper, when modern
-graphical display needs to be supported. I'm thinking, for instance,
-variable width fonts, mixing of text and other visual entities,
-pixel-based scrolling etc. which are known to be a nightmare to
-implement in text editors such as Emacs. In other words, I'm skeptical
-as to whether the proposed infrastructure would be of any practical
-value for anything else than pure-text, fixed sized editing, and I
-would like to know the author's opinion on this.
-
 ----------------------- REVIEW 2 ---------------------
 PAPER: 3
 TITLE: A CLOS Protocol for Editor Buffers
@@ -100,11 +87,6 @@ OVERALL EVALUATION: 2 (accept)
 REVIEWER'S CONFIDENCE: 4 (high)
 
 ----------- Review -----------
-
-Furthermore, since this article is for a Lisp conference, I really
-think that a point about the interest of a functional language for
-this implementation should be more clearly claimed in the paper.
-
 Some points that could improve the paper (in no particular order)
 
 - all the editors presented in the state of the art belongs to a the
