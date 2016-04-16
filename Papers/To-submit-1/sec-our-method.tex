@@ -87,8 +87,9 @@ related to one another by the \emph{protocol classes} that they
 operate on.  The buffer-edit protocol operates on instances of the
 protocol class named \texttt{buffer}.  The line-edit protocol operates
 on instances of the two protocol classes \texttt{line} and
-\texttt{cursor}.  These protocols are tied together by an internal
-protocol class named \texttt{dock}.  \refFig{fig-participation}
+\texttt{cursor}.  These protocols are tied together by classes and
+other code, serving as \emph{glue} to hold the two protocols together.
+\refFig{fig-participation}
 illustrates the participation of these protocol classes in the
 different protocols, omitting the update protocol.
 
