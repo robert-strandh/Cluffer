@@ -93,8 +93,3 @@ Some points that could improve the paper (in no particular order)
   Emacs family (surely not a problem for a Lisp conference, but perhaps it
   exists some vi Lispers in the world, who could find this is a biased
   view...)
-
-- Section 4 is short and could probably be merged with the conclusion
-
-- The description of the dock is useless in the context of the paper
-  and could be omitted.
