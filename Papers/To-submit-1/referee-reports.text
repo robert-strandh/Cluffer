@@ -46,38 +46,6 @@ plus some ad-hoc code. So I think the problem was the lack of a proper
 API for implementing syntactic analysis, regardless of the underlying
 buffer representation.
 
-Finally, I find that at least three important matters of discussion
-are left out of this paper.
-
-1. Influence of character encoding. The paper doesn't say a word about
-which character encodings are supported, planned to be, or even
-whether it is a matter taken into consideration. The issue is an
-important one however. Most notably, whether characters are
-represented in fixed or variable width will have a dramatic influence
-on basically all editing operations (not only buffer modifications but
-also searching), and hence on the underlying representation. At a
-first glance, it seems to me that the conjunction of a splay tree
-(whole buffer) and vectors/gap buffers (individual lines) allows for
-supporting all kinds of encoding equally easily, which is good if
-that's the case. Nevertheless, this matter should be addressed.
-
-2. Non-character items. The footnote on page one hides and important
-question, also not addressed in this paper: that of non-character
-items. What other kind of items do the authors expect to handle? My
-suspicion is that they envision some form of encoding for syntactic
-information on the buffer's contents (such as beginning and end of
-expression markers, or Emacs-like overlays / text properties). As long
-as these items don't have any visual representation, everything's
-fine. In modern editors, however, other kinds of items are supported,
-such as images spanning multiple lines and columns. Note that I'm not
-talking about visual clues added on top of text (e.g. line wrap
-icons), which do not belong to the buffer's contents per-se, but
-actual, non textual contents. In such a situation, an item cannot be
-defined as a "single place in the editable sequence that the buffer
-defines", because the buffer may not be defining a sequence
-anymore. I'm aware that the author targets the editing of Lisp code
-primarily, but this matter should be addressed anyway.
-
 ----------------------- REVIEW 2 ---------------------
 PAPER: 3
 TITLE: A CLOS Protocol for Editor Buffers
