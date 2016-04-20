@@ -228,3 +228,12 @@ content itself is separate from the doubly linked structure.  Lines
 are represented by a gap buffer.  The gap buffer is encapsulated in
 a library called Flexivector, which was later extended to become the
 Flexichain library.
+
+To take one example that is not a member of the Emacs family, VIM%
+\footnote{https://github.com/vim/} represents the buffer contents as a
+tree of blocks.  A block contains one or more lines of text.  A line
+can not span block boundaries.  Most blocks are exactly one page (as
+defined by the operating system) in size.  Only a block containing a
+(single) line that is larger than one page can be larger than a page.
+Blocks are file backed, making it possible to represent text buffers
+that are larger than the swap space of the computer.
