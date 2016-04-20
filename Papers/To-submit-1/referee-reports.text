@@ -53,11 +53,3 @@ AUTHORS: Robert Strandh
 
 OVERALL EVALUATION: 2 (accept)
 REVIEWER'S CONFIDENCE: 4 (high)
-
------------ Review -----------
-Some points that could improve the paper (in no particular order)
-
-- all the editors presented in the state of the art belongs to a the
-  Emacs family (surely not a problem for a Lisp conference, but perhaps it
-  exists some vi Lispers in the world, who could find this is a biased
-  view...)
