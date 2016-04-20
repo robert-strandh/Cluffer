@@ -21,13 +21,25 @@ initiative of the views that need updating, and only when they need to
 be updated.  The standard buffer implementation provided by our
 library provides an efficient implementation of the update protocol.
 
+Because of the way the line-editing protocol is designed, a line can
+contain any \commonlisp{} object, and therefore any characters.  The
+standard implementation of the line editing protocol uses simple
+vectors%
+\footnote{A simple vector is a \commonlisp{} one-dimensional array,
+  capable of storing any \commonlisp{} object.}
+to store the data.
+
 Our technique can be \emph{customized} by the fact that the buffer
-editing protocol and the line editing protocol are independent.
+editing protocol and the line-editing protocol are independent.
 Client code with specific needs can therefore replace the
 implementation of one or the other or both according to its
 requirements.  Thanks to the existence of the \clos{} protocol, such
 customization can be done gradually, starting with the supplied
-implementations and replacing them as requirements change.
+implementations and replacing them as requirements change.  A typical
+customization might be to optimize the implementation of the
+line-editing protocol so that when every object in a particular line
+is an ASCII character, an efficient string representation is
+used instead of a simple vector.
 
 The standard line implementation supplied makes it possible to obtain
 reasonable performance for aggregate editing operations even when
