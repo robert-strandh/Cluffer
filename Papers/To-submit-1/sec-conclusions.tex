@@ -93,11 +93,11 @@ or deleting a single item.  However, the current implementation also
 keeps the \emph{item count} of the entire buffer up to date for each
 such operation.
 
-However, the item count for the entire buffer is typically asked for
-only at the frequency of the update protocol, for instance, in order
-to display this information to the end user.  Other situations exist
-when this information is needed, for example when an operation to go
-to a particular item offset is issued.  But such operations are
+Fortunately, the item count for the entire buffer is typically asked
+for only at the frequency of the update protocol, for instance, in
+order to display this information to the end user.  Other situations
+exist when this information is needed, for example when an operation
+to go to a particular item offset is issued.  But such operations are
 relatively rare.
 
 This analysis suggests that it may be possible to update the global
