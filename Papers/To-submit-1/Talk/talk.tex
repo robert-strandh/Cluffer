@@ -94,6 +94,23 @@ LaBRI, University of Bordeaux
 }
 
 \frame{
+  \frametitle{Gap buffer}
+
+  \begin{itemize}
+  \item The contents of the buffer is stored in a \emph{vector}.
+  \item Three parts:
+    \begin{enumerate}
+    \item A possibly empty \emph{prefix} of items.
+    \item A possibly empty \emph{gap}.
+    \item A possibly empty \emph{suffix} of items.
+    \end{enumerate}
+  \item Items are moved so that modifications are either at the
+    beginning or at the end of the gap.
+  \end{itemize}
+
+}
+
+\frame{
   \frametitle{Acknowledgments}
 
 We would like to thank Daniel Kochmański, Bart Botta, and Matthew Alan
