@@ -140,6 +140,18 @@ LaBRI, University of Bordeaux
 }
 
 \frame{
+  \frametitle{Existing editors}
+
+  \begin{itemize}
+  \item GNU Emacs and (first) Climacs use a gap buffer to represent
+    the entire editor buffer.
+  \item Many others use a doubly linked list of lines, such as Multics
+    Emacs, Hemlock, Goatee.
+  \item VIM uses a tree of file-backed blocks.
+  \end{itemize}
+}
+
+\frame{
   \frametitle{Acknowledgments}
 
 We would like to thank Daniel Kochmański, Bart Botta, and Matthew Alan
