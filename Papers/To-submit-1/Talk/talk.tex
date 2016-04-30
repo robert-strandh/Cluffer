@@ -160,9 +160,6 @@ LaBRI, University of Bordeaux
     a window is re-sized.
   \item The fast loop.  Each iteration is an operation to
     insert/delete an item, or to move a cursor.
-  \item The fast loop is faster because a single keystroke can trigger
-    several operations, for example when a region is inserted/deleted,
-    or when a keyboard macro is executed.
   \end{itemize}
 }
 
@@ -174,6 +171,22 @@ LaBRI, University of Bordeaux
     iteration.
   \item The view must determine what has changed in the buffer since 
     it was last redrawn. 
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{The fast loop}
+
+  \begin{itemize}
+  \item The fast loop is faster because a single keystroke can trigger
+    several operations, for example when a region is inserted/deleted,
+    or when a keyboard macro is executed.
+  \item Some fast cases could be avoided by the use of special
+    operations on regions.
+  \item With keyboard macros, multiple operations can not easily be
+    avoided.
+  \item Besides, for reasons of maintainability, it is best to avoid
+    special cases.
   \end{itemize}
 }
 
