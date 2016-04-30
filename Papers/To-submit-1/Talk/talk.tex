@@ -152,6 +152,21 @@ LaBRI, University of Bordeaux
 }
 
 \frame{
+  \frametitle{Two loops}
+
+  \begin{itemize}
+  \item The slow loop.  It is typically triggered by a keystroke, but
+    can also be triggered by other events such as mouse events or when
+    a window is re-sized.
+  \item The fast loop.  Each iteration is an operation to
+    insert/delete an item, or to move a cursor.
+  \item The fast loop is faster because a single keystroke can trigger
+    several operations, for example when a region is inserted/deleted,
+    or when a keyboard macro is executed.
+  \end{itemize}
+}
+
+\frame{
   \frametitle{Acknowledgments}
 
 We would like to thank Daniel Kochmański, Bart Botta, and Matthew Alan
