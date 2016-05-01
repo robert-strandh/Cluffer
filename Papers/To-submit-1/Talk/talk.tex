@@ -204,12 +204,32 @@ LaBRI, University of Bordeaux
 
 Divided into two sub-protocols
 
-    \begin{enumerate}
-    \item The \emph{line-edit} protocol.
-    \item The \emph{buffer-edit} protocol.
-    \end{enumerate}
+\begin{enumerate}
+\item The \emph{line-edit} protocol.
+\item The \emph{buffer-edit} protocol.
+\end{enumerate}
 
 The two sub-protocols can be independently customized.
+}
+
+\frame{
+  \frametitle{Line-edit protocol}
+
+Defines two classes:
+
+\begin{enumerate}
+\item \texttt{line}
+\item \texttt{cursor}
+\end{enumerate}
+
+Defines several generic functions:
+
+\begin{enumerate}
+\item Inserting and deleting items.
+\item Moving cursors.
+\item Attaching and detaching cursors.
+\end{enumerate}
+
 }
 
 \frame{
