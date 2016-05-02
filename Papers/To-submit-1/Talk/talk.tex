@@ -259,6 +259,30 @@ Defines several generic functions:
 }
 
 \frame{
+  \frametitle{The \texttt{update} function}
+
+Has six parameters: The buffer, the time stamp of the previous update,
+and four function parameters defining edit operations on the view.
+\vskip 0.3cm
+The view maintains a sequence of lines and an index into the sequence.
+The function parameters operate on this sequence and on the index:
+
+\begin{itemize}
+\item \texttt{skip} takes a single argument, an integer to add to the
+  index.
+\item \texttt{modify} takes a single argument, the next line that has
+  been modified.  The view deletes lines until the modified line has
+  been found.
+\item \texttt{insert} takes a single line, the line that has been
+  inserted.  The view inserts the line.
+\item \texttt{sync} takes a single argument, the next line that has
+  not been modified.  The view deletes lines until the line has been
+  found.
+\end{itemize}
+
+}
+
+\frame{
   \frametitle{Acknowledgments}
 
 We would like to thank Daniel Kochmański, Bart Botta, and Matthew Alan
