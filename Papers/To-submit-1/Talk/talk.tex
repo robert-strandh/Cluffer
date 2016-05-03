@@ -287,6 +287,18 @@ The function parameters operate on this sequence and on the index:
 }
 
 \frame{
+  \frametitle{Thread safety}
+
+  \begin{itemize}
+  \item Avoid locking the entire buffer for operations confided to a
+    single line.
+  \item Complication: The buffer maintains a global item count.
+  \item Handle global item count by updating only when needed.
+  \end{itemize}
+
+}
+
+\frame{
   \frametitle{Acknowledgments}
 
 We would like to thank Daniel Kochmański, Bart Botta, and Matthew Alan
