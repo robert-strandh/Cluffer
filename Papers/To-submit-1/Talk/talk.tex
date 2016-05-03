@@ -287,6 +287,19 @@ The function parameters operate on this sequence and on the index:
 }
 
 \frame{
+  \frametitle{Emacs compatibility layer}
+
+  \begin{itemize}
+  \item In an Emacs buffer, a newline character is just another
+    character. 
+  \item Moving a cursor across a newline character involves detaching
+    and attaching the cursor.
+  \item Inserting a newline character involves splitting a line.
+  \item Deleting a newline character involves joining two lines.
+  \end{itemize}
+}
+
+\frame{
   \frametitle{Thread safety}
 
   \begin{itemize}
