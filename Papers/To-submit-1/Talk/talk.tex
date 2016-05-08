@@ -285,6 +285,20 @@ The function parameters operate on this sequence and on the index:
 }
 
 \frame{
+  \frametitle{Standard implementation}
+
+  \begin{itemize}
+  \item A buffer is represented as a splay tree of lines.
+  \item A line is either \emph{open} or \emph{closed} depending on the
+    last operation on it:
+    \begin{itemize}
+    \item An open line is represented as a gap buffer.
+    \item A closed line is represented as a simple vector.
+    \end{itemize}
+  \end{itemize}
+}
+
+\frame{
   \frametitle{Benefits of our technique}
 }
 
