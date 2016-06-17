@@ -42,6 +42,20 @@ left-sticky cursor located at \textit{position} will be located at the
 end of the first line, and any right-sticky cursor located at
 \textit{position} will be located at the beginning of the second line.
 
+This operation is implemented in one of two ways:
+
+\begin{enumerate}
+\item Either the prefix is moved from the original line to a new line.
+  In this case, the second of the two resulting lines is \texttt{eq}
+  to the original one.
+\item Or the suffix is moved from the original line to a new line.
+  In this case, the first of the two resulting lines is \texttt{eq} to
+  the original one.
+\end{enumerate}
+
+However, it is not specified which of the two techniques is used, and
+it is not specified what value is returned from this operation.
+
 \Defgeneric {split-line} {cursor}
 
 Calling this function is equivalent to calling
