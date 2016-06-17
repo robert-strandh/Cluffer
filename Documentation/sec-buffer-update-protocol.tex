@@ -52,7 +52,10 @@ representation of the buffer as it was after the previous call to
 \item \textit{modify} indicates a line that has been modified.  The
   function is called with that line as an argument.  Client code must
   compare the current line of its view to the argument, and delete the
-  current line repeatedly until the two are \texttt{eq}.
+  current line repeatedly until the two are \texttt{eq}.  It
+  must then take whatever action is needed for the modified contents
+  of the line, and finally it must make the immediately following line
+  the current one.
 \item \textit{sync} indicates the first unmodified line after a
   sequence of new or modified lines.  Accordingly, this function is
   called once, following one or more calls to \textit{create} or
