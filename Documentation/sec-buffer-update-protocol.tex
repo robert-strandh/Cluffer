@@ -57,7 +57,10 @@ representation of the buffer as it was after the previous call to
   sequence of new or modified lines.  Accordingly, this function is
   called once, following one or more calls to \textit{create} or
   \textit{modify}.  This function is called with a single argument:
-  the unmodified line.
+  the unmodified line.  Client code must compare the current line of
+  its view to the argument, and delete the current line repeatedly
+  until the two are \texttt{eq}.  Finally, it must make the
+  immediately following line the current one.
 \item \textit{skip} indicates that a number of lines have not been
   subject to any modifications since the last update.  The function
   takes a single argument, the number of lines to skip.  This function
