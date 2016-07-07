@@ -8,6 +8,4 @@
 	       :cluffer-standard-line
 	       :cluffer-standard-buffer
 	       :cluffer-simple-line
-	       :cluffer-simple-buffer)
-  :components
-  ())
+	       :cluffer-simple-buffer))
