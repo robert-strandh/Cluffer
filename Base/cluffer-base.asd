@@ -5,9 +5,9 @@
   :serial t
   :components
   ((:file "packages")
+   (:file "internal-protocol")
    (:file "edit-protocol")
    (:file "update-protocol")
-   (:file "internal-protocol")
    (:file "conditions")
    (:file "condition-reporters-english")
    (:file "check-cursor-attached")
