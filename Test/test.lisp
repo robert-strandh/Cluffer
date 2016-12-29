@@ -4,4 +4,5 @@
   (test-simple-line)
   (test-standard-line)
   (test-simple-buffer)
-  (test-standard-buffer))
+  (test-standard-buffer)
+  (test-update))
