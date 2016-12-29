@@ -26,6 +26,7 @@
    #:erase-item
    #:beginning-of-buffer
    #:end-of-buffer
+   #:cluffer-error
    #:cursor-attached
    #:cursor-detached
    #:line-detached
