@@ -1,0 +1,24 @@
+\section{Conditions}
+
+\sysname{} defines a number of conditions that are signaled when
+\sysname{} is unable to fulfill the contract stipulated by the
+protocol function being used.
+
+\Defcondition {cluffer:cluffer-error}
+
+This condition type is the base of all error conditions signaled by
+\sysname{}.  Client code that wishes to handle all error conditions
+signaled by \sysname{} may use this condition in its condition
+handlers.
+
+\Defcondition {cluffer:end-of-line}
+
+This condition is signaled when an attempt is made to use a
+position that is too large, either by moving a cursor there, or by
+attempting to access an item in such a position.  Notice that in
+some cases, "too large" means "strictly greater than the number of
+items in a line", and sometimes it means "greater than or equal to
+the number of items in a line".  For example, it is perfectly
+acceptable to move a cursor to a position that is equal to the
+number of items in a line, but it is not acceptable to attempt to
+access an item in a line at that position.
