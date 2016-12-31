@@ -22,3 +22,40 @@ the number of items in a line".  For example, it is perfectly
 acceptable to move a cursor to a position that is equal to the
 number of items in a line, but it is not acceptable to attempt to
 access an item in a line at that position.
+
+\Defcondition {cluffer:beginning-of-buffer}
+
+\Defcondition {cluffer:end-of-buffer}
+
+\Defcondition {cluffer:cursor-attached}
+
+This condition is signaled when an attempt is made to use a cursor
+in an operation that requires that cursor to be detached, but the
+cursor used in the operation is attached to a line.
+
+\Defcondition {cluffer:cursor-detached}
+
+This condition is signaled when an attempt is made to use a cursor
+in an operation that requires that cursor to be attached, but the
+cursor used in the operation is not attached to any line.
+
+\Defcondition {cluffer:line-detached}
+
+This condition is signaled when an attempt is made to use a line
+in an operation that requires the line to be attached to a buffer,
+but the line used in the operation is not attached to a buffer.
+An example of such an operation would be to attempt to get the
+line number of the line, given that the line number of a line is
+determined by the buffer to which the line is attached.
+
+\Defcondition {cluffer:object-must-be-line}
+
+This condition is signaled by protocol generic functions that take
+a line object as an argument, but something other than a line
+object was given.
+
+\Defcondition {cluffer:object-must-be-buffer}
+
+This condition is signaled by protocol generic functions that take
+a buffer object as an argument, but something other than a buffer
+object was given.
