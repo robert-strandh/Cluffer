@@ -44,3 +44,10 @@
      (language acclimation:english))
   (format stream "Attempt to use a detached line~@
                   when an attached line was required."))
+
+(defmethod acclimation:report-condition
+    ((condition cluffer:object-must-be-line)
+     stream
+     (language acclimation:english))
+  (format stream "Attempt to use an object that is not a line~@
+                  in an operation requiring a line object."))
