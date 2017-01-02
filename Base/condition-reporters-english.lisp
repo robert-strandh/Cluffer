@@ -23,3 +23,17 @@
      stream
      (language acclimation:english))
   (format stream "Attempt to access beyond the end of the buffer."))
+
+(defmethod acclimation:report-condition
+    ((condition cluffer:cursor-attached)
+     stream
+     (language acclimation:english))
+  (format stream "Attempt to use an attached cursor~@
+                  when a detached cursor was required."))
+
+(defmethod acclimation:report-condition
+    ((condition cluffer:cursor-detached)
+     stream
+     (language acclimation:english))
+  (format stream "Attempt to use a detached cursor~@
+                  when an attached cursor was required."))
