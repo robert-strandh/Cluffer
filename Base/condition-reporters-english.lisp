@@ -37,3 +37,10 @@
      (language acclimation:english))
   (format stream "Attempt to use a detached cursor~@
                   when an attached cursor was required."))
+
+(defmethod acclimation:report-condition
+    ((condition cluffer:line-detached)
+     stream
+     (language acclimation:english))
+  (format stream "Attempt to use a detached line~@
+                  when an attached line was required."))
