@@ -46,14 +46,14 @@
 ;;; Edit protocol
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Method on generic function LINE-COUNT.
 
 (defmethod cluffer:line-count ((buffer buffer))
   (line-count (contents buffer)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Method on generic function ITEM-COUNT.
 
 (defmethod cluffer:item-count ((buffer buffer))
