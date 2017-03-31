@@ -50,11 +50,15 @@
      stream
      (language acclimation:english))
   (format stream "Attempt to use an object that is not a line~@
-                  in an operation requiring a line object."))
+                  in an operation requiring a line object:
+                  ~s"
+          (object condition)))
 
 (defmethod acclimation:report-condition
     ((condition cluffer:object-must-be-buffer)
      stream
      (language acclimation:english))
   (format stream "Attempt to use an object that is not a buffer~@
-                  in an operation requiring a buffer object."))
+                  in an operation requiring a buffer object:~@
+                  ~s"
+          (object condition)))
