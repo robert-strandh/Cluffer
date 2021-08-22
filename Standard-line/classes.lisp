@@ -19,6 +19,16 @@
    (%gap-end :initform  10 :initarg :gap-end :accessor gap-end))
   (:default-initargs :contents (make-array 10)))
 
+(defmethod print-object ((object open-line) stream)
+  (print-unreadable-object (object stream :type t :identity t)
+    (loop with contents = (contents object)
+          for index from 0 below (gap-start object)
+          do (format stream "~s" (aref contents index)))
+    (format stream "[~d]" (- (gap-end object) (gap-start object)))
+    (loop with contents = (contents object)
+          for index from (gap-end object) below (length contents)
+          do (format stream "~s" (aref contents index)))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Class CLOSED-LINE. 
@@ -29,6 +39,12 @@
 (defclass closed-line (line)
   ()
   (:default-initargs :contents (vector)))
+
+(defmethod print-object ((object closed-line) stream)
+  (print-unreadable-object (object stream :type t :identity t)
+    (loop with contents = (contents object)
+          for index from 0 below (length contents)
+          do (format stream "~s" (aref contents index)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
