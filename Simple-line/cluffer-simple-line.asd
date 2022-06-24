@@ -8,8 +8,8 @@
 ;;;; protocol in a simple way, so that clients can use it as a
 ;;;; starting point for their own implementations of the protocol.
 
-(defsystem :cluffer-simple-line
-  :depends-on (:cluffer-base)
+(defsystem #:cluffer-simple-line
+  :depends-on (#:cluffer-base)
   :serial t
   :components
   ((:file "packages")
