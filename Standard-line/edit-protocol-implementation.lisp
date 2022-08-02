@@ -242,10 +242,11 @@
 (defmethod cluffer-internal:line-join-line
     ((line1 closed-line) (line2 closed-line))
   (loop with length = (length (contents line1))
+          initially
+             (setf (contents line1)
+                   (concatenate 'vector (contents line1) (contents line2)))
 	for cursor in (cursors line2)
 	do (setf (line cursor) line1)
 	   (incf (cluffer:cursor-position cursor) length)
            (push cursor (cursors line1)))
-  (setf (contents line1)
-	(concatenate 'vector (contents line1) (contents line2)))
   nil)
