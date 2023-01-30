@@ -47,15 +47,6 @@ representation of the buffer as it was after the previous call to
 \texttt{update}.  The operations have the following meaning:
 
 \begin{itemize}
-\item \textit{create} indicates a line that has been created.  The
-  function is called with that line as an argument.
-\item \textit{modify} indicates a line that has been modified.  The
-  function is called with that line as an argument.  Client code must
-  compare the current line of its view to the argument, and delete the
-  current line repeatedly until the two are \texttt{eq}.  It
-  must then take whatever action is needed for the modified contents
-  of the line, and finally it must make the immediately following line
-  the current one.
 \item \textit{sync} indicates the first unmodified line after a
   sequence of new or modified lines.  Accordingly, this function is
   called once, following one or more calls to \textit{create} or
@@ -74,5 +65,14 @@ representation of the buffer as it was after the previous call to
   called when there are unmodified lines at the end of the buffer so
   that the total line count of the buffer corresponds to the total
   number of lines mentioned in the sequence of operations.
+\item \textit{modify} indicates a line that has been modified.  The
+  function is called with that line as an argument.  Client code must
+  compare the current line of its view to the argument, and delete the
+  current line repeatedly until the two are \texttt{eq}.  It
+  must then take whatever action is needed for the modified contents
+  of the line, and finally it must make the immediately following line
+  the current one.
+\item \textit{create} indicates a line that has been created.  The
+  function is called with that line as an argument.
 \end{itemize}
 
