@@ -53,12 +53,17 @@
 (defclass cursor (cluffer:cursor)
   ((%line
     :initform nil
-    :initarg :line
     :accessor line
     :reader cluffer:line)
    (%cursor-position
-    :initarg :cursor-position
     :accessor cluffer:cursor-position)))
+
+(defmethod initialize-instance :after
+    ((cursor cluffer:cursor) &key line cursor-position)
+  (when line
+    (cluffer:attach-cursor cursor line))
+  (when cursor-position
+    (setf (cluffer:cursor-position cursor) cursor-position)))
 
 (defclass left-sticky-cursor (cursor)
   ())
