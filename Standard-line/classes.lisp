@@ -59,11 +59,14 @@
     :accessor cluffer:cursor-position)))
 
 (defmethod initialize-instance :after
-    ((cursor cluffer:cursor) &key line cursor-position)
-  (when line
-    (cluffer:attach-cursor cursor line))
-  (when cursor-position
-    (setf (cluffer:cursor-position cursor) cursor-position)))
+    ((cursor cluffer:cursor)
+     &key (line nil line-supplied-p)
+          (cursor-position 0 cursor-position-supplied-p))
+  (cond (line-supplied-p
+         (cluffer:attach-cursor cursor line cursor-position))
+        (cursor-position-supplied-p
+         (error "~@<Cannot supply ~S without also supplying ~S.~@:>"
+                :cursor-position :line))))
 
 (defclass left-sticky-cursor (cursor)
   ())
