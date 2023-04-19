@@ -4,7 +4,7 @@
 
 (defclass cluffer:line ()
   ((%dock :initarg :dock :initform nil
-	  :accessor cluffer-internal:dock)))
+          :accessor cluffer-internal:dock)))
 
 (defclass cluffer:cursor () ())
 

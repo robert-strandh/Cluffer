@@ -2,7 +2,7 @@
 
 (defsystem #:cluffer-standard-buffer
   :depends-on (#:cluffer-base
-	       #:clump)
+               #:clump)
   :serial t
   :components
   ((:file "packages")

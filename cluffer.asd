@@ -5,7 +5,7 @@
   :author "Robert Strandh <robert.strandh@gmail.com>"
   :license "FreeBSD, see file LICENSE.text"
   :depends-on (#:cluffer-base
-	       #:cluffer-standard-line
-	       #:cluffer-standard-buffer
-	       #:cluffer-simple-line
-	       #:cluffer-simple-buffer))
+               #:cluffer-standard-line
+               #:cluffer-standard-buffer
+               #:cluffer-simple-line
+               #:cluffer-simple-buffer))

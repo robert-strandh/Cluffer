@@ -54,7 +54,7 @@
 
 (defmethod cluffer:end-of-line ((cursor cluffer:cursor))
   (setf (cluffer:cursor-position cursor)
-	(cluffer:item-count cursor)))
+        (cluffer:item-count cursor)))
 
 ;;; Default method on FIRST-LINE-P.
 (defmethod cluffer:first-line-p ((line cluffer:line))
@@ -99,7 +99,7 @@
 ;;; is a valid item position.
 (defmethod cluffer:item-before-cursor ((cursor cluffer:cursor))
   (let ((line (cluffer:line cursor))
-	(position (cluffer:cursor-position cursor)))
+        (position (cluffer:cursor-position cursor)))
     (cluffer:item-at-position line (1- position))))
 
 ;;; Default method on ITEM-AFTER-CURSOR.
@@ -111,7 +111,7 @@
 ;;; valid item position.
 (defmethod cluffer:item-after-cursor ((cursor cluffer:cursor))
   (let ((line (cluffer:line cursor))
-	(position (cluffer:cursor-position cursor)))
+        (position (cluffer:cursor-position cursor)))
     (cluffer:item-at-position line position)))
 
 ;;; Default method on INSERT-ITEM.
@@ -125,7 +125,7 @@
 ;;; position is a valid inserition position.
 (defmethod cluffer:insert-item ((cursor cluffer:cursor) item)
   (let ((line (cluffer:line cursor))
-	(position (cluffer:cursor-position cursor)))
+        (position (cluffer:cursor-position cursor)))
     (cluffer:insert-item-at-position line item position)))
 
 ;;; Default method on DELETE-ITEM.
@@ -137,7 +137,7 @@
 ;;; POSITION is a valid position for deletion.
 (defmethod cluffer:delete-item ((cursor cluffer:cursor))
   (let ((line (cluffer:line cursor))
-	(position (cluffer:cursor-position cursor)))
+        (position (cluffer:cursor-position cursor)))
     (cluffer:delete-item-at-position line position)))
 
 ;;; Default method on ERASE-ITEM.
@@ -149,7 +149,7 @@
 ;;; POSITION is a valid position for deletion.
 (defmethod cluffer:erase-item ((cursor cluffer:cursor))
   (let ((line (cluffer:line cursor))
-	(position (cluffer:cursor-position cursor)))
+        (position (cluffer:cursor-position cursor)))
     (cluffer:delete-item-at-position line (1- position))))
 
 ;;; Default method on SPLIT-LINE.  This method calls
@@ -157,7 +157,7 @@
 ;;; of the cursor as arguments.
 (defmethod cluffer:split-line ((cursor cluffer:cursor))
   (let ((line (cluffer:line cursor))
-	(position (cluffer:cursor-position cursor)))
+        (position (cluffer:cursor-position cursor)))
     (cluffer:split-line-at-position line position)))
 
 ;;; Default method on SPLIT-LINE-AT-POSITION.  This method calls the
@@ -187,34 +187,34 @@
 ;;; is not an instance of LINE.
 (defmethod cluffer:item-at-position (line position)
   (error 'cluffer:object-must-be-line
-	 :object line))
+         :object line))
 
 ;;; Default method on INSERT-ITEM-AT-POSITION, invoked when the LINE
 ;;; argument is not an instance of LINE.
 (defmethod cluffer:insert-item-at-position (line item position)
   (declare (ignore item position))
   (error 'cluffer:object-must-be-line
-	 :object line))
+         :object line))
 
 ;;; Default method on DELETE-ITEM-AT-POSITION, invoked when the LINE
 ;;; argument is not an instance of LINE.
 (defmethod cluffer:delete-item-at-position (line position)
   (declare (ignore position))
   (error 'cluffer:object-must-be-line
-	 :object line))
+         :object line))
 
 ;;; Default method on LINE-COUNT, invoked when the BUFFER argument is
 ;;; not an instance of BUFFER.
 (defmethod cluffer:line-count (buffer)
   (error 'cluffer:object-must-be-buffer
-	 :object buffer))
+         :object buffer))
 
 ;;; Default method on FIND-LINE, invoked when the BUFFER argument is
 ;;; not an instance of BUFFER.
 (defmethod cluffer:find-line (buffer line-number)
   (declare (ignore line-number))
   (error 'cluffer:object-must-be-buffer
-	 :object buffer))
+         :object buffer))
 
 ;;; Default method on BUFFER specialized to CURSOR.
 (defmethod cluffer:buffer ((entity cluffer:cursor))

@@ -14,7 +14,7 @@
 
 (defclass buffer (cluffer:buffer)
   ((%current-time :initform 0 :initarg :current-time
-		  :accessor current-time)
+                  :accessor current-time)
    (%contents :initarg :contents :accessor contents)))
 
 ;;; The node contains a reference to the buffer in which it is
@@ -23,8 +23,8 @@
 ;;; slot of the buffer.
 (defclass node (clump-binary-tree:node-with-parent cluffer-internal:dock)
   ((%buffer :initform nil
-	    :initarg :buffer
-	    :accessor cluffer-internal:buffer)
+            :initarg :buffer
+            :accessor cluffer-internal:buffer)
    (;; The line count of the entire subtree.
     %line-count :initarg :line-count :accessor line-count)
    (;; The item count of the entire subtree.
@@ -35,12 +35,12 @@
 
 (defmethod initialize-instance :after ((buffer buffer) &key initial-line)
   (let ((node (make-instance 'node
-		:buffer buffer
-		:line-count 1
-		:item-count 0
-		:create-time 0
-		:modify-time 0
-		:max-modify-time 0
-		:line initial-line)))
+                :buffer buffer
+                :line-count 1
+                :item-count 0
+                :create-time 0
+                :modify-time 0
+                :max-modify-time 0
+                :line initial-line)))
     (setf (contents buffer) node)
     (setf (cluffer-internal:dock initial-line) node)))
