@@ -2,4 +2,5 @@
 
 (defpackage #:cluffer-test
   (:use #:common-lisp)
-  (:shadow #:delete))
+  (:shadow #:delete)
+  (:export #:run-tests))

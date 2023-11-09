@@ -8,4 +8,5 @@
                #:cluffer-standard-line
                #:cluffer-standard-buffer
                #:cluffer-simple-line
-               #:cluffer-simple-buffer))
+               #:cluffer-simple-buffer)
+  :in-order-to ((test-op (test-op "cluffer-test"))))

@@ -11,4 +11,6 @@
    (:file "test-simple-buffer")
    (:file "test-standard-buffer")
    (:file "test-update-protocol")
-   (:file "test")))
+   (:file "test"))
+  :perform (test-op (operation component)
+             (uiop:symbol-call '#:cluffer-test '#:run-tests)))
