@@ -105,5 +105,6 @@
     (values buffer1 buffer2)))
 
 (defun test-standard-buffer ()
+  (format *trace-output* "~&; Standard buffer test~%")
   (loop repeat 30
         do (test-standard-buffer-1 30000)))

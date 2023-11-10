@@ -251,6 +251,7 @@
     (assert (zerop (cluffer:item-count line)))))
 
 (defun test-simple-line ()
+  (format *trace-output* "~&; Simple line test~%")
   (test-simple-line-1)
   (test-simple-line-2)
   (test-simple-line-3)

@@ -81,6 +81,7 @@
                 cluffer:object-must-be-buffer))
 
 (defun test-simple-buffer ()
+  (format *trace-output* "~&; Simple buffer test~%")
   (test-simple-buffer-1)
   (test-simple-buffer-2)
   (test-simple-buffer-3)

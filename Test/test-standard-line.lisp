@@ -86,5 +86,6 @@
         do (random-deletions-iteration)))
 
 (defun test-standard-line ()
+  (format *trace-output* "~&; Standard line test~%")
   (random-insertions)
   (random-deletions))

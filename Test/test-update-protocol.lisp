@@ -14,14 +14,15 @@
               (nreverse result)))))
 
 (defun test-update ()
+  (format *trace-output* "~&; Update protocol test~%")
   (setf *operations* '())
   (let* ((line1 (make-instance 'cluffer-simple-line:line))
          (buffer1 (make-instance 'cluffer-simple-buffer:buffer
-                    :initial-line line1))
+                                 :initial-line line1))
          (time1 nil)
          (line2 (make-instance 'cluffer-standard-line:open-line))
          (buffer2 (make-instance 'cluffer-standard-buffer:buffer
-                    :initial-line line2))
+                                 :initial-line line2))
          (time2 nil))
     (loop repeat 10000
           do (loop repeat 10
