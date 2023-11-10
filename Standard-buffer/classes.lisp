@@ -1,5 +1,21 @@
 (cl:in-package #:cluffer-standard-buffer)
 
+;;; The node contains a reference to the buffer in which it is
+;;; located.  This reference is needed because when a node of the tree
+;;; is splayed, that node must be explicitly assigned to the CONTENTS
+;;; slot of the buffer.
+(defclass node (clump-binary-tree:node-with-parent cluffer-internal:dock)
+  ((%buffer :initform nil
+            :initarg :buffer
+            :accessor cluffer-internal:buffer)
+   ;; The line count of the entire subtree.
+   (%line-count :initarg :line-count :accessor line-count)
+   ;; The item count of the entire subtree.
+   (%item-count :initarg :item-count :accessor item-count)
+   (%create-time :initarg :create-time :reader create-time)
+   (%modify-time :initarg :modify-time :accessor modify-time)
+   (%max-modify-time :initarg :max-modify-time :accessor max-modify-time)))
+
 ;;; CURRENT-TIME represents the time stamp of the last operation in
 ;;; the buffer.  If UPDATE is called with a time stamp that is greater
 ;;; than or equal to CURRENT-TIME, then a single SKIP operation is
@@ -17,30 +33,13 @@
                   :accessor current-time)
    (%contents :initarg :contents :accessor contents)))
 
-;;; The node contains a reference to the buffer in which it is
-;;; located.  This reference is needed because when a node of the tree
-;;; is splayed, that node must be explicitly assigned to the CONTENTS
-;;; slot of the buffer.
-(defclass node (clump-binary-tree:node-with-parent cluffer-internal:dock)
-  ((%buffer :initform nil
-            :initarg :buffer
-            :accessor cluffer-internal:buffer)
-   (;; The line count of the entire subtree.
-    %line-count :initarg :line-count :accessor line-count)
-   (;; The item count of the entire subtree.
-    %item-count :initarg :item-count :accessor item-count)
-   (%create-time :initarg :create-time :reader create-time)
-   (%modify-time :initarg :modify-time :accessor modify-time)
-   (%max-modify-time :initarg :max-modify-time :accessor max-modify-time)))
-
 (defmethod initialize-instance :after ((buffer buffer) &key initial-line)
-  (let ((node (make-instance 'node
-                :buffer buffer
-                :line-count 1
-                :item-count 0
-                :create-time 0
-                :modify-time 0
-                :max-modify-time 0
-                :line initial-line)))
-    (setf (contents buffer) node)
-    (setf (cluffer-internal:dock initial-line) node)))
+  (let ((node (make-instance 'node :buffer buffer
+                                   :line-count 1
+                                   :item-count 0
+                                   :create-time 0
+                                   :modify-time 0
+                                   :max-modify-time 0
+                                   :line initial-line)))
+    (setf (contents buffer) node
+          (cluffer-internal:dock initial-line) node)))

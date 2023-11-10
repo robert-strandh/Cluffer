@@ -71,11 +71,8 @@
 ;;;
 ;;; Detaching and attaching a cursor.
 
-(defmethod cluffer:attach-cursor
-    ((cursor cursor)
-     (line line)
-     &optional
-       (position 0))
+(defmethod cluffer:attach-cursor ((cursor cursor) (line line)
+                                  &optional (position 0))
   (push cursor (cursors line))
   (setf (line cursor) line)
   (setf (cluffer:cursor-position cursor) position)
@@ -107,14 +104,12 @@
              (setf (contents line) new-contents)))
           ((< position (gap-start line))
            (decf (gap-end line) (- (gap-start line) position))
-           (replace contents contents
-                    :start2 position :end2 (gap-start line)
-                    :start1 (gap-end line))
+           (replace contents contents :start2 position :end2 (gap-start line)
+                                      :start1 (gap-end line))
            (setf (gap-start line) position))
           ((> position (gap-start line))
-           (replace contents contents
-                    :start2 (gap-end line)
-                    :start1 (gap-start line) :end1 position)
+           (replace contents contents :start2 (gap-end line)
+                                      :start1 (gap-start line) :end1 position)
            (incf (gap-end line) (- position (gap-start line)))
            (setf (gap-start line) position))
           (t

@@ -5,13 +5,13 @@
 ;;;; closed line, a compact representation is more important.
 
 (defclass line (cluffer:line)
-   ((%contents :initarg :contents :accessor contents)
-    (%cursors :initform '() :initarg :cursors :accessor cursors)))
+  ((%contents :initarg :contents :accessor contents)
+   (%cursors :initform '() :initarg :cursors :accessor cursors)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Class OPEN-LINE.
-;;; 
+;;;
 ;;; The items of an open line are stored in a gap buffer.
 
 (defclass open-line (line)
@@ -31,8 +31,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Class CLOSED-LINE. 
-;;; 
+;;; Class CLOSED-LINE.
+;;;
 ;;; The contents of a closed line is a vector of items.  At the
 ;;; moment, it is always a simple vector.
 
