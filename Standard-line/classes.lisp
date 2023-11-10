@@ -5,8 +5,22 @@
 ;;;; closed line, a compact representation is more important.
 
 (defclass line (cluffer:line)
-  ((%contents :initarg :contents :accessor contents)
-   (%cursors :initform '() :initarg :cursors :accessor cursors)))
+  ((%contents     :initarg  :contents
+                  :accessor contents)
+   (%cursors      :initarg  :cursors
+                  :type     list
+                  :accessor cursors
+                  :initform '())
+   ;; No writer since the first line always remains the first line
+   ;; since even splitting the first line at position 0 will insert
+   ;; the new line after the first line.
+   (%first-line-p :initarg  :first-line-p
+                  :reader   cluffer:first-line-p
+                  :initform t)
+   (%last-line-p  :initarg  :last-line-p
+                  :accessor last-line-p
+                  :reader   cluffer:last-line-p
+                  :initform t)))
 
 (defun print-line-contents (contents stream)
   (cond ((stringp contents)

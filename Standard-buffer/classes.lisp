@@ -34,9 +34,12 @@
 ;;; issued.
 
 (defclass buffer (cluffer:buffer)
-  ((%current-time :initform 0 :initarg :current-time
-                  :accessor current-time)
-   (%contents :initarg :contents :accessor contents))
+  ((%current-time :initarg :current-time
+                  :accessor current-time
+                  :initform 0)
+   (%contents     :initarg :contents
+                  :type node
+                  :accessor contents))
   (:default-initargs
    :initial-line (error "Required initarg ~S not supplied" :initial-line)))
 

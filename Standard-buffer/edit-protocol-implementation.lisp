@@ -100,24 +100,23 @@
     (clump-binary-tree:splay dock)
     (decf (item-count dock) diff)
     (let ((time (incf (current-time buffer))))
-      (setf (modify-time dock) time)
-      (setf (max-modify-time dock) time))
+      (setf (modify-time dock)     time
+            (max-modify-time dock) time))
     (let* ((new-line (cluffer-internal:line-split-line line position))
-           (time (incf (current-time buffer)))
-           (new-node (make-instance 'node
-                       :buffer buffer
-                       :line-count 1
-                       :item-count diff
-                       :create-time time
-                       :modify-time time
-                       :max-modify-time time
-                       :line new-line)))
+           (time     (incf (current-time buffer)))
+           (new-node (make-instance 'node :buffer buffer
+                                          :line-count 1
+                                          :item-count diff
+                                          :create-time time
+                                          :modify-time time
+                                          :max-modify-time time
+                                          :line new-line)))
       (setf (cluffer-internal:dock new-line) new-node)
       (let ((right-node (clump-binary-tree:right dock)))
-        (setf (clump-binary-tree:right dock) nil)
-        (setf (clump-binary-tree:left new-node) dock)
-        (setf (clump-binary-tree:right new-node) right-node)
-        (setf (contents buffer) new-node))))
+        (setf (clump-binary-tree:right dock)     nil
+              (clump-binary-tree:left new-node)  dock
+              (clump-binary-tree:right new-node) right-node
+              (contents buffer)                  new-node))))
   nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -67,13 +67,15 @@
 
 ;;; Default method on BEGINNING-OF-BUFFER-P.
 (defmethod cluffer:beginning-of-buffer-p ((cursor cluffer:cursor))
-  (and (cluffer:beginning-of-line-p cursor)
-       (cluffer:first-line-p (cluffer:line cursor))))
+  ;; Check FIRST-LINE-P first, because it is cheap.
+  (and (cluffer:first-line-p (cluffer:line cursor))
+       (cluffer:beginning-of-line-p cursor)))
 
 ;;; Default method on END-OF-BUFFER-P.
 (defmethod cluffer:end-of-buffer-p ((cursor cluffer:cursor))
-  (and (cluffer:end-of-line-p cursor)
-       (cluffer:last-line-p (cluffer:line cursor))))
+  ;; Check LAST-LINE-P first, because it is cheap.
+  (and (cluffer:last-line-p (cluffer:line cursor))
+       (cluffer:end-of-line-p cursor)))
 
 ;;; Default method on FORWARD-ITEM.
 (defmethod cluffer:forward-item ((cursor cluffer:cursor))

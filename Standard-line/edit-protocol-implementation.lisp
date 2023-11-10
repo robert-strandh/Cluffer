@@ -203,11 +203,12 @@
 (defmethod cluffer-internal:line-split-line ((line closed-line) position)
   (let* ((contents (contents line))
          (new-contents (subseq contents position))
-         (new-line (make-instance 'closed-line
-                     :cursors '()
-                     :contents new-contents)))
-    (setf (contents line)
-          (subseq contents 0 position))
+         (last-line-p (last-line-p line)) ; are we inserting after the last line?
+         (new-line (make-instance 'closed-line :cursors      '()
+                                               :contents     new-contents
+                                               :first-line-p nil
+                                               :last-line-p  last-line-p)))
+    (setf (contents line) (subseq contents 0 position))
     (setf (cursors new-line)
           (loop for cursor in (cursors line)
                 when (or (and (typep cursor 'right-sticky-cursor)
@@ -220,6 +221,10 @@
              (decf (cluffer:cursor-position cursor) position))
     (setf (cursors line)
           (set-difference (cursors line) (cursors new-line)))
+    ;; If we inserted the new line after the former last line, that
+    ;; line is no longer the last line.
+    (when last-line-p
+      (setf (last-line-p line) nil))
     new-line))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -244,4 +249,8 @@
         do (setf (line cursor) line1)
            (incf (cluffer:cursor-position cursor) length)
            (push cursor (cursors line1)))
+  ;; If we are joining the former next-to-last and last lines, the
+  ;; "surviving" line, LINE1, is now the last line.
+  (when (last-line-p line2)
+    (setf (last-line-p line1) t))
   nil)
