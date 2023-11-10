@@ -58,7 +58,7 @@
   (let* ((contents (contents line))
          (item-count (length contents))
          (new-length (max 32 item-count))
-         (new-contents (make-array new-length)))
+         (new-contents (make-array new-length :element-type (array-element-type contents))))
     (replace new-contents contents
              :start1 (- new-length item-count) :start2 0)
     (change-class line 'open-line
