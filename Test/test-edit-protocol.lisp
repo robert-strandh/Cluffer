@@ -1,0 +1,73 @@
+(cl:in-package #:cluffer-test)
+
+(defun test-cursor-conditions ()
+  (let* ((line1 (make-instance 'cluffer-standard-line:closed-line))
+         (buffer1 (make-instance 'cluffer-standard-buffer:buffer :initial-line line1))
+         (cursor1 (make-instance 'cluffer-standard-line:right-sticky-cursor))
+         (line2 (make-instance 'cluffer-standard-line:closed-line))
+         (buffer2 (make-instance 'cluffer-standard-buffer:buffer :initial-line line2))
+         (cursor2 (make-instance 'cluffer-standard-line:right-sticky-cursor)))
+    (declare (ignore buffer1 buffer2))
+    (cluffer:attach-cursor cursor1 line1)
+    (cluffer:attach-cursor cursor2 line2)
+    (flet ((test-predicate (predicate)
+             (let ((condition (nth-value 1 (ignore-errors
+                                            (funcall predicate cursor1 cursor2)))))
+               (assert (typep condition 'cluffer:cursors-are-not-comparable))
+               (assert (eq cursor1 (cluffer:cursor1 condition)))
+               (assert (eq cursor2 (cluffer:cursor2 condition))))))
+      (test-predicate 'cluffer:cursor<)
+      (test-predicate 'cluffer:cursor<=)
+      (test-predicate 'cluffer:cursor=)
+      (test-predicate 'cluffer:cursor/=)
+      (test-predicate 'cluffer:cursor>=)
+      (test-predicate 'cluffer:cursor>))))
+
+(defun test-cursor-predicates-iteration (item-count)
+  (let* ((cursor-count (+ 1 (random 5)))
+         (positions (map-into (make-list cursor-count) (lambda () (random item-count))))
+         (line (make-instance 'cluffer-standard-line:closed-line))
+         (buffer (make-instance 'cluffer-standard-buffer:buffer
+                                :initial-line line)))
+    (let ((cursor (make-instance 'cluffer-standard-line:right-sticky-cursor)))
+      (cluffer:attach-cursor cursor line)
+      (loop repeat item-count
+            when (= 1 (random 5))
+            do (cluffer:split-line cursor)
+            do (cluffer:insert-item cursor #\a))
+      (cluffer:detach-cursor cursor))
+    (flet ((add-cursor (position)
+             (let ((cursor (make-instance 'cluffer-standard-line:right-sticky-cursor)))
+               (cluffer:attach-cursor cursor line)
+               (loop repeat position
+                     do (cond ((cluffer:end-of-line-p cursor)
+                               (let* ((next-line-number (1+ (cluffer:line-number cursor)))
+                                      (next-line (cluffer:find-line buffer next-line-number)))
+                                 (cluffer:detach-cursor cursor)
+                                 (cluffer:attach-cursor cursor next-line 0)))
+                              (t
+                               (setf (cluffer:cursor-position cursor)
+                                     (1+ (cluffer:cursor-position cursor))))))
+               cursor)))
+      (let ((cursors (map 'list #'add-cursor positions)))
+        (loop for (real-predicate . cursor-predicate) in '((<  . cluffer:cursor<)
+                                                           (<= . cluffer:cursor<=)
+                                                           (=  . cluffer:cursor=)
+                                                           (/= . cluffer:cursor/=)
+                                                           (>= . cluffer:cursor>=)
+                                                           (>  . cluffer:cursor>))
+              for real-result = (apply real-predicate positions)
+              for cursor-result = (apply cursor-predicate cursors)
+              do (assert (eq real-result cursor-result)))))))
+
+
+
+(defun test-cursor-predicates ()
+  (loop with item-count = 100
+        repeat 10000
+        do (test-cursor-predicates-iteration item-count)))
+
+(defun test-edit-protocol ()
+  (format *trace-output* "~&; Edit protocol test~%")
+  (test-cursor-conditions)
+  (test-cursor-predicates))

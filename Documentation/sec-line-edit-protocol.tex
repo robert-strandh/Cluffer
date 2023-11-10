@@ -243,7 +243,7 @@ the total number of items is returned.
 
 \Defgeneric {line} {cursor}
 
-Return the line in which \textit{cursor} is located. 
+Return the line in which \textit{cursor} is located.
 
 \ifdetached{}
 
@@ -259,3 +259,97 @@ line, a condition of type \texttt{cursor-detached} is signaled.
 
 If \textit{entity} is a line that is not currently attached to a
 buffer, a condition of type \texttt{line-detached} is signaled.
+
+\subsubsection{Comparing Cursors}
+
+Cursors which are attached to lines which belong to the same buffer
+can be lexicographically ordered based on their line numbers and
+within-line positions.  The following functions allow comparing cursor
+objects according to this order:
+
+\Defun {cursor<} {cursor \rest more-cursors}
+
+Return true if for each adjacent pair of cursors $(c_1, c_2)$ in the
+sequence of cursors consisting of \textit{cursor} followed by
+\textit{more-cursors}, $c_1$ is positioned before $c_2$ in the buffer.
+This function calls the generic function \texttt{cursor</2} for each
+such pair to check whether the property holds.  As a consequence,
+return true if only \textit{cursor} is supplied.
+
+\ifdetachedmany{}
+
+\Defun {cursor<=} {cursor \rest more-cursors}
+
+Return true if for each adjacent pair of cursors $(c_1, c_2)$ in the
+sequence of cursors consisting of \textit{cursor} followed by
+\textit{more-cursors}, $c_1$ is positioned before $c_2$ or at the same
+position as $c_2$ in the buffer.  This function calls the generic
+function \texttt{cursor<=/2} for each such pair to check whether the
+property holds.  As a consequence, return true if only \textit{cursor}
+is supplied.
+
+\ifdetachedmany{}
+
+\Defun {cursor=} {cursor \rest more-cursors}
+
+Return true if all cursors in the sequence of cursors consisting of
+\textit{cursor} followed by \textit{more-cursors} are positioned at
+the same position in the buffer.  This function calls the generic
+function \texttt{cursor=/2} for pairs of cursors to check whether the
+property holds.  As a consequence, return true if only \textit{cursor}
+is supplied.
+
+\ifdetachedmany{}
+
+\Defun {cursor/=} {cursor \rest more-cursors}
+
+Return true if no two cursors in the sequence of cursors consisting of
+\textit{cursor} followed by \textit{more-cursors} are positioned at
+the same position in the buffer.  This function calls the generic
+function \texttt{cursor=/2} for \emph{all} pairs of cursors to check
+whether the property is violated.  As a consequence, return true if
+only \textit{cursor} is supplied.
+
+\ifdetachedmany{}
+
+\Defun {cursor>=} {cursor \rest more-cursors}
+
+Return true if for each adjacent pair of cursors $(c_1, c_2)$ in the
+sequence of cursors consisting of \textit{cursor} followed by
+\textit{more-cursors}, $c_1$ is positioned after or at the same
+position as $c_2$ in the buffer.  This function calls the generic
+function \texttt{cursor</2} for each such pair to check whether the
+property is violated.  As a consequence, return true if only
+\textit{cursor} is supplied.
+
+\ifdetachedmany{}
+
+\Defun {cursor>} {cursor \rest more-cursors}
+
+Return true if for each adjacent pair of cursors $(c_1, c_2)$ in the
+sequence of cursors consisting of \textit{cursor} followed by
+\textit{more-cursors}, $c_1$ is positioned strictly after $c_2$ in the
+buffer.  This function calls the generic function \texttt{cursor<=/2}
+for each such pair to check whether the property is violated.  As a
+consequence, return true if only \textit{cursor} is supplied.
+
+\Defgeneric {cursor</2} {cursor1 cursor2}
+
+Return true if \textit{cursor1} is positioned strictly before
+\textit{cursor2} in the buffer.
+
+\ifdetachedmany{}
+
+\Defgeneric {cursor<=/2} {cursor1 cursor2}
+
+Return true if \textit{cursor1} is positioned before or at the same
+position as \textit{cursor2} in the buffer.
+
+\ifdetachedmany{}
+
+\Defgeneric {cursor=/2} {cursor1 cursor2}
+
+Return true if \textit{cursor1} is positioned at the same position as
+\textit{cursor2} in the buffer.
+
+\ifdetachedmany{}

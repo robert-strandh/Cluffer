@@ -5,13 +5,50 @@
 ;;;; closed line, a compact representation is more important.
 
 (defclass line (cluffer:line)
-   ((%contents :initarg :contents :accessor contents)
-    (%cursors :initform '() :initarg :cursors :accessor cursors)))
+  ((%contents     :initarg  :contents
+                  :accessor contents)
+   (%cursors      :initarg  :cursors
+                  :type     list
+                  :accessor cursors
+                  :initform '())
+   ;; No writer since the first line always remains the first line
+   ;; since even splitting the first line at position 0 will insert
+   ;; the new line after the first line.
+   (%first-line-p :initarg  :first-line-p
+                  :reader   cluffer:first-line-p
+                  :initform t)
+   (%last-line-p  :initarg  :last-line-p
+                  :accessor last-line-p
+                  :reader   cluffer:last-line-p
+                  :initform t)))
+
+(defun print-line-contents (contents stream)
+  (cond ((stringp contents)
+         (let ((length (length contents)))
+           (write-char #\" stream)
+           (write-string contents stream :end (min 10 length))
+           (when (> length 10)
+             (write-char #\… stream))
+           (write-char #\" stream)))
+        (t
+         (loop for index from 0 below (min (or *print-length* 3)
+                                           (length contents))
+               do (prin1 (aref contents index) stream)))))
+
+(defun print-cursor-count (object stream)
+  (let ((cursor-count (length (cursors object))))
+    (format stream " ~D cursor~:P" cursor-count)))
+
+(defmethod print-object ((object line) stream)
+  (let ((contents (contents object)))
+    (print-unreadable-object (object stream :type t :identity t)
+      (print-line-contents contents stream)
+      (print-cursor-count object stream))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Class OPEN-LINE.
-;;; 
+;;;
 ;;; The items of an open line are stored in a gap buffer.
 
 (defclass open-line (line)
@@ -20,31 +57,26 @@
   (:default-initargs :contents (make-array 10)))
 
 (defmethod print-object ((object open-line) stream)
-  (print-unreadable-object (object stream :type t :identity t)
-    (loop with contents = (contents object)
-          for index from 0 below (gap-start object)
-          do (format stream "~s" (aref contents index)))
-    (format stream "[~d]" (- (gap-end object) (gap-start object)))
-    (loop with contents = (contents object)
-          for index from (gap-end object) below (length contents)
-          do (format stream "~s" (aref contents index)))))
+  (let* ((contents (contents object))
+         (length (length contents))
+         (gap-start (gap-start object))
+         (gap-end (gap-end object)))
+    (print-unreadable-object (object stream :type t :identity t)
+      (print-line-contents (subseq contents 0 gap-start) stream)
+      (format stream "[~d]" (- gap-end gap-start))
+      (print-line-contents (subseq contents gap-end length) stream)
+      (print-cursor-count object stream))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Class CLOSED-LINE. 
-;;; 
+;;; Class CLOSED-LINE.
+;;;
 ;;; The contents of a closed line is a vector of items.  At the
 ;;; moment, it is always a simple vector.
 
 (defclass closed-line (line)
   ()
   (:default-initargs :contents (vector)))
-
-(defmethod print-object ((object closed-line) stream)
-  (print-unreadable-object (object stream :type t :identity t)
-    (loop with contents = (contents object)
-          for index from 0 below (length contents)
-          do (format stream "~s" (aref contents index)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -59,11 +91,14 @@
     :accessor cluffer:cursor-position)))
 
 (defmethod initialize-instance :after
-    ((cursor cluffer:cursor) &key line cursor-position)
-  (when line
-    (cluffer:attach-cursor cursor line))
-  (when cursor-position
-    (setf (cluffer:cursor-position cursor) cursor-position)))
+    ((cursor cluffer:cursor)
+     &key (line nil line-supplied-p)
+          (cursor-position 0 cursor-position-supplied-p))
+  (cond (line-supplied-p
+         (cluffer:attach-cursor cursor line cursor-position))
+        (cursor-position-supplied-p
+         (error "~@<Cannot supply ~S without also supplying ~S.~@:>"
+                :cursor-position :line))))
 
 (defclass left-sticky-cursor (cursor)
   ())

@@ -1,4 +1,9 @@
 \def\ifdetached{If \textit{cursor} is not currently attached to a
 line, a condition of type \texttt{cursor-detached} is signaled.}
+\def\ifdetachedmany{If any of the cursors is not currently attached to
+a line, a condition of type \texttt{cursor-detached} is signaled.
+Unless all cursors are attached to lines which belong to the same
+buffer, a condition of type \texttt{cursors-are-not-comparable} is
+signaled.}
 \def\howeverperformance{However, this function might be implemented
 differently for reasons of performance.}

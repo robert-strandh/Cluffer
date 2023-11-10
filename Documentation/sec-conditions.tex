@@ -39,6 +39,13 @@ This condition is signaled when an attempt is made to use a cursor
 in an operation that requires that cursor to be attached, but the
 cursor used in the operation is not attached to any line.
 
+\Defcondition {cluffer:cursors-are-not-comparable}
+
+This condition is signaled when an attempt is made to compare two
+cursors which are each attached to a line but the lines do not belong
+to the same buffer.  The readers \texttt{cursor1} and \texttt{cursor2}
+can be used to obtain the offending cursor objects.
+
 \Defcondition {cluffer:line-detached}
 
 This condition is signaled when an attempt is made to use a line

@@ -39,6 +39,15 @@
                   when an attached cursor was required."))
 
 (defmethod acclimation:report-condition
+    ((condition cluffer:cursors-are-not-comparable)
+     stream
+     (language acclimation:english))
+  (format stream "~@<Attempt to use compare cursors ~s and ~s ~
+                  which are attached to lines which belong to ~
+                  different buffers.~@:>"
+          (cluffer:cursor1 condition) (cluffer:cursor2 condition)))
+
+(defmethod acclimation:report-condition
     ((condition cluffer:line-detached)
      stream
      (language acclimation:english))

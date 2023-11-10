@@ -16,7 +16,7 @@
 
 (defmethod cluffer:item-count ((line closed-line))
   (length (contents line)))
-    
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on ITEMS.
@@ -44,38 +44,35 @@
 
 (defun close-line (line)
   (let* ((item-count (cluffer:item-count line))
-	 (contents (contents line))
-	 (new-contents (make-array item-count)))
+         (contents (contents line))
+         (new-contents (make-array item-count)))
     (replace new-contents contents
-	     :start1 0 :start2 0 :end2 (gap-start line))
+             :start1 0 :start2 0 :end2 (gap-start line))
     (replace new-contents contents
-	     :start1 (gap-start line) :start2 (gap-end line))
+             :start1 (gap-start line) :start2 (gap-end line))
     (change-class line 'closed-line
-		  :contents new-contents)
+                  :contents new-contents)
     nil))
 
 (defun open-line (line)
   (let* ((contents (contents line))
-	 (item-count (length contents))
-	 (new-length (max 32 item-count))
-	 (new-contents (make-array new-length)))
+         (item-count (length contents))
+         (new-length (max 32 item-count))
+         (new-contents (make-array new-length :element-type (array-element-type contents))))
     (replace new-contents contents
-	     :start1 (- new-length item-count) :start2 0)
+             :start1 (- new-length item-count) :start2 0)
     (change-class line 'open-line
-		  :contents new-contents
-		  :gap-start 0
-		  :gap-end (- new-length item-count))
+                  :contents new-contents
+                  :gap-start 0
+                  :gap-end (- new-length item-count))
     nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Detaching and attaching a cursor.
 
-(defmethod cluffer:attach-cursor
-    ((cursor cursor)
-     (line line)
-     &optional
-       (position 0))
+(defmethod cluffer:attach-cursor ((cursor cursor) (line line)
+                                  &optional (position 0))
   (push cursor (cursors line))
   (setf (line cursor) line)
   (setf (cluffer:cursor-position cursor) position)
@@ -83,7 +80,7 @@
 
 (defmethod cluffer:detach-cursor ((cursor cursor))
   (setf (cursors (line cursor))
-	(remove cursor (cursors (line cursor))))
+        (remove cursor (cursors (line cursor))))
   (setf (line cursor) nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -95,37 +92,35 @@
 (defun insert-item-at-position (line item position)
   (let ((contents (contents line)))
     (cond ((= (gap-start line) (gap-end line))
-	   (let* ((new-length (* 2 (length contents)))
-		  (diff (- new-length (length contents)))
-		  (new-contents (make-array new-length)))
-	     (replace new-contents contents
-		      :start2 0 :start1 0 :end2 position)
-	     (replace new-contents contents
-		      :start2 position :start1 (+ position diff))
-	     (setf (gap-start line) position)
-	     (setf (gap-end line) (+ position diff))
-	     (setf (contents line) new-contents)))
-	  ((< position (gap-start line))
-	   (decf (gap-end line) (- (gap-start line) position))
-	   (replace contents contents
-		    :start2 position :end2 (gap-start line)
-		    :start1 (gap-end line))
-	   (setf (gap-start line) position))
-	  ((> position (gap-start line))
-	   (replace contents contents
-		    :start2 (gap-end line)
-		    :start1 (gap-start line) :end1 position)
-	   (incf (gap-end line) (- position (gap-start line)))
-	   (setf (gap-start line) position))
-	  (t
-	   nil))
+           (let* ((new-length (* 2 (length contents)))
+                  (diff (- new-length (length contents)))
+                  (new-contents (make-array new-length)))
+             (replace new-contents contents
+                      :start2 0 :start1 0 :end2 position)
+             (replace new-contents contents
+                      :start2 position :start1 (+ position diff))
+             (setf (gap-start line) position)
+             (setf (gap-end line) (+ position diff))
+             (setf (contents line) new-contents)))
+          ((< position (gap-start line))
+           (decf (gap-end line) (- (gap-start line) position))
+           (replace contents contents :start2 position :end2 (gap-start line)
+                                      :start1 (gap-end line))
+           (setf (gap-start line) position))
+          ((> position (gap-start line))
+           (replace contents contents :start2 (gap-end line)
+                                      :start1 (gap-start line) :end1 position)
+           (incf (gap-end line) (- position (gap-start line)))
+           (setf (gap-start line) position))
+          (t
+           nil))
     (setf (aref (contents line) (gap-start line)) item)
     (incf (gap-start line))
     (loop for cursor in (cursors line)
-	  do (when (or (> (cluffer:cursor-position cursor) position)
-		       (and (= (cluffer:cursor-position cursor) position)
-			    (typep cursor 'right-sticky-cursor)))
-	       (incf (cluffer:cursor-position cursor)))))
+          do (when (or (> (cluffer:cursor-position cursor) position)
+                       (and (= (cluffer:cursor-position cursor) position)
+                            (typep cursor 'right-sticky-cursor)))
+               (incf (cluffer:cursor-position cursor)))))
   nil)
 
 (defmethod cluffer:insert-item-at-position ((line closed-line) item position)
@@ -144,36 +139,36 @@
 (defun delete-item-at-position (line position)
   (let ((contents (contents line)))
     (cond ((< position (gap-start line))
-	   (decf (gap-end line) (- (gap-start line) position))
-	   (replace contents contents
-		    :start2 position :end2 (gap-start line)
-		    :start1 (gap-end line))
-	   (setf (gap-start line) position))
-	  ((> position (gap-start line))
-	   (replace contents contents
-		    :start2 (gap-end line)
-		    :start1 (gap-start line) :end1 position)
-	   (incf (gap-end line) (- position (gap-start line)))
-	   (setf (gap-start line) position))
-	  (t
-	   nil))
+           (decf (gap-end line) (- (gap-start line) position))
+           (replace contents contents
+                    :start2 position :end2 (gap-start line)
+                    :start1 (gap-end line))
+           (setf (gap-start line) position))
+          ((> position (gap-start line))
+           (replace contents contents
+                    :start2 (gap-end line)
+                    :start1 (gap-start line) :end1 position)
+           (incf (gap-end line) (- position (gap-start line)))
+           (setf (gap-start line) position))
+          (t
+           nil))
     (setf (aref contents (gap-end line)) 0)  ; for the GC
     (incf (gap-end line))
     (when (and (> (length contents) 32)
-	       (> (- (gap-end line) (gap-start line))
-		  (* 3/4 (length contents))))
+               (> (- (gap-end line) (gap-start line))
+                  (* 3/4 (length contents))))
       (let* ((new-length (floor (length contents) 2))
-	     (diff (- (length contents) new-length))
-	     (new-contents (make-array new-length)))
-	(replace new-contents contents
-		 :start2 0 :start1 0 :end2 (gap-start line))
-	(replace new-contents contents
-		 :start2 (gap-end line) :start1 (- (gap-end line) diff))
-	(decf (gap-end line) diff)
-	(setf (contents line) new-contents)))
+             (diff (- (length contents) new-length))
+             (new-contents (make-array new-length)))
+        (replace new-contents contents
+                 :start2 0 :start1 0 :end2 (gap-start line))
+        (replace new-contents contents
+                 :start2 (gap-end line) :start1 (- (gap-end line) diff))
+        (decf (gap-end line) diff)
+        (setf (contents line) new-contents)))
     (loop for cursor in (cursors line)
-	  do (when (> (cluffer:cursor-position cursor) position)
-	       (decf (cluffer:cursor-position cursor)))))
+          do (when (> (cluffer:cursor-position cursor) position)
+               (decf (cluffer:cursor-position cursor)))))
   nil)
 
 (defmethod cluffer:delete-item-at-position ((line closed-line) position)
@@ -193,9 +188,9 @@
 
 (defmethod cluffer:item-at-position ((line open-line) position)
   (aref (contents line)
-	(if (< position (gap-start line))
-	    position
-	    (+ position (- (gap-end line) (gap-start line))))))
+        (if (< position (gap-start line))
+            position
+            (+ position (- (gap-end line) (gap-start line))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -207,24 +202,29 @@
 
 (defmethod cluffer-internal:line-split-line ((line closed-line) position)
   (let* ((contents (contents line))
-	 (new-contents (subseq contents position))
-	 (new-line (make-instance 'closed-line
-		     :cursors '()
-		     :contents new-contents)))
-    (setf (contents line)
-	  (subseq contents 0 position))
+         (new-contents (subseq contents position))
+         (last-line-p (last-line-p line)) ; are we inserting after the last line?
+         (new-line (make-instance 'closed-line :cursors      '()
+                                               :contents     new-contents
+                                               :first-line-p nil
+                                               :last-line-p  last-line-p)))
+    (setf (contents line) (subseq contents 0 position))
     (setf (cursors new-line)
-	  (loop for cursor in (cursors line)
-		when (or (and (typep cursor 'right-sticky-cursor)
-			      (>= (cluffer:cursor-position cursor) position))
-			 (and (typep cursor 'left-sticky-cursor)
-			      (> (cluffer:cursor-position cursor) position)))
-		  collect cursor))
+          (loop for cursor in (cursors line)
+                when (or (and (typep cursor 'right-sticky-cursor)
+                              (>= (cluffer:cursor-position cursor) position))
+                         (and (typep cursor 'left-sticky-cursor)
+                              (> (cluffer:cursor-position cursor) position)))
+                  collect cursor))
     (loop for cursor in (cursors new-line)
-	  do (setf (line cursor) new-line)
-	     (decf (cluffer:cursor-position cursor) position))
+          do (setf (line cursor) new-line)
+             (decf (cluffer:cursor-position cursor) position))
     (setf (cursors line)
-	  (set-difference (cursors line) (cursors new-line)))
+          (set-difference (cursors line) (cursors new-line)))
+    ;; If we inserted the new line after the former last line, that
+    ;; line is no longer the last line.
+    (when last-line-p
+      (setf (last-line-p line) nil))
     new-line))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -245,8 +245,12 @@
           initially
              (setf (contents line1)
                    (concatenate 'vector (contents line1) (contents line2)))
-	for cursor in (cursors line2)
-	do (setf (line cursor) line1)
-	   (incf (cluffer:cursor-position cursor) length)
+        for cursor in (cursors line2)
+        do (setf (line cursor) line1)
+           (incf (cluffer:cursor-position cursor) length)
            (push cursor (cursors line1)))
+  ;; If we are joining the former next-to-last and last lines, the
+  ;; "surviving" line, LINE1, is now the last line.
+  (when (last-line-p line2)
+    (setf (last-line-p line1) t))
   nil)

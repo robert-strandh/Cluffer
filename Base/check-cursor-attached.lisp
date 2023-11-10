@@ -14,9 +14,9 @@
   (let ((args (substitute '(cursor cluffer:cursor) 'cursor arguments)))
     `(defmethod ,name :before ,args
        (declare (ignore ,@(set-difference (remove 'cursor arguments)
-					  lambda-list-keywords)))
+                                          lambda-list-keywords)))
        (unless (cluffer:cursor-attached-p cursor)
-	 (error 'cluffer:cursor-detached)))))
+         (error 'cluffer:cursor-detached)))))
 
 (check-cursor-attached cluffer:cursor-position (cursor))
 (check-cursor-attached (setf cluffer:cursor-position) (position cursor))

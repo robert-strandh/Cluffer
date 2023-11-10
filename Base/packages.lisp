@@ -10,6 +10,16 @@
    #:item-count
    #:cursor-attached-p
    #:cursor-position
+   #:cursor</2
+   #:cursor<=/2
+   #:cursor=/2
+   #:cursor<
+   #:cursor<=
+   #:cursor=
+   #:cursor/=
+   #:cursor>=
+   #:cursor>
+
    #:beginning-of-line-p
    #:end-of-line-p
    #:forward-item
@@ -29,6 +39,9 @@
    #:cluffer-error
    #:cursor-attached
    #:cursor-detached
+   #:cursors-are-not-comparable
+   #:cursor1
+   #:cursor2
    #:line-detached
    #:object-must-be-line
    #:object-must-be-buffer
@@ -49,17 +62,17 @@
 (defpackage #:cluffer-internal
   (:use #:common-lisp)
   (:export #:line-split-line
-	   #:line-join-line
-	   #:dock
-	   #:line
-	   #:buffer
-	   #:buffer-line-number
-	   #:dock-split-line
-	   #:buffer-split-line
-	   #:dock-join-line
-	   #:buffer-join-line
-	   #:dock-line-number
-	   #:notify-item-count-changed))
+           #:line-join-line
+           #:dock
+           #:line
+           #:buffer
+           #:buffer-line-number
+           #:dock-split-line
+           #:buffer-split-line
+           #:dock-join-line
+           #:buffer-join-line
+           #:dock-line-number
+           #:notify-item-count-changed))
 
 (defpackage #:cluffer-base
   (:use #:common-lisp)

@@ -5,11 +5,11 @@
 
 (defclass line (cluffer:line)
    ((%contents :initarg :contents
-	       :initform (make-array 0)
-	       :accessor contents)
+               :initform (make-array 0)
+               :accessor contents)
     (%cursors :initarg :cursors
-	      :initform '()
-	      :accessor cursors)))
+              :initform '()
+              :accessor cursors)))
 
 (defclass cursor (cluffer:cursor)
   ((%line
