@@ -31,7 +31,9 @@
 (defclass buffer (cluffer:buffer)
   ((%current-time :initform 0 :initarg :current-time
                   :accessor current-time)
-   (%contents :initarg :contents :accessor contents)))
+   (%contents :initarg :contents :accessor contents))
+  (:default-initargs
+   :initial-line (error "Required initarg ~S not supplied" :initial-line)))
 
 (defmethod initialize-instance :after ((buffer buffer) &key initial-line)
   (let ((node (make-instance 'node :buffer buffer
