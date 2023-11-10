@@ -8,6 +8,29 @@
   ((%contents :initarg :contents :accessor contents)
    (%cursors :initform '() :initarg :cursors :accessor cursors)))
 
+(defun print-line-contents (contents stream)
+  (cond ((stringp contents)
+         (let ((length (length contents)))
+           (write-char #\" stream)
+           (write-string contents stream :end (min 10 length))
+           (when (> length 10)
+             (write-char #\… stream))
+           (write-char #\" stream)))
+        (t
+         (loop for index from 0 below (min (or *print-length* 3)
+                                           (length contents))
+               do (prin1 (aref contents index) stream)))))
+
+(defun print-cursor-count (object stream)
+  (let ((cursor-count (length (cursors object))))
+    (format stream " ~D cursor~:P" cursor-count)))
+
+(defmethod print-object ((object line) stream)
+  (let ((contents (contents object)))
+    (print-unreadable-object (object stream :type t :identity t)
+      (print-line-contents contents stream)
+      (print-cursor-count object stream))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Class OPEN-LINE.
@@ -20,14 +43,15 @@
   (:default-initargs :contents (make-array 10)))
 
 (defmethod print-object ((object open-line) stream)
-  (print-unreadable-object (object stream :type t :identity t)
-    (loop with contents = (contents object)
-          for index from 0 below (gap-start object)
-          do (format stream "~s" (aref contents index)))
-    (format stream "[~d]" (- (gap-end object) (gap-start object)))
-    (loop with contents = (contents object)
-          for index from (gap-end object) below (length contents)
-          do (format stream "~s" (aref contents index)))))
+  (let* ((contents (contents object))
+         (length (length contents))
+         (gap-start (gap-start object))
+         (gap-end (gap-end object)))
+    (print-unreadable-object (object stream :type t :identity t)
+      (print-line-contents (subseq contents 0 gap-start) stream)
+      (format stream "[~d]" (- gap-end gap-start))
+      (print-line-contents (subseq contents gap-end length) stream)
+      (print-cursor-count object stream))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -39,12 +63,6 @@
 (defclass closed-line (line)
   ()
   (:default-initargs :contents (vector)))
-
-(defmethod print-object ((object closed-line) stream)
-  (print-unreadable-object (object stream :type t :identity t)
-    (loop with contents = (contents object)
-          for index from 0 below (length contents)
-          do (format stream "~s" (aref contents index)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

@@ -16,6 +16,11 @@
    (%modify-time :initarg :modify-time :accessor modify-time)
    (%max-modify-time :initarg :max-modify-time :accessor max-modify-time)))
 
+(defmethod print-object ((object node) stream)
+  (print-unreadable-object (object stream :type t :identity t)
+    (format stream "~D line~:P ~D item~:P"
+            (line-count object) (item-count object))))
+
 ;;; CURRENT-TIME represents the time stamp of the last operation in
 ;;; the buffer.  If UPDATE is called with a time stamp that is greater
 ;;; than or equal to CURRENT-TIME, then a single SKIP operation is
