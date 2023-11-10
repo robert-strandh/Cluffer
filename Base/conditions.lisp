@@ -45,6 +45,14 @@
     (cluffer:cluffer-error)
   ())
 
+;;; This condition is signaled when an attempt is made to compare two
+;;; cursors which are each attached to a line but the lines do not
+;;; belong to the same buffer.
+(define-condition cluffer:cursors-are-not-comparable
+    (cluffer:cluffer-error)
+  ((%cursor1 :initarg :cursor1 :reader cluffer:cursor1)
+   (%cursor2 :initarg :cursor2 :reader cluffer:cursor2)))
+
 ;;; This condition is signaled when an attempt is made to use a line
 ;;; in an operation that requires the line to be attached to a buffer,
 ;;; but the line used in the operation is not attached to a buffer.

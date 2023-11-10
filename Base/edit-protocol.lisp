@@ -407,3 +407,68 @@
 ;;; then an error of type DETACHED-CURSOR is signaled.
 
 (defgeneric cluffer:line (cursor))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function CURSOR=/2
+;;;
+;;; Return true if CURSOR1 and CURSOR2 are positioned at the same line
+;;; and the same item index in a given buffer.
+;;;
+;;; If CURSOR1 or CURSOR2 is not currently attached to a line, then an
+;;; error of type DETACHED-CURSOR is signaled.
+;;;
+;;; If CURSOR1 and CURSOR2 are currently attached to lines that belong
+;;; to different buffers, a TODO error signaled.
+
+(defgeneric cluffer:cursor=/2 (cursor1 cursor2))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Generic function CURSOR</2
+;;;
+;;; Return true if CURSOR1 is positioned before CURSOR2 in a given
+;;; buffer.
+;;;
+;;; If CURSOR1 or CURSOR2 is not currently attached to a line, then an
+;;; error of type DETACHED-CURSOR is signaled.
+;;;
+;;; If CURSOR1 and CURSOR2 are currently attached to lines that belong
+;;; to different buffers, a TODO error signaled.
+
+(defgeneric cluffer:cursor</2 (cursor1 cursor2))
+
+(defun cluffer:cursor< (cursor &rest more-cursors)
+  (or (null more-cursors)
+      (every #'cluffer:cursor</2 (list* cursor more-cursors) more-cursors)))
+
+(defun cluffer:cursor<= (cursor &rest more-cursors)
+  (or (null more-cursors)
+      (every #'cluffer:cursor<=/2 (list* cursor more-cursors) more-cursors)))
+
+(defun cluffer:cursor= (cursor &rest more-cursors)
+  (or (null more-cursors)
+      (every #'cluffer:cursor=/2 (list* cursor more-cursors) more-cursors)))
+
+(defun cluffer:cursor/= (cursor &rest more-cursors)
+  (cond ((null more-cursors)
+         t)
+        ((null (cdr more-cursors))
+         (not (cluffer:cursor=/2 cursor (first more-cursors))))
+        (t
+         (loop named outer
+               for cursors on (list* cursor more-cursors)
+               for (cursor1 . rest) = cursors
+               while rest
+               do (loop for cursor2 in rest
+                        when (cluffer:cursor=/2 cursor1 cursor2)
+                          do (return-from outer nil))
+               finally (return-from outer t)))))
+
+(defun cluffer:cursor>= (cursor &rest more-cursors)
+  (or (null more-cursors)
+      (notany #'cluffer:cursor</2 (list* cursor more-cursors) more-cursors)))
+
+(defun cluffer:cursor> (cursor &rest more-cursors)
+  (or (null more-cursors)
+      (notany #'cluffer:cursor<=/2 (list* cursor more-cursors) more-cursors)))

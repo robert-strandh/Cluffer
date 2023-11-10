@@ -10,6 +10,16 @@
    #:item-count
    #:cursor-attached-p
    #:cursor-position
+   #:cursor</2
+   #:cursor<=/2
+   #:cursor=/2
+   #:cursor<
+   #:cursor<=
+   #:cursor=
+   #:cursor/=
+   #:cursor>=
+   #:cursor>
+
    #:beginning-of-line-p
    #:end-of-line-p
    #:forward-item
@@ -29,6 +39,9 @@
    #:cluffer-error
    #:cursor-attached
    #:cursor-detached
+   #:cursors-are-not-comparable
+   #:cursor1
+   #:cursor2
    #:line-detached
    #:object-must-be-line
    #:object-must-be-buffer
