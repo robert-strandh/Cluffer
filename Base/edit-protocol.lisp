@@ -419,7 +419,8 @@
 ;;; error of type DETACHED-CURSOR is signaled.
 ;;;
 ;;; If CURSOR1 and CURSOR2 are currently attached to lines that belong
-;;; to different buffers, a TODO error signaled.
+;;; to different buffers, an error of type CURSORS-ARE-NOT-COMPARABLE
+;;; is signaled.
 
 (defgeneric cluffer:cursor=/2 (cursor1 cursor2))
 
@@ -434,7 +435,8 @@
 ;;; error of type DETACHED-CURSOR is signaled.
 ;;;
 ;;; If CURSOR1 and CURSOR2 are currently attached to lines that belong
-;;; to different buffers, a TODO error signaled.
+;;; to different buffers, an error of type CURSORS-ARE-NOT-COMPARABLE
+;;; is signaled.
 
 (defgeneric cluffer:cursor</2 (cursor1 cursor2))
 
