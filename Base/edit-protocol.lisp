@@ -419,7 +419,8 @@
 ;;; error of type DETACHED-CURSOR is signaled.
 ;;;
 ;;; If CURSOR1 and CURSOR2 are currently attached to lines that belong
-;;; to different buffers, a TODO error signaled.
+;;; to different buffers, an error of type CURSORS-ARE-NOT-COMPARABLE
+;;; is signaled.
 
 (defgeneric cluffer:cursor=/2 (cursor1 cursor2))
 
@@ -434,21 +435,37 @@
 ;;; error of type DETACHED-CURSOR is signaled.
 ;;;
 ;;; If CURSOR1 and CURSOR2 are currently attached to lines that belong
-;;; to different buffers, a TODO error signaled.
+;;; to different buffers, an error of type CURSORS-ARE-NOT-COMPARABLE
+;;; is signaled.
 
 (defgeneric cluffer:cursor</2 (cursor1 cursor2))
 
-(defun cluffer:cursor< (cursor &rest more-cursors)
-  (or (null more-cursors)
-      (every #'cluffer:cursor</2 (list* cursor more-cursors) more-cursors)))
+(macrolet
+    ((define (name binary-predicate &key negatep)
+       (let ((reducer (if negatep 'notany 'every)))
+         `(progn
+            (defun ,name (cursor &rest more-cursors)
+              (or (null more-cursors)
+                  (,reducer (function ,binary-predicate)
+                            (list* cursor more-cursors) more-cursors)))
 
-(defun cluffer:cursor<= (cursor &rest more-cursors)
-  (or (null more-cursors)
-      (every #'cluffer:cursor<=/2 (list* cursor more-cursors) more-cursors)))
-
-(defun cluffer:cursor= (cursor &rest more-cursors)
-  (or (null more-cursors)
-      (every #'cluffer:cursor=/2 (list* cursor more-cursors) more-cursors)))
+            (define-compiler-macro ,name (cursor &rest more-cursors)
+              (if (null more-cursors)
+                  t
+                  (destructuring-bind (second-cursor &rest rest-cursors)
+                      more-cursors
+                    (let* ((binary `(,',binary-predicate ,cursor ,second-cursor))
+                           (pair   ,(if negatep
+                                        '`(not ,binary)
+                                        'binary)))
+                      (if (null rest-cursors)
+                          pair
+                          `(and ,pair (,',name ,@more-cursors)))))))))))
+  (define cluffer:cursor<  cluffer:cursor</2)
+  (define cluffer:cursor<= cluffer:cursor<=/2)
+  (define cluffer:cursor=  cluffer:cursor=/2)
+  (define cluffer:cursor>= cluffer:cursor</2  :negatep t)
+  (define cluffer:cursor>  cluffer:cursor<=/2 :negatep t))
 
 (defun cluffer:cursor/= (cursor &rest more-cursors)
   (cond ((null more-cursors)
@@ -464,11 +481,3 @@
                         when (cluffer:cursor=/2 cursor1 cursor2)
                           do (return-from outer nil))
                finally (return-from outer t)))))
-
-(defun cluffer:cursor>= (cursor &rest more-cursors)
-  (or (null more-cursors)
-      (notany #'cluffer:cursor</2 (list* cursor more-cursors) more-cursors)))
-
-(defun cluffer:cursor> (cursor &rest more-cursors)
-  (or (null more-cursors)
-      (notany #'cluffer:cursor<=/2 (list* cursor more-cursors) more-cursors)))
