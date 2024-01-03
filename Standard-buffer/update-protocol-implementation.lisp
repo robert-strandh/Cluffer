@@ -85,9 +85,9 @@
                  0
                  (line-count node-or-nil)))
            (left (node)
-             (clump-binary-tree:left node))
+             (bt:left node))
            (right (node)
-             (clump-binary-tree:right node)))
+             (bt:right node)))
       (flet ((pre (node)
                (if (eq state :skip)
                    (if (> (max-modify-time node) time)
@@ -181,7 +181,7 @@
                            ;; ITERATIVE-TRAVERSAL that it should
                            ;; traverse the right sub-tree.
                            t)))))))
-        (clump-binary-tree:iterative-traversal
+        (bt:iterative-traversal
          (contents buffer) #'pre #'in #'identity)
         ;; Now, if we are in the :SKIP state at the end of the buffer,
         ;; we issue a skip with the number of remaining nodes to skip.
