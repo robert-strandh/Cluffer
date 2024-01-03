@@ -2,4 +2,8 @@
 
 (defpackage #:cluffer-standard-buffer
   (:use #:common-lisp)
+
+  (:local-nicknames
+   (#:bt #:clump-binary-tree))
+
   (:export #:buffer))

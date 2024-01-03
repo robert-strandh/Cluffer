@@ -4,7 +4,7 @@
 ;;; located.  This reference is needed because when a node of the tree
 ;;; is splayed, that node must be explicitly assigned to the CONTENTS
 ;;; slot of the buffer.
-(defclass node (clump-binary-tree:node-with-parent cluffer-internal:dock)
+(defclass node (bt:node-with-parent cluffer-internal:dock)
   ((%buffer :initform nil
             :initarg :buffer
             :accessor cluffer-internal:buffer)
