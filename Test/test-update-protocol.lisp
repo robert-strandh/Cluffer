@@ -20,7 +20,7 @@
          (buffer1 (make-instance 'cluffer-simple-buffer:buffer
                                  :initial-line line1))
          (time1 nil)
-         (line2 (make-instance 'cluffer-standard-line:open-line))
+         (line2 (make-instance 'cluffer-standard-line:line))
          (buffer2 (make-instance 'cluffer-standard-buffer:buffer
                                  :initial-line line2))
          (time2 nil))

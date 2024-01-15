@@ -6,7 +6,7 @@
 
 (defun random-insertions-iteration ()
   (let ((linea (make-instance 'cluffer-simple-line:line))
-        (lineb (make-instance 'cluffer-standard-line:closed-line))
+        (lineb (make-instance 'cluffer-standard-line:line))
         (cursorla (make-instance
                       'cluffer-simple-line:left-sticky-cursor))
         (cursorra (make-instance
@@ -45,7 +45,7 @@
 
 (defun random-deletions-iteration ()
   (let ((linea (make-instance 'cluffer-simple-line:line))
-        (lineb (make-instance 'cluffer-standard-line:closed-line))
+        (lineb (make-instance 'cluffer-standard-line:line))
         (cursorla (make-instance
                       'cluffer-simple-line:left-sticky-cursor))
         (cursorra (make-instance

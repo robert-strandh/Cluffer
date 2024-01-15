@@ -1,10 +1,10 @@
 (cl:in-package #:cluffer-test)
 
 (defun test-cursor-conditions ()
-  (let* ((line1 (make-instance 'cluffer-standard-line:closed-line))
+  (let* ((line1 (make-instance 'cluffer-standard-line:line))
          (buffer1 (make-instance 'cluffer-standard-buffer:buffer :initial-line line1))
          (cursor1 (make-instance 'cluffer-standard-line:right-sticky-cursor))
-         (line2 (make-instance 'cluffer-standard-line:closed-line))
+         (line2 (make-instance 'cluffer-standard-line:line))
          (buffer2 (make-instance 'cluffer-standard-buffer:buffer :initial-line line2))
          (cursor2 (make-instance 'cluffer-standard-line:right-sticky-cursor)))
     (declare (ignore buffer1 buffer2))
@@ -26,7 +26,7 @@
 (defun test-cursor-predicates-iteration (item-count)
   (let* ((cursor-count (+ 1 (random 5)))
          (positions (map-into (make-list cursor-count) (lambda () (random item-count))))
-         (line (make-instance 'cluffer-standard-line:closed-line))
+         (line (make-instance 'cluffer-standard-line:line))
          (buffer (make-instance 'cluffer-standard-buffer:buffer
                                 :initial-line line)))
     (let ((cursor (make-instance 'cluffer-standard-line:right-sticky-cursor)))
