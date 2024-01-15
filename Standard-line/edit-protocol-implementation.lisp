@@ -195,11 +195,11 @@
   (let* ((contents (contents line))
          (new-contents (subseq contents position))
          (last-line-p (last-line-p line)) ; are we inserting after the last line?
-         (new-line (make-instance 'line :cursors      '()
-                                        :contents     new-contents
-                                        :first-line-p nil
-                                        :last-line-p  last-line-p
-                                        :open-line-p  nil)))
+         (new-line (make-instance (class-of line) :cursors      '()
+                                                  :contents     new-contents
+                                                  :first-line-p nil
+                                                  :last-line-p  last-line-p
+                                                  :open-line-p  nil)))
     (setf (contents line) (subseq contents 0 position))
     (setf (cursors new-line)
           (loop for cursor in (cursors line)

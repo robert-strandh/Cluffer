@@ -89,9 +89,8 @@
 (defmethod cluffer-internal:line-split-line ((line line) position)
   (let* ((contents (contents line))
          (new-contents (subseq contents position))
-         (new-line (make-instance 'line
-                     :cursors '()
-                     :contents new-contents)))
+         (new-line (make-instance (class-of line) :cursors '()
+                                                  :contents new-contents)))
     (setf (contents line)
           (subseq (contents line) 0 position))
     (setf (cursors new-line)
