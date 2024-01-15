@@ -11,11 +11,10 @@
 ;;;
 ;;; Methods on ITEM-COUNT.
 
-(defmethod cluffer:item-count ((line open-line))
-  (- (length (contents line)) (- (gap-end line) (gap-start line))))
-
-(defmethod cluffer:item-count ((line closed-line))
-  (length (contents line)))
+(defmethod cluffer:item-count ((line line))
+  (if (open-line-p line)
+      (- (length (contents line)) (- (gap-end line) (gap-start line)))
+      (length (contents line))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -30,14 +29,13 @@
 ;;; edit) and closed (to display), it probably does not matter much.
 ;;; A slight improvement could be to leave the line open and return a
 ;;; freshly allocated vector with the items in it.
-(defmethod cluffer:items ((line open-line) &key (start 0) (end nil))
-  (close-line line)
-  (cluffer:items line :start start :end end))
-
+;;;
 ;;; When all the items are asked for, we do not allocate a fresh
 ;;; vector.  This means that client code is not allowed to mutate the
 ;;; return value of this function
-(defmethod cluffer:items ((line closed-line) &key (start 0) (end nil))
+(defmethod cluffer:items ((line line) &key (start 0) (end nil))
+  (when (open-line-p line)
+    (close-line line))
   (if (and (= start 0) (null end))
       (contents line)
       (subseq (contents line) start end)))
@@ -50,8 +48,8 @@
              :start1 0 :start2 0 :end2 (gap-start line))
     (replace new-contents contents
              :start1 (gap-start line) :start2 (gap-end line))
-    (change-class line 'closed-line
-                  :contents new-contents)
+    (setf (contents line) new-contents
+          (%open-line-p line) nil)
     nil))
 
 (defun open-line (line)
@@ -61,10 +59,10 @@
          (new-contents (make-array new-length :element-type (array-element-type contents))))
     (replace new-contents contents
              :start1 (- new-length item-count) :start2 0)
-    (change-class line 'open-line
-                  :contents new-contents
-                  :gap-start 0
-                  :gap-end (- new-length item-count))
+    (setf (contents line) new-contents
+          (gap-start line) 0
+          (gap-end line) (- new-length item-count)
+          (%open-line-p line) t)
     nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -123,11 +121,9 @@
                (incf (cluffer:cursor-position cursor)))))
   nil)
 
-(defmethod cluffer:insert-item-at-position ((line closed-line) item position)
-  (open-line line)
-  (insert-item-at-position line item position))
-
-(defmethod cluffer:insert-item-at-position ((line open-line) item position)
+(defmethod cluffer:insert-item-at-position ((line line) item position)
+  (unless (open-line-p line)
+    (open-line line))
   (insert-item-at-position line item position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -171,11 +167,9 @@
                (decf (cluffer:cursor-position cursor)))))
   nil)
 
-(defmethod cluffer:delete-item-at-position ((line closed-line) position)
-  (open-line line)
-  (delete-item-at-position line position))
-
-(defmethod cluffer:delete-item-at-position ((line open-line) position)
+(defmethod cluffer:delete-item-at-position ((line line) position)
+  (unless (open-line-p line)
+    (open-line line))
   (delete-item-at-position line position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -183,31 +177,29 @@
 ;;; Method on ITEM-AT-POSITION.
 
 ;;; No need to open the line.
-(defmethod cluffer:item-at-position ((line closed-line) position)
-  (aref (contents line) position))
-
-(defmethod cluffer:item-at-position ((line open-line) position)
-  (aref (contents line)
-        (if (< position (gap-start line))
-            position
-            (+ position (- (gap-end line) (gap-start line))))))
+(defmethod cluffer:item-at-position ((line line) position)
+  (if (open-line-p line)
+      (aref (contents line) position)
+      (aref (contents line)
+            (if (< position (gap-start line))
+                position
+                (+ position (- (gap-end line) (gap-start line)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Methods on CLUFFER-INTERNAL:LINE-SPLIT-LINE.
 
-(defmethod cluffer-internal:line-split-line ((line open-line) position)
-  (close-line line)
-  (cluffer-internal:line-split-line line position))
-
-(defmethod cluffer-internal:line-split-line ((line closed-line) position)
+(defmethod cluffer-internal:line-split-line ((line line) position)
+  (when (open-line-p line)
+    (close-line line))
   (let* ((contents (contents line))
          (new-contents (subseq contents position))
          (last-line-p (last-line-p line)) ; are we inserting after the last line?
-         (new-line (make-instance 'closed-line :cursors      '()
-                                               :contents     new-contents
-                                               :first-line-p nil
-                                               :last-line-p  last-line-p)))
+         (new-line (make-instance 'line :cursors      '()
+                                        :contents     new-contents
+                                        :first-line-p nil
+                                        :last-line-p  last-line-p
+                                        :open-line-p  nil)))
     (setf (contents line) (subseq contents 0 position))
     (setf (cursors new-line)
           (loop for cursor in (cursors line)
@@ -231,16 +223,11 @@
 ;;;
 ;;; Methods on CLUFFER-INTERNAL:LINE-JOIN-LINE.
 
-(defmethod cluffer-internal:line-join-line ((line1 open-line) line2)
-  (close-line line1)
-  (cluffer-internal:line-join-line line1 line2))
-
-(defmethod cluffer-internal:line-join-line (line1 (line2 open-line))
-  (close-line line2)
-  (cluffer-internal:line-join-line line1 line2))
-
-(defmethod cluffer-internal:line-join-line
-    ((line1 closed-line) (line2 closed-line))
+(defmethod cluffer-internal:line-join-line ((line1 line) (line2 line))
+  (when (open-line-p line1)
+    (close-line line1))
+  (when (open-line-p line2)
+    (close-line line2))
   (loop with length = (length (contents line1))
           initially
              (setf (contents line1)

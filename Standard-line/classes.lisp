@@ -20,7 +20,19 @@
    (%last-line-p  :initarg  :last-line-p
                   :accessor last-line-p
                   :reader   cluffer:last-line-p
-                  :initform t)))
+                  :initform t)
+   ;;; The items of an open line are stored in a gap buffer.
+   (%gap-start   :initform 0
+                 :initarg :gap-start
+                 :accessor gap-start)
+   (%gap-end     :initform 1
+                 :initarg :gap-end
+                 :accessor gap-end)
+   (%open-line-p :initform nil
+                 :initarg :open-line-p
+                 :reader open-line-p
+                 :accessor %open-line-p))
+  (:default-initargs :contents (vector)))
 
 (defun print-line-contents (contents stream)
   (cond ((stringp contents)
@@ -40,43 +52,20 @@
     (format stream " ~D cursor~:P" cursor-count)))
 
 (defmethod print-object ((object line) stream)
-  (let ((contents (contents object)))
-    (print-unreadable-object (object stream :type t :identity t)
-      (print-line-contents contents stream)
-      (print-cursor-count object stream))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Class OPEN-LINE.
-;;;
-;;; The items of an open line are stored in a gap buffer.
-
-(defclass open-line (line)
-  ((%gap-start :initform 0 :initarg :gap-start :accessor gap-start)
-   (%gap-end :initform  10 :initarg :gap-end :accessor gap-end))
-  (:default-initargs :contents (make-array 10)))
-
-(defmethod print-object ((object open-line) stream)
-  (let* ((contents (contents object))
-         (length (length contents))
-         (gap-start (gap-start object))
-         (gap-end (gap-end object)))
-    (print-unreadable-object (object stream :type t :identity t)
-      (print-line-contents (subseq contents 0 gap-start) stream)
-      (format stream "[~d]" (- gap-end gap-start))
-      (print-line-contents (subseq contents gap-end length) stream)
-      (print-cursor-count object stream))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Class CLOSED-LINE.
-;;;
-;;; The contents of a closed line is a vector of items.  At the
-;;; moment, it is always a simple vector.
-
-(defclass closed-line (line)
-  ()
-  (:default-initargs :contents (vector)))
+  (if (open-line-p object)
+      (let ((contents (contents object)))
+        (print-unreadable-object (object stream :type t :identity t)
+          (print-line-contents contents stream)
+          (print-cursor-count object stream)))
+      (let* ((contents (contents object))
+             (length (length contents))
+             (gap-start (gap-start object))
+             (gap-end (gap-end object)))
+        (print-unreadable-object (object stream :type t :identity t)
+          (print-line-contents (subseq contents 0 gap-start) stream)
+          (format stream "[~d]" (- gap-end gap-start))
+          (print-line-contents (subseq contents gap-end length) stream)
+          (print-cursor-count object stream)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

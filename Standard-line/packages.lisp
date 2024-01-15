@@ -4,7 +4,6 @@
   (:use #:common-lisp)
   (:export
    #:line
-   #:open-line
-   #:closed-line
+   #:open-line-p
    #:left-sticky-cursor
    #:right-sticky-cursor))
