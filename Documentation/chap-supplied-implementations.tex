@@ -68,25 +68,16 @@ that are specific to the implementation of standard lines.
 This class is a subclass of the protocol class named \texttt{line} in
 the package named \texttt{cluffer}.
 
-\Defclass {open-line}
+The line may be open or closed. When the line is open \texttt{open-line-p}
+returns \texttt{T}, otherwise it returns \texttt{NIL}.
 
-This class is a subclass of the class named \texttt{line}.  It is used
-when the contents of the line is modified.
+When the line is open then the contents of the line may be modified.  The
+contents then are represented as a simple \emph{gap buffer} so that adding or
+deleting items is done at the beginning or the end of the gap.
 
-For this class, the contents is represented as a simple \emph{gap
-  buffer} so that adding or deleting items is done at the beginning or
-the end of the gap.
-
-\Defclass {closed-line}
-
-This class is a subclass of the class named \texttt{line}.  It is used
-when the contents of the line has not been modified after an
-invocation of the function \texttt{items}.
-
-For this class, the contents is represented by a simple \commonlisp{}
-vector.  Whenever \texttt{items} is invoked on a closed line and the
-entire contents is asked for, this simple vector is returned, and no
-copy is made.
+When the line is closed then contents of the line are represented by a simple
+vector. Whenever \texttt{items} is invoked on a closed line and the entire
+contents is asked for, this simple vector is returned, and no copy is made.
 
 \Defclass{cursor}
 
